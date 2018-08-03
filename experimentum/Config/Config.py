@@ -81,10 +81,10 @@ class Config(object):
         """Set a given configuration value.
 
         Arguments:
-            key {list|string} -- Config item keys to change the value
+            key {dict|string} -- Config item keys to change the value
 
         Keyword Arguments:
             value {object} -- New value (default: {None})
         """
-        keys = key if isinstance(key, list) else {key: value}
+        keys = key if isinstance(key, dict) else {key: value}
         self.items.update(keys)

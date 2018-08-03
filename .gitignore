@@ -10,8 +10,10 @@ __pycache__
 
 build
 dist
+htmlcov/
 docs/_build/
 docs/html/
+.coverage
 *.egg-info
 .venv
 .cache
