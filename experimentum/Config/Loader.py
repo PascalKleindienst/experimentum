@@ -23,7 +23,6 @@ class Loader(object):
         """
         self.config_path = config_path
         self.config = config
-        self.load_config_files()
 
     def load_config_files(self):
         """Load the configuration items from all of the files.
