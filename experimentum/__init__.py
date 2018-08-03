@@ -2,6 +2,7 @@
 # flake8: noqa
 from .Experiments import *
 from .Config import *
+from .Commands import *
 
 ##################
 # Helper Methods #
