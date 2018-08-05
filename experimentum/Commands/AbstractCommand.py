@@ -46,10 +46,11 @@ class AbstractCommand(object):
         self.arguments = arguments
         self.help = help
 
-    def handle(self, args):
+    def handle(self, app, args):
         """Handle the command execution.
 
         Arguments:
+            app {experimentum.Experiments.App} -- App class
             args {dict} -- Dictionary with possible passed arguments
 
         Raises:

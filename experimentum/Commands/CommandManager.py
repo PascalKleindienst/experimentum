@@ -37,7 +37,7 @@ class CommandManager(object):
     """
     commands = {}
 
-    def __init__(self, prog, description=''):
+    def __init__(self, app, prog, description=''):
         """Create and setup up the argument parser and superparsers.
 
         Arguments:
@@ -46,6 +46,8 @@ class CommandManager(object):
         Keyword Arguments:
             description {str} -- Description of the programm (default: {''})
         """
+        self.app = app
+
         # Init ArgumentParser
         self.parser = argparse.ArgumentParser(
             add_help=False,
@@ -113,12 +115,15 @@ class CommandManager(object):
 
     def dispatch(self):
         """Use dispatch pattern to invoke class and let it handle the command."""
-        # no command selected
         options = self.parser.parse_args()
-        if not vars(options):
-            print_failure('Please specify a command')
-            self.parser.print_help(sys.stderr)
-            sys.exit(2)
+        options.func(self.app, options)
+        # try:
+        #     # dispatch
+        #     options = self.parser.parse_args()
+        #     options.func(options)
+        # except SystemExit:
+        #     # no command selected
+        #     print_failure('Please specify a command')
+        #     self.parser.print_help(sys.stderr)
+        #     sys.exit(2)
 
-        # dispatch
-        options.func(options)
