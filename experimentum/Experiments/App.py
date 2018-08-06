@@ -1,8 +1,11 @@
 from __future__ import print_function
 import os
+import sys
 import logging
 import logging.handlers
 from experimentum.Config import Config, Loader
+from experimentum.Commands import CommandManager, MigrationCommand, print_failure
+from experimentum.Storage.Migrations import Migrator
 
 _app = None
 
@@ -31,6 +34,7 @@ class App(object):
         name {string} -- Name of the app
         config {Config} -- Config Manager
         log {logging.Logger} -- Logger
+        aliases {dict} -- Dictionary of aliases and factory functions
     """
     config_path = '.'
 
@@ -54,8 +58,47 @@ class App(object):
         self._set_logger()
         self.log.info('Bootstrap App')
 
+        # Aliases
+        self.register_aliases()
+
+        # Register commands
+        self.log.info('Register Commands')
+        self.cmd_manager = CommandManager(
+            self,
+            self.config.get('app.prog', 'app'),
+            self.config.get('app.description', '')
+        )
+        self._add_commands()
+
         # save app instance
         app(self)
+
+    def make(self, alias):
+        """Create an instance of an aliased class.
+
+        Arguments:
+            alias {string} -- Class alias
+
+        Raises:
+            Exception -- raises an exception if the alias does not exists
+
+        Returns:
+            object -- instance of the aliased class
+        """
+        klass = self.aliases.get(alias, None)
+
+        if klass is None:
+            msg = "Class with alias '{}' does not exist.".format(alias)
+            self.log.critical(msg)
+            print_failure(msg)
+            sys.exit(1)
+
+        return klass()
+
+    def run(self):
+        """Run the app."""
+        self.cmd_manager.dispatch()
+        self.log.info('Run App')
 
     def register_commands(self):
         """Register custom cli commands.
@@ -65,9 +108,38 @@ class App(object):
         """
         return {}
 
-    def run(self):
-        """Run the app."""
-        print('Running App...')
+    def register_aliases(self):
+        """Register aliases for classes."""
+        self.log.info('Register Aliases')
+        self.aliases = {
+            'migrator': lambda: Migrator(self.config.get('storage.migrations.path', 'migrations'))
+        }
+
+    def _add_commands(self):
+        """Add Commands to the command manager."""
+        commands = self._commands()
+        user_commands = self.register_commands()
+
+        if any(user_commands):
+            commands.update(user_commands)
+
+        for name, cmd in commands.items():
+            self.log.debug('Adding Command {}'.format(name))
+            self.cmd_manager.add_command(name, cmd)
+
+    def _commands(self):
+        """Register default commands.
+
+        Returns:
+            dict -- Default commands
+        """
+        return {
+            'migration:status': MigrationCommand.status,
+            'migration:refresh': MigrationCommand.refresh,
+            'migration:up': MigrationCommand.up,
+            'migration:down': MigrationCommand.down,
+            'migration:make': MigrationCommand.make,
+        }
 
     def _set_logger(self):
         """Set up the logger and its handlers."""
