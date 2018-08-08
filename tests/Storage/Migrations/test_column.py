@@ -31,11 +31,9 @@ class TestColumn(object):
 
     def test_representation(self):
         col = Column('some type', 'some name', {'foo': 'bar'})
-        assert str(col) == str({
-            'name': 'some name',
-            'parameters': {'foo': 'bar'},
-            'default': None,
-            'unsigned': False,
-            'null': False,
-            'type': 'some type'
-        })
+        assert "'type': 'some type'" in str(col)
+        assert "'name': 'some name'" in str(col)
+        assert "'parameters': {'foo': 'bar'}" in str(col)
+        assert "'null': False" in str(col)
+        assert "'default': None" in str(col)
+        assert "'unsigned': False" in str(col)

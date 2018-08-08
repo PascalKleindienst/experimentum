@@ -1,10 +1,18 @@
-from abc import ABCMeta, abstractmethod
+from __future__ import unicode_literals
+import sys
+import abc
+from abc import abstractmethod
+
+# Python2 and 3 Compatible Metaclass
+if sys.version_info >= (3, 4):
+    ABC = abc.ABC
+else:
+    ABC = abc.ABCMeta(str('ABC'), (), {})
 
 
-class AbstractStore(object):
+class AbstractStore(ABC):
 
     """Contains the interface between the framework and the concrete Database implementation."""
-    __metaclass__ = ABCMeta
 
     @abstractmethod
     def create(self, blueprint):
