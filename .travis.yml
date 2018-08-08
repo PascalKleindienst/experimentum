@@ -11,5 +11,9 @@ install:
   #- pip install travis-sphinx
   - pip install tox-travis
 
-# script:
-#   - travis-sphinx build --source=docs
+script:
+  # - travis-sphinx build --source=docs
+  - tox
+
+# after_success:
+#   - travis-sphinx deploy
