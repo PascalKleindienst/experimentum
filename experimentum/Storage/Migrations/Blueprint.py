@@ -1,4 +1,4 @@
-from experimentum.Storage.Migrations import Column
+from experimentum.Storage.Migrations import Column, ForeignKey
 
 
 class Blueprint(object):
@@ -9,6 +9,7 @@ class Blueprint(object):
         table {string} -- Name of the table
         columns {list} -- List of columns for the table (default: {[]})
         indexes {list} -- List of indices for the table (default: {[]})
+        fkeys {list} -- List of foreign keys for the table (default: {[]})
         action {string} -- Action (i.e. create or alter) (default: {None})
     """
 
@@ -21,6 +22,7 @@ class Blueprint(object):
         self.table = table
         self.columns = []
         self.indexes = []
+        self.fkeys = []
         self.action = None
 
     def create(self):
@@ -319,10 +321,82 @@ class Blueprint(object):
         return self.add_column('timestamp', column)
 
     """ Indices """
-    # TODO: Indices
     def primary(self, column, name=None):
+        """Add a primary key to the column.
+
+        Arguments:
+            column {string} -- Primary Key column
+
+        Keyword Arguments:
+            name {string} -- Name of the primary key (default: {None})
+
+        Returns:
+            Blueprint
+        """
+        self._add_idx(column, 'primary', name)
+        return self
+
+    def unique(self, column, name=None):
+        """Add a unique key to the column.
+
+        Arguments:
+            column {string} -- Unique Key column
+
+        Keyword Arguments:
+            name {string} -- Name of the unique key (default: {None})
+
+        Returns:
+            Blueprint
+        """
+        self._add_idx(column, 'unique', name)
+        return self
+
+    def index(self, column, name=None):
+        """Add a basic index to the column.
+
+        Arguments:
+            column {string} -- Indexed column
+
+        Keyword Arguments:
+            name {string} -- Name of the unique key (default: {None})
+
+        Returns:
+            Blueprint
+        """
+        self._add_idx(column, 'index', name)
+        return self
+
+    def foreign(self, column, name=None):
+        """Add a foreign key to the column.
+
+        Arguments:
+            column {string} -- Foreign Key column
+
+        Keyword Arguments:
+            name {string} -- Name of the foreign key (default: {None})
+
+        Returns:
+            ForeignKey
+        """
+        fkey = ForeignKey(column, name)
+        self.fkeys.append({'col': column, 'key': fkey})
+        return fkey
+
+    def _add_idx(self, column, idx_type, name=None):
+        """Add an index to the index list.
+
+        Arguments:
+            column {string} -- indexed column
+            idx_type {string} -- index type
+
+        Keyword Arguments:
+            name {string} -- Custom index name (default: {None})
+        """
+        if not name:
+            name = '{}_{}_{}'.format(self.table, column, idx_type)
+
         self.indexes.append({
             'col': column,
-            'type': 'primary',
-            'name': 'name'
+            'type': idx_type,
+            'name': name
         })

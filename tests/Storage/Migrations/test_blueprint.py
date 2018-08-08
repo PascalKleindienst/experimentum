@@ -1,4 +1,4 @@
-from experimentum.Storage.Migrations import Blueprint
+from experimentum.Storage.Migrations import Blueprint, ForeignKey
 
 
 class TestBlueprint(object):
@@ -208,3 +208,42 @@ class TestBlueprint(object):
         assert col.get('parameters') == {}
 
     # * Indices *
+    def test_add_primary(self):
+        blueprint = Blueprint('some_table')
+        blueprint.primary('col_name')
+        key = blueprint.indexes[-1]
+        assert key.get('col') is 'col_name'
+        assert key.get('type') is 'primary'
+        assert key.get('name') == 'some_table_col_name_primary'
+
+    def test_add_unique(self):
+        blueprint = Blueprint('some_table')
+        blueprint.unique('col_name')
+        key = blueprint.indexes[-1]
+        assert key.get('col') is 'col_name'
+        assert key.get('type') is 'unique'
+        assert key.get('name') == 'some_table_col_name_unique'
+
+    def test_add_index(self):
+        blueprint = Blueprint('some_table')
+        blueprint.index('col_name')
+        key = blueprint.indexes[-1]
+        assert key.get('col') is 'col_name'
+        assert key.get('type') is 'index'
+        assert key.get('name') == 'some_table_col_name_index'
+
+    def test_add_multiple_indexes_with_custom_name(self):
+        blueprint = Blueprint('some_table')
+        blueprint.index(['col_name', 'another_col'], 'my_index')
+        key = blueprint.indexes[-1]
+        assert key.get('col') == ['col_name', 'another_col']
+        assert key.get('type') is 'index'
+        assert key.get('name') == 'my_index'
+
+    def test_add_index(self):
+        blueprint = Blueprint('some_table')
+        fkey = blueprint.foreign('col_name')
+        key = blueprint.fkeys[-1]
+        assert key.get('col') is 'col_name'
+        assert isinstance(key.get('key'), ForeignKey)
+        assert isinstance(fkey, ForeignKey)
