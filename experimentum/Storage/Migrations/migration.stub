@@ -7,7 +7,7 @@ class {migration}(Migration):
     revision = '{revision}'
 
     def up(self):
-        """Revert the migrations."""
+        """Run the migrations."""
         pass
 
     def down(self):
