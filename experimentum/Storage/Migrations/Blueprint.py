@@ -8,9 +8,10 @@ class Blueprint(object):
     Attributes:
         table {string} -- Name of the table
         columns {list} -- List of columns for the table (default: {[]})
+        dropped {list} -- List of dropped columns of the table (default: {[]})
         indexes {list} -- List of indices for the table (default: {[]})
         fkeys {list} -- List of foreign keys for the table (default: {[]})
-        action {string} -- Action (i.e. create or alter) (default: {None})
+        action {string} -- Action (i.e. create or alter) (default: {'alter'})
     """
 
     def __init__(self, table):
@@ -21,9 +22,10 @@ class Blueprint(object):
         """
         self.table = table
         self.columns = []
+        self.dropped = []
         self.indexes = []
         self.fkeys = []
-        self.action = None
+        self.action = 'alter'
 
     def create(self):
         """Set the create action."""
@@ -45,8 +47,12 @@ class Blueprint(object):
         return col
 
     def drop_column(self, *args):
-        # TODO: Drop column
-        print(args)
+        """Drop one or multiple columns.
+
+        Arguments:
+            *args {string} -- Column names
+        """
+        self.dropped.extend(list(args))
 
     def array(self, column, arr_type, dimensions=None):
         """ARRAY column type.

@@ -7,13 +7,20 @@ class TestBlueprint(object):
         assert blueprint.table is 'some table'
         assert blueprint.columns == []
         assert blueprint.indexes == []
-        assert blueprint.action is None
+        assert blueprint.dropped == []
+        assert blueprint.fkeys == []
+        assert blueprint.action is 'alter'
 
     # * COLUMNS *
     def test_create_action(self):
         blueprint = Blueprint('some table')
         blueprint.create()
         assert blueprint.action is 'create'
+
+    def test_drop_column(self):
+        blueprint = Blueprint('some table')
+        blueprint.drop_column('foo', 'bar', 'baz')
+        assert blueprint.dropped == ['foo', 'bar', 'baz']
 
     def test_add_column(self):
         blueprint = Blueprint('some table')
