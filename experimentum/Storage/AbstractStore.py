@@ -15,6 +15,30 @@ class AbstractStore(ABC):
     """Contains the interface between the framework and the concrete Database implementation."""
 
     @abstractmethod
+    def has_table(self, table):
+        """Check if the data store has a specific table.
+
+        Arguments:
+            table {string} -- Name of the Table
+
+        Returns:
+            boolean
+        """
+        raise NotImplementedError('Must has_table rename method')
+
+    def has_column(self, table, column):
+        """Check if a table has a specific column.
+
+        Arguments:
+            table {string} -- Name of the table
+            column {string} -- Name of the column
+
+        Returns:
+            boolean
+        """
+        raise NotImplementedError('Must has_column rename method')
+
+    @abstractmethod
     def create(self, blueprint):
         """Create a new Table.
 

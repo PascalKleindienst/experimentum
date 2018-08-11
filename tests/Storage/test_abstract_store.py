@@ -4,6 +4,21 @@ import pytest
 
 
 class TestAbstractStore(object):
+
+    def test_abstract_has_table(self, mocker):
+        mocker.patch.multiple(AbstractStore, __abstractmethods__=set())
+        store = AbstractStore()
+
+        with pytest.raises(NotImplementedError):
+            store.has_table('foo')
+
+    def test_abstract_has_column(self, mocker):
+        mocker.patch.multiple(AbstractStore, __abstractmethods__=set())
+        store = AbstractStore()
+
+        with pytest.raises(NotImplementedError):
+            store.has_column('foo', 'bar')
+
     def test_abstract_create(self, mocker):
         mocker.patch.multiple(AbstractStore, __abstractmethods__=set())
         store = AbstractStore()
