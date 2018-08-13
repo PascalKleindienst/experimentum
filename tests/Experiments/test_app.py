@@ -1,10 +1,29 @@
 from experimentum.Experiments import App, app as _app
 from experimentum.Config import Config
 from experimentum.Commands import CommandManager
+import json
+import os
 import logging
 import pytest
 
 class TestApp(object):
+    @classmethod
+    def setup_class(cls):
+        """ setup """
+        with open(os.path.join('.', 'app.json'), 'w') as outfile:
+            json.dump({
+                "prog": "test.py",
+                "description": "Test",
+                "logging": {"level": "DEBUG"}
+            }, outfile)
+
+    @classmethod
+    def teardown_class(cls):
+        """ teardown any state that was previously setup with a call to
+        setup_class.
+        """
+        os.remove(os.path.join('.', 'app.json'))
+
     def test_set_name(self):
         app = App('Foo App')
         assert 'Foo App' == app.name
