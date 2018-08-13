@@ -3,9 +3,12 @@ import os
 import sys
 import logging
 import logging.handlers
+from sqlalchemy import create_engine
+from sqlalchemy.engine.url import URL
 from experimentum.Config import Config, Loader
 from experimentum.Commands import CommandManager, MigrationCommand, print_failure
-from experimentum.Storage.Migrations import Migrator
+from experimentum.Storage.Migrations import Migrator, Blueprint, Schema
+from experimentum.Storage.SQLAlchemy import Store
 
 _app = None
 
@@ -34,6 +37,7 @@ class App(object):
         name {string} -- Name of the app
         config {Config} -- Config Manager
         log {logging.Logger} -- Logger
+        store {AbstractStore} -- Data Store
         aliases {dict} -- Dictionary of aliases and factory functions
     """
     config_path = '.'
@@ -58,6 +62,9 @@ class App(object):
         self._set_logger()
         self.log.info('Bootstrap App')
 
+        # Setup Datastore
+        self.setup_datastore()
+
         # Aliases
         self.register_aliases()
 
@@ -73,7 +80,15 @@ class App(object):
         # save app instance
         app(self)
 
-    def make(self, alias):
+    def setup_datastore(self):
+        """Set up the data store."""
+        self.log.info('Setup Data Store')
+        default_db = {'drivername': 'sqlite', 'database': 'experimentum.db'}
+        engine = create_engine(URL(**self.config.get('storage.datastore', default_db)))
+        self.store = Store(self)
+        self.store.set_engine(engine)
+
+    def make(self, alias, *args, **kwargs):
         """Create an instance of an aliased class.
 
         Arguments:
@@ -93,7 +108,7 @@ class App(object):
             print_failure(msg)
             sys.exit(1)
 
-        return klass()
+        return klass(*args, **kwargs)
 
     def run(self):
         """Run the app."""
@@ -111,8 +126,12 @@ class App(object):
     def register_aliases(self):
         """Register aliases for classes."""
         self.log.info('Register Aliases')
+
         self.aliases = {
-            'migrator': lambda: Migrator(self.config.get('storage.migrations.path', 'migrations'))
+            'migrator': lambda: Migrator(self.config.get('storage.migrations.path', 'migrations')),
+            'store': lambda: self.store,
+            'schema': lambda: Schema(self),
+            'blueprint': lambda *args, **kwargs: Blueprint(*args, **kwargs),
         }
 
     def _add_commands(self):
