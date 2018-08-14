@@ -18,12 +18,12 @@ URL = 'https://github.com/PascalKleindienst/experimentum'
 EMAIL = 'mail@pascalkleindienst.de'
 AUTHOR = 'Pascal Kleindienst'
 REQUIRES_PYTHON = '>=2.7.0'
-VERSION = '0.0.1'
+VERSION = None
 
 # What packages are required for this module to be executed?
 REQUIRED = [
     # 'requests', 'maya', 'records',
-    'SQLAlchemy>=1.2.0', 'termcolor', 'tabulate', 'inflection',
+    'SQLAlchemy>=1.2.0', 'termcolor', 'tabulate', 'inflection', 'six'
 ]
 
 # What packages are optional?
@@ -63,7 +63,6 @@ if not VERSION:
         exec(f.read(), about)
 else:
     about['__version__'] = VERSION
-
 
 class UploadCommand(Command):
     """Support setup.py upload."""
@@ -117,9 +116,9 @@ setup(
     # If your package is a single module, use this instead of 'packages':
     # py_modules=['mypackage'],
 
-    # entry_points={
-    #     'console_scripts': ['mycli=mymodule:cli'],
-    # },
+    entry_points={
+        'console_scripts': ['experimentum-quickstart=experimentum.quickstart:main'],
+    },
     install_requires=REQUIRED,
     extras_require=EXTRAS,
     include_package_data=True,
