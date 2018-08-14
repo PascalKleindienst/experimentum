@@ -146,10 +146,10 @@ def main():
         'datastore': {
             'drivername': 'sqlite',
             'database': 'experimentum.db',
-            'username': '',
-            'password': '',
-            'host': '',
-            'port': ''
+            'username': None,
+            'password': None,
+            'host': None,
+            'port': None
         },
         'migrations': {
             'path': folders['migrations']
