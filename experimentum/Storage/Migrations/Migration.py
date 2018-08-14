@@ -6,6 +6,14 @@ class Migration(object):
     """Abstract Migration."""
     revision = None
 
+    def __init__(self, app):
+        """Init the Migration and set up the schema class.
+
+        Arguments:
+            app {App} -- App class
+        """
+        self.schema = app.make('schema')
+
     def up(self):
         """Revert the migrations."""
         pass

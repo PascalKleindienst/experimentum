@@ -128,7 +128,8 @@ class App(object):
         self.log.info('Register Aliases')
 
         self.aliases = {
-            'migrator': lambda: Migrator(self.config.get('storage.migrations.path', 'migrations')),
+            'migrator':
+                lambda: Migrator(self.config.get('storage.migrations.path', 'migrations'), self),
             'store': lambda: self.store,
             'schema': lambda: Schema(self),
             'blueprint': lambda *args, **kwargs: Blueprint(*args, **kwargs),
@@ -187,7 +188,12 @@ class App(object):
             os.path.realpath(self.config.get('app.logging.path', '.')),
             name
         )
-        fh = logging.FileHandler(filename, mode='a+')
+        fh = logging.handlers.RotatingFileHandler(
+            filename,
+            maxBytes=self.config.get('app.logging.max_bytes', 1024),
+            backupCount=self.config.get('app.logging.backup_count', 10),
+            mode='a+'
+        )
         fh.setLevel(level)
         fh.setFormatter(logging.Formatter(self.config.get(
             'app.logging.format',

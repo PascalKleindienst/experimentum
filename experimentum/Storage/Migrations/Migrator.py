@@ -18,9 +18,10 @@ class Migrator(object):
 
     Arguments:
         path {string} -- Path to the migrations folder.
+        app {App} -- Main App class
     """
 
-    def __init__(self, path):
+    def __init__(self, path, app):
         """Set the path for the migrations.
 
         Arguments:
@@ -44,7 +45,7 @@ class Migrator(object):
             with open(file, 'rb') as fh:
                 mod = imp.load_source('migrations', file, fh)
                 migration = getattr(mod, inflection.camelize(name[15:]))
-                self.migrations[name] = migration()
+                self.migrations[name] = migration(app)
 
     def status(self):
         """Print the current status of which migrations did run and which not."""
