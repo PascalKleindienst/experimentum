@@ -9,7 +9,7 @@ class TestMigrationCommand(object):
         app_mock.make = mocker.MagicMock(return_value=mock_migrator)
 
         status().handle(app_mock, None)
-        mock_migrator.status.assert_called_once()
+        mock_migrator.status.assert_called_once_with()
 
     def test_refresh(self, mocker):
         mock_migrator = mocker.patch('experimentum.Storage.Migrator')
@@ -18,7 +18,7 @@ class TestMigrationCommand(object):
         app_mock.make = mocker.MagicMock(return_value=mock_migrator)
 
         refresh().handle(app_mock, None)
-        mock_migrator.refresh.assert_called_once()
+        mock_migrator.refresh.assert_called_once_with()
 
     def test_up(self, mocker):
         mock_migrator = mocker.patch('experimentum.Storage.Migrator')
@@ -27,7 +27,7 @@ class TestMigrationCommand(object):
         app_mock.make = mocker.MagicMock(return_value=mock_migrator)
 
         up().handle(app_mock, None)
-        mock_migrator.up.assert_called_once()
+        mock_migrator.up.assert_called_once_with()
 
     def test_down(self, mocker):
         mock_migrator = mocker.patch('experimentum.Storage.Migrator')
@@ -36,7 +36,7 @@ class TestMigrationCommand(object):
         app_mock.make = mocker.MagicMock(return_value=mock_migrator)
 
         down().handle(app_mock, None)
-        mock_migrator.down.assert_called_once()
+        mock_migrator.down.assert_called_once_with()
 
     def test_make(self, mocker):
         mock_migrator = mocker.patch('experimentum.Storage.Migrator')

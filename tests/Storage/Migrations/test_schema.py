@@ -19,7 +19,7 @@ class TestSchema(object):
         with self.schema.create('Test') as table:
             assert isinstance(table, Blueprint) is True
             table.action = 'create'
-            table.create.assert_called_once()
+            table.create.assert_called_once_with()
 
         self.schema.store.create.assert_called_once_with(table)
 

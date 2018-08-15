@@ -93,7 +93,7 @@ class TestMigrator(object):
 
         migrator = self._create_migrator(tmpdir.strpath, mocker)
         migrator.up(mock_migration)
-        mock_migration.up.assert_called_once()
+        mock_migration.up.assert_called_once_with()
 
     def test_upgrade_with_invalid_migration(self, tmpdir, mocker):
         migrator = self._create_migrator(tmpdir.strpath, mocker)
@@ -126,7 +126,7 @@ class TestMigrator(object):
 
         migrator = self._create_migrator(tmpdir.strpath, mocker)
         migrator.down(mock_migration)
-        mock_migration.down.assert_called_once()
+        mock_migration.down.assert_called_once_with()
 
     def test_downgrade_with_invalid_migration(self, tmpdir, mocker):
         migrator = self._create_migrator(tmpdir.strpath, mocker)

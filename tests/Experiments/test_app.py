@@ -56,7 +56,7 @@ class TestApp(object):
         app.cmd_manager = cmd_manager
         app.run()
 
-        cmd_manager.dispatch.assert_called_once()
+        cmd_manager.dispatch.assert_called_once_with()
 
     def test_make_alias_instance(self, mocker):
         app = App('')
