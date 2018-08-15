@@ -49,7 +49,7 @@ Example Config:
 
 Storage Configuration
 ---------------------
-The App configuration is stored in the ``storage.json`` file and has to following options:
+The Database configuration is stored in the ``storage.json`` file and has to following options:
 
 +--------------------------+---------------------------------------------------------------+
 | Option                   | Description                                                   |
@@ -61,7 +61,7 @@ The App configuration is stored in the ``storage.json`` file and has to followin
 +--------------------------+---------------------------------------------------------------+
 | ``datastore.username``   | Database Username.                                            |
 +--------------------------+---------------------------------------------------------------+
-| ``ldatastore.password``  | Database Password.                                            |
+| ``datastore.password``   | Database Password.                                            |
 +--------------------------+---------------------------------------------------------------+
 | ``datastore.host``       | Database host.                                                |
 +--------------------------+---------------------------------------------------------------+
