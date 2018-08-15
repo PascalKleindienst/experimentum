@@ -136,6 +136,7 @@ class TestMigrator(object):
 
     def test_refresh(self, tmpdir, mocker):
         self._create_migration_file(0, tmpdir)
+        migration = '{}_test_migration_0'.format(datetime.fromtimestamp(0).strftime('%Y%m%d%H%M%S'))
         tmpdir.join('.version').write('|' + datetime.fromtimestamp(0).strftime('%Y%m%d%H%M%S'))
         migrator = self._create_migrator(tmpdir.strpath, mocker)
         migrator.up = mocker.MagicMock()
@@ -143,5 +144,5 @@ class TestMigrator(object):
 
         migrator.refresh()
 
-        migrator.down.assert_called_with(migrator.migrations.values()[0])
-        migrator.up.assert_called_with(migrator.migrations.values()[0])
+        migrator.down.assert_called_with(migrator.migrations.get(migration))
+        migrator.up.assert_called_with(migrator.migrations.get(migration))
