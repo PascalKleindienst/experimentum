@@ -143,5 +143,5 @@ class TestMigrator(object):
 
         migrator.refresh()
 
-        migrator.down.assert_called()
-        migrator.up.assert_called()
+        migrator.down.assert_called_with(migrator.migrations.values()[0])
+        migrator.up.assert_called_with(migrator.migrations.values()[0])
