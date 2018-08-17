@@ -8,7 +8,8 @@ class Blueprint(object):
     Attributes:
         table {string} -- Name of the table
         columns {list} -- List of columns for the table (default: {[]})
-        dropped {list} -- List of dropped columns of the table (default: {[]})
+        dropped {object} -- Object with list of dropped columns and indexes of
+                            the table (default: {{'columns': [], 'indexes': []}})
         indexes {list} -- List of indices for the table (default: {[]})
         fkeys {list} -- List of foreign keys for the table (default: {[]})
         action {string} -- Action (i.e. create or alter) (default: {'alter'})
@@ -22,7 +23,7 @@ class Blueprint(object):
         """
         self.table = table
         self.columns = []
-        self.dropped = []
+        self.dropped = {'columns': [], 'indexes': []}
         self.indexes = []
         self.fkeys = []
         self.action = 'alter'
@@ -52,7 +53,7 @@ class Blueprint(object):
         Arguments:
             *args {string} -- Column names
         """
-        self.dropped.extend(list(args))
+        self.dropped['columns'].extend(list(args))
 
     def array(self, column, arr_type, dimensions=None):
         """ARRAY column type.
@@ -384,6 +385,9 @@ class Blueprint(object):
         Returns:
             ForeignKey
         """
+        if not name:
+            name = '{}_{}_{}'.format(self.table, column, 'foreign')
+
         fkey = ForeignKey(column, name)
         self.fkeys.append({'col': column, 'key': fkey})
         return fkey
@@ -402,6 +406,69 @@ class Blueprint(object):
             name = '{}_{}_{}'.format(self.table, column, idx_type)
 
         self.indexes.append({
+            'col': column,
+            'type': idx_type,
+            'name': name
+        })
+
+    def drop_primary(self, column, name=None):
+        """Drop a primary key from the column.
+
+        Arguments:
+            column {string} -- Primary Key column
+
+        Keyword Arguments:
+            name {string} -- Name of the primary key (default: {None})
+        """
+        self._drop_idx(column, 'primary', name)
+
+    def drop_unique(self, column, name=None):
+        """Drop a unique key from the column.
+
+        Arguments:
+            column {string} -- unique Key column
+
+        Keyword Arguments:
+            name {string} -- Name of the unique key (default: {None})
+        """
+        self._drop_idx(column, 'unique', name)
+
+    def drop_index(self, column, name=None):
+        """Drop a index key from the column.
+
+        Arguments:
+            column {string} -- index Key column
+
+        Keyword Arguments:
+            name {string} -- Name of the index key (default: {None})
+        """
+        self._drop_idx(column, 'index', name)
+
+    def drop_foreign(self, column, name=None):
+        """Drop a foreign key from the column.
+
+        Arguments:
+            column {string} -- foreign Key column
+
+        Keyword Arguments:
+            name {string} -- Name of the foreign key (default: {None})
+        """
+        self._drop_idx(column, 'foreign', name)
+
+    def _drop_idx(self, column, idx_type, name=None):
+        """Drop an index.
+
+        Arguments:
+            column {string} -- indexed column
+            idx_type {string} -- index type
+
+        Keyword Arguments:
+            name {string} -- Custom index name (default: {None})
+        """
+        if not name:
+            name = '{}_{}_{}'.format(self.table, column, idx_type)
+
+        self.dropped['indexes'].append({
             'col': column,
             'type': idx_type,
             'name': name

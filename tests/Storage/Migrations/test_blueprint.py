@@ -7,7 +7,8 @@ class TestBlueprint(object):
         assert blueprint.table is 'some table'
         assert blueprint.columns == []
         assert blueprint.indexes == []
-        assert blueprint.dropped == []
+        assert blueprint.dropped.get('indexes') == []
+        assert blueprint.dropped.get('columns') == []
         assert blueprint.fkeys == []
         assert blueprint.action is 'alter'
 
@@ -20,7 +21,7 @@ class TestBlueprint(object):
     def test_drop_column(self):
         blueprint = Blueprint('some table')
         blueprint.drop_column('foo', 'bar', 'baz')
-        assert blueprint.dropped == ['foo', 'bar', 'baz']
+        assert blueprint.dropped.get('columns') == ['foo', 'bar', 'baz']
 
     def test_add_column(self):
         blueprint = Blueprint('some table')
@@ -254,3 +255,31 @@ class TestBlueprint(object):
         assert key.get('col') is 'col_name'
         assert isinstance(key.get('key'), ForeignKey)
         assert isinstance(fkey, ForeignKey)
+
+    def test_drop_primary(self):
+        blueprint = Blueprint('some_table')
+        blueprint.drop_primary('col_name')
+        assert blueprint.dropped.get('indexes')[0]['col'] == 'col_name'
+        assert blueprint.dropped.get('indexes')[0]['name'] == 'some_table_col_name_primary'
+        assert blueprint.dropped.get('indexes')[0]['type'] == 'primary'
+
+    def test_drop_unique(self):
+        blueprint = Blueprint('some_table')
+        blueprint.drop_unique('col_name')
+        assert blueprint.dropped.get('indexes')[0]['col'] == 'col_name'
+        assert blueprint.dropped.get('indexes')[0]['name'] == 'some_table_col_name_unique'
+        assert blueprint.dropped.get('indexes')[0]['type'] == 'unique'
+
+    def test_drop_index(self):
+        blueprint = Blueprint('some_table')
+        blueprint.drop_index('col_name')
+        assert blueprint.dropped.get('indexes')[0]['col'] == 'col_name'
+        assert blueprint.dropped.get('indexes')[0]['name'] == 'some_table_col_name_index'
+        assert blueprint.dropped.get('indexes')[0]['type'] == 'index'
+
+    def test_drop_foreign(self):
+        blueprint = Blueprint('some_table')
+        blueprint.drop_foreign('col_name')
+        assert blueprint.dropped.get('indexes')[0]['col'] == 'col_name'
+        assert blueprint.dropped.get('indexes')[0]['name'] == 'some_table_col_name_foreign'
+        assert blueprint.dropped.get('indexes')[0]['type'] == 'foreign'
