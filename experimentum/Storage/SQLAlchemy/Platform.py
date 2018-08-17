@@ -1,3 +1,8 @@
+from sqlalchemy.dialects.mysql.base import MySQLDialect
+from sqlalchemy.dialects.mssql.base import MSDialect
+from sqlalchemy.dialects.sqlite.base import SQLiteDialect
+
+
 class Platform(object):
 
     """Gettings some sql platform specific queries.
@@ -21,6 +26,30 @@ class Platform(object):
         """
         self.engine = engine
         self.meta = meta
+
+    def is_sqlite(self):
+        """Check if current database driver is SQLite.
+
+        Returns:
+            boolean
+        """
+        return isinstance(self.engine.dialect, SQLiteDialect)
+
+    def is_mysql(self):
+        """Check if current database driver is MySQL.
+
+        Returns:
+            boolean
+        """
+        return isinstance(self.engine.dialect, MySQLDialect)
+
+    def is_mssql(self):
+        """Check if current database driver is MSSQL.
+
+        Returns:
+            boolean
+        """
+        return isinstance(self.engine.dialect, MSDialect)
 
     def get_add_column_sql(self, table, column):
         """Get SQL for adding a column to a table.
@@ -104,6 +133,47 @@ class Platform(object):
             list
         """
         return ['ALTER TABLE {} DROP COLUMN {};'.format(table, column) for column in columns]
+
+    def get_drop_key_constraint_sql(self, table, column, idx_type, idx_name):
+        """Get a drop key constraint sql query.
+
+        Arguments:
+            table {string} -- Name of table
+            column {Column} -- Column with the key
+            idx_type {string} -- Type of index, i.e. primary, foreign, unique or index
+            idx_name {string} -- Name of the index
+
+        Returns:
+            string
+        """
+        column_name = column.compile(dialect=self.engine.dialect)
+        column_type = column.type.compile(self.engine.dialect)
+
+        if idx_type == 'primary':
+            if self.is_mysql():
+                return 'ALTER TABLE {0} CHANGE {1} {1} {2} UNSIGNED NOT NULL; ' \
+                    'ALTER TABLE {0} DROP PRIMARY KEY;'.format(table, column_name, column_type)
+
+            return 'ALTER TABLE {} DROP CONSTRAINT {};'.format(table, idx_name)
+        elif idx_type == 'unique':
+            return 'ALTER TABLE {} DROP {} {};'.format(
+                table,
+                'INDEX' if self.is_mysql() else 'CONSTRAINT',
+                idx_name
+            )
+        elif idx_type == 'foreign':
+            return 'ALTER TABLE {} DROP {} {};'.format(
+                table,
+                'FOREIGN KEY' if self.is_mysql() else 'CONSTRAINT',
+                idx_name
+            )
+        elif idx_type == 'index':
+            if self.is_mssql():
+                return 'DROP INDEX {} ON {};'.format(idx_name, table)
+            elif self.is_mysql():
+                return 'ALTER TABLE {} DROP INDEX {};'.format(table, idx_name)
+
+            return 'DROP INDEX {};'.format(idx_name)
 
     def _get_foreign_key_action_sql(self, foreign_key):
         """Get ONUPDATE/ONDELETE actions.
