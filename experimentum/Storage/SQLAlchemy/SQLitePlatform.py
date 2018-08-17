@@ -141,7 +141,7 @@ class SQLitePlatform(Platform):
                 # Drop old index if exists to avoid naming conflicts
                 try:
                     column.drop(self.engine)
-                except Exception, e:
+                except Exception:
                     pass
             else:
                 table.append_column(column.copy())
