@@ -1,3 +1,9 @@
+"""The Config Loader module loads json config files.
+
+The :py:mod:`experimentum.Config.Loader` loads all json files from a folder
+and stores the content in the :py:mod:`experimentum.Config.Config` module.
+"""
+
 import logging
 import json
 import glob
@@ -9,17 +15,17 @@ class Loader(object):
 
     """Load the configuration files.
 
-    Arguments:
-        config_path {string} -- path to config files
-        config {Config} -- config class
+    Attributes:
+        config_path (string): Path to config files.
+        config (Config): Config holder class
     """
 
     def __init__(self, config_path, config):
         """Load the configuration items.
 
         Arguments:
-            config_path {string} -- path to config files
-            config {Config} -- config class
+            config_path (string): Path to config files.
+            config (Config): Config holder class.
         """
         self.config_path = config_path
         self.config = config
@@ -28,7 +34,7 @@ class Loader(object):
         """Load the configuration items from all of the files.
 
         Raises:
-            Exception -- if there is no app.json config
+            Exception: if there is no app.json config.
         """
         files = self.get_config_files()
 
@@ -44,7 +50,7 @@ class Loader(object):
         """Get all of the configuration files for the application.
 
         Returns:
-            dict -- config items
+            dict: The config items.
         """
         files = glob.glob(os.path.join(self.config_path, '*.json'))
 
@@ -56,9 +62,9 @@ class Loader(object):
         """Get the config key based on the filename.
 
         Arguments:
-            fname {string} -- Name of the config file
+            fname (string): Name of the config file.
 
         Returns:
-            string -- key
+            string: key
         """
         return os.path.splitext(os.path.basename(fname))[0]
