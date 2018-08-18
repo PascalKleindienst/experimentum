@@ -1,6 +1,6 @@
 """Provides Config Holder and Config Loader modules to easily load/store config items.
 
-Import :py:mod:`experimentum.Config.Loader` and :py:mod:`experimentum.Config.Config`
+Import :py:mod:`.Loader` and :py:mod:`.Config`
 so that they can be easly imported by other packages/modules.
 """
 # flake8: noqa

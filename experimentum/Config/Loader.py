@@ -1,7 +1,7 @@
 """The Config Loader module loads json config files.
 
-The :py:mod:`experimentum.Config.Loader` loads all json files from a folder
-and stores the content in the :py:mod:`experimentum.Config.Config` module.
+The :py:mod:`.Loader` loads all json files from a folder
+and stores the content in the :py:mod:`.Config` module.
 """
 
 import logging
