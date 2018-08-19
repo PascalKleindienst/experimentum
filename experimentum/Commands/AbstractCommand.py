@@ -1,13 +1,58 @@
+"""Easily add CLI commands to the app.
+
+There are to possible ways for defining CLI commands in
+order for them to be added to the :py:mod:`.CommandManager`.
+
+Decorator
+---------
+The easiest method to define a command is via the :py:func:`.AbstractCommand.command`
+decorator. The decorator accepts some arguments like description or help text in order
+to descrine the command while the decorated function handles the command execution.
+The ``arguments`` argument accepts a dictionary which each key is the name of the argument
+and each value is passed to the :py:func:`argparse.add_argument` method::
+
+    @command(
+        'Some description about what the command does.',
+        arguments={
+            'integers': {'help': 'Some Help', 'default': 42, 'nargs': '?'},
+            '--bar': {'action': 'store_true', 'help': 'Bar Help'}
+        }
+        help='Short help text.'
+    )
+    def foo(app, args):
+        print(args)
+
+
+Class-based
+-----------
+The other way of defining a command is a class based approach. Your command class
+has to derived from the :py:class:`.AbstractCommand` class. Just like the decorator
+you can define description, arguments and a help text. The ``handle`` method handles
+the command execution::
+
+    class FooCommand(AbstractCommand):
+        description = 'Some description about what the command does'
+        arguments = {
+            'integers': {'help': 'Some Help', 'default': 42, 'nargs': '?'},
+            '--bar': {'action': 'store_true', 'help': 'Bar Help'}
+        }
+        help='Short help text.'
+
+        def handle(self, app, args):
+            print(args)
+"""
+
+
 def command(description='', arguments={}, help=''):
     """Command decorator, creates a Command to use with the CommandManager.
 
-    Keyword Arguments:
-        description {str} -- Command Description (default: {''})
-        arguments {dict} -- Command Arguments (default: {{}})
-        help {str} -- Help Text (default: {''})
+    Args:
+        description (str, optional): Defaults to ''. Description of the command.
+        arguments (dict, optional): Defaults to {}. Arguments for the command.
+        help (str, optional): Defaults to ''. Help text of the command.
 
     Returns:
-        function
+        function:
     """
     def command_decorator(command):
         def command_wrapper(args=None):
@@ -23,11 +68,11 @@ class AbstractCommand(object):
 
     """Abstract Command Class.
 
-    Arguments:
-        description {str} -- Command description
-        arguments {dict} -- Optional Arguments for the command
-        help {str} -- Help Text for the command
-        args {dict} -- Dictionary with possible passed arguments
+    Attributes:
+        description (str): Description of the command.
+        arguments (dict): Optional aguments for the command.
+        help (str): Help Text for the command.
+        args (dict): Dictionary with possible passed arguments.
     """
     description = ''
     help = ''
@@ -37,10 +82,10 @@ class AbstractCommand(object):
     def setup(self, description='', arguments={}, help=''):
         """Set up the command.
 
-        Keyword Arguments:
-            description {str} -- Command description (default: {''})
-            arguments {dict} -- Optional args for the command (default: {{}})
-            help {str} -- Help Text for the command (default: {''})
+        Args:
+            description (str, optional): Defaults to ''. Description of the command.
+            arguments (dict, optional): Defaults to {}. Optional aguments for the command.
+            help (str, optional): Defaults to ''. Help Text for the command.
         """
         self.description = description
         self.arguments = arguments
@@ -49,12 +94,12 @@ class AbstractCommand(object):
     def handle(self, app, args):
         """Handle the command execution.
 
-        Arguments:
-            app {experimentum.Experiments.App} -- App class
-            args {dict} -- Dictionary with possible passed arguments
+        Args:
+            app (App): Main App class
+            args (dict): Dictionary with possible passed arguments.
 
         Raises:
-            NotImplementedError -- must implement abstract method
+            NotImplementedError: must be implemented
         """
         raise NotImplementedError(
             'handle-Method has not been implemented yet.'
