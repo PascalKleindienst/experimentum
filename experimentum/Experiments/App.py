@@ -1,3 +1,36 @@
+"""Main entry point of the framework.
+
+Sets up the framework and runs the experiments and lets you customize/extend
+the behavior of the framework.
+
+Register new commands with the :py:meth:`.App.register_commands` method.
+It should return a dictionary where the keys are names of the commands and
+the values are the command handlers. The command handlers must either be
+derived from :py:class:`.AbstractCommand` or a function with the decorator
+:py:func:`.AbstractCommand.command`. Example return::
+
+    {
+        'foo': FooCommand,
+        'bar': BarCommand
+    }
+
+Add more aliases or change aliases with the :py:meth:`.App.register_aliases` method.
+To create a new instance of an aliased class just run the :py:meth:`.App.make` method::
+
+    class MyDerivedApp(App):
+        def register_aliases(self):
+            super(MyDerivedApp, self).register_aliases()  # register default aliases
+
+            # register alias 'foo' and pass all args and kwargs when called with make
+            self.aliases['foo'] = lambda *args, **kwargs: Foo(*args, **kwargs)
+
+    ...
+
+    # create a new instance of Foo and pass the args to it.
+    foo = app.make('foo', 42, bar='foobar')
+
+
+"""
 from __future__ import print_function
 import os
 import sys
@@ -10,43 +43,26 @@ from experimentum.Commands import CommandManager, MigrationCommand, print_failur
 from experimentum.Storage.Migrations import Migrator, Blueprint, Schema
 from experimentum.Storage.SQLAlchemy import Store
 
-_app = None
-
-
-def app(app=None):
-    """Singleton helper for app.
-
-    Keyword Arguments:
-        app {App} -- Set current app (default: {None})
-
-    Returns:
-        App
-    """
-    global _app
-    if app:
-        _app = app
-    return _app
-
 
 class App(object):
 
     """Main entry point of the framework.
 
-    Arguments:
-        config_path {string} -- Path to config files (default: {'.'})
-        name {string} -- Name of the app
-        config {Config} -- Config Manager
-        log {logging.Logger} -- Logger
-        store {AbstractStore} -- Data Store
-        aliases {dict} -- Dictionary of aliases and factory functions
+    Attributes:
+        config_path (string): Defaults to ``.``. Path to config files.
+        name (string): Name of the app.
+        config (Config): Config Manager.
+        log (logging.Logger): Logger.
+        store (AbstractStore): Data Store.
+        aliases (dict): Dictionary of aliases and factory functions.
     """
     config_path = '.'
 
     def __init__(self, name):
         """Bootstrap the app framework.
 
-        Arguments:
-            name {string} -- Name of the App
+        Args:
+            name (string): Name of the App.
         """
         self.name = name
         self.bootstrap()
@@ -78,7 +94,7 @@ class App(object):
         self._add_commands()
 
         # save app instance
-        app(self)
+        # app(self)
 
     def setup_datastore(self):
         """Set up the data store."""
@@ -91,14 +107,14 @@ class App(object):
     def make(self, alias, *args, **kwargs):
         """Create an instance of an aliased class.
 
-        Arguments:
-            alias {string} -- Class alias
+        Args:
+            alias (string): Name of class alias.
 
         Raises:
-            Exception -- raises an exception if the alias does not exists
+            Exception: if the alias does not exists.
 
         Returns:
-            object -- instance of the aliased class
+            object: Instance of the aliased class
         """
         klass = self.aliases.get(alias, None)
 
@@ -119,7 +135,7 @@ class App(object):
         """Register custom cli commands.
 
         Returns:
-            dict -- commands to register
+            dict: commands to register
         """
         return {}
 
@@ -151,7 +167,7 @@ class App(object):
         """Register default commands.
 
         Returns:
-            dict -- Default commands
+            dict: Default commands
         """
         return {
             'migration:status': MigrationCommand.status,
@@ -190,7 +206,7 @@ class App(object):
         )
         fh = logging.handlers.RotatingFileHandler(
             filename,
-            maxBytes=self.config.get('app.logging.max_bytes', 1024),
+            maxBytes=self.config.get('app.logging.max_bytes', 1024 * 1024),  # default to 1MB
             backupCount=self.config.get('app.logging.backup_count', 10),
             mode='a+'
         )

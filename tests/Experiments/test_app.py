@@ -1,4 +1,4 @@
-from experimentum.Experiments import App, app as _app
+from experimentum.Experiments import App
 from experimentum.Config import Config
 from experimentum.Commands import CommandManager
 import json
@@ -33,7 +33,6 @@ class TestApp(object):
         assert isinstance(app.config, Config)
         assert isinstance(app.log, logging.Logger)
         assert isinstance(app.cmd_manager, CommandManager)
-        assert app is _app()
 
     def test_adding_user_commands(self, mocker):
         cmd_manager = mocker.patch('experimentum.Commands.CommandManager')

@@ -8,6 +8,6 @@ from .Storage import *
 ##################
 # Helper Methods #
 ##################
-def config(get=None, default=None):
-    """Shortcut for getting the config instance."""
-    return app().config.get(get, default) if get else app().config
+# def config(get=None, default=None):
+#     """Shortcut for getting the config instance."""
+#     return app().config.get(get, default) if get else app().config
