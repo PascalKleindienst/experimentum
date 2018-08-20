@@ -16,10 +16,12 @@ install:
   - pip install sphinx_rtd_theme
   - pip install travis-sphinx
   - pip install tox-travis
+  - pip install codacy-coverage
 
 script:
   - travis-sphinx build --source=docs
   - tox
 
-# after_success:
+after_success:
   - travis-sphinx deploy
+  - python-codacy-coverage -r coverage.xml
