@@ -8,12 +8,12 @@ class TestSQLitePlatform(object):
     def setup_class(cls):
         """ init platform """
         cls.platform = SQLitePlatform()
-        cls.engine = create_engine('sqlite://')
 
     def _setup_platform(self):
+        engine = create_engine('sqlite://')
         self.platform.set_engine(
-            self.engine,
-            MetaData(self.engine)
+            engine,
+            MetaData(engine)
         )
 
     def test_set_engine(self):

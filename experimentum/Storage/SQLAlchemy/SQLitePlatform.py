@@ -1,5 +1,66 @@
+"""SQLite specific sql commands and queries.
+
+SQLite does not provide complete range of all sql commands, therefore some tricks are needed
+to emulate the behavior. See: https://www.sqlite.org/omitted.html
+"""
+import logging
 from experimentum.Storage.SQLAlchemy import Platform
 from sqlalchemy import Table, Index, ForeignKey
+
+
+def prepare_columns(columns, indexes, dropped):
+    """Prepate columns so that they can be created for another table.
+
+    Args:
+        columns (list): Columns of a table
+        indexes (list): indexes of a table
+        dropped (object): Columns and indexes to drop
+
+    Returns:
+        dict: with columns and column names
+    """
+    data = {'columns': [], 'names': []}
+    dropped_fkeys = [fkey['name'] for fkey in dropped['indexes'] if fkey['type'] == 'foreign']
+    dropped_pkeys = [pkey['col'] for pkey in dropped['indexes'] if pkey['type'] == 'primary']
+
+    # Add Columns
+    for col in columns:
+        column = col.copy()
+
+        # Add Foreign Keys
+        fkeys = []
+        for fkey in col.foreign_keys:
+            if fkey.name not in dropped_fkeys:
+                fkeys.append(ForeignKey(
+                    fkey.column,
+                    name=fkey.name,
+                    onupdate=fkey.onupdate,
+                    ondelete=fkey.ondelete,
+                    deferrable=fkey.deferrable
+                ))
+        column.foreign_keys = set(fkeys)
+
+        # Drop primary keys
+        if column.primary_key and column.name in dropped_pkeys:
+            column.primary_key = False
+
+        # Add column and names
+        if column.name not in dropped['columns']:
+            data['columns'].append(column)
+            data['names'].append(column.name)
+
+    # Add Indexes
+    for idx in indexes:
+        drop = False
+        for drop_idx in dropped['indexes']:
+            if drop_idx['name'] == idx.name:
+                drop = True
+                break
+
+        if drop is False:
+            data['columns'].append(idx)
+
+    return data
 
 
 class SQLitePlatform(Platform):
@@ -18,14 +79,14 @@ class SQLitePlatform(Platform):
         See:
         https://www.sqlite.org/omitted.html
 
-        Arguments:
-            table {string} -- Name of the table
-            cols {list} -- List with changed columns
-            dropped {object} -- Object with list of columns and indexes to drop
+        Args:
+            table (str): Name of the table
+            cols (list): List with changed columns
+            dropped (dict): Dictionary with list of columns and indexes to drop
         """
         # Prepare columns
         old_table = self.meta.tables.get(table, Table(table, self.meta, autoload=True))
-        columns = self._prepare_columns(list(old_table.columns), list(old_table.indexes), dropped)
+        columns = prepare_columns(list(old_table.columns), list(old_table.indexes), dropped)
         new_columns = columns['columns']
         new_columns.extend(cols)
 
@@ -46,67 +107,13 @@ class SQLitePlatform(Platform):
         # * DROP TABLE $data_table;
         data_table.drop(self.engine)
 
-    def _prepare_columns(self, columns, indexes, dropped):
-        """Prepate columns so that they can be created for another table.
-
-        Arguments:
-            columns {list} -- Columns of a table
-            indexes {list} -- indexes of a table
-            dropped {object} -- Columns and indexes to drop
-
-        Returns:
-            dict
-        """
-        data = {'columns': [], 'names': []}
-        dropped_fkeys = [fkey['name'] for fkey in dropped['indexes'] if fkey['type'] == 'foreign']
-        dropped_pkeys = [pkey['col'] for pkey in dropped['indexes'] if pkey['type'] == 'primary']
-
-        # Add Columns
-        for col in columns:
-            column = col.copy()
-
-            # Add Foreign Keys
-            fkeys = []
-            for fkey in col.foreign_keys:
-                if fkey.name not in dropped_fkeys:
-                    fkeys.append(ForeignKey(
-                        fkey.column,
-                        name=fkey.name,
-                        onupdate=fkey.onupdate,
-                        ondelete=fkey.ondelete,
-                        deferrable=fkey.deferrable
-                    ))
-            column.foreign_keys = set(fkeys)
-
-            # Drop primary keys
-            if column.primary_key and column.name in dropped_pkeys:
-                column.primary_key = False
-
-            # Add column and names
-            if column.name not in dropped['columns']:
-                data['columns'].append(column)
-                data['names'].append(column.name)
-
-        # Add Indexes
-        for idx in indexes:
-            drop = False
-            for drop_idx in dropped['indexes']:
-                if drop_idx['name'] == idx.name:
-                    drop = True
-                    break
-
-            if drop is False:
-                data['columns'].append(idx)
-
-        return data
-
     def _fill_table(self, target_tablename, columns, source_table):
         """Fill a target table with values from a source table.
 
-        Arguments:
-            target_tablename {string} -- Table to be filled
-            columns {list} -- List of columns to be filled
-            source_table {string} -- Name of the source table
+        Args:
+            target_tablename (str): Table to be filled
+            columns (list): List of columns to be filled
+            source_table (str): Name of the source table
         """
         self.engine.execute('INSERT INTO {} ({}) SELECT {} FROM {}'.format(
             target_tablename,
@@ -118,12 +125,12 @@ class SQLitePlatform(Platform):
     def _create_table(self, tablename, columns):
         """Create a new table with columns and constraints.
 
-        Arguments:
-            tablename {string} -- Name of new table
-            columns {list} -- List of Columns
+        Args:
+            tablename (str): Name of new table
+            columns (list): List of Columns
 
         Returns:
-            Table
+            Table: newly created table
         """
         table = Table(tablename, self.meta, extend_existing=True)
         used_idx = []
@@ -141,8 +148,11 @@ class SQLitePlatform(Platform):
                 # Drop old index if exists to avoid naming conflicts
                 try:
                     column.drop(self.engine)
-                except Exception:
-                    pass
+                except Exception as exc:
+                    # do not fail, just keep going - but log the error (just in case)
+                    logging.getLogger('experimentum').warning(
+                        'Error while recreating index: ' + str(exc)
+                    )
             else:
                 table.append_column(column.copy())
 

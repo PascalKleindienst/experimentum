@@ -1,3 +1,8 @@
+"""SQL Platform specific code.
+
+Generate SQL queries for altering tables and columns because
+SQLAlchemy mostly does not support these types of operations.
+"""
 from sqlalchemy.dialects.mysql.base import MySQLDialect
 from sqlalchemy.dialects.mssql.base import MSDialect
 from sqlalchemy.dialects.sqlite.base import SQLiteDialect
@@ -8,9 +13,57 @@ class Platform(object):
     """Gettings some sql platform specific queries.
 
     Attributes:
-        engine {Engine} -- Database Engine
-        meta {MetaData} -- Schema Metadata
+        engine (sqlalchemy.engine.Engine): Database Engine
+        meta (sqlalchemy.schema.MetaData): Schema Metadata
     """
+
+    @staticmethod
+    def get_rename_sql(old, new):
+        """Get the sql for renaming a table.
+
+        Args:
+            old (str): old table name
+            new (str): new table name
+
+        Returns:
+            str
+        """
+        return 'ALTER TABLE {} RENAME TO {};'.format(old, new)
+
+    @staticmethod
+    def get_drop_columns_sql(table, columns):
+        """Get a list of sql commands for dropping columns.
+
+        Args:
+            table (str): name of the table
+            columns (list): list of column names
+
+        Returns:
+            list
+        """
+        return ['ALTER TABLE {} DROP COLUMN {};'.format(table, column) for column in columns]
+
+    @staticmethod
+    def get_foreign_key_action_sql(foreign_key):
+        """Get ONUPDATE/ONDELETE actions.
+
+        Args:
+            foreign_key (sqlalchemy.schema.ForeignKey): ForeignKey to get action of.
+
+        Returns:
+            dict
+        """
+        actions = {
+            'on_delete': '',
+            'on_update': ''
+        }
+
+        if foreign_key.ondelete:
+            actions['on_delete'] = 'ON DELETE {}'.format(foreign_key.ondelete)
+        if foreign_key.onupdate:
+            actions['on_update'] = 'ON UPDATE {}'.format(foreign_key.onupdate)
+
+        return actions
 
     def __init__(self):
         """Initialize platform."""
@@ -20,9 +73,9 @@ class Platform(object):
     def set_engine(self, engine, meta):
         """Set engine and meta.
 
-        Arguments:
-            engine {Engine} -- Database Engine
-            meta {MetaData} -- Schema Metadata
+        Args:
+            engine (sqlalchemy.engine.Engine): Database Engine
+            meta (sqlalchemy.schema.MetaData): Schema Metadata
         """
         self.engine = engine
         self.meta = meta
@@ -54,16 +107,16 @@ class Platform(object):
     def get_add_column_sql(self, table, column):
         """Get SQL for adding a column to a table.
 
-        See:
-        * https://stackoverflow.com/questions/7300948/add-column-to-sqlalchemy-table#17243132
-        * http://docs.sqlalchemy.org/en/latest/core/compiler.html#dialect-specific-compilation-rules
+        Notes:
+            - https://stackoverflow.com/questions/7300948/add-column-to-sqlalchemy-table#17243132
+            - http://docs.sqlalchemy.org/en/latest/core/compiler.html
 
-        Arguments:
-            table {string} -- Name of the table
-            column {Column} -- Column to add
+        Args:
+            table (str): Name of the table
+            column (sqlalchemy.schema.Column): Column to add
 
         Returns:
-            string
+            str
         """
         column_name = column.compile(dialect=self.engine.dialect)
         column_type = column.type.compile(self.engine.dialect)
@@ -77,18 +130,18 @@ class Platform(object):
     def get_key_sql(self, table, column):
         """Get SQL for adding foreign key and primary key constraints.
 
-        Arguments:
-            table {string} -- Name of the table
-            column {Column} -- Column to add contraints on
+        Args:
+            table (str): Name of the table
+            column (sqlalchemy.schema.Column): Column to add contraints on
 
         Returns:
-            list -- List of strings with SQL commands
+            list: List of strings with SQL commands
         """
         sql = []
 
         # add foreign keys
         for fkey in column.foreign_keys:
-            actions = self._get_foreign_key_action_sql(fkey)
+            actions = self.get_foreign_key_action_sql(fkey)
             sql.append(
                 'ALTER TABLE {} ADD CONSTRAINT {} FOREIGN KEY ({}) REFERENCES {}({}) {} {};'.format(
                     table,
@@ -110,41 +163,17 @@ class Platform(object):
 
         return sql
 
-    def get_rename_sql(self, old, new):
-        """Get the sql for renaming a table.
-
-        Arguments:
-            old {string} -- old table name
-            new {string} -- new table name
-
-        Returns:
-            string
-        """
-        return 'ALTER TABLE {} RENAME TO {};'.format(old, new)
-
-    def get_drop_columns_sql(self, table, columns):
-        """Get a list of sql commands for dropping columns.
-
-        Arguments:
-            table {string} -- name of the table
-            columns {list} -- list of column names
-
-        Returns:
-            list
-        """
-        return ['ALTER TABLE {} DROP COLUMN {};'.format(table, column) for column in columns]
-
     def get_drop_key_constraint_sql(self, table, column, idx_type, idx_name):
         """Get a drop key constraint sql query.
 
-        Arguments:
-            table {string} -- Name of table
-            column {Column} -- Column with the key
-            idx_type {string} -- Type of index, i.e. primary, foreign, unique or index
-            idx_name {string} -- Name of the index
+        Args:
+            table (str): Name of table
+            column (sqlalchemy.schema.Column): Column with the key
+            idx_type (str): Type of index, i.e. primary, foreign, unique or index
+            idx_name (str): Name of the index
 
         Returns:
-            string
+            str
         """
         column_name = column.compile(dialect=self.engine.dialect)
         column_type = column.type.compile(self.engine.dialect)
@@ -174,24 +203,3 @@ class Platform(object):
                 return 'ALTER TABLE {} DROP INDEX {};'.format(table, idx_name)
 
             return 'DROP INDEX {};'.format(idx_name)
-
-    def _get_foreign_key_action_sql(self, foreign_key):
-        """Get ONUPDATE/ONDELETE actions.
-
-        Arguments:
-            foreign_key {ForeignKey} -- ForeignKey to get action of.
-
-        Returns:
-            dict
-        """
-        actions = {
-            'on_delete': '',
-            'on_update': ''
-        }
-
-        if foreign_key.ondelete:
-            actions['on_delete'] = 'ON DELETE {}'.format(foreign_key.ondelete)
-        if foreign_key.onupdate:
-            actions['on_update'] = 'ON UPDATE {}'.format(foreign_key.onupdate)
-
-        return actions
