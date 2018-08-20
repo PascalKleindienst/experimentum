@@ -1,17 +1,26 @@
+"""Column Data Structure to add column modifiers.
+
+Add column modifiers like nullable, default, unsigned to
+a column. They support method chaining, so the following is possible::
+
+    table.integer('foo').unsigned().nullable()
+"""
+
+
 class Column(object):
 
     """Stores attributes the the column."""
 
-    def __init__(self, type, name, parameters):
+    def __init__(self, col_typ, name, parameters):
         """Set Attributes.
 
-        Arguments:
-            type {string} -- Type of the column
-            name {string} -- Name of the column
-            parameters {object} -- Additional parameters for the column
+        Args:
+            col_typ (str): Type of the column.
+            name (str): Name of the column.
+            parameters (object): Additional parameters for the column.
         """
         self._attributes = {
-            'type': type,
+            'type': col_typ,
             'name': name,
             'parameters': parameters,
             'null': False,
@@ -22,11 +31,9 @@ class Column(object):
     def get(self, attribute, default=None):
         """Get the value of an attribute, with a default if it does not exist.
 
-        Arguments:
-            attribute {string} -- Attribute you want to get
-
-        Keyword Arguments:
-            default {object} -- Default value (default: {None})
+        Args:
+            attribute (str): Attribute you want to get.
+            default (object, optional): Defaults to None. Default value if attribute is not found.
 
         Returns:
             object
@@ -37,7 +44,7 @@ class Column(object):
         """Designate that the column allows NULL values.
 
         Returns:
-            Column
+            Column: self instance for method chaining.
         """
         self._attributes['null'] = True
         return self
@@ -45,11 +52,11 @@ class Column(object):
     def default(self, value):
         """Specify a default value for the column.
 
-        Arguments:
-            value {object} -- The default value
+        Args:
+            value (object): The default value
 
         Returns:
-            Column
+            Column: self instance for method chaining.
         """
         self._attributes['default'] = value
         return self
@@ -58,7 +65,7 @@ class Column(object):
         """Set INTEGER column as UNSINGED (MySQL).
 
         Returns:
-            Column
+            Column: self instance for method chaining.
         """
         self._attributes['unsigned'] = True
         return self
@@ -67,6 +74,6 @@ class Column(object):
         """Human-readable representation of the column attributes.
 
         Returns:
-            string
+            str
         """
         return '{}'.format(self._attributes)

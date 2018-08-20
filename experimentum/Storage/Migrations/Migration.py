@@ -1,16 +1,17 @@
+"""Handles database migrations."""
 import inflection
 
 
 class Migration(object):
 
-    """Abstract Migration."""
+    """Base Migration Class."""
     revision = None
 
     def __init__(self, app):
         """Init the Migration and set up the schema class.
 
         Arguments:
-            app {App} -- App class
+            app (App): App class
         """
         self.schema = app.make('schema')
 

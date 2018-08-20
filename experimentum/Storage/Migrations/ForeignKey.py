@@ -1,3 +1,13 @@
+r"""ForeignKey data structure to configure foreign key attributes.
+
+Supports method chaining to easily configure foreign keys, like::
+
+    table.foreign('user_id').references('id').on('users')\
+        .on_delete('cascade')\
+        .on_update('cascade')
+"""
+
+
 class ForeignKey(object):
 
     """Stores attributes for a Foreign Key."""
@@ -5,11 +15,9 @@ class ForeignKey(object):
     def __init__(self, column, name=None):
         """Set Attributes.
 
-        Arguments:
-            column {string} -- Column of the foreign key
-
-        Keyword Arguments:
-            name {string} -- Name of the foreign key (default: {None})
+        Args:
+            column (str): Column of the foreign key
+            name (str, optional): Defaults to None. Name of the foreign key.
         """
         self._attributes = {
             'column': column,
@@ -23,11 +31,11 @@ class ForeignKey(object):
     def references(self, ref_column):
         """Set the column the foreign key references.
 
-        Arguments:
-            ref_column {string} -- Name of referenced column
+        Args:
+            ref_column (str): Name of referenced column
 
         Returns:
-            ForeignKey
+            ForeignKey: self instance for method chaining.
         """
         self._attributes['ref_column'] = ref_column
         return self
@@ -35,11 +43,11 @@ class ForeignKey(object):
     def on(self, ref_table):
         """Set the table the foreign key references.
 
-        Arguments:
-            ref_table {string} -- Name of the referenced table
+        Args:
+            ref_table (str): Name of the referenced table
 
         Returns:
-            ForeignKey
+            ForeignKey: self instance for method chaining.
         """
         self._attributes['ref_table'] = ref_table
         return self
@@ -47,11 +55,11 @@ class ForeignKey(object):
     def on_delete(self, action):
         """Set the action which will be executed on delete.
 
-        Arguments:
-            action {string} -- Action to execute
+        Args:
+            action (str): Action to execute
 
         Returns:
-            ForeignKey
+            ForeignKey: self instance for method chaining.
         """
         self._attributes['on_delete'] = action
         return self
@@ -59,11 +67,11 @@ class ForeignKey(object):
     def on_update(self, action):
         """Set the action which will be executed on update.
 
-        Arguments:
-            action {string} -- Action to execute
+        Args:
+            action (str): Action to execute
 
         Returns:
-            ForeignKey
+            ForeignKey: self instance for method chaining.
         """
         self._attributes['on_update'] = action
         return self
@@ -71,11 +79,9 @@ class ForeignKey(object):
     def get(self, attribute, default=None):
         """Get the value of an attribute, with a default if it does not exist.
 
-        Arguments:
-            attribute {string} -- Attribute you want to get
-
-        Keyword Arguments:
-            default {object} -- Default value (default: {None})
+        Args:
+            attribute (str): Attribute you want to get
+            default (object, optional): Defaults to None. Default value.
 
         Returns:
             object
