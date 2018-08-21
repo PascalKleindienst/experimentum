@@ -1,3 +1,13 @@
+"""Generate needed files and folders to get up and running.
+
+In order to create all needed files and folders *(including config and migrations)*
+the experimentum framework contains a quickstart command. Just run ``experimentum-quickstart``
+and answer the questions.
+
+You can also add a different root path with the ``--root`` option, e.g.::
+
+    experimentum-quickstart --root example
+"""
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 import six
