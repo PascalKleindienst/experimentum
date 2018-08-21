@@ -1,7 +1,7 @@
 """The Config Loader module loads json config files.
 
 The :py:mod:`.Loader` loads all json files from a folder
-and stores the content in the :py:mod:`.Config` module.
+and stores the content in the :py:class:`.Config` class.
 """
 
 import logging
@@ -16,7 +16,7 @@ class Loader(object):
     """Load the configuration files.
 
     Attributes:
-        config_path (string): Path to config files.
+        config_path (str): Path to config files.
         config (Config): Config holder class
     """
 
@@ -24,7 +24,7 @@ class Loader(object):
         """Load the configuration items.
 
         Arguments:
-            config_path (string): Path to config files.
+            config_path (str): Path to config files.
             config (Config): Config holder class.
         """
         self.config_path = config_path
@@ -43,8 +43,8 @@ class Loader(object):
             raise Exception('Unable to load the "app" configuration file.')
 
         for key, path in files.items():
-            with io.open(path, encoding='utf-8') as fh:
-                self.config.set(key, json.load(fh))
+            with io.open(path, encoding='utf-8') as filehandler:
+                self.config.set(key, json.load(filehandler))
 
     def get_config_files(self):
         """Get all of the configuration files for the application.
@@ -55,16 +55,17 @@ class Loader(object):
         files = glob.glob(os.path.join(self.config_path, '*.json'))
 
         return {
-           self._config_key(file): os.path.realpath(file) for file in files
+           self.config_key(file): os.path.realpath(file) for file in files
         }
 
-    def _config_key(self, fname):
+    @classmethod
+    def config_key(self, fname):
         """Get the config key based on the filename.
 
         Arguments:
-            fname (string): Name of the config file.
+            fname (str): Name of the config file.
 
         Returns:
-            string: key
+            str: key
         """
         return os.path.splitext(os.path.basename(fname))[0]
