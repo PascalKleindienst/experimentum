@@ -51,9 +51,4 @@ Example ``MyApp`` class:
 
 Quickstart
 ----------
-In order to create all needed files and folders *(including config and migrations)* the experimentum framework contains a quickstart command.
-Just run ``experimentum-quickstart`` and answer the questions.
-
-You can also add a different root path with the ``--root`` option, e.g.::
-
-    experimentum-quickstart --root example
+.. automodule:: experimentum.quickstart
