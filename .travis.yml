@@ -12,10 +12,11 @@ matrix:
   allow_failures:
   #- python: "3.5" # problems with py.mock
   - python: "3.7"
-  - python: "pypy3"
+  # - python: "pypy3"
 
 install:
   - pip install sphinx_rtd_theme
+  - pip install sphinxcontrib-napoleon
   - pip install travis-sphinx
   - pip install tox-travis
   - pip install codacy-coverage
