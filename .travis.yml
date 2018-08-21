@@ -20,8 +20,9 @@ install:
   - pip install travis-sphinx
   - pip install tox-travis
   - pip install codacy-coverage
+  - pip install -r requirements.txt # just needed sphinx-autodoc
 
-script: # run tox first so that all modules are installed and sphinx-apidoc can find them
+script:
   - tox
   - travis-sphinx build --source=docs
 
