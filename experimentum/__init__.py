@@ -1,9 +1,10 @@
 """Import classes for easier importing by other packages/modules."""
 # flake8: noqa
-from .Experiments import *
-from .Config import *
-from .Commands import *
-from .Storage import *
+from .Experiments import App, Performance
+from .Config import Config, Loader
+from .Commands import AbstractCommand, CommandManager, MigrationCommand
+from .Storage import AbstractStore, Blueprint, Column, ForeignKey, Migration, Migrator,\
+    Schema, ColumnFactory, Platform, SQLitePlatform, Store
 
 ##################
 # Helper Methods #

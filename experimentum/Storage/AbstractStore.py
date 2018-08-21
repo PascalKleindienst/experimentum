@@ -1,3 +1,4 @@
+"""Interface of the data store to make it possible to switch between different implementations."""
 from __future__ import unicode_literals
 from six import add_metaclass
 from abc import abstractmethod, ABCMeta
@@ -12,8 +13,11 @@ class AbstractStore(object):
     def has_table(self, table):
         """Check if the data store has a specific table.
 
-        Arguments:
-            table {string} -- Name of the Table
+        Args:
+            table (str): Name of the Table
+
+        Raises:
+            NotImplementedError: if method is not implemented by derived class.
 
         Returns:
             boolean
@@ -23,9 +27,12 @@ class AbstractStore(object):
     def has_column(self, table, column):
         """Check if a table has a specific column.
 
-        Arguments:
-            table {string} -- Name of the table
-            column {string} -- Name of the column
+        Args:
+            table (str): Name of the table
+            column (str): Name of the column
+
+        Raises:
+            NotImplementedError: if method is not implemented by derived class.
 
         Returns:
             boolean
@@ -36,8 +43,11 @@ class AbstractStore(object):
     def create(self, blueprint):
         """Create a new Table.
 
-        Arguments:
-            blueprint {Blueprint} -- The Blueprint to create the table
+        Args:
+            blueprint (Blueprint): The Blueprint to create the table
+
+        Raises:
+            NotImplementedError: if method is not implemented by derived class.
         """
         raise NotImplementedError('Must implement rename method')
 
@@ -45,9 +55,12 @@ class AbstractStore(object):
     def rename(self, old, new):
         """Rename a table.
 
-        Arguments:
-            old {string} -- Old table name
-            new {string} -- New table name
+        Args:
+            old (str): Old table name
+            new (str): New table name
+
+        Raises:
+            NotImplementedError: if method is not implemented by derived class.
         """
         raise NotImplementedError('Must implement rename method')
 
@@ -55,8 +68,11 @@ class AbstractStore(object):
     def drop(self, name, checkfirst=False):
         """Drop a table.
 
-        Arguments:
-            name {string} -- Name of the table
+        Args:
+            name (str): Name of the table
+
+        Raises:
+            NotImplementedError: if method is not implemented by derived class.
         """
         raise NotImplementedError('Must implement drop method')
 
@@ -64,7 +80,10 @@ class AbstractStore(object):
     def alter(self, blueprint):
         """Alter the schema for a table.
 
-        Arguments:
-            blueprint {Blueprint} -- Table Blueprint
+        Args:
+            blueprint (Blueprint): Table Blueprint
+
+        Raises:
+            NotImplementedError: if method is not implemented by derived class.
         """
         raise NotImplementedError('Must implement alter method')
