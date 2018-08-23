@@ -44,13 +44,27 @@ from experimentum.Storage.Migrations import Migrator, Blueprint, Schema
 from experimentum.Storage.SQLAlchemy import Store
 
 
+def _path_join(root, path):
+    """Join root with relative path.
+
+    Args:
+        root (str): Root path
+        path (str): relative path to root
+
+    Returns:
+        str: realpath
+    """
+    return os.path.realpath(os.path.join(root, path))
+
+
 class App(object):
 
     """Main entry point of the framework.
 
     Attributes:
-        config_path (string): Defaults to ``.``. Path to config files.
-        name (string): Name of the app.
+        config_path (str): Defaults to ``.``. Path to config files.
+        name (str): Name of the app.
+        root (str): Root Path of the app.
         config (Config): Config Manager.
         log (logging.Logger): Logger.
         store (AbstractStore): Data Store.
@@ -58,20 +72,22 @@ class App(object):
     """
     config_path = '.'
 
-    def __init__(self, name):
+    def __init__(self, name, root):
         """Bootstrap the app framework.
 
         Args:
-            name (string): Name of the App.
+            name (str): Name of the App.
         """
         self.name = name
+        self.root = os.path.dirname(root)
         self.bootstrap()
 
     def bootstrap(self):
         """Bootstrap the app, i.e. setup config and logger."""
         # Load Config
         self.config = Config()
-        loader = Loader(os.path.realpath(self.config_path), self.config)
+        print(_path_join(self.root, self.config_path))
+        loader = Loader(_path_join(self.root, self.config_path), self.config)
         loader.load_config_files()
 
         # Setup logger
@@ -108,7 +124,7 @@ class App(object):
         """Create an instance of an aliased class.
 
         Args:
-            alias (string): Name of class alias.
+            alias (str): Name of class alias.
 
         Raises:
             Exception: if the alias does not exists.
@@ -143,9 +159,10 @@ class App(object):
         """Register aliases for classes."""
         self.log.info('Register Aliases')
 
+        migration_path = self.config.get('storage.migrations.path', 'migrations')
         self.aliases = {
             'migrator':
-                lambda: Migrator(self.config.get('storage.migrations.path', 'migrations'), self),
+                lambda: Migrator(_path_join(self.root, migration_path), self),
             'store': lambda: self.store,
             'schema': lambda: Schema(self),
             'blueprint': lambda *args, **kwargs: Blueprint(*args, **kwargs),
@@ -201,7 +218,7 @@ class App(object):
         ).format(name=self.name).lower()
 
         filename = '{}/{}'.format(
-            os.path.realpath(self.config.get('app.logging.path', '.')),
+            os.path.realpath(_path_join(self.root, self.config.get('app.logging.path', '.'))),
             name
         )
         fh = logging.handlers.RotatingFileHandler(

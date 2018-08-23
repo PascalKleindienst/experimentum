@@ -49,7 +49,7 @@ class {klass}(App):
     \"\"\"Main Entry Point of the Framework.
 
     Args:
-        config_path {{string}} -- Path to config files (default: {{'.'}})
+        config_path (str): Defaults to '.'. Path to config files
     \"\"\"
     config_path = '{config_path}'
 
@@ -57,13 +57,13 @@ class {klass}(App):
         \"\"\"Register Custom Commands.
 
         Returns:
-            dict -- {{ Name of command : Command Handler }}
+            dict: {{ Name of command : Command Handler }}
         \"\"\"
         return {{}}
 
 
 if __name__ == '__main__':
-    app = {klass}('{name}')
+    app = {klass}('{name}', __file__)
     app.run()
 """
 
