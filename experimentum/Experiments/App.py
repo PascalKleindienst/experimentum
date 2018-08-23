@@ -86,7 +86,6 @@ class App(object):
         """Bootstrap the app, i.e. setup config and logger."""
         # Load Config
         self.config = Config()
-        print(_path_join(self.root, self.config_path))
         loader = Loader(_path_join(self.root, self.config_path), self.config)
         loader.load_config_files()
 
