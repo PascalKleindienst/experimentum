@@ -4,3 +4,4 @@ tabulate
 inflection
 six
 psutil
+pandas

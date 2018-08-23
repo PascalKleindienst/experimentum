@@ -2,6 +2,7 @@
 from experimentum.Experiments import Performance
 from experimentum.Experiments.Performance import Formatter, Point
 import pytest
+import pandas
 
 
 class TestPerformance(object):
@@ -18,6 +19,7 @@ class TestPerformance(object):
         with self.performance.point() as point:
             assert isinstance(point, Point)
             assert point.label == 'Point'
+            assert point.id is None
             assert point.start_time >= 0
             assert point.stop_time == 0
             assert point.start_memory >= 0
@@ -47,7 +49,14 @@ class TestPerformance(object):
         with self.performance.point('Foo Label') as point:
             pass
 
-        assert self.performance.export() == [point.to_dict()]
+        assert isinstance(self.performance.export(), pandas.DataFrame)
+
+    def test_iterate(self):
+        assert self.performance.iteration is 0
+
+        for i in self.performance.iterate(0, 5):
+            assert self.performance.iteration is 0
+            self.performance.iteration = i
 
     def test_results(self, capsys):
         with self.performance.point('Foo Label') as point:
@@ -73,7 +82,7 @@ class TestPerformance(object):
 
         assert formatter.time_to_human(1) == '1.00 s'
         assert formatter.time_to_human(0.001) == '1.00 ms'
-        assert formatter.time_to_human(0.0001) == '100.00 µs'
+        assert formatter.time_to_human(0.0001) == u'100.00 \u03BCs'
 
         assert formatter.time_to_human(1, 'ms') == '1000.00 ms'
         assert formatter.time_to_human(1, decimals=4) == '1.0000 s'
