@@ -33,13 +33,13 @@ To create a new instance of an aliased class just run the :py:meth:`.App.make` m
 """
 from __future__ import print_function
 import os
-import sys
 import logging
 import logging.handlers
 from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
+from experimentum.cli import print_failure
 from experimentum.Config import Config, Loader
-from experimentum.Commands import CommandManager, MigrationCommand, print_failure
+from experimentum.Commands import CommandManager, MigrationCommand
 from experimentum.Storage.Migrations import Migrator, Blueprint, Schema
 from experimentum.Storage.SQLAlchemy import Store
 
@@ -80,12 +80,15 @@ class App(object):
         """
         self.name = name
         self.root = os.path.dirname(root)
+        self.log = logging.getLogger('experimentum')
+        self.config = Config()
+        self.store = None
+        self.aliases = {}
         self.bootstrap()
 
     def bootstrap(self):
         """Bootstrap the app, i.e. setup config and logger."""
         # Load Config
-        self.config = Config()
         loader = Loader(_path_join(self.root, self.config_path), self.config)
         loader.load_config_files()
 
@@ -134,10 +137,7 @@ class App(object):
         klass = self.aliases.get(alias, None)
 
         if klass is None:
-            msg = "Class with alias '{}' does not exist.".format(alias)
-            self.log.critical(msg)
-            print_failure(msg)
-            sys.exit(1)
+            print_failure("Class with alias '{}' does not exist.".format(alias), 1)
 
         return klass(*args, **kwargs)
 
@@ -179,7 +179,8 @@ class App(object):
             self.log.debug('Adding Command {}'.format(name))
             self.cmd_manager.add_command(name, cmd)
 
-    def _commands(self):
+    @classmethod
+    def _commands(cls):
         """Register default commands.
 
         Returns:
@@ -195,17 +196,15 @@ class App(object):
 
     def _set_logger(self):
         """Set up the logger and its handlers."""
-        self.log = logging.getLogger('experimentum')
-
         # Set log level
-        LEVELS = {
+        levels = {
             'debug': logging.DEBUG,
             'info': logging.INFO,
             'warning': logging.WARNING,
             'error': logging.ERROR,
             'critical': logging.CRITICAL
         }
-        level = LEVELS.get(
+        level = levels.get(
             self.config.get('app.logging.level', 'info'), logging.NOTSET
         )
         self.log.setLevel(level)
@@ -220,15 +219,15 @@ class App(object):
             os.path.realpath(_path_join(self.root, self.config.get('app.logging.path', '.'))),
             name
         )
-        fh = logging.handlers.RotatingFileHandler(
+        filehandler = logging.handlers.RotatingFileHandler(
             filename,
             maxBytes=self.config.get('app.logging.max_bytes', 1024 * 1024),  # default to 1MB
             backupCount=self.config.get('app.logging.backup_count', 10),
             mode='a+'
         )
-        fh.setLevel(level)
-        fh.setFormatter(logging.Formatter(self.config.get(
+        filehandler.setLevel(level)
+        filehandler.setFormatter(logging.Formatter(self.config.get(
             'app.logging.format',
             '[%(asctime)s] - [%(levelname)s] - [%(module)s] - %(message)s'
         )))
-        self.log.addHandler(fh)
+        self.log.addHandler(filehandler)

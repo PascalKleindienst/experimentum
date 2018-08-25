@@ -4,29 +4,8 @@ import shutil
 import sys
 import types
 from termcolor import colored
+from experimentum.cli import print_failure
 from experimentum.Commands import AbstractCommand
-
-
-def print_failure(msg):
-    """Print a failure message to stder.
-
-    Args:
-        msg (str): Failure message.
-    """
-    try:
-        size = shutil.get_terminal_size()[0]  # pylint: disable=no-member
-        msg = '{}'.format(msg).center(size, ' ')
-        sys.stderr.write('{0}{1}{0}'.format(
-            colored(''.center(size, ' '), 'white', 'on_red'),
-            colored(msg, 'white', 'on_red', ['bold'])
-        ))
-    except Exception:
-        size = 4
-        msg = '{}'.format(msg).center(size, ' ')
-        sys.stderr.write('{0}{1}{0}\n'.format(
-            colored(''.center(size, ' '), 'white', 'on_red'),
-            colored(msg, 'white', 'on_red', ['bold'])
-        ))
 
 
 class CommandManager(object):
@@ -89,8 +68,7 @@ class CommandManager(object):
             not isinstance(cmd, types.FunctionType) and
             not issubclass(cmd, AbstractCommand)
         ):
-            print_failure("{}-Command must inherit from AbstractCommand!".format(name))
-            sys.exit(1)
+            print_failure("{}-Command must inherit from AbstractCommand!".format(name), 1)
 
         # setup command
         cmd = cmd()  # type: AbstractCommand
@@ -137,13 +115,13 @@ class ColoredHelpFormatter(argparse.HelpFormatter):
 
     def _get_help_string(self, action):
         """Color in the default text of the current action."""
-        help = action.help
+        helptext = action.help
         if '%(default)' not in action.help:
             if action.default is not '==SUPPRESS==':
                 defaulting_nargs = ['?', '*']
                 if action.nargs in defaulting_nargs:
-                    help += colored(' [default: %(default)s]', 'cyan')
-        return help
+                    helptext += colored(' [default: %(default)s]', 'cyan')
+        return helptext
 
     def _format_action_invocation(self, action):
         """Color in action invation (except for option strings)."""
@@ -174,7 +152,7 @@ class ColoredHelpFormatter(argparse.HelpFormatter):
             )
             return '{}  {}\n'.format(option, help_text)
 
-        if type(action) == argparse._SubParsersAction:
+        if isinstance(action, argparse._SubParsersAction):
             # inject new class variable for subcommand formatting
             subactions = action._get_subactions()
             invocations = [
@@ -182,7 +160,7 @@ class ColoredHelpFormatter(argparse.HelpFormatter):
             ]
             self._subcommand_max_length = max(len(i) for i in invocations)
 
-        if type(action) == argparse._SubParsersAction._ChoicesPseudoAction:
+        if isinstance(action, argparse._SubParsersAction._ChoicesPseudoAction):
             # format subcommand help line
             subcommand = self._format_action_invocation(action)  # type: str
             width = self._subcommand_max_length
@@ -196,7 +174,7 @@ class ColoredHelpFormatter(argparse.HelpFormatter):
             )
             return '{}  {}\n'.format(subcommand, help_text)
 
-        elif type(action) == argparse._SubParsersAction:
+        elif isinstance(action, argparse._SubParsersAction):
             # process subcommand help section
             msg = ''
             for subaction in action._get_subactions():

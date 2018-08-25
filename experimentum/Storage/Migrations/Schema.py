@@ -37,8 +37,7 @@ To drop a table, you can use the :py:meth:`~.Schema.drop` or
     self.schema.drop('users')
     self.schema.drop_if_exists('users')
 """
-import sys
-from experimentum.Commands import print_failure
+from experimentum.cli import print_failure
 from contextlib import contextmanager
 
 
@@ -78,10 +77,8 @@ class Schema(object):
             blueprint.create()
 
             yield blueprint
-        except Exception as e:
-            print_failure('Error while creating blueprint')
-            self.app.log.critical('Error while creating blueprint: ' + str(e))
-            sys.exit(1)
+        except Exception as exc:
+            print_failure('Error while creating blueprint: ' + str(exc), 1)
 
         self._build(blueprint)
 
@@ -100,9 +97,7 @@ class Schema(object):
 
             yield blueprint
         except Exception as exc:
-            print_failure('Error while creating blueprint')
-            self.app.log.critical('Error while creating blueprint: ' + str(exc))
-            sys.exit(1)
+            print_failure('Error while creating blueprint: ' + str(exc), 1)
 
         self._build(blueprint)
 
