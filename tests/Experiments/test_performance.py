@@ -2,7 +2,6 @@
 from experimentum.Experiments import Performance
 from experimentum.Experiments.Performance import Formatter, Point
 import pytest
-import pandas
 
 
 class TestPerformance(object):
