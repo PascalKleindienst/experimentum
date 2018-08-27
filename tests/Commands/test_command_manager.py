@@ -1,4 +1,4 @@
-from experimentum.Commands import CommandManager, print_failure, command
+from experimentum.Commands import CommandManager, command
 import pytest
 import argparse
 import sys

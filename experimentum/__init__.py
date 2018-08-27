@@ -1,6 +1,6 @@
 """Import classes for easier importing by other packages/modules."""
 # flake8: noqa
-from .Experiments import App, Performance
+from .Experiments import App, Performance, Experiment
 from .Config import Config, Loader
 from .Commands import AbstractCommand, CommandManager, MigrationCommand
 from .Storage import AbstractStore, Blueprint, Column, ForeignKey, Migration, Migrator,\

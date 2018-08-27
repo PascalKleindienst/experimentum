@@ -39,7 +39,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
 from experimentum.cli import print_failure
 from experimentum.Config import Config, Loader
-from experimentum.Commands import CommandManager, MigrationCommand
+from experimentum.Commands import CommandManager, MigrationCommand, ExperimentsCommand
+from experimentum.Experiments import Experiment
 from experimentum.Storage.Migrations import Migrator, Blueprint, Schema
 from experimentum.Storage.SQLAlchemy import Store
 
@@ -159,7 +160,11 @@ class App(object):
         self.log.info('Register Aliases')
 
         migration_path = self.config.get('storage.migrations.path', 'migrations')
+        experiments_path = self.config.get('app.experiments.path', 'experiments')
+
         self.aliases = {
+            'experiment':
+                lambda name: Experiment.load(_path_join(self.root, experiments_path), name),
             'migrator':
                 lambda: Migrator(_path_join(self.root, migration_path), self),
             'store': lambda: self.store,
@@ -187,6 +192,7 @@ class App(object):
             dict: Default commands
         """
         return {
+            'experiments:run': ExperimentsCommand.run,
             'migration:status': MigrationCommand.status,
             'migration:refresh': MigrationCommand.refresh,
             'migration:up': MigrationCommand.up,

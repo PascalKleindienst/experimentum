@@ -105,7 +105,7 @@ class Experiment(object):
         # Load Experiment File
         files = glob.glob(os.path.join(path, '*.py'))
         files = list(filter(
-            lambda exp: name == os.path.basename(exp).replace('Experiment.py', '').lower(),
+            lambda exp: name.lower() == os.path.basename(exp).lower().replace('experiment.py', ''),
             files
         ))
 
@@ -119,18 +119,22 @@ class Experiment(object):
 
         # Init Experiment class if possible
         with open(exp, 'rb') as filehandler:
-            mod = imp.load_source('experiments', exp, filehandler)
-            experiment = getattr(mod, os.path.basename(exp)[:-3])
+            try:
+                mod = imp.load_source('experiments', exp, filehandler)
+                experiment = getattr(mod, os.path.basename(exp)[:-3])
+            except Exception as exc:
+                print_failure('Could not load experiment. ' + str(exc), exit_code=2)
 
             if issubclass(experiment, Experiment) is False:
                 print_failure(
                     'Experiment must be derived from the experimentum.Experiments.Experiment class',
-                    exit_code=2
+                    exit_code=3
                 )
 
         return experiment(path)
 
-    def call(self, cmd, verbose=False, shell=False):
+    @staticmethod
+    def call(cmd, verbose=False, shell=False):
         """Call another script to run algorithms for your experiment.
 
         .. Warning::
