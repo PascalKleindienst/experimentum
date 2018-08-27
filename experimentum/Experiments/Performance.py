@@ -25,11 +25,11 @@ from __future__ import print_function
 from contextlib import contextmanager
 from timeit import time
 from termcolor import colored
-from math import floor, log
+import collections
+import math
 import psutil
 import os
 import tabulate
-import pandas as pd
 tabulate.PRESERVE_WHITESPACE = True
 
 
@@ -68,7 +68,8 @@ def _to_df(point, level=0):
         'Peak Memory': [point['peak_memory']],
         'Level': [level],
         'Type': ['point'],
-        'ID': [point['id']]
+        'ID': [point['id']],
+        'Key': ['{}_{}_{}'.format(point['id'], level, point['label'])]
     }
 
     for msg in point['messages']:
@@ -79,6 +80,7 @@ def _to_df(point, level=0):
         data['Level'].append(level)
         data['Type'].append('message')
         data['ID'].append(point['id'])
+        data['Key'].append('{}_{}_{}'.format(point['id'], level, msg[1]))
 
     for subpoint in point['subpoints']:
         _point = subpoint.to_dict()
@@ -90,6 +92,7 @@ def _to_df(point, level=0):
         data['Level'].extend(result['Level'])
         data['Type'].extend(result['Type'])
         data['ID'].extend(result['ID'])
+        data['Key'].extend(result['Key'])
 
     return data
 
@@ -123,11 +126,11 @@ class Formatter(object):
         if _bytes > 0:
             # Generate automatic prefix by bytes if wrong prefix given
             if unit not in units:
-                power = floor(log(_bytes) / log(1024))
+                power = math.floor(math.log(_bytes) / math.log(1024))
                 unit = [k for k, v in units.items() if v == power][0]
 
             # Calculate byte value by prefix
-            value = (_bytes / pow(1024, floor(units[unit])))
+            value = (_bytes / pow(1024, math.floor(units[unit])))
 
         return self.format_number(value, decimals, unit)
 
@@ -178,7 +181,7 @@ class Formatter(object):
         ]
 
         # Color items and build data list
-        for idx, row in points.iterrows():
+        for row in points:
             label = {'format': u'› {}', 'attrs': ['bold']}
             time = {
                 'val': self.time_to_human(row['Mean Time']),
@@ -294,9 +297,9 @@ class Point(object):
         """Transform point to dataframe.
 
         Returns:
-            pandas.DataFrame: Dataframe
+            dict: Dataframe
         """
-        return pd.DataFrame.from_dict(_to_df(self.to_dict()))
+        return _to_df(self.to_dict())
 
 
 class Performance(object):
@@ -376,31 +379,78 @@ class Performance(object):
         """Export the measuring points as a dictionary.
 
         Returns:
-            pandas.Dataframe: Measuring points
+            dict: Measuring points
         """
-        # Build Dataframe of points
+        # Build grouped Dataframe of points
         frames = [point.to_df() for point in self.points]
-        result = pd.concat(frames)
+        result = collections.OrderedDict()
+        for frame in frames:
+            key = '|'.join(frame['Key'])
+            if key in result:
+                result[key].append(frame)
+            else:
+                result[key] = [frame]
 
-        # Calc mean and standard deviation
-        group = result.groupby([result.index, 'ID', 'Label', 'Type'], sort=False)
-        mean = group.mean().reset_index()
-        std = group.std().reset_index()
-        mean_data = mean.to_dict(orient='list')
-        std_data = std.to_dict(orient='list')
+        # Transform to ouput format
+        data = []
+        for row in result.values():
+            # Calculate mean and standard deviation
+            times = zip(*[item['Time'] for item in row])
+            item['MEAN_TIME'] = list(map(Performance.mean, times))
+            item['STD_TIME'] = list(map(Performance.standard_deviation, times))
+            memory = zip(*[item['Memory'] for item in row])
+            item['MEAN_MEMORY'] = list(map(Performance.mean, memory))
+            item['STD_MEMORY'] = list(map(Performance.standard_deviation, memory))
 
-        return pd.DataFrame.from_dict({
-            'Label': mean_data['Label'],
-            'Level': mean_data['Level'],
-            'Type': mean_data['Type'],
-            'Id': mean_data['ID'],
-            'Mean Time': mean_data['Time'],
-            'STD Time': std_data['Time'],
-            'Mean Memory': mean_data['Memory'],
-            'STD Memory': std_data['Memory'],
-            'Peak Memory': mean_data['Peak Memory'],
-        })
+            # combine and flatten df
+            items = zip(
+                item['Label'], item['Level'], item['Type'], item['ID'], item['MEAN_TIME'],
+                item['STD_TIME'], item['MEAN_MEMORY'], item['STD_MEMORY'], item['Peak Memory']
+            )
+
+            for row in items:
+                data.append({
+                    'Label': row[0],
+                    'Level': row[1],
+                    'Type': row[2],
+                    'Id': row[3],
+                    'Mean Time': row[4],
+                    'STD Time': row[5],
+                    'Mean Memory': row[6],
+                    'STD Memory': row[7],
+                    'Peak Memory': row[8],
+                })
+
+        return data
 
     def results(self):
         """Print the performance results in a human-readable format."""
         self.formatter.print_table(self.export())
+
+    # Mean and Standard Deviation
+    @staticmethod
+    def mean(values):
+        """Calculate Mean of values.
+
+        Args:
+            values (list): List of values
+
+        Returns:
+            float: Mean value
+        """
+        return sum(values) / float(len(values))
+
+    @staticmethod
+    def standard_deviation(numbers):
+        """Calculate the standard deviation.
+
+        Args:
+            numbers (list): List of numbers
+
+        Returns:
+            float: Standard Deviation
+        """
+        mean = Performance.mean(numbers)
+        return math.sqrt(
+            Performance.mean([math.pow(number - mean, 2) for number in numbers])
+        )

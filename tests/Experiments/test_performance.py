@@ -49,7 +49,17 @@ class TestPerformance(object):
         with self.performance.point('Foo Label') as point:
             pass
 
-        assert isinstance(self.performance.export(), pandas.DataFrame)
+        export = self.performance.export()
+        assert len(export) == 1
+        assert 'Peak Memory' in export[0]
+        assert 'Mean Memory' in export[0]
+        assert 'STD Memory' in export[0]
+        assert 'Level' in export[0]
+        assert 'Mean Time' in export[0]
+        assert 'STD Time' in export[0]
+        assert 'Type' in export[0]
+        assert 'Id' in export[0]
+        assert 'Label' in export[0]
 
     def test_iterate(self):
         assert self.performance.iteration is 0
