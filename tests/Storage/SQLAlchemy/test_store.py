@@ -101,6 +101,6 @@ class TestStore(object):
         inspector = inspect(store.engine)
         assert 'foo' in inspector.get_table_names()
         assert 'id' == inspector.get_columns('foo')[0]['name']
-        assert 'fkey_name' == inspector.get_foreign_keys('foo')[1]['name']
+        assert 'fkey_name' == inspector.get_foreign_keys('foo')[0]['name']
         assert {'unique': 0, 'name': u'foo_some_key_index', 'column_names': [u'some_key']} in inspector.get_indexes('foo')
         assert {'unique': 1, 'name': u'foo_unique_key_unique', 'column_names': [u'unique_key']} in inspector.get_indexes('foo')
