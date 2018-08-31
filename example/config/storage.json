@@ -1,0 +1,16 @@
+{
+    "datastore": {
+        "username": null,
+        "database": "ExampleApp.db",
+        "host": null,
+        "drivername": "sqlite",
+        "password": null,
+        "port": null
+    },
+    "repositories": {
+        "path": "repositories"
+    },
+    "migrations": {
+        "path": "migrations"
+    }
+}

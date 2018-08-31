@@ -1,0 +1,15 @@
+{
+    "prog": "main.py",
+    "experiments": {
+        "path": "experiments"
+    },
+    "logging": {
+        "format": "[%(asctime)s] - [%(levelname)s] - [%(module)s] - %(message)s",
+        "level": "info",
+        "filename": "exampleapp.log",
+        "path": "logs",
+        "backup_count": 10,
+        "max_bytes": 1048576
+    },
+    "description": "This is an example on how to use the experimentum framework."
+}
