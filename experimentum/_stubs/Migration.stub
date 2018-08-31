@@ -1,0 +1,15 @@
+from experimentum.Storage.Migrations import Migration
+
+
+class {migration}(Migration):
+
+    """Create the {name} migration."""
+    revision = '{revision}'
+
+    def up(self):
+        """Run the migrations."""
+        {up}
+
+    def down(self):
+        """Revert the migrations."""
+        {down}

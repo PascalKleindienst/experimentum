@@ -1,8 +1,33 @@
 # -*- coding: utf-8 -*-
+"""Some CLI Helpers."""
 import sys
+import six
 import shutil
 import logging
 from termcolor import colored
+
+
+def get_input(msg, default=None):
+    """Get the user input.
+
+    Args:
+        msg (str): Message
+        default (object, optional): Default to None. Default value if nothing is entered
+
+    Returns:
+        object: User Input
+    """
+    # Default value if skipped
+    if default is not None:
+        return six.moves.input(colored("› {} [{}]: ".format(msg, default), 'green')) or default
+
+    # Required input
+    value = six.moves.input(colored("› {}: ".format(msg), 'green'))
+    while value is '':
+        print(colored("× Please specify a value!", 'red'))
+        value = six.moves.input(colored("› {}: ".format(msg), 'green'))
+
+    return value
 
 
 def print_progress(iteration, total, prefix='', suffix='', decimals=1, bar_length=100):

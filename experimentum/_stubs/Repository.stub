@@ -1,0 +1,12 @@
+from experimentum.Storage import AbstractRepository{imports}
+
+
+class {name}(AbstractRepository.implementation):
+
+    """Repository for the {table} table data."""
+    __table__ = '{table}'
+    __relationships__ = {relationships}
+
+    def __init__(self, {kwargs}):
+        """Set attributes."""
+        {set_attr}
