@@ -5,6 +5,7 @@ Uses the SQLAlchemy ORM to implement the :py:mod:`.AbstractStore` interface.
 from experimentum.Storage import AbstractStore
 from experimentum.Storage.SQLAlchemy import SQLitePlatform, Platform, ColumnFactory
 from sqlalchemy import inspect, MetaData, Table
+from sqlalchemy.orm import sessionmaker
 
 
 class Store(AbstractStore):
@@ -31,6 +32,7 @@ class Store(AbstractStore):
         self.factory = ColumnFactory()
         self.engine = None
         self.meta = None
+        self.session = None
 
     def set_engine(self, engine):
         """Set database engine, metadata store, and platform specific handlers.
@@ -44,6 +46,10 @@ class Store(AbstractStore):
         self.meta.reflect()  # Reflecting All Tables at Once
         self.platform.set_engine(self.engine, self.meta)
         self.sqlite_platform.set_engine(self.engine, self.meta)
+
+        # Create session
+        Session = sessionmaker(bind=engine)
+        self.session = Session()
 
     def has_table(self, table):
         """Check if the data store has a specific table.

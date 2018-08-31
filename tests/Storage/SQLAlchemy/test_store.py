@@ -1,6 +1,7 @@
 from experimentum.Storage.SQLAlchemy import Store
 from experimentum.Storage.Migrations import Blueprint
 from sqlalchemy import create_engine, MetaData, Table, Column, Integer, inspect
+from sqlalchemy.orm.session import Session
 from sqlalchemy.dialects.mysql import INTEGER, BIGINT, DOUBLE, LONGTEXT, MEDIUMINT, MEDIUMTEXT
 from sqlalchemy.types import ARRAY, BigInteger, Boolean, Date, DateTime, Enum,\
     LargeBinary, Numeric, SmallInteger, String, Text, Time, CHAR, Float, JSON, TIMESTAMP
@@ -26,6 +27,7 @@ class TestStore(object):
         store.set_engine(engine)
         assert store.engine is engine
         assert isinstance(store.meta, MetaData)
+        assert isinstance(store.session, Session)
 
     def test_has_table(self, mocker):
         store = self._init_store(mocker)
