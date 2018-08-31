@@ -190,10 +190,10 @@ class Migrator(object):
 
         with open(fname, 'w+') as filehandler:
             if delete:
-                print('remove revision')
+                # print('remove revision')
                 revisions.remove(revision)
             else:
-                print('add revision')
+                # print('add revision')
                 revisions.append(revision)
 
             filehandler.write('|'.join(revisions))

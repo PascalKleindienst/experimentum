@@ -224,7 +224,7 @@ class ColumnFactory(object):
         foreign_key = [
             self.create_foreign_key(fkey.get('key'), col)
             for fkey in fkeys
-            if (fkey.get('col') == col_name or col_name in fkey.get('col'))
+            if fkey.get('col') == col_name  # or col_name in fkey.get('col')
         ]
 
         if len(foreign_key):
