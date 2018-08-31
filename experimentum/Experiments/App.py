@@ -33,6 +33,7 @@ To create a new instance of an aliased class just run the :py:meth:`.App.make` m
 """
 from __future__ import print_function
 import os
+import sys
 import logging
 import logging.handlers
 from sqlalchemy import create_engine
@@ -41,8 +42,9 @@ from experimentum.cli import print_failure
 from experimentum.Config import Config, Loader
 from experimentum.Commands import CommandManager, MigrationCommand, ExperimentsCommand
 from experimentum.Experiments import Experiment
+from experimentum.Storage.AbstractRepository import RepositoryLoader
 from experimentum.Storage.Migrations import Migrator, Blueprint, Schema
-from experimentum.Storage.SQLAlchemy import Store
+from experimentum.Storage.SQLAlchemy import Store, Repository
 
 
 def _path_join(root, path):
@@ -64,6 +66,7 @@ class App(object):
 
     Attributes:
         config_path (str): Defaults to ``.``. Path to config files.
+        base_repository (AbstractRepository): Defaults to ``Repository``. Repository Base Class
         name (str): Name of the app.
         root (str): Root Path of the app.
         config (Config): Config Manager.
@@ -72,6 +75,7 @@ class App(object):
         aliases (dict): Dictionary of aliases and factory functions.
     """
     config_path = '.'
+    base_repository = Repository
 
     def __init__(self, name, root):
         """Bootstrap the app framework.
@@ -93,12 +97,30 @@ class App(object):
         loader = Loader(_path_join(self.root, self.config_path), self.config)
         loader.load_config_files()
 
+        # Add experiments and repo folders to path
+        paths = [
+            self.config.get('app.experiments.path', 'experiments'),
+            self.config.get('storage.repositories.path', 'repositories')
+        ]
+        for path in paths:
+            sys.path.insert(0, os.path.abspath(_path_join(self.root, path)))
+
         # Setup logger
         self._set_logger()
         self.log.info('Bootstrap App')
 
         # Setup Datastore
-        self.setup_datastore()
+        default_db = {'drivername': 'sqlite', 'database': 'experimentum.db'}
+        database = self.config.get('storage.datastore', default_db)
+
+        if database['drivername'] == 'sqlite':  # Absolute db path based on root
+            database['database'] = _path_join(self.root, database['database'])
+
+        self.setup_datastore(database)
+
+        # Load and map Repositories
+        self.repositories = RepositoryLoader(self, self.base_repository, self.store)
+        self.repositories.load()
 
         # Aliases
         self.register_aliases()
@@ -115,13 +137,11 @@ class App(object):
         # save app instance
         # app(self)
 
-    def setup_datastore(self):
+    def setup_datastore(self, datastore):
         """Set up the data store."""
         self.log.info('Setup Data Store')
-        default_db = {'drivername': 'sqlite', 'database': 'experimentum.db'}
-        engine = create_engine(URL(**self.config.get('storage.datastore', default_db)))
         self.store = Store(self)
-        self.store.set_engine(engine)
+        self.store.set_engine(create_engine(URL(**datastore)))
 
     def make(self, alias, *args, **kwargs):
         """Create an instance of an aliased class.

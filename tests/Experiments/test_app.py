@@ -1,6 +1,7 @@
 from experimentum.Experiments import App
 from experimentum.Config import Config
 from experimentum.Commands import CommandManager
+from experimentum.Storage.AbstractRepository import RepositoryLoader
 import json
 import os
 import logging
@@ -28,6 +29,7 @@ class TestApp(object):
         assert isinstance(app.config, Config)
         assert isinstance(app.log, logging.Logger)
         assert isinstance(app.cmd_manager, CommandManager)
+        assert isinstance(app.repositories, RepositoryLoader)
 
     def test_adding_user_commands(self, mocker, tmpdir):
         cmd_manager = mocker.patch('experimentum.Commands.CommandManager')
