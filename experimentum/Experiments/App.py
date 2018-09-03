@@ -184,7 +184,7 @@ class App(object):
 
         self.aliases = {
             'experiment':
-                lambda name: Experiment.load(_path_join(self.root, experiments_path), name),
+                lambda name: Experiment.load(self, _path_join(self.root, experiments_path), name),
             'migrator':
                 lambda: Migrator(_path_join(self.root, migration_path), self),
             'store': lambda: self.store,

@@ -184,25 +184,25 @@ class Formatter(object):
         for row in points:
             label = {'format': u'› {}', 'attrs': ['bold']}
             time = {
-                'val': self.time_to_human(row['Mean Time']),
-                'std': self.time_to_human(row['STD Time']),
+                'val': self.time_to_human(row['mean_time']),
+                'std': self.time_to_human(row['std_time']),
                 'attrs': ['bold']
             }
             memory = {
-                'val': self.memory_to_human(row['Mean Memory']),
-                'std': self.memory_to_human(row['STD Memory']),
-                'peak': self.memory_to_human(row['Peak Memory']),
+                'val': self.memory_to_human(row['mean_memory']),
+                'std': self.memory_to_human(row['std_memory']),
+                'peak': self.memory_to_human(row['peak_memory']),
                 'frmt': u'{} (± {})',
                 'attrs': ['bold']
             }
 
-            if row['Type'] == 'message':
+            if row['type'] == 'message':
                 label = {'format': '  {}', 'attrs': ['dark']}
                 memory['frmt'] = '--'
                 memory['peak'] = '--'
 
             data.append([
-                colored(label['format'].format(row['Label']), attrs=label['attrs']),
+                colored(label['format'].format(row['label']), attrs=label['attrs']),
                 u'{} (± {})'.format(colored(time['val'], attrs=time['attrs']), time['std']),
                 memory['frmt'].format(colored(memory['val'], attrs=memory['attrs']), memory['std']),
                 colored(memory['peak'], attrs=memory['attrs'])
@@ -287,7 +287,7 @@ class Point(object):
             'difference_time': self.stop_time - self.start_time,
             'start_memory': self.start_memory,
             'stop_memory': self.stop_memory,
-            'difference_memory': self.stop_memory - self.start_memory,
+            'difference_memory': self.stop_memory - float(self.start_memory),
             'peak_memory': max(self.stop_memory, self.start_memory),
             'messages': self.messages,
             'subpoints': self.subpoints
@@ -375,8 +375,11 @@ class Performance(object):
             point.stop_time = time.time()
             point.stop_memory = memory_usage()
 
-    def export(self):
+    def export(self, metrics=False):
         """Export the measuring points as a dictionary.
+
+        Args:
+            metrics (bool, optional). Defaults to False. Whether or not metrics should be calculated.
 
         Returns:
             dict: Measuring points
@@ -394,38 +397,67 @@ class Performance(object):
         # Transform to ouput format
         data = []
         for row in result.values():
-            # Calculate mean and standard deviation
-            times = zip(*[item['Time'] for item in row])
-            item['MEAN_TIME'] = list(map(Performance.mean, times))
-            item['STD_TIME'] = list(map(Performance.standard_deviation, times))
-            memory = zip(*[item['Memory'] for item in row])
-            item['MEAN_MEMORY'] = list(map(Performance.mean, memory))
-            item['STD_MEMORY'] = list(map(Performance.standard_deviation, memory))
-
-            # combine and flatten df
-            items = zip(
-                item['Label'], item['Level'], item['Type'], item['ID'], item['MEAN_TIME'],
-                item['STD_TIME'], item['MEAN_MEMORY'], item['STD_MEMORY'], item['Peak Memory']
+            # Only last iteration
+            points = self._get_points(
+                row[-1], ['Label', 'Level', 'Type', 'Time', 'Memory', 'Peak Memory']
             )
 
-            for row in items:
-                data.append({
-                    'Label': row[0],
-                    'Level': row[1],
-                    'Type': row[2],
-                    'Id': row[3],
-                    'Mean Time': row[4],
-                    'STD Time': row[5],
-                    'Mean Memory': row[6],
-                    'STD Memory': row[7],
-                    'Peak Memory': row[8],
-                })
+            # Calculate metrics for time and memory
+            if metrics:
+                metrics = self._calc_metrics(row)
+
+                # add metrics to each point
+                for idx, point in enumerate(points):
+                    point['mean_time'] = metrics[idx][0]
+                    point['std_time'] = metrics[idx][1]
+                    point['mean_memory'] = metrics[idx][2]
+                    point['std_memory'] = metrics[idx][3]
+
+            # add points to data list
+            data.extend(points)
 
         return data
 
+    def _get_points(self, points, attrs):
+        """Transform points to another format for better usability.
+
+        Args:
+            points (dict): Points
+            attrs (list): list of point attributes
+
+        Returns:
+            list: List of Points in the format of [{'label': 'foo', ...}, {'label': 'bar'}]
+        """
+        items = zip(*[points[k] for k in attrs])
+        return [
+            {
+                key.lower().replace(' ', '_'): item[idx] for idx, key in enumerate(attrs)
+            }
+            for item in items
+        ]
+
+    def _calc_metrics(self, row):
+        """Calculate metrics for time and memory.
+
+        Args:
+            row (list): List of points
+
+        Returns:
+            set: Mean Time, STD Time, Mean Memory, STD Memory
+        """
+        times = zip(*[points['Time'] for points in row])
+        mean_time = list(map(Performance.mean, times))
+        std_time = list(map(Performance.standard_deviation, times))
+
+        memory = zip(*[points['Memory'] for points in row])
+        mean_memory = list(map(Performance.mean, memory))
+        std_memory = list(map(Performance.standard_deviation, memory))
+
+        return zip(mean_time, std_time, mean_memory, std_memory)
+
     def results(self):
         """Print the performance results in a human-readable format."""
-        self.formatter.print_table(self.export())
+        self.formatter.print_table(self.export(metrics=True))
 
     # Mean and Standard Deviation
     @staticmethod

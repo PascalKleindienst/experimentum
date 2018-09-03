@@ -6,6 +6,7 @@ import glob
 import imp
 import subprocess
 import json
+from datetime import datetime
 from six import add_metaclass
 from abc import abstractmethod, ABCMeta
 from experimentum.Config import Config
@@ -71,31 +72,37 @@ class Experiment(object):
     """Run experiments and save the results in the data store.
 
     Attributes:
+        app (App): Main Application Class.
         performance (Performance): Performance Profiler.
         config (Config): Hold the experiment configuration.
         show_progress (bool): Flag to show/hide the progress bar.
         hide_performance (bool): Flag to show/hide the performance table.
         config_file (str): Config file to load.
+        repos (dict): Experiment and Testcast Repo to save results.
     """
     config_file = None
 
-    def __init__(self, path):
+    def __init__(self, app, path):
         """Init the experiment.
 
         Args:
+            app (App): Main Application class
             path (str): Path to experiments folder
         """
+        self.app = app
         self.performance = Performance()
         self.config = Config()
         self.show_progress = False
         self.hide_performance = False
+        self.repos = {'experiment': None, 'testcase': None}
         self._path = path
 
     @staticmethod
-    def load(path, name):
+    def load(app, path, name):
         """Load and initialize an experiment class.
 
         Args:
+            app (App): Main app calss
             path (str): Path to experiments folder.
             name (str): Name of experiment.
 
@@ -131,7 +138,7 @@ class Experiment(object):
                     exit_code=3
                 )
 
-        return experiment(path)
+        return experiment(app, path)
 
     @staticmethod
     def call(cmd, verbose=False, shell=False):
@@ -163,6 +170,21 @@ class Experiment(object):
         except Exception as exc:
             print_failure(exc, 2)
 
+        # Load Experiment and testcase repos
+        try:
+            self.repos['experiment'] = self.app.repositories.get('ExperimentRepository')
+            self.repos['testcase'] = self.app.repositories.get('TestCaseRepository')
+
+            self.repos['experiment'] = self.repos['experiment'].from_dict({
+                'start': datetime.now(),
+                'config_file': self.config_file,
+                'config_content': json.dumps(self.config.all()),
+                'tests': []
+            })
+            self.repos['experiment'].create()
+        except Exception as exc:
+            print_failure(exc, 2)
+
     def start(self, steps=10):
         """Start the test runs of the experiment.
 
@@ -188,7 +210,9 @@ class Experiment(object):
             if self.show_progress:
                 print_progress(iteration, steps, prefix='Progress:', suffix='Complete')
 
-        # Print Performance result
+        # Finished Experiment
+        self.repos['experiment'].finished = datetime.now()
+        self.repos['experiment'].update()
         if self.hide_performance is False:
             self.performance.results()
 
@@ -202,9 +226,11 @@ class Experiment(object):
         # TODO: Actually saving results and performance values
         # TODO: Wrap saving in try/except statement to catch when saving fails
         # TODO: due to missing tables etc
-        print('Saving Performance: \n')
-        # print(self.performance.points[iteration].to_df())
-        # print(result)
+        self.repos['testcase'].from_dict({
+            'experiment_id':  self.repos['experiment'].id,
+            'iteration': iteration,
+            'performances': self.performance.export()
+        }).create()
 
     @abstractmethod
     def reset(self):
