@@ -5,7 +5,7 @@ with the help of sqlalchemy.
 """
 from sqlalchemy import Column, Index, ForeignKey
 from sqlalchemy.dialects.mysql import INTEGER, BIGINT, DOUBLE, LONGTEXT, MEDIUMINT, MEDIUMTEXT
-from sqlalchemy.types import ARRAY, BigInteger, Boolean, Date, DateTime, Enum,\
+from sqlalchemy.types import ARRAY, BigInteger, Integer, Boolean, Date, DateTime, Enum,\
     LargeBinary, Numeric, SmallInteger, String, Text, Time, CHAR, Float, JSON, TIMESTAMP
 
 
@@ -25,9 +25,11 @@ def get_number_type(col_type, params, unsigned=False):
 
     # Integers
     if col_type == 'big_increments' or col_type == 'big_integer':
-        return BigInteger().with_variant(BIGINT(unsigned=unsigned), 'mysql')
+        return BigInteger()\
+            .with_variant(BIGINT(unsigned=unsigned), 'mysql')\
+            .with_variant(Integer(), 'sqlite')
     elif col_type == 'increments' or col_type == 'integer':
-        return INTEGER(unsigned=unsigned)
+        return Integer().with_variant(INTEGER(unsigned=unsigned), 'mysql')
     # Floats
     elif col_type == 'float':
         # ! Seems not to work, don't know why???
@@ -176,7 +178,8 @@ class ColumnFactory(object):
                 ),
                 default=col.get('default'),
                 nullable=col.get('null'),
-                primary_key=primary
+                autoincrement=col.get('parameters', {}).get('autoincrement', 'auto'),
+                primary_key=primary,
             ))
 
         return data
@@ -208,6 +211,7 @@ class ColumnFactory(object):
             fkey,
             default=col.get('default'),
             nullable=col.get('null'),
+            autoincrement=col.get('autoincrement', False)
         )
 
     def get_foreign_key(self, col, fkeys):
