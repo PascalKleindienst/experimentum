@@ -11,6 +11,7 @@ class CreateTestcase(Migration):
         with self.schema.create('testcases') as table:
             table.increments('id')
             table.primary('id')
+            table.integer('iteration')
             table.integer('experiment_id')
             table.foreign('experiment_id')\
                 .references('id').on('experiments')\

@@ -14,7 +14,7 @@ class CreateExperiments(Migration):
             table.datetime('start')
             table.datetime('finished').nullable()
             table.string('config_file')
-            table.text('config_content').nullable()
+            table.json('config_content').nullable()
 
     def down(self):
         """Revert the migrations."""
