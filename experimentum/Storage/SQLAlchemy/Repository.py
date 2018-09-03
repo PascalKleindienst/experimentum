@@ -189,13 +189,17 @@ class Repository(AbstractRepository):
         cls.store = store
 
         # Map classes with relationships
-        relationships = {}
-        for key, relation in cls.__relationships__.items():
-            if len(relation) is 2:
-                relationships[key] = relationship(relation[0], *relation[1])
-            else:
-                relationships[key] = relationship(relation[0])
         try:
+            relationships = {}
+            for key, relation in cls.__relationships__.items():
+                if len(relation) is 2:
+                    relationships[key] = relationship(relation[0], **relation[1])
+                else:
+                    relationships[key] = relationship(relation[0])
+
+                # recursively map relations first otherwise it won't work!
+                Repository.mapping(relation[0], store)
+
             mapper(cls, cls.store.meta.tables.get(cls.__table__), properties=relationships)
         except Exception:
             logging.getLogger('experimentum').warning('Could not map table: ' + cls.__table__)
