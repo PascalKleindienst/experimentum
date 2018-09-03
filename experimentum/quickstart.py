@@ -176,6 +176,27 @@ def main():
                 .on_update('cascade')""",
         down="self.schema.drop_if_exists('testcases')"
     )
+    sleep(1)
+    _create_migration(
+        folders['migrations'],
+        'create_performance',
+        up=r"""with self.schema.create('performance') as table:
+            table.big_increments('id')
+            table.primary('id')
+            able.primary('id')
+            table.string('label', 25)
+            table.small_integer('level')
+            table.string('type', 25)
+            table.float('time')
+            table.float('memory')
+            table.float('peak_memory')
+            table.integer('test_id')
+            table.foreign('test_id')\
+                .references('id').on('testcases')\
+                .on_delete('cascade')\
+                .on_update('cascade')""",
+        down="self.schema.drop_if_exists('performance')"
+    )
 
     # Create Repositories
     print(colored('Creating repositories ...', 'cyan'))
@@ -183,14 +204,21 @@ def main():
         folders['repositories'],
         'ExperimentRepository',
         'experiments',
-        attributes=['id', 'start', 'finished', 'config_file', 'config_content'],
+        attributes=['start', 'finished', 'config_file', 'config_content'],
         relationships={'tests': 'TestCaseRepository'}
     )
     _create_repository(
         folders['repositories'],
         'TestCaseRepository',
         'testcases',
-        attributes=['id'],
+        attributes=['experiment_id', 'iteration'],
+        relationships={'performances': 'PerformanceRepository'}
+    )
+    _create_repository(
+        folders['repositories'],
+        'PerformanceRepository',
+        'performance',
+        attributes=['label', 'level', 'type', 'time', 'memory', 'peak_memory'],
     )
 
     # Done
