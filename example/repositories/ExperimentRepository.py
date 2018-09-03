@@ -10,9 +10,8 @@ class ExperimentRepository(AbstractRepository.implementation):
         'tests': [TestCaseRepository]
     }
 
-    def __init__(self, id=None, start=None, finished=None, config_file=None, config_content=None):
+    def __init__(self, start=None, finished=None, config_file=None, config_content=None):
         """Set attributes."""
-        self.id = id
         self.start = start
         self.finished = finished
         self.config_file = config_file
