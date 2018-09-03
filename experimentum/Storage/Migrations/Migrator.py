@@ -128,7 +128,7 @@ class Migrator(object):
             self._update_revision(migration.revision)
             print(colored('› Migrated', 'green'), colored(migration, 'cyan'))
         except Exception:
-            raise TypeError('{} is not a valid migration'.format('migration'))
+            raise TypeError('{} is not a valid migration'.format(migration))
 
     def down(self, migration=None):
         """Downgrade to an old migration revision.
