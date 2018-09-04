@@ -9,14 +9,14 @@ to easly manage your database's schema.
 
 Generating Migrations
 ---------------------
-To create a new :py:class:`.Migration`, you can use the ``migration:make``
-command provided by :py:mod:`.MigrationCommand`::
+Use the ``migration:make`` command  to create a new :py:class:`.Migration`. This will create the following new :py:class:`.Migration`
+class in your ``migrations`` folder. In order to determine the order of the migrations, each migration file name contains a timestamp.
 
-    python main.py migration:make create_users_table
+Arguments:
 
-This will create the following new :py:class:`.Migration` class in your
-``migrations`` folder. In order to determine the order of the migrations,
-each migration file name contains a timestamp.
+====  ======================
+name  Name of the migration
+====  ======================
 
 
 Migration Structure

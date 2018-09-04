@@ -20,6 +20,14 @@ experimentum.Commands.CommandManager module
     :undoc-members:
     :show-inheritance:
 
+experimentum.Commands.ExperimentsCommand module
+-----------------------------------------------
+
+.. automodule:: experimentum.Commands.ExperimentsCommand
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 experimentum.Commands.MigrationCommand module
 ---------------------------------------------
 

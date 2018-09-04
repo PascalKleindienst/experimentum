@@ -20,6 +20,14 @@ experimentum.Storage.SQLAlchemy.Platform module
     :undoc-members:
     :show-inheritance:
 
+experimentum.Storage.SQLAlchemy.Repository module
+-------------------------------------------------
+
+.. automodule:: experimentum.Storage.SQLAlchemy.Repository
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 experimentum.Storage.SQLAlchemy.SQLitePlatform module
 -----------------------------------------------------
 

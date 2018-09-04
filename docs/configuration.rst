@@ -1,3 +1,5 @@
+.. _configuration:
+
 =============
 Configuration
 =============
@@ -27,6 +29,8 @@ The App configuration is stored in the ``app.json`` file and has to following op
 +--------------------------+----------------------------------------------+
 | ``logging.max_bytes``    | Maxium Bytes per log file. *(default 1MB)*   |
 +--------------------------+----------------------------------------------+
+| ``experiments.path``     | Path to the experiments folder.              |
++--------------------------+----------------------------------------------+
 
 
 Example Config:
@@ -43,6 +47,9 @@ Example Config:
             "path": "logs",
             "backup_count": 10,
             "max_bytes": 1048576
+        },
+        "experiments": {
+            "path": "experiments"
         }
     }
 
@@ -69,6 +76,8 @@ The Database configuration is stored in the ``storage.json`` file and has to fol
 +--------------------------+---------------------------------------------------------------+
 | ``migrations.path``      | Path to the migrations folder.                                |
 +--------------------------+---------------------------------------------------------------+
+| ``repositories.path``    | Path to the repositories folder.                              |
++--------------------------+---------------------------------------------------------------+
 
 
 Example Config:
@@ -83,6 +92,9 @@ Example Config:
             "password": null,
             "host": null,
             "port": null
+        },
+        "repositories": {
+            "path": "repositories"
         },
         "migrations": {
             "path": "migrations"

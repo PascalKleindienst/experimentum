@@ -12,6 +12,14 @@ Subpackages
 Submodules
 ----------
 
+experimentum.Storage.AbstractRepository module
+----------------------------------------------
+
+.. automodule:: experimentum.Storage.AbstractRepository
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 experimentum.Storage.AbstractStore module
 -----------------------------------------
 

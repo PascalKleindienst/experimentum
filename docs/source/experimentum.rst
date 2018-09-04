@@ -14,6 +14,22 @@ Subpackages
 Submodules
 ----------
 
+experimentum.cli module
+-----------------------
+
+.. automodule:: experimentum.cli
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+experimentum.files module
+-------------------------
+
+.. automodule:: experimentum.files
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 experimentum.quickstart module
 ------------------------------
 

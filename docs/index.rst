@@ -12,8 +12,11 @@ Welcome to experimentum's documentation!
 
    install
    configuration
+   commands
    migrations
-   source/modules
+   repositories
+   experiments
+   API <source/modules>
 
 
 Indices and tables

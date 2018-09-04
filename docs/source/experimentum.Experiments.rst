@@ -12,6 +12,14 @@ experimentum.Experiments.App module
     :undoc-members:
     :show-inheritance:
 
+experimentum.Experiments.Experiment module
+------------------------------------------
+
+.. automodule:: experimentum.Experiments.Experiment
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 experimentum.Experiments.Performance module
 -------------------------------------------
 
