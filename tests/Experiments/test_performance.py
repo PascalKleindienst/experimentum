@@ -50,15 +50,31 @@ class TestPerformance(object):
 
         export = self.performance.export()
         assert len(export) == 1
-        assert 'Peak Memory' in export[0]
-        assert 'Mean Memory' in export[0]
-        assert 'STD Memory' in export[0]
-        assert 'Level' in export[0]
-        assert 'Mean Time' in export[0]
-        assert 'STD Time' in export[0]
-        assert 'Type' in export[0]
-        assert 'Id' in export[0]
-        assert 'Label' in export[0]
+        assert 'peak_memory' in export[0]
+        assert 'memory' in export[0]
+        assert 'time' in export[0]
+        assert 'level' in export[0]
+        assert 'type' in export[0]
+        # assert 'Id' in export[0]
+        assert 'label' in export[0]
+
+    def test_export_with_metrics(self):
+        with self.performance.point('Foo Label') as point:
+            pass
+
+        export = self.performance.export(metrics=True)
+        assert len(export) == 1
+        assert 'peak_memory' in export[0]
+        assert 'memory' in export[0]
+        assert 'time' in export[0]
+        assert 'mean_memory' in export[0]
+        assert 'std_memory' in export[0]
+        assert 'level' in export[0]
+        assert 'mean_time' in export[0]
+        assert 'std_time' in export[0]
+        assert 'type' in export[0]
+        # assert 'Id' in export[0]
+        assert 'label' in export[0]
 
     def test_iterate(self):
         assert self.performance.iteration is 0

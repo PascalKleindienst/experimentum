@@ -9,7 +9,7 @@ class TestColumnFactory(object):
         factory = ColumnFactory()
 
         _type = factory.get_type('big_increments').__dict__
-        assert _type['mapping']['mysql'].unsigned == True
+        assert _type['mapping']['mysql'].unsigned is True
         assert isinstance(_type['mapping']['mysql'], BIGINT)
         assert isinstance(_type['impl'], BigInteger)
 
@@ -17,6 +17,16 @@ class TestColumnFactory(object):
         assert _type['mapping']['mysql'].unsigned is False
         assert isinstance(_type['mapping']['mysql'], BIGINT)
         assert isinstance(_type['impl'], BigInteger)
+
+        _type = factory.get_type('increments').__dict__
+        assert _type['mapping']['mysql'].unsigned is True
+        assert isinstance(_type['mapping']['mysql'], INTEGER)
+        assert isinstance(_type['impl'], Integer)
+
+        _type = factory.get_type('integer', unsigned=False).__dict__
+        assert _type['mapping']['mysql'].unsigned is False
+        assert isinstance(_type['mapping']['mysql'], INTEGER)
+        assert isinstance(_type['impl'], Integer)
 
         _type = factory.get_type('double', {'precision': 10, 'scale': 2}).__dict__
         assert _type['mapping']['sqlite'].precision == 10
@@ -29,8 +39,6 @@ class TestColumnFactory(object):
         self._test_get_type_attribute(factory, 'char', CHAR, {'length': 42}, {'length': 42})
         self._test_get_type_attribute(factory, 'string', String, {'length': 42}, {'length': 42})
         self._test_get_type_attribute(factory, 'enum', Enum, {'enums': ['foo', 'bar']}, {'fields': ['foo', 'bar']})
-        self._test_get_type_attribute(factory, 'integer', Integer, {'unsigned': False})
-        self._test_get_type_attribute(factory, 'increments', Integer, {'unsigned': True})
         self._test_get_type_attribute(factory, 'decimal', Numeric, {'precision': 10, 'scale': 2}, {'precision': 10, 'scale': 2})
         self._test_get_type_attribute(factory, 'float', Float, {'precision': 10, 'decimal_return_scale': 2}, {'precision': 10, 'scale': 2})
 
@@ -41,7 +49,7 @@ class TestColumnFactory(object):
 
         _type = factory.get_type('array', {'arr_type': 'integer', 'dimensions': 2}).__dict__
         assert isinstance(_type['mapping']['postgresql'], ARRAY)
-        assert isinstance(_type['mapping']['postgresql'].__dict__['item_type'], INTEGER)
+        # assert isinstance(_type['mapping']['postgresql'].__dict__['item_type']['impl'], INTEGER)
         assert _type['mapping']['postgresql'].__dict__['dimensions'] is 2
         assert isinstance(_type['impl'], Integer)
 
