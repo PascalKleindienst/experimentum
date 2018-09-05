@@ -48,7 +48,7 @@ def _create_migration(path, name, up, down):
     create_from_stub('Migration.stub', filename, attrs)
 
 
-def _create_repository(path, name, table, attributes, relationships=None):
+def _create_repository(path, name, table, attributes, nullable=[], relationships=None):
     # Relationships and Imports
     relationships = relationships if relationships is not None else {}
     imports = []
@@ -71,7 +71,9 @@ def _create_repository(path, name, table, attributes, relationships=None):
         'table': table,
         'imports': imports,
         'relationships': relationships,
-        'kwargs': ', '.join(map(lambda attr: '{}=None'.format(attr), attributes)),
+        'kwargs': ', '.join(
+            map(lambda attr: '{}{}'.format(attr, '=None' if attr in nullable else ''), attributes)
+        ),
         'set_attr': '\n        '.join(map(lambda attr: 'self.{0} = {0}'.format(attr), attributes))
     }
 
@@ -204,14 +206,16 @@ def main():
         folders['repositories'],
         'ExperimentRepository',
         'experiments',
-        attributes=['start', 'finished', 'config_file', 'config_content'],
+        attributes=['name', 'config_file', 'start', 'config_content', 'finished'],
+        nullable=['finished', 'config_content'],
         relationships={'tests': 'TestCaseRepository'}
     )
     _create_repository(
         folders['repositories'],
         'TestCaseRepository',
         'testcases',
-        attributes=['experiment_id', 'iteration'],
+        attributes=['iteration', 'experiment_id'],
+        nullable=['experiment_id'],
         relationships={'performances': 'PerformanceRepository'}
     )
     _create_repository(
