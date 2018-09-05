@@ -405,7 +405,7 @@ class Performance(object):
             # Calculate metrics for time and memory
             if metrics:
                 metrics = self._calc_metrics(row)
-                
+
                 # add metrics to each point
                 for idx, point in enumerate(points):
                     point['mean_time'] = metrics[idx][0]
