@@ -6,9 +6,7 @@ class PerformanceRepository(AbstractRepository.implementation):
     """Repository for the performance table data."""
     __table__ = 'performance'
 
-    def __init__(
-        self, label=None, level=None, type=None, time=None, memory=None, peak_memory=None
-    ):
+    def __init__(self, label, level, type, time, memory, peak_memory):
         """Set attributes."""
         self.label = label
         self.level = level

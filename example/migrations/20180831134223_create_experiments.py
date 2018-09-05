@@ -11,6 +11,7 @@ class CreateExperiments(Migration):
         with self.schema.create('experiments') as table:
             table.increments('id')
             table.primary('id')
+            table.string('name', 75)
             table.datetime('start')
             table.datetime('finished').nullable()
             table.string('config_file')

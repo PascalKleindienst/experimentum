@@ -176,6 +176,7 @@ class Experiment(object):
             self.repos['testcase'] = self.app.repositories.get('TestCaseRepository')
 
             self.repos['experiment'] = self.repos['experiment'].from_dict({
+                'name': self.__class__.__name__.replace('Experiment', ''),
                 'start': datetime.now(),
                 'config_file': self.config_file,
                 'config_content': json.dumps(self.config.all()),

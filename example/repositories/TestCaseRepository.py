@@ -10,7 +10,7 @@ class TestCaseRepository(AbstractRepository.implementation):
         'performances': [PerformanceRepository]
     }
 
-    def __init__(self, experiment_id=None, iteration=None):
+    def __init__(self, iteration, experiment_id=None):
         """Set attributes."""
-        self.experiment_id = experiment_id
         self.iteration = iteration
+        self.experiment_id = experiment_id
