@@ -26,13 +26,13 @@ class FooExperiment(Experiment):
             subpoint.message('List insert finished')
 
         return {
-            # 'list': self.my_list,
-            'performance': {
+            'random_value': self.my_list[-1],
+            'performances': [{
                 'label': 'Custom Performance entry',
                 'time': 12345,
-                'memory': None,
-                'peak_memory': None,
+                'memory': 0,
+                'peak_memory': 0,
                 'level': 0,
                 'type': 'custom'
-            }
+            }]
         }
