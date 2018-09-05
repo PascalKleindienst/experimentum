@@ -405,7 +405,7 @@ class Performance(object):
             # Calculate metrics for time and memory
             if metrics:
                 metrics = self._calc_metrics(row)
-
+                
                 # add metrics to each point
                 for idx, point in enumerate(points):
                     point['mean_time'] = metrics[idx][0]
@@ -445,15 +445,15 @@ class Performance(object):
         Returns:
             set: Mean Time, STD Time, Mean Memory, STD Memory
         """
-        times = zip(*[points['Time'] for points in row])
+        times = list(zip(*[points['Time'] for points in row]))
         mean_time = list(map(Performance.mean, times))
         std_time = list(map(Performance.standard_deviation, times))
 
-        memory = zip(*[points['Memory'] for points in row])
+        memory = list(zip(*[points['Memory'] for points in row]))
         mean_memory = list(map(Performance.mean, memory))
         std_memory = list(map(Performance.standard_deviation, memory))
 
-        return zip(mean_time, std_time, mean_memory, std_memory)
+        return list(zip(mean_time, std_time, mean_memory, std_memory))
 
     def results(self):
         """Print the performance results in a human-readable format."""
