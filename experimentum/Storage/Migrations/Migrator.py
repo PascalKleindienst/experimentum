@@ -12,6 +12,7 @@ import inflection
 import datetime
 from tabulate import tabulate
 from termcolor import colored
+from experimentum.cli import print_failure
 
 
 class Migrator(object):
@@ -127,8 +128,8 @@ class Migrator(object):
             migration.up()
             self._update_revision(migration.revision)
             print(colored('› Migrated', 'green'), colored(migration, 'cyan'))
-        except Exception:
-            raise TypeError('{} is not a valid migration'.format(migration))
+        except Exception as exc:
+            print_failure('Error while ugrading migration {}: {}'.format(migration, exc), exit_code=1)
 
     def down(self, migration=None):
         """Downgrade to an old migration revision.
@@ -157,8 +158,8 @@ class Migrator(object):
             migration.down()
             self._update_revision(migration.revision, delete=True)
             print(colored('› Migrated', 'green'), colored(migration, 'cyan'))
-        except Exception:
-            raise TypeError('{} is not a valid migration'.format('migration'))
+        except Exception as exc:
+            print_failure('Error while downgrading migration {}: {}'.format(migration, exc), exit_code=1)
 
     def refresh(self):
         """Rerun all migrations."""
