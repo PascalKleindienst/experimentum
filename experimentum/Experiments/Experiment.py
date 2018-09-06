@@ -1,5 +1,78 @@
 # -*- coding: utf-8 -*-
-"""Run experiments and save the results for future analysations."""
+"""Run experiments and save the results for future analysations.
+
+...
+
+Writing Experiments
+-------------------
+All Experiments extend the :py:class:`.Experiment` class. Experiments
+contain a :py:meth:`~.Experiment.reset` and :py:meth:`~.Experiment.run`
+method. Within :py:meth:`~.Experiment.reset` the method, you should
+reset/initialize the data structuresand values you want to use in each test run.
+
+The :py:meth:`~.Experiment.run` method should contain the code you want to test.
+It should return a dictionary with the values you want to save.
+
+The Reset Method
+----------------
+As mentioned before the :py:meth:`~.Experiment.reset` should reset/initialize the
+data structuresand values you want to use in each test run.
+
+Let's take a look at a basic experiment. Within any of your experiment methods,
+you always have access to the :py:attr:`~.Experiment.app` attribute which
+provides access to the main app class and to the :py:attr:`~.Experiment.config` which
+contains the content of the :py:attr:`~.Experiment.config_file`::
+
+    from experimentum.Experiments import Experiment
+    import random
+
+
+    class FooExperiment(Experiment):
+
+        config_file = 'foo.json'
+
+        def reset(self):
+            # use app to create an instance of a custom aliased class
+            self.user = self.config.get('user')
+            self.some_class = self.app.make('some_class', self.user)
+            self.rand = random.randint(0, 10)
+
+
+The Run Method
+--------------
+As mentioned before the :py:meth:`~.Experiment.run` method should contain the code
+you want to test and return a dictionary with the values you want to save.
+
+Let's take a look at a basic experiment, assuming that you added a ``rand`` attribute to
+your TestCaseRepository with a migration::
+
+    from experimentum.Experiments import Experiment
+    import random
+
+
+    class FooExperiment(Experiment):
+
+        config_file = 'foo.json'
+
+        def run(self):
+            with self.performance.point('Task to measure some Rscript algo') as point:
+                script = self.call('some_script.r')  # prints json to stdout as return value.
+                algo_result = script.get_json()
+                script.process.wait()  # Wait for child process to terminate.
+
+            # Add a custom performance entry
+            return {
+                'rand': self.rand,
+                'performances': [{
+                    'label': 'Custom Rscript measuring',
+                    'time': algo_result.get('time'),
+                    'memory': 0,
+                    'peak_memory': 0,
+                    'level': 0,
+                    'type': 'custom'
+                }]
+            }
+"""
 from __future__ import print_function
 import os
 import glob

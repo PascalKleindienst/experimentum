@@ -110,7 +110,30 @@ deleting data, like :py:meth:`~.Repository.create`, :py:meth:`~.Repository.updat
 
 Events
 ------
-TODO
+A Repository provides several events, allowing you to hook into the following points in a
+repositorie's lifecycle: :py:meth:`~.AbstractRepository.before_insert`,
+:py:meth:`~.AbstractRepository.after_insert`, :py:meth:`~.AbstractRepository.before_update`,
+:py:meth:`~.AbstractRepository.after_update`.
+
+Events allow you to easily execute code each time after/before a specific repository object
+is saved or updated in the data store.
+
+::
+
+    class AddressRepository(AbstractRepository.implementation):
+        # ...
+
+        def after_insert(self):
+            print('Gets called each time after an address is saved to the database.')
+            print(self.id, self.email)  # Object has access to the inserted id
+
+Loading
+-------
+In order for the framework to map all the repositories it has to load them via the
+:py:class:`~.RepositoryLoader` class. For the :py:class:`~.RepositoryLoader` class
+to be able to find the repositories, the files have be in your repository folder and
+end with ``Repository.py``. The repository files should contain a repository class with
+the same name as the file name.
 """
 import os
 import glob
