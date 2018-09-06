@@ -227,11 +227,15 @@ class Experiment(object):
         # TODO: Actually saving results and performance values
         # TODO: Wrap saving in try/except statement to catch when saving fails
         # TODO: due to missing tables etc
-        self.repos['testcase'].from_dict({
+        data = {
             'experiment_id':  self.repos['experiment'].id,
             'iteration': iteration,
-            'performances': self.performance.export()
-        }).create()
+            'performances': []
+        }
+        data.update(result)
+        data['performances'].extend(self.performance.export())
+
+        self.repos['testcase'].from_dict(data).create()
 
     @abstractmethod
     def reset(self):
