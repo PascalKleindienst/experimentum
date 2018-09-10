@@ -1,7 +1,5 @@
 """Adding CLI commands to the app and handle their execution."""
 import argparse
-import shutil
-import sys
 import types
 from termcolor import colored
 from experimentum.cli import print_failure
