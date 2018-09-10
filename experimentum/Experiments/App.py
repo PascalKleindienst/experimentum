@@ -36,6 +36,7 @@ import os
 import sys
 import logging
 import logging.handlers
+from collections import OrderedDict
 from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
 from experimentum.cli import print_failure
@@ -198,7 +199,7 @@ class App(object):
         user_commands = self.register_commands()
 
         if any(user_commands):
-            commands.update(user_commands)
+            commands.update(OrderedDict(sorted(user_commands.items(), key=lambda c: c[0])))
 
         for name, cmd in commands.items():
             self.log.debug('Adding Command {}'.format(name))
@@ -211,14 +212,14 @@ class App(object):
         Returns:
             dict: Default commands
         """
-        return {
-            'experiments:run': ExperimentsCommand.run,
-            'migration:status': MigrationCommand.status,
-            'migration:refresh': MigrationCommand.refresh,
-            'migration:up': MigrationCommand.up,
-            'migration:down': MigrationCommand.down,
-            'migration:make': MigrationCommand.make,
-        }
+        commands = OrderedDict()
+        commands['experiments:run'] = ExperimentsCommand.run
+        commands['migration:status'] = MigrationCommand.status
+        commands['migration:refresh'] = MigrationCommand.refresh
+        commands['migration:up'] = MigrationCommand.up
+        commands['migration:down'] = MigrationCommand.down
+        commands['migration:make'] = MigrationCommand.make
+        return commands
 
     def _set_logger(self):
         """Set up the logger and its handlers."""
