@@ -95,11 +95,14 @@ class TestMigrator(object):
         migrator.up(mock_migration)
         mock_migration.up.assert_called_once_with()
 
-    def test_upgrade_with_invalid_migration(self, tmpdir, mocker):
+    def test_upgrade_with_invalid_migration(self, tmpdir, mocker, capsys):
         migrator = self._create_migrator(tmpdir.strpath, mocker)
 
-        with pytest.raises(TypeError):
+        with pytest.raises(SystemExit) as pytest_wrapped_e:
             migrator.up('mock_migration')
+
+        assert pytest_wrapped_e.type == SystemExit
+        assert pytest_wrapped_e.value.code == 1
 
     def test_downgrade_latest_migration(self, tmpdir, mocker):
         self._create_migration_file(0, tmpdir)
@@ -111,7 +114,7 @@ class TestMigrator(object):
 
         migrator = self._create_migrator(tmpdir.strpath, mocker)
         migrator.down()
-        assert tmpdir.join('.version').read() ==  '|' + datetime.fromtimestamp(0).strftime('%Y%m%d%H%M%S')
+        assert tmpdir.join('.version').read() == '|' + datetime.fromtimestamp(0).strftime('%Y%m%d%H%M%S')
 
     def test_downgraded_all_migrations(self, tmpdir, mocker, capsys):
         self._create_migration_file(0, tmpdir)
@@ -128,11 +131,14 @@ class TestMigrator(object):
         migrator.down(mock_migration)
         mock_migration.down.assert_called_once_with()
 
-    def test_downgrade_with_invalid_migration(self, tmpdir, mocker):
+    def test_downgrade_with_invalid_migration(self, tmpdir, mocker, capsys):
         migrator = self._create_migrator(tmpdir.strpath, mocker)
 
-        with pytest.raises(TypeError):
+        with pytest.raises(SystemExit) as pytest_wrapped_e:
             migrator.down('mock_migration')
+
+        assert pytest_wrapped_e.type == SystemExit
+        assert pytest_wrapped_e.value.code == 1
 
     def test_refresh(self, tmpdir, mocker):
         self._create_migration_file(0, tmpdir)

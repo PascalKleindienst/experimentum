@@ -129,7 +129,7 @@ class Migrator(object):
             self._update_revision(migration.revision)
             print(colored('› Migrated', 'green'), colored(migration, 'cyan'))
         except Exception as exc:
-            print_failure('Error while ugrading migration {}: {}'.format(migration, exc), exit_code=1)
+            print_failure('Error while ugrading migration {}: {}'.format(migration, exc), 1)
 
     def down(self, migration=None):
         """Downgrade to an old migration revision.
@@ -159,7 +159,7 @@ class Migrator(object):
             self._update_revision(migration.revision, delete=True)
             print(colored('› Migrated', 'green'), colored(migration, 'cyan'))
         except Exception as exc:
-            print_failure('Error while downgrading migration {}: {}'.format(migration, exc), exit_code=1)
+            print_failure('Error while downgrading migration {}: {}'.format(migration, exc), 1)
 
     def refresh(self):
         """Rerun all migrations."""
