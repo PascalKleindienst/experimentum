@@ -1,8 +1,41 @@
-"""Main entry point of the framework.
+"""Main Service Container and Provider.
 
 Sets up the framework and runs the experiments and lets you customize/extend
 the behavior of the framework.
 
+Binding
+-------
+We can register/bind a new  alias by extending either the :py:meth:`~.App.register_aliases class` or by
+directly adding the alias to the :py:attr:`~.App.aliases` dictionary. The key is the alias name you want
+to register and the value is a function that returns an instance of the class::
+
+    def register_aliases(self):
+        super(MyAppClass, self).register_aliases()
+
+        self.aliases['my_custom_api'] = lambda: API(self.store)
+
+Additional arguments for creating a class instance may be passed when resolving. Your function just has
+to add them in order to use them::
+
+    self.aliases['my_custom_api'] = lambda name, user_id=None: API(self.store, name, user_id)
+
+Resolving
+---------
+You may use the :py:meth:`~.App.make` method to resolve a class instance out of the container.
+The :py:meth:`~.App.make` method accepts the alias of the class you want to resolve::
+
+    api = self.app.make('my_custom_api')
+
+If some of your class' dependencies are not resolvable via the app container, you may pass them
+as additional args and keyword args::
+
+    api = self.app.make('my_custom_api', foo, user_id=42)
+
+Customizing
+-----------
+
+Commands
+^^^^^^^^
 Register new commands with the :py:meth:`.App.register_commands` method.
 It should return a dictionary where the keys are names of the commands and
 the values are the command handlers. The command handlers must either be
@@ -13,23 +46,6 @@ derived from :py:class:`.AbstractCommand` or a function with the decorator
         'foo': FooCommand,
         'bar': BarCommand
     }
-
-Add more aliases or change aliases with the :py:meth:`.App.register_aliases` method.
-To create a new instance of an aliased class just run the :py:meth:`.App.make` method::
-
-    class MyDerivedApp(App):
-        def register_aliases(self):
-            super(MyDerivedApp, self).register_aliases()  # register default aliases
-
-            # register alias 'foo' and pass all args and kwargs when called with make
-            self.aliases['foo'] = lambda *args, **kwargs: Foo(*args, **kwargs)
-
-    ...
-
-    # create a new instance of Foo and pass the args to it.
-    foo = app.make('foo', 42, bar='foobar')
-
-
 """
 from __future__ import print_function
 import os

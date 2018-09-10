@@ -12,6 +12,7 @@ Welcome to experimentum's documentation!
 
    install
    configuration
+   service
    commands
    migrations
    repositories
