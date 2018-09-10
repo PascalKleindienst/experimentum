@@ -184,7 +184,7 @@ class RepositoryLoader(object):
             try:
                 # first find and load the package assuming it is in
                 # the current working directory, '.'
-                fp, p, desc = imp.find_module(path, ['.'])
+                fp, p, desc = imp.find_module(os.path.join(self.app.root, path), ['.'])
                 pkg = imp.load_module(path, fp, p, desc)
 
                 # then find the named repository module using pkg.__path__
@@ -197,10 +197,10 @@ class RepositoryLoader(object):
                 repo.mapping(repo, self.store)
                 self._repos[name] = repo
 
+                fp.close()
+
             except Exception as exc:
                 print_failure('Could not load repository. ' + str(exc), exit_code=1)
-            finally:
-                fp.close()
 
     def get(self, repository):
         """Return class of a loaded repository if it exists.

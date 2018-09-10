@@ -16,9 +16,12 @@ class TestRepositoryLoader(object):
         app.root = os.path.dirname(__file__)
         app.config.get = mocker.MagicMock(return_value='.')
 
-        with pytest.raises(Exception):
+        with pytest.raises(SystemExit) as pytest_wrapped_e:
             loader = RepositoryLoader(app, 'Implementation', app.store)
             loader.load()
+
+        assert pytest_wrapped_e.type == SystemExit
+        assert pytest_wrapped_e.value.code == 1
 
     def test_get_repo(self):
         loader = RepositoryLoader('App', 'Implementation', 'Store')
