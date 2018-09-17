@@ -73,7 +73,7 @@ def print_failure(msg, exit_code=None):
         colored(''.center(size, ' '), 'white', 'on_red'),
         colored(msg, 'white', 'on_red', ['bold'])
     ))
-    logging.getLogger('experimentum').critical(msg)
+    logging.getLogger('experimentum').critical(msg.strip())
 
     if exit_code is not None:
         sys.exit(exit_code)
