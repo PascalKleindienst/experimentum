@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+termcolor = "*"
+tabulate = "*"
+inflection = "*"
+six = "*"
+psutil = "*"
+SQLAlchemy = ">=1.2.0"
+experimentum = {editable = true, path = "."}
+colorama = "*"
+
+[dev-packages]
+sphinx = "*"
+"sphinxcontrib.napoleon" = "*"
+sphinx-rtd-theme = "*"
+tox = "*"
+
+[requires]
+python_version = "3.6"

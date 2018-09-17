@@ -23,7 +23,7 @@ VERSION = None
 # What packages are required for this module to be executed?
 REQUIRED = [
     # 'requests', 'maya', 'records',
-    'SQLAlchemy>=1.2.0', 'termcolor', 'tabulate', 'inflection', 'six', 'psutil'
+    'SQLAlchemy>=1.2.0', 'termcolor', 'colorama', 'tabulate', 'inflection', 'six', 'psutil'
 ]
 
 # What packages are optional?

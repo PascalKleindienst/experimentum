@@ -1,6 +1,11 @@
 SQLAlchemy>=1.2.0
 termcolor
+colorama
 tabulate
 inflection
 six
 psutil
+sphinx
+sphinxcontrib-napoleon
+sphinx-rtd-theme
+tox
