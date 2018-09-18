@@ -1,7 +1,11 @@
 # Experimentum [![Build Status][build-status-badge]][build-status-link] [![Codacy grade][codacy-quality-badge]][codacy-quality-link] [![Codacy coverage][codacy-coverage-badge]][codacy-coverage-link]
 
 ## Installation
+Since experimentum is in its development stage you have to install it from its GitHub repository.
+
 `pip install https://github.com/PascalKleindienst/experimentum/archive/master.tar.gz`
+
+or 
 
 `pip install git+ssh://git@github.com/PascalKleindienst/experimentum.git#egg=experimentum`
 
@@ -13,34 +17,50 @@
 >* SQLite: The ``sqlite3`` module is bundled with Python by default
 
 ### Getting Started
-All you need to get you started is an `app.json` config file and creating a new class derived from the `experimentum.Experiments.App` class where you set the path to the config folder.
-To start the framework just call the `run`-method of the new `App` class.
+In order to use the experimentum framework, you’ll have to take care of some initial setup. You’ll need to auto-generate some code that creates the config files, migrations, repositories and other application-specific settings.
 
-All needed files and a derived `App` class can be generated with the `experimentum-quickstart` command *(see [Quickstart](#quickstart))*
+From the command line, `cd` into a directory where you would like to store your code, and then run the following command:
 
-Example `MyApp` class:
+`experimentum-quickstart`
 
-```python
-from experimentum.Experiments import App
+After you answered the questions it will create the files and folders in this directory. If you want to create the project in a subdirectory you can add the `--root` option to the command, like so:
 
-class MyApp(App):
-    """Main Entry Point of the Framework.
+`experimentum-quickstart --root myproject`
 
-    Args:
-        config_path (str): Defaults to '.'. Path to config files.
-    """
-    config_path = 'config'
-
-if __name__ == '__main__':
-    app = MyApp('MyApp')  # Name of the app.
-    app.run()
+This willl create a **myproject** directory in your current directoy. The quickstart command will have created the following:
 ```
+/
+    config/
+        app.json
+        storage.json
+    experiments/
+        __init__.py
+    logs/
+    migrations/
+        {TIMESTAMP}_create_experiments.py
+        {TIMESTAMP}_create_testcase.py
+        {TIMESTAMP}_create_performance.py
+    repositories/
+        __init__.py
+        ExperimentRepository.py
+        PerformanceRepository.py
+        TestcaseRepository.py
+    main.py
+```
+These files are:
 
-### Quickstart
-In order to create all needed config files and folders the experimentum framework contains a quickstart command.
-Just run `experimentum-quickstart` and answer the questions.
-
-You can add a different root path with the `--root` option, e.g. `experimentum-quickstart --root example`
+- **main.py**: The main entry point of the framework. It lets you interact with the experimentum framework via the command line.
+- **config/**: Contains all configuration files. You can place you own configuration files here. All *.json files will be loaded by the framework and available via the Config class under the config attribute of the App class.
+- **config/app.json** and **storage.json**: Framework related settings. For more information see Configuration
+- **experiments/**: Here you can place your experiments and their configrations.
+- **logs/**: Contains the log files.
+- **migrations/**: Your migration files are placed here.
+- **migrations/{TIMESTAMP}_create_experiments.py**: Migration for creating the experiments table.
+- **migrations/{TIMESTAMP}_create_testcase.py**: Migration for creating the testcase table.
+- **migrations/{TIMESTAMP}_create_performance.py**: Migration for creating the performance table.
+- **repositories/ExperimentRepository.py**: Repository for experiment data.
+- **repositories/TestcaseRepository.py**: Repository for testcase data.
+- **repositories/PerformanceRepository.py**: Repository for performance data.
 
 ## Documentation
 The documentation can be found under: https://pascalkleindienst.github.io/experimentum/index.html
