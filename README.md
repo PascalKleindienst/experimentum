@@ -84,8 +84,10 @@ limitations under the License.
 [build-status-badge]: https://travis-ci.com/PascalKleindienst/experimentum.svg?token=Hv3aZrJaquTDR7zjNhps&branch=master
 [build-status-link]:https://travis-ci.com/PascalKleindienst/experimentum
 
-[codacy-quality-badge]: https://img.shields.io/codacy/grade/e85a2c346ef14265b3986ff7f58b3c7a.svg?style=flat-square
+[_codacy-quality-badge]: https://img.shields.io/codacy/grade/e85a2c346ef14265b3986ff7f58b3c7a.svg?style=flat-square
+[codacy-quality-badge]: https://api.codacy.com/project/badge/Grade/e85a2c346ef14265b3986ff7f58b3c7a
 [codacy-quality-link]: https://www.codacy.com?utm_source=github.com&utm_medium=referral&utm_content=PascalKleindienst/experimentum&utm_campaign=Badge_Grade
 
-[codacy-coverage-badge]: https://img.shields.io/codacy/coverage/e85a2c346ef14265b3986ff7f58b3c7a.svg?style=flat-square
+[_codacy-coverage-badge]: https://img.shields.io/codacy/coverage/e85a2c346ef14265b3986ff7f58b3c7a.svg?style=flat-square
+[codacy-coverage-badge]: https://api.codacy.com/project/badge/Coverage/e85a2c346ef14265b3986ff7f58b3c7a
 [codacy-coverage-link]: https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=PascalKleindienst/experimentum&amp;utm_campaign=Badge_Coverage
