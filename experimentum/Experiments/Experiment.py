@@ -171,6 +171,22 @@ class Experiment(object):
         self._path = path
 
     @staticmethod
+    def get_experiments(path):
+        """Get experiment names from exp files/classes.
+        
+        Args:
+            path (str): Path to experiments folder.
+        
+        Returns:
+            list: Names of experiments
+        """
+        files = glob.glob(os.path.join(path, '[!_]*.py'))
+        return list(map(
+            lambda exp: os.path.basename(exp).lower().replace('experiment.py', ''),
+            files
+        ))
+
+    @staticmethod
     def load(app, path, name):
         """Load and initialize an experiment class.
 
@@ -183,7 +199,7 @@ class Experiment(object):
             Experiment: Loaded experiment.
         """
         # Load Experiment File
-        files = glob.glob(os.path.join(path, '*.py'))
+        files = glob.glob(os.path.join(path, '[!_]*.py'))
         files = list(filter(
             lambda exp: name.lower() == os.path.basename(exp).lower().replace('experiment.py', ''),
             files

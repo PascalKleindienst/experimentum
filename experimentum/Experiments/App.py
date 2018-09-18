@@ -230,6 +230,7 @@ class App(object):
         """
         commands = OrderedDict()
         commands['experiments:run'] = ExperimentsCommand.run
+        commands['experiments:list'] = ExperimentsCommand.status
         commands['migration:status'] = MigrationCommand.status
         commands['migration:refresh'] = MigrationCommand.refresh
         commands['migration:up'] = MigrationCommand.up
