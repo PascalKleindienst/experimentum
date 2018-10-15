@@ -6,4 +6,5 @@ they can be easly imported by other packages/modules.
 # flake8: noqa
 from .Performance import Performance
 from .Experiment import Experiment, Script
+from .DataBag import DataBag
 from .App import App
