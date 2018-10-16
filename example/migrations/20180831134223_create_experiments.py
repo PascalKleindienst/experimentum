@@ -14,7 +14,7 @@ class CreateExperiments(Migration):
             table.string('name', 75)
             table.datetime('start')
             table.datetime('finished').nullable()
-            table.string('config_file')
+            table.string('config_file').nullable()
             table.json('config_content').nullable()
 
     def down(self):

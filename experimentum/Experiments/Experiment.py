@@ -173,10 +173,10 @@ class Experiment(object):
     @staticmethod
     def get_experiments(path):
         """Get experiment names from exp files/classes.
-        
+
         Args:
             path (str): Path to experiments folder.
-        
+
         Returns:
             list: Names of experiments
         """
@@ -253,11 +253,12 @@ class Experiment(object):
     def boot(self):
         """Boot up the experiment, e.g. load config etc."""
         # Load Config/Args for experiment
-        try:
-            with open(os.path.join(self._path, self.config_file), 'r') as cfg:
-                self.config.set(json.load(cfg))
-        except Exception as exc:
-            print_failure(exc, 2)
+        if self.config_file:
+            try:
+                with open(os.path.join(self._path, self.config_file), 'r') as cfg:
+                    self.config.set(json.load(cfg))
+            except Exception as exc:
+                print_failure(exc, 2)
 
         # Load Experiment and testcase repos
         try:

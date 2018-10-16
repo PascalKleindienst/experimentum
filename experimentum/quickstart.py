@@ -161,7 +161,7 @@ def main():
             table.string('name', 75)
             table.datetime('start')
             table.datetime('finished').nullable()
-            table.string('config_file')
+            table.string('config_file').nullable()
             table.text('config_content').nullable()""",
         down="self.schema.drop_if_exists('experiments')"
     )
@@ -186,7 +186,7 @@ def main():
         up=r"""with self.schema.create('performance') as table:
             table.big_increments('id')
             table.primary('id')
-            able.primary('id')
+            table.primary('id')
             table.string('label', 25)
             table.small_integer('level')
             table.string('type', 25)
