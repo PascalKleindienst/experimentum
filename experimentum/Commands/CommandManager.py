@@ -1,6 +1,7 @@
 """Adding CLI commands to the app and handle their execution."""
 import argparse
 import types
+import sys
 from termcolor import colored
 from experimentum.cli import print_failure
 from experimentum.Commands import AbstractCommand
@@ -94,17 +95,15 @@ class CommandManager(object):
 
     def dispatch(self):
         """Use dispatch pattern to invoke class and let it handle the command."""
-        options = self.parser.parse_args()
-        options.func(self.app, options)
-        # try:
-        #     # dispatch
-        #     options = self.parser.parse_args()
-        #     options.func(options)
-        # except SystemExit:
-        #     # no command selected
-        #     print_failure('Please specify a command')
-        #     self.parser.print_help(sys.stderr)
-        #     sys.exit(2)
+        try:
+            # dispatch
+            options = self.parser.parse_args()
+            options.func(self.app, options)
+        except AttributeError:
+            # no command selected
+            print_failure('Please specify a command')
+            self.parser.print_help(sys.stderr)
+            sys.exit(2)
 
 
 class ColoredHelpFormatter(argparse.HelpFormatter):
