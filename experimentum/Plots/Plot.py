@@ -139,6 +139,8 @@ class Plot(AbstractPlot):
             plt.errorbar(data.get('x'), data.get('y'), **self._get_params(plot_idx))
         elif self.type == 'bar':
             plt.bar(data.get('x'), data.get('y'), **self._get_params(plot_idx))
+        elif self.type == 'pie':
+            plt.pie(data.get('x'), **self._get_params(plot_idx, ['label']))
         else:
             params = self._get_params(plot_idx)
             fmt = self.config.get('styles.fmt', [])
