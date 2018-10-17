@@ -133,22 +133,42 @@ class Plot(AbstractPlot):
             data (dict): Dictionary with coordinates (e.g. {'x': 0, 'y': 0, 'z': 0})
             plot_idx (integer, optional): Defaults to None. Index for when multiple plots are drawn
         """
-        params = self.config.get('params', {})
-        params['fmt'] = self.config.get('styles.fmt', '')
-        params['label'] = self.config.get('styles.label', '')
-
         if self.type == 'histogram':
-            plt.hist(data.get('y'), bins=self.config.get('params.bins'))
+            plt.hist(data.get('y'), **self._get_params(plot_idx))
         elif self.type == 'errorbar':
-            plt.errorbar(data.get('x'), data.get('y'), **params)
+            plt.errorbar(data.get('x'), data.get('y'), **self._get_params(plot_idx))
         elif self.type == 'bar':
-            del params['fmt']
-            plt.bar(data.get('x'), data.get('y'), **params)
+            plt.bar(data.get('x'), data.get('y'), **self._get_params(plot_idx))
         else:
-            for key, values in params.items():
-                if isinstance(values, list) and len(values) > plot_idx:
-                    params[key] = values[plot_idx]
-            fmt = params['fmt']
-            del params['fmt']
+            params = self._get_params(plot_idx)
+            fmt = self.config.get('styles.fmt', [])
+
+            if plot_idx is not None and isinstance(fmt, list):
+                fmt = fmt[plot_idx]
 
             plt.plot(data.get('x'), data.get('y'), fmt, **params)
+
+    def _get_params(self, plot_idx, remove=[]):
+        """Get params for the plot.
+
+        Args:
+            plot_idx (integer): Index for when multiple plots are drawn.
+            remove (list, optional): Defaults to []. List of keys to remove from params.
+
+        Returns:
+            dict: Dictionary of params
+        """
+        _params = {}
+        params = self.config.get('params', {})
+        params['label'] = self.config.get('styles.label', '')
+
+        for key in remove:
+            del params[key]
+
+        for key, values in params.items():
+            if plot_idx is not None and isinstance(values, list) and len(values) > plot_idx:
+                _params[key] = values[plot_idx]
+            else:
+                _params[key] = values
+
+        return _params
