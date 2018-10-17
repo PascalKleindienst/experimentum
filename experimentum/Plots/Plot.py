@@ -141,6 +141,8 @@ class Plot(AbstractPlot):
             plt.bar(data.get('x'), data.get('y'), **self._get_params(plot_idx))
         elif self.type == 'pie':
             plt.pie(data.get('x'), **self._get_params(plot_idx, ['label']))
+        elif self.type == 'scatter':
+            plt.scatter(data.get('x'), data.get('y'), **self._get_params(plot_idx))
         else:
             params = self._get_params(plot_idx)
             fmt = self.config.get('styles.fmt', [])
