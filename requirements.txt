@@ -5,6 +5,7 @@ tabulate
 inflection
 six
 psutil
+matplotlib
 sphinx
 sphinxcontrib-napoleon
 sphinx-rtd-theme
