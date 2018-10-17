@@ -256,6 +256,17 @@ class AbstractRepository(object):
         attrs = ['{}="{}"'.format(k, v) for k, v in self.__dict__.items() if k[:1] != '_']
         return '<{} {} />'.format(self.__class__.__name__, ' '.join(attrs))
 
+    def __contains__(self, key):
+        """Check if repository has a certain attribute.
+
+        Args:
+            key (str): Attribute to check
+
+        Returns:
+            bool: Whether the attribute exists or not
+        """
+        return hasattr(self, key)
+
     def __getitem__(self, key):
         """Get attribute value with dictionary like syntax.
 
