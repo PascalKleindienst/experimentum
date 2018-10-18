@@ -9,10 +9,11 @@ Example:
 
     cfg = Config()
     cfg.set({ 'foo': 'bar', 'foobar': {'baz': 42 } })
+    cfg.set('a.b.c', 'd')
 
     cfg.get('foobar.baz')  # returns: 42
     cfg.has('foobar.foo')  # returns: False
-    cfg.all()              # returns: { 'foo': 'bar', 'foobar': {'baz': 42 } }
+    cfg.all()              # returns: { 'foo': 'bar', 'foobar': {'baz': 42 }, 'a': {'b': {'c': 'd'}} }
 
 """
 
@@ -104,5 +105,25 @@ class Config(object):
             key (dict|string): Config item keys to change the value
             value (object,optional): Defaults to None. New value
         """
-        keys = key if isinstance(key, dict) else {key: value}
-        self.items.update(keys)
+        def set_to(items, data):
+            """Recursively set value to dictionary deep key.
+
+            Args:
+                items (list): List of dictionary keys
+                data (dict): Portion of dictionary to operate on
+            """
+            item = items.pop(0)
+
+            # Traverse dictionary to last item key
+            if items:
+                if item not in data:
+                    data[item] = {}
+                set_to(items, data[item])
+            # Set Value on last key
+            else:
+                data[item] = value
+
+        if isinstance(key, str):
+            set_to(key.split('.'), self.items)
+        elif isinstance(key, dict):
+            self.items.update(key)
