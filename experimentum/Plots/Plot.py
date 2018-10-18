@@ -143,6 +143,8 @@ class Plot(AbstractPlot):
             plt.pie(data.get('x'), **self._get_params(plot_idx, ['label']))
         elif self.type == 'scatter':
             plt.scatter(data.get('x'), data.get('y'), **self._get_params(plot_idx))
+        elif self.type == 'polar':
+            plt.polar(data.get('theta'), data.get('r'))
         else:
             params = self._get_params(plot_idx)
             fmt = self.config.get('styles.fmt', [])
