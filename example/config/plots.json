@@ -1,0 +1,44 @@
+
+{
+    "pie": {
+        "type": "pie"
+    },
+    "polar": {
+        "type": "polar"
+    },
+    "scatter": {
+        "type": "scatter"
+    },
+    "histogram": {
+        "type": "histogram"
+    },
+    "bar": {
+        "type": "bar"
+    },
+    "errorbar": {
+        "type": "errorbar",
+        "styles": { "fmt": "^-" },
+        "params": { "ecolor": "green" }
+    },
+    "simpleline": {
+        "title": {
+            "label": "Some Foo Experiment",
+            "loc": "right"
+        },
+        "labels": {
+            "x-axis": "X-Axis Label",
+            "y-axis": "Y-Axis Label"
+        },
+        "legend": {
+            "loc": "upper center",
+            "shadow": true,
+            "fontsize": "large"
+        },
+        "styles": {
+            "grid": true,
+            "axis": [0, 5, -1, 64],
+            "fmt": ["r--", "bs:", "g^"],
+            "label": ["Line 1", "Line 2", "Line 3"]
+        }
+    }
+}
