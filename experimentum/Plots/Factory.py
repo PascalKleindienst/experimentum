@@ -1,3 +1,4 @@
+"""Factory to load and init plot classes."""
 from experimentum.cli import print_failure
 from experimentum.utils import find_files, load_class
 from experimentum.Plots import AbstractPlot

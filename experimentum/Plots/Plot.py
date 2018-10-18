@@ -1,3 +1,12 @@
+"""Interface and Implementation for generating plots and charts.
+
+The default implementation of :py:class:`.AbstractPlot` is the
+:py:class:`.Plot` class which internally uses the matplotlib library
+to generate the plots. If you want to use another library to generate
+your plots you can add a new `CustomPlot` class which implements the
+:py:class:`.AbstractPlot` interface. Now your plots need to inherit
+from your `CustomPlot` class and you are good to go.
+"""
 from __future__ import unicode_literals
 from six import add_metaclass
 from abc import abstractmethod, ABCMeta
