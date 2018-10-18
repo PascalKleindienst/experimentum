@@ -5,17 +5,17 @@ the behavior of the framework.
 
 Binding
 -------
-We can register/bind a new  alias by extending either the :py:meth:`~.App.register_aliases class` or by
-directly adding the alias to the :py:attr:`~.App.aliases` dictionary. The key is the alias name you want
-to register and the value is a function that returns an instance of the class::
+We can register/bind a new  alias by extending either the :py:meth:`~.App.register_aliases class`
+or by directly adding the alias to the :py:attr:`~.App.aliases` dictionary. The key is the alias
+name you want to register and the value is a function that returns an instance of the class::
 
     def register_aliases(self):
         super(MyAppClass, self).register_aliases()
 
         self.aliases['my_custom_api'] = lambda: API(self.store)
 
-Additional arguments for creating a class instance may be passed when resolving. Your function just has
-to add them in order to use them::
+Additional arguments for creating a class instance may be passed when resolving. Your function
+just has to add them in order to use them::
 
     self.aliases['my_custom_api'] = lambda name, user_id=None: API(self.store, name, user_id)
 
@@ -57,11 +57,12 @@ from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
 from experimentum.cli import print_failure
 from experimentum.Config import Config, Loader
-from experimentum.Commands import CommandManager, MigrationCommand, ExperimentsCommand
+from experimentum.Commands import CommandManager, MigrationCommand, ExperimentsCommand, PlotCommand
 from experimentum.Experiments import Experiment
 from experimentum.Storage.AbstractRepository import RepositoryLoader
 from experimentum.Storage.Migrations import Migrator, Blueprint, Schema
 from experimentum.Storage.SQLAlchemy import Store, Repository
+from experimentum.Plots import Factory
 
 
 def _path_join(root, path):
@@ -198,12 +199,14 @@ class App(object):
 
         migration_path = self.config.get('storage.migrations.path', 'migrations')
         experiments_path = self.config.get('app.experiments.path', 'experiments')
+        plot_factory = Factory(self)
 
         self.aliases = {
             'experiment':
                 lambda name: Experiment.load(self, _path_join(self.root, experiments_path), name),
             'migrator':
                 lambda: Migrator(_path_join(self.root, migration_path), self),
+            'plot': lambda name: plot_factory.create(name),
             'store': lambda: self.store,
             'schema': lambda: Schema(self),
             'blueprint': lambda *args, **kwargs: Blueprint(*args, **kwargs),
@@ -236,6 +239,8 @@ class App(object):
         commands['migration:up'] = MigrationCommand.up
         commands['migration:down'] = MigrationCommand.down
         commands['migration:make'] = MigrationCommand.make
+        commands['plot:generate'] = PlotCommand.generate
+
         return commands
 
     def _set_logger(self):
