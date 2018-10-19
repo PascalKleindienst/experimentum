@@ -10,3 +10,4 @@ sphinx
 sphinxcontrib-napoleon
 sphinx-rtd-theme
 tox
+flask

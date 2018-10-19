@@ -13,6 +13,7 @@ SQLAlchemy = ">=1.2.0"
 experimentum = {editable = true, path = "."}
 colorama = "*"
 matplotlib = "*"
+flask = "*"
 
 [dev-packages]
 sphinx = "*"
