@@ -69,8 +69,15 @@ class Migrator(object):
                 migration = getattr(mod, inflection.camelize(name[15:]))
                 self.migrations[name] = migration(app)
 
-    def status(self):
-        """Print the current status of which migrations did run and which not."""
+    def status(self, print=True):
+        """Print the current status of which migrations did run and which not.
+
+        Args:
+            print (bool, optional): Defaults to True. Whether or not the status table is printed.
+
+        Returns:
+            list: migration status list
+        """
         # check whether migration did run or not
         migrated = self._get_migrated_revisions()
         migrations = self.get_migration_files(self.path)
@@ -81,7 +88,12 @@ class Migrator(object):
         ]
 
         headers = [colored('Migration', 'yellow'), colored('Ran?', 'yellow')]
-        print(tabulate(status, headers=headers, tablefmt='psql'))
+
+        # Print Table
+        if print:
+            print(tabulate(status, headers=headers, tablefmt='psql'))
+
+        return status
 
     def make(self, name):
         """Make a new migration file.
