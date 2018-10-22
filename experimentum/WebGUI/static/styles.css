@@ -11,3 +11,16 @@
 
 /* Tables */
 table { background: #fff; }
+
+/* Cards */
+.card-add {
+    background: transparent;
+    border: 2px dashed #b0bec5; /** blue-grey lighten-3 **/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: .5rem 0 1rem 0;
+    height: calc(100% - 2*(.5rem + 2px));
+    cursor: pointer;
+    color: #b0bec5;
+}

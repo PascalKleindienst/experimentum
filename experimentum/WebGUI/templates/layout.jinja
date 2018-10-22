@@ -36,10 +36,9 @@
     <div id="content" class="container">{% block content %}{% endblock %}</div>
 
     {% block scripts %}
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>
-        M.AutoInit();
-    </script>
+    <script src="{{ url_for('static', filename='app.js')}}" type="module"></script>
     {% endblock %}
 </body>
 </html>
