@@ -1,0 +1,13 @@
+/** Custom App Styles */
+
+/* Rows */
+.row-equal {
+    display: flex;
+    flex-wrap: wrap;
+    }
+    .row-equal .col {
+        margin-left: 0 !important;
+    }
+
+/* Tables */
+table { background: #fff; }
