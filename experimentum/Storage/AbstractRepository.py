@@ -306,7 +306,7 @@ class AbstractRepository(object):
                 if type(val) is list:
                     relations[key] = [relationships[key][0].from_dict(v) for v in val]
                 else:
-                    relations[key] = relationships[key][0].from_dict(val)
+                    relations[key] = [relationships[key][0].from_dict(val)]
             else:
                 init[key] = val
 
