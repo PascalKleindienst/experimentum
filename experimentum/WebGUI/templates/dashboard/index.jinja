@@ -1,0 +1,56 @@
+{# Main App Dashboard #}
+{% extends "layout.jinja" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+{# Experiment Section #}
+<div class="section">
+    <div class="row row-equal">
+        <div class="col s12"><h3 class="header teal-text text-darken-2">Experiments</h3></div>
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-content">
+                  <span class="card-title">Experiment 1</span>
+                  <p><small>Run: <em>4</em> times</small></p>
+                </div>
+                <div class="card-action">
+                  <a href="#results" class="teal-text text-darken-2">Show Results</a>
+                  <a href="#run" class="teal-text text-darken-2">Run</a>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-content">
+                  <span class="card-title">Experiment 2</span>
+                  <p><small>Run: <em>2</em> times</small></p>
+                </div>
+                <div class="card-action">
+                  <a href="#results" class="teal-text text-darken-2">Show Results</a>
+                  <a href="#run" class="teal-text text-darken-2">Run</a>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-content">
+                  <span class="card-title">Experiment 3</span>
+                  <p><small>Run: <em>0</em> times</small></p>
+                </div>
+                <div class="card-action">
+                  <a href="#results" class="teal-text text-darken-2">Show Results</a>
+                  <a href="#run" class="teal-text text-darken-2">Run</a>
+                </div>
+            </div>
+        </div>
+        {# <div class="col s12 m4">
+            <div class="card-add">
+                <i class="material-icons">add_circle_outline</i>
+                Add Experiment
+            </div>
+        </div> #}
+    </div>
+</div>
+
+{% endblock %}
