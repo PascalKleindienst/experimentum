@@ -1,0 +1,58 @@
+{# Display list of migrations #}
+<div class="section" id="migration-list" data-status-url="{{ url_for('migrations.status') }}">
+    <div class="row row-equal">
+        <div class="col s12">
+            <h3 class="header teal-text text-darken-2">
+                Migrations
+                <span class="right">
+                    <a class="waves-effect waves-light btn migration-upgrade" href="{{ url_for('migrations.upgrade') }}">Upgrade</a>
+                    <a class="waves-effect waves-light btn red migration-downgrade" href="{{ url_for('migrations.downgrade') }}">Downgrade</a>
+                    <a class="waves-effect waves-light btn red modal-trigger" href="#refresh-migration-modal">Refresh</a>
+                </span>
+            </h3>
+        </div>
+        {% for migration in migrations %}
+            <div class="col s12 m6 l4">
+                <div class="card">
+                    <div class="card-content valign-wrapper {{ 'green-text text-lighten-2' if migration[1] == 'yes' else 'red-text' }}">
+                        <i class="material-icons">{{ 'check_circle' if migration[1] == 'yes' else 'error' }}</i> {{ migration[0] }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="col s12 m6 l4">
+            <div class="card-add modal-trigger" data-target="add-migration-modal">
+                <i class="material-icons">add_circle_outline</i>
+                Add Migration
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Migration Refresh Modal #}
+<div id="refresh-migration-modal" class="modal">
+    <div class="modal-content">
+        <h4>Migration Refresh</h4>
+        <p>Are you sure you want to refresh all your migrations? This effectively deletes your entire database.</p>
+    </div>
+    <div class="modal-footer">
+        <a class="modal-close waves-effect waves-green btn red migration-refresh" href="{{ url_for('migrations.refresh') }}">Yes</a>
+        <a class="modal-close waves-effect waves-green btn grey" href="#!">No</a>
+    </div>
+</div>
+
+{# Migration Add Modal #}
+<div id="add-migration-modal" class="modal">
+    <div class="modal-content">
+        <h4>Add Migration</h4>
+        <div class="input-field">
+            <input id="migration-name-input" type="text" class="validate">
+            <label for="migration-name-input">Migration Name</label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a href="{{ url_for('migrations.make') }}" class="modal-close waves-effect waves-green btn teal darken-2 migration-add">Add</a>
+        <a href="#!" class="modal-close waves-effect waves-green btn btn-flat">Cancel</a>
+    </div>
+</div>
