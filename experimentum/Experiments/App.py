@@ -57,7 +57,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.engine.url import URL
 from experimentum.cli import print_failure
 from experimentum.Config import Config, Loader
-from experimentum.Commands import CommandManager, MigrationCommand, ExperimentsCommand, PlotCommand
+from experimentum.Commands import CommandManager, MigrationCommand, ExperimentsCommand,\
+    PlotCommand, WebGUICommand
 from experimentum.Experiments import Experiment
 from experimentum.Storage.AbstractRepository import RepositoryLoader
 from experimentum.Storage.Migrations import Migrator, Blueprint, Schema
@@ -240,6 +241,7 @@ class App(object):
         commands['migration:down'] = MigrationCommand.down
         commands['migration:make'] = MigrationCommand.make
         commands['plot:generate'] = PlotCommand.generate
+        commands['webgui'] = WebGUICommand.start
 
         return commands
 

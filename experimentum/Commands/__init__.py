@@ -5,3 +5,4 @@ from .CommandManager import CommandManager
 from .MigrationCommand import status, refresh, up, down, make
 from .ExperimentsCommand import run
 from .PlotCommand import generate
+from .WebGUICommand import start
