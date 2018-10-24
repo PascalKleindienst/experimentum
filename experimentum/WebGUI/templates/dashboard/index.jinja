@@ -15,8 +15,8 @@
                   <p><small>Run: <em>4</em> times</small></p>
                 </div>
                 <div class="card-action">
-                  <a href="#results" class="teal-text text-darken-2">Show Results</a>
-                  <a href="#run" class="teal-text text-darken-2">Run</a>
+                  <a href="{{ url_for('experiments.run', experiment='foo') }}" class="teal-text text-darken-2">Run</a>
+                  <a href="{{ url_for('experiments.plots', experiment='foo') }}" class="teal-text text-darken-2">Show Plots</a>
                 </div>
             </div>
         </div>
@@ -27,8 +27,8 @@
                   <p><small>Run: <em>2</em> times</small></p>
                 </div>
                 <div class="card-action">
-                  <a href="#results" class="teal-text text-darken-2">Show Results</a>
-                  <a href="#run" class="teal-text text-darken-2">Run</a>
+                  <a href="{{ url_for('experiments.run', experiment='foo') }}" class="teal-text text-darken-2">Run</a>
+                  <a href="{{ url_for('experiments.plots', experiment='foo') }}" class="teal-text text-darken-2">Show Plots</a>
                 </div>
             </div>
         </div>
@@ -39,8 +39,8 @@
                   <p><small>Run: <em>0</em> times</small></p>
                 </div>
                 <div class="card-action">
-                  <a href="#results" class="teal-text text-darken-2">Show Results</a>
-                  <a href="#run" class="teal-text text-darken-2">Run</a>
+                  <a href="{{ url_for('experiments.run', experiment='foo') }}" class="teal-text text-darken-2">Run</a>
+                  <a href="{{ url_for('experiments.plots', experiment='foo') }}" class="teal-text text-darken-2">Show Plots</a>
                 </div>
             </div>
         </div>
