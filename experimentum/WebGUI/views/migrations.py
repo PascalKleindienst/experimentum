@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Contains all views/routes for the migrations.
 
 Available Routes for:
@@ -19,7 +20,7 @@ def get_migration_status():
     Returns:
         list: list of migrations with their status (i.e. migrated or not)
     """
-    status = current_app.config.get('container').make('migrator').status(print=False)
+    status = current_app.config.get('container').make('migrator').status(printing=False)
     status = list(map(lambda s: [ansi_escape(s[0]), ansi_escape(s[1]).lower()], status))
 
     return status

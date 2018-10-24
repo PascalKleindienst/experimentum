@@ -69,11 +69,11 @@ class Migrator(object):
                 migration = getattr(mod, inflection.camelize(name[15:]))
                 self.migrations[name] = migration(app)
 
-    def status(self, print=True):
+    def status(self, printing=True):
         """Print the current status of which migrations did run and which not.
 
         Args:
-            print (bool, optional): Defaults to True. Whether or not the status table is printed.
+            printing (bool, optional): Defaults to True. Whether or not the status table is printed.
 
         Returns:
             list: migration status list
@@ -90,7 +90,7 @@ class Migrator(object):
         headers = [colored('Migration', 'yellow'), colored('Ran?', 'yellow')]
 
         # Print Table
-        if print:
+        if printing:
             print(tabulate(status, headers=headers, tablefmt='psql'))
 
         return status
