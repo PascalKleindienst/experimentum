@@ -23,8 +23,9 @@ def create_app(container):
     app.config['container'] = container
 
     # Add Blueprints
-    from .views import dashboard, migrations
+    from .views import dashboard, migrations, experiments
     app.register_blueprint(dashboard.blueprint)
     app.register_blueprint(migrations.blueprint, url_prefix='/migrations')
+    app.register_blueprint(experiments.blueprint, url_prefix='/experiments')
 
     return app
