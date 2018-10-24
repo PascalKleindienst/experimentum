@@ -74,7 +74,7 @@ def plots(experiment):
     Returns:
         str: HTML template
     """
-    return render_template('experiments/results.jinja')
+    return render_template('experiments/plots.jinja')
 
 
 # @blueprint.route('/streaming')
