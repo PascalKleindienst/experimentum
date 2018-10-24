@@ -1,0 +1,72 @@
+{% extends "layout.jinja" %}
+
+{% block title %}Running Experiment{% endblock %}
+
+{% block nav_content %}
+<div class="container">
+    <div class="row">
+        <div class="col s12 m6 no-padding">
+            <h6 class="no-padding header teal-text text-darken-2">
+                Experiments: Results
+            </h6>
+            <div>
+                <span class="started_at"><strong>Started At:</strong> <time></time></span>
+                <span class="finished_at"><strong>Finished At:</strong> <time></time></span>
+                <span><strong>Config File:</strong> foo.json</span>
+            </div>
+        </div>
+        <div class="col s12 m6 no-padding">
+            <h6 class="no-padding header teal-text text-darken-2">Config:</h6>
+            <pre><code>{ "foo": "bar", "bar": 42 }</code></pre>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="col s12">
+    <div class="progress">
+        <div class="indeterminate"></div>
+    </div>
+    <ul class="tabs">
+        <li class="tab col s4"><a class="active" href="#log">Log</a></li>
+        <li class="tab col s4"><a href="#result">Result</a></li>
+        <li class="tab col s4">
+            <a target="_self" href="#">Plots</a>
+        </li>
+    </ul>
+</div>
+
+<div id="result" class="col s12">
+    <table>
+        <tbody>
+            <tr><th>Label </th><th>Time</th><th>Memory</th><th>Peak Memory</th></tr>
+            <tr><td>› Booting Experiment</td><td>46.88 ms (± 0.00 μs)</td><td>948.00 KB (± 0.00 KB)</td><td>37.12 MB</td></tr>
+            <tr><td>› Running Experiment</td><td>15.88 ms (± 2.00 μs)</td><td>00.00 KB (± 0.00 KB)</td><td>37.12 MB</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<div id="log" class="col s12">
+    <ul class="collapsible status-log">
+        <li class="active success">
+            <div class="collapsible-header status">
+                <i class="material-icons green-text">check_circle</i>Running Tests
+            </div>
+            <div class="log grey darken-3 green-text text-lighten-2" style="padding: .5rem;">
+                <span class="loading">nothing received yet ...</span>
+            </div>
+        </li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='event-stream.js') }}"></script>
+    <script>
+    if (!!window.EventSource) {
+        log_stream('{{ request.path }}');
+    }
+    </script>
+{% endblock %}

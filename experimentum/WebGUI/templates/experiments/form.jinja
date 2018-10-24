@@ -1,0 +1,30 @@
+{% extends "layout.jinja" %}
+
+{% block title %}Run Experiment{% endblock %}
+
+{% block nav_content %}
+<div class="container">
+    <header class="row">
+        <h5 class="col s12 no-padding header teal-text text-darken-2">
+            Run Experiment
+        </h5>
+    </header>
+
+    <div class="row">
+        <form method="POST">
+            <div class="input-field col s4">
+                <input type="number" name="iterations" min="0" max="1000" value="100"/>
+                <label>Iterations</label>
+            </div>
+            <div class="input-field col s4">
+                <input type="text" name="config" class="validate" placeholder="foo.json">
+                <label>Config</label>
+            </div>
+            <div class="col s4">
+                <input class="btn" type="submit" value="Run">
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

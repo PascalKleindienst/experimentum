@@ -1,0 +1,37 @@
+{% extends "layout.jinja" %}
+
+{% block title %}Showing Plots if available{% endblock %}
+
+{% block nav_content %}
+<div class="container">
+    <div class="row">
+        <div class="col s8 no-padding">
+            <h5 class="header teal-text text-darken-2">
+                Plots and Graphs
+            </h5>
+        </div>
+        <div class="col s4">
+            <p>
+            <a class="waves-effect waves-light btn"><i class="material-icons right">multiline_chart</i>Generate</a>
+            <a class="waves-effect waves-light btn"><i class="material-icons right">file_download</i>Export</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="section">
+    <div class="row">
+        <div class="col s12 m6">
+            <img class="materialboxed responsive-img" src="{{ url_for('static', filename='bar_chart.webp') }}">
+        </div>
+        <div class="col s12 m6">
+            <img class="materialboxed responsive-img" src="{{ url_for('static', filename='stacked_bar_graph.webp') }}">
+        </div>
+        <div class="col s12 m6">
+            <img class="materialboxed responsive-img" src="{{ url_for('static', filename='sphx_glr_cohere_001.webp') }}">
+        </div>
+    </div>
+</div>
+{% endblock %}
