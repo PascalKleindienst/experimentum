@@ -36,6 +36,14 @@ experimentum.Commands.MigrationCommand module
     :undoc-members:
     :show-inheritance:
 
+experimentum.Commands.PlotCommand module
+----------------------------------------
+
+.. automodule:: experimentum.Commands.PlotCommand
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 Module contents
 ---------------

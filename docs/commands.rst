@@ -36,3 +36,7 @@ Use the ``migration:status`` command to check which migration did run and which 
 Experiments
 ===========
 .. automodule:: experimentum.Commands.ExperimentsCommand
+
+Plots and Charts
+================
+.. automodule:: experimentum.Commands.PlotCommand

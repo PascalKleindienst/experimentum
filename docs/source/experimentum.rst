@@ -9,6 +9,7 @@ Subpackages
     experimentum.Commands
     experimentum.Config
     experimentum.Experiments
+    experimentum.Plots
     experimentum.Storage
 
 Submodules
@@ -34,6 +35,14 @@ experimentum.quickstart module
 ------------------------------
 
 .. automodule:: experimentum.quickstart
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+experimentum.utils module
+-------------------------
+
+.. automodule:: experimentum.utils
     :members:
     :undoc-members:
     :show-inheritance:

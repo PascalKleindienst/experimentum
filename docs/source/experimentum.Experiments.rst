@@ -12,6 +12,14 @@ experimentum.Experiments.App module
     :undoc-members:
     :show-inheritance:
 
+experimentum.Experiments.DataBag module
+---------------------------------------
+
+.. automodule:: experimentum.Experiments.DataBag
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 experimentum.Experiments.Experiment module
 ------------------------------------------
 
