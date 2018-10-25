@@ -22,5 +22,5 @@ def start(app, args):
     """
     run_simple(
         'localhost', 5000, create_app(app), use_reloader=True,
-        use_debugger=True, use_evalex=True, threaded=True
+        use_debugger=True, use_evalex=True, threaded=False
     )
