@@ -8,7 +8,11 @@ The dashboard should:
     - Refresh Migrations
 """
 from experimentum.WebGUI.views.migrations import get_migration_status
-from flask import Blueprint, render_template
+from experimentum.utils import find_files, get_basenames
+from experimentum.Experiments import Experiment
+import os
+import re
+from flask import Blueprint, current_app, render_template
 
 blueprint = Blueprint('dashboard', __name__)
 
@@ -20,4 +24,9 @@ def dashboard():
     Returns:
         str: HTML Template
     """
-    return render_template('dashboard/index.jinja', migrations=get_migration_status())
+    data = {
+        'experiments': Experiment.get_status(current_app.config.get('container')),
+        'migrations': get_migration_status(),
+    }
+
+    return render_template('dashboard/index.jinja', **data)
