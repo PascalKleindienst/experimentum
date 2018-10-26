@@ -160,7 +160,9 @@ class App(object):
         """Set up the data store."""
         self.log.info('Setup Data Store')
         self.store = Store(self)
-        self.store.set_engine(create_engine(URL(**datastore)))
+        self.store.set_engine(
+            create_engine(URL(**datastore), connect_args={'check_same_thread': False})
+        )
 
     def make(self, alias, *args, **kwargs):
         """Create an instance of an aliased class.
