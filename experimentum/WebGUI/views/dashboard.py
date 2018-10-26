@@ -8,10 +8,7 @@ The dashboard should:
     - Refresh Migrations
 """
 from experimentum.WebGUI.views.migrations import get_migration_status
-from experimentum.utils import find_files, get_basenames
 from experimentum.Experiments import Experiment
-import os
-import re
 from flask import Blueprint, current_app, render_template
 
 blueprint = Blueprint('dashboard', __name__)
