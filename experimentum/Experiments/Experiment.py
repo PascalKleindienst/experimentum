@@ -211,7 +211,7 @@ class Experiment(object):
             data[idx]['count'] += 1
 
             if exp.config_file:
-                data[idx]['config_file'] += exp.config_file
+                data[idx]['config_file'] = exp.config_file
 
         return data
 
