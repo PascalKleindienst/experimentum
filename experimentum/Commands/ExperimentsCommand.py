@@ -26,7 +26,6 @@ Options:
 
 -h, --help  Show the help message.
 """
-import os
 from tabulate import tabulate
 from termcolor import colored
 from experimentum.cli import print_failure
@@ -74,37 +73,27 @@ def run(app, args):
 
 @command('Gather status informations about all available experiments', help='List experiments')
 def status(app, args):
-    """List experiment status
+    """List experiment status.
 
     Args:
         app (App): App Service Container.
         args (argparse.Namespace): Command Arguments and Options.
     """
     data = []
-    headers = [colored('Experiment', 'yellow'), colored('Config File', 'yellow'), colored('Times Executed', 'yellow')]
+    headers = [
+        colored('Experiment', 'yellow'),
+        colored('Config File', 'yellow'),
+        colored('Times Executed', 'yellow')
+    ]
 
     try:
-        # Load experiment classes
-        path = os.path.realpath(os.path.join(app.root, app.config.get('app.experiments.path', 'experiments')))
-        exps = {exp: {} for exp in Experiment.get_experiments(path)}
-
-        # Load experiment stats
-        repo = app.repositories.get('ExperimentRepository')
-        rows = repo.all()
-        for exp in rows:
-            current = exps[exp.name.lower()].get(exp.config_file, {})
-            current['count'] = current.get('count', 0) + 1
-            exps[exp.name.lower()][exp.config_file] = current
-        
-        # transform to data array
-        for experiment, config in exps.items():
-            for conf_file, cfg in config.items():
-                data.append([
-                    colored(experiment, 'cyan'),
-                    colored(conf_file, 'cyan'),
-                    colored(cfg['count'], 'cyan')
-                ])
-
+        exps = Experiment.get_status(app)
+        for experiment in exps.values():
+            data.append([
+                colored(experiment['name'], 'cyan'),
+                colored(experiment.get('config_file'), 'cyan'),
+                colored(experiment['count'], 'cyan')
+            ])
     except Exception as exc:
         print_failure(exc, 2)
 

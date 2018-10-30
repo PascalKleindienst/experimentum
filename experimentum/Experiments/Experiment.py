@@ -85,6 +85,7 @@ from abc import abstractmethod, ABCMeta
 from experimentum.Config import Config
 from experimentum.Experiments import Performance
 from experimentum.cli import print_progress, print_failure
+from experimentum.utils import get_basenames
 
 
 class Script(object):
@@ -180,11 +181,39 @@ class Experiment(object):
         Returns:
             list: Names of experiments
         """
+        # TODO: Deprecated remove!
         files = glob.glob(os.path.join(path, '[!_]*.py'))
         return list(map(
             lambda exp: os.path.basename(exp).lower().replace('experiment.py', ''),
             files
         ))
+
+    @staticmethod
+    def get_status(app):
+        """Get status information about experiments.
+
+        Args:
+            app (App): Main Service Provider/Container.
+
+        Returns:
+            dict: Dictionary with experiment status
+        """
+        # Load experiment classes
+        path = app.config.get('app.experiments.path', 'experiments')
+        exps = get_basenames(app.root, path, 'experiment.py')
+        data = {exp.lower(): {'count': 0, 'name': exp} for exp in exps}
+
+        # Load experiment stats
+        repo = app.repositories.get('ExperimentRepository')
+        rows = repo.all()
+        for exp in rows:
+            idx = exp.name.lower()
+            data[idx]['count'] += 1
+
+            if exp.config_file:
+                data[idx]['config_file'] = exp.config_file
+
+        return data
 
     @staticmethod
     def load(app, path, name):
@@ -198,6 +227,7 @@ class Experiment(object):
         Returns:
             Experiment: Loaded experiment.
         """
+        # TODO: Refactor to use load_class helper
         # Load Experiment File
         files = glob.glob(os.path.join(path, '[!_]*.py'))
         files = list(filter(

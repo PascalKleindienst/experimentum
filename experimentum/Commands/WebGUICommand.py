@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Dispatch and configure the flask web app.
 
 Starting the Server
@@ -8,6 +9,7 @@ Use the ```webgui`` command to dispatch a new server instance
 from experimentum.Commands import command
 from experimentum.WebGUI import create_app
 from werkzeug.serving import run_simple
+
 
 @command(
     'Start a new web server to act as a GUI on localhost:5000.',
@@ -22,5 +24,5 @@ def start(app, args):
     """
     run_simple(
         'localhost', 5000, create_app(app), use_reloader=True,
-        use_debugger=True, use_evalex=True, threaded=True
+        use_debugger=True, use_evalex=True, threaded=False
     )

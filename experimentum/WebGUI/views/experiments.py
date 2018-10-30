@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """Contains all views/routes for the experiments.
 
 It should call ``experiments:run`` to run an experiment,
@@ -8,33 +9,42 @@ Available Routes for:
     * Running Experiments
     * Showing Plots and Charts of experiments
 """
-from flask import Blueprint, Response, request, render_template
+from flask import Blueprint, Response, request, render_template, current_app, abort
+from experimentum.WebGUI.helpers import CapturedContent
+from threading import Thread
+import json
 
 blueprint = Blueprint('experiments', __name__)
 
-# Fake output data
-data = [
-    ' * Loading Experiment "XYZ": okay',
-    ' * Config File: foo.json',
-    ' * Iterations: 100',
-    ' * Could not load plot "XYZ": NotFoundException in xyz.py on line 42',
-    ' * Loading Plot "abc": okay',
-    ' * Loading Plot "uvw": okay',
-    ' * Generating Plot "abc": okay',
-    ' * Generating Plot "uvw": okay'
-]
 
+def run_experiment(exp_thread, capturer, performance):
+    """Experiment runner, which monitors and yields the thread output.
 
-def run_experiment():
-    """Fake runner for experiments, yields output log to event-stream."""
-    import json
+    Args:
+        exp_thread (Thread): Thread which runs the experiment.
+        capturer (CapturedContent): Capturer the capture the thread output.
+        performance (Performance): Performance measurement.
+    """
     from time import sleep
-    sleep(1.5)  # artifical delay
+    from experimentum.WebGUI.helpers import ansi_escape
 
-    for idx, item in enumerate(data):
-        yield "data: {}\n\n".format(json.dumps({'data': item, 'error': idx == 3}))
-        sleep(.3)  # artifical delay
+    while exp_thread.isAlive():
+        sleep(.1)  # artifical delay, otherwise loop runs to fast and misses some output :/
+        error = capturer.has_error()
+        content = capturer.get_text()
 
+        # if there is data in the output stream, yield it to the event stream
+        if content:
+            yield 'data: {}\n\n'.format(json.dumps({'data': content, 'error': error}))
+            capturer.clear()
+
+    # get performance table
+    points = performance.export(metrics=True)
+    table = ansi_escape(performance.formatter.get_table(points, 'html'))
+    yield 'data: {}\n\n'.format(json.dumps({'table': table}))
+
+    # Revert streams back to normal and finish event stream.
+    capturer.revert()
     yield 'data: finished\n\n'
 
 
@@ -48,6 +58,12 @@ def run(experiment):
     Returns:
         str|Response: HTML template, or event stream for experiment log
     """
+    # Try to load the experiment
+    try:
+        exp = current_app.config.get('container').make('experiment', experiment)
+    except SystemExit:
+        abort(404)
+
     # Show results page for experiment
     if request.method == 'POST':
         context = {
@@ -57,11 +73,25 @@ def run(experiment):
         return render_template('experiments/result.jinja', **context)
 
     # Run experiment and stream output log
-    if request.headers.get('accept') == 'text/event-stream':
-        return Response(run_experiment(), content_type='text/event-stream')
+    elif request.headers.get('accept') == 'text/event-stream':
+        # Use submitted config and iteration
+        exp.show_progress = True
+        exp.config_file = request.args.get('config')
+        iterations = int(request.args.get('iterations', 100))
+
+        # Run the experiment in a seperate thread, so we can monitor its output
+        capturer = CapturedContent(True)
+        func1_thread = Thread(target=lambda: exp.start(iterations))
+        func1_thread.deamon = True
+        func1_thread.start()
+
+        return Response(
+            run_experiment(func1_thread, capturer, exp.performance),
+            content_type='text/event-stream'
+        )
 
     # Show experiment form
-    return render_template('experiments/form.jinja', name=experiment)
+    return render_template('experiments/form.jinja', name=experiment, config=exp.config_file)
 
 
 @blueprint.route('/plots/<experiment>')

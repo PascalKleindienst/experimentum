@@ -77,6 +77,22 @@ class CapturedContent(object):
         """
         return '\n'.join(self.get_lines())
 
+    def clear(self):
+        """Clear the streams."""
+        self.streams['out'].seek(0)
+        self.streams['err'].seek(0)
+
+        self.streams['out'].truncate(0)
+        self.streams['err'].truncate(0)
+
+    def has_error(self):
+        """Check if there is something in the error stream.
+
+        Returns:
+            boolean: Whether the error stream has content or not.
+        """
+        return self.streams['err'].getvalue() is not ''
+
     def _prepare_lines(self, lines):
         """Strip and escape lines if needed.
 

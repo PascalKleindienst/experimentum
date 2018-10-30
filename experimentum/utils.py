@@ -31,6 +31,26 @@ def find_files(root, path, search=None, remove='.py'):
     return files
 
 
+def get_basenames(root, path, remove='.py'):
+    """Get file basenames of a folder.
+
+    Args:
+        root (str): Root path
+        path (str): Path to folder
+        remove (str, optional): Defaults to '.py'. Part to remove from filename.
+
+    Returns:
+        list: list of names
+    """
+    regex = re.compile(remove, re.IGNORECASE)
+    files = find_files(root, path, remove=remove)
+
+    return list(map(
+        lambda file: re.sub(regex, '', os.path.basename(file)),
+        files
+    ))
+
+
 def load_class(src, module, subclass=None):
     """Try to load a class from a module.
 

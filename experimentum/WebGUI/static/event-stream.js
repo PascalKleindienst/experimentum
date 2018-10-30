@@ -19,13 +19,13 @@
      */
     const log = (item) => {
         $('.log').append(
-            `<pre style="margin: 0;"><code style="font-size: 1rem; ${item.error ? 'font-weight: bold' : ''}">${item.data}</code></pre>`
-        );
+            `<pre style="margin: 0;" class="green-text"><code style="font-size: 1rem; ${item.error ? 'font-weight: bold' : ''}">${item.data}</code></pre>`
+        ).animate({ scrollTop: $('.log').outerHeight() });
 
         // Error indicators
         if (item.error) {
             $('.status i').text('error').addClass('red-text').removeClass('green-text');
-            $('.log').removeClass('green-text').addClass('red-text');
+            $('.log > pre:last').removeClass('green-text').addClass('red-text');
             $('.status-log > li.success').removeClass('success').addClass('error');
         }
     }
@@ -52,8 +52,17 @@
                 return finish(source);
             }
 
+            const data = JSON.parse(e.data)
+
+            // Result table
+            if (data.table) {
+                $('#result').html(data.table);
+                $('#result > table').addClass('striped').addClass('responsive-table')
+                return;
+            }
+
             // Add data to log
-            log(JSON.parse(e.data));
+            log(data);
         }
     }
 

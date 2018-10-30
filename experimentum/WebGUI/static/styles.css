@@ -28,6 +28,15 @@ table { background: #fff; }
 /* Logs */
 .collapsible li.success .collapsible-header { border-left: 2px solid #4caf50;} /** green **/
 .collapsible li.error .collapsible-header { border-left: 2px solid #f44336;} /** red **/
+.log {
+    padding: .5rem;
+    overflow-y: scroll;
+    max-height: 70vh;
+}
+.log pre {
+    white-space: pre-wrap;
+    word-break: break-all;
+}
 
 /* Nav headers */
 .nav-extended .nav-content i.material-icons {
