@@ -37,15 +37,7 @@
     </ul>
 </div>
 
-<div id="result" class="col s12">
-    <table>
-        <tbody>
-            <tr><th>Label </th><th>Time</th><th>Memory</th><th>Peak Memory</th></tr>
-            <tr><td>› Booting Experiment</td><td>46.88 ms (± 0.00 μs)</td><td>948.00 KB (± 0.00 KB)</td><td>37.12 MB</td></tr>
-            <tr><td>› Running Experiment</td><td>15.88 ms (± 2.00 μs)</td><td>00.00 KB (± 0.00 KB)</td><td>37.12 MB</td></tr>
-        </tbody>
-    </table>
-</div>
+<div id="result" class="col s12"></div>
 
 <div id="log" class="col s12">
     <ul class="collapsible status-log">
@@ -66,7 +58,7 @@
     <script src="{{ url_for('static', filename='event-stream.js') }}"></script>
     <script>
     if (!!window.EventSource) {
-        log_stream('{{ request.path }}');
+        log_stream('{{ request.path + "?config=" + config + "&iterations=" + iterations }}');
     }
     </script>
 {% endblock %}

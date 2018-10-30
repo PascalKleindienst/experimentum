@@ -52,8 +52,17 @@
                 return finish(source);
             }
 
+            const data = JSON.parse(e.data)
+
+            // Result table
+            if (data.table) {
+                $('#result').html(data.table);
+                $('#result > table').addClass('striped').addClass('responsive-table')
+                return;
+            }
+
             // Add data to log
-            log(JSON.parse(e.data));
+            log(data);
         }
     }
 

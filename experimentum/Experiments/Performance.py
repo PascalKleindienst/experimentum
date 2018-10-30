@@ -172,6 +172,15 @@ class Formatter(object):
             points (list): Measuring Points.
             tablefmt (str, optional): Defaults to 'psql'. Table format for :mod:`tabulate`
         """
+        print(self.get_table(points, tablefmt))
+
+    def get_table(self, points, tablefmt='psql'):
+        """Print performance table in human-readable format.
+
+        Args:
+            points (list): Measuring Points.
+            tablefmt (str, optional): Defaults to 'psql'. Table format for :mod:`tabulate`
+        """
         data = []
         headers = [
            colored('Label', 'cyan', attrs=['bold']),
@@ -208,7 +217,7 @@ class Formatter(object):
                 colored(memory['peak'], attrs=memory['attrs'])
             ])
 
-        print(tabulate.tabulate(data, headers, tablefmt=tablefmt))
+        return tabulate.tabulate(data, headers, tablefmt=tablefmt)
 
     @staticmethod
     def format_number(value, decimals, unit):
@@ -379,7 +388,7 @@ class Performance(object):
         """Export the measuring points as a dictionary.
 
         Args:
-            metrics (bool, optional). Defaults to False. Whether or not metrics should be calculated.
+            metrics (bool, optional). Defaults to False. Whether or not metrics should be calculated
 
         Returns:
             dict: Measuring points
