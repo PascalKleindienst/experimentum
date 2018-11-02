@@ -10,7 +10,11 @@
     const finish = (stream) => {
         stream.close()
         $('.progress').remove();
-        $('.finished_at > time').text(new Date().toLocaleString());
+    }
+
+    function updateScroll(){
+        var element = $("#log .log").get(0);
+        element.scrollTop = element.scrollHeight;
     }
 
     /**
@@ -20,7 +24,9 @@
     const log = (item) => {
         $('.log').append(
             `<pre style="margin: 0;" class="green-text"><code style="font-size: 1rem; ${item.error ? 'font-weight: bold' : ''}">${item.data}</code></pre>`
-        ).animate({ scrollTop: $('.log').outerHeight() });
+        );
+
+        updateScroll();
 
         // Error indicators
         if (item.error) {
@@ -35,34 +41,36 @@
      * @param {string} src Source url for the event stream
      */
     const log_stream = (src) => {
-        $('.started_at > time').text(new Date().toLocaleString());
-
         const source = new EventSource(src);
-        let started = false;
 
         source.onmessage = function(e) {
-            // Stream started
-            if (!started) {
-                $('.loading').remove();
-                started = true;
-            }
+            const data = JSON.parse(e.data);
 
+            // Stream started
+            if (data.type == 'started') {
+                $('.loading').remove();
+            }
+            // Add data to log
+            else if (data.type == 'log') {
+                log(data);
+            }
+            // Result table
+            else if (data.type == 'table') {
+                $('#result').html(data.table);
+                $('#result > table').addClass('striped').addClass('responsive-table');
+            }
             // Stream finished
-            if (e.data == 'finished') {
+            else if (data.type == 'finished') {
+                const start = new Date(data.data.start);
+                const finished = new Date(data.data.finished);
+
+                $('.started_at').html(start.toLocaleString());
+                $('.finished_at').html(finished.toLocaleString());
+                $('.config_file').html(data.data.config_file);
+                $('.config_content').html(data.data.config_content);
+
                 return finish(source);
             }
-
-            const data = JSON.parse(e.data)
-
-            // Result table
-            if (data.table) {
-                $('#result').html(data.table);
-                $('#result > table').addClass('striped').addClass('responsive-table')
-                return;
-            }
-
-            // Add data to log
-            log(data);
         }
     }
 

@@ -8,16 +8,17 @@
         <div class="col s12 m6 no-padding">
             <h6 class="no-padding header teal-text text-darken-2">
                 Experiments: Results
+                {{ start }}
             </h6>
-            <div>
-                <span class="started_at"><strong>Started At:</strong> <time></time></span>
-                <span class="finished_at"><strong>Finished At:</strong> <time></time></span>
-                <span><strong>Config File:</strong> foo.json</span>
+            <div class="experiment-meta">
+                <span><strong>Started At:</strong> <time class="started_at">-</time></span>
+                <span><strong>Finished At:</strong> <time class="finished_at">-</time></span>
+                <span><strong>Config File:</strong> <code class="config_file">-</code></span>
             </div>
         </div>
         <div class="col s12 m6 no-padding">
             <h6 class="no-padding header teal-text text-darken-2">Config:</h6>
-            <pre><code>{ "foo": "bar", "bar": 42 }</code></pre>
+            <pre class="config_content"><code>-</code></pre>
         </div>
     </div>
 </div>
