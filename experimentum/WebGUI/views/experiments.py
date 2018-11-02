@@ -17,16 +17,18 @@ import json
 blueprint = Blueprint('experiments', __name__)
 
 
-def run_experiment(exp_thread, capturer, performance):
+def run_experiment(exp_thread, capturer, experiment):
     """Experiment runner, which monitors and yields the thread output.
 
     Args:
         exp_thread (Thread): Thread which runs the experiment.
         capturer (CapturedContent): Capturer the capture the thread output.
-        performance (Performance): Performance measurement.
+        experiment (Experiment): experiment measurement.
     """
     from time import sleep
     from experimentum.WebGUI.helpers import ansi_escape
+
+    yield 'data: {}\n\n'.format(json.dumps({'type': 'started'}))
 
     while exp_thread.isAlive():
         sleep(.1)  # artifical delay, otherwise loop runs to fast and misses some output :/
@@ -35,17 +37,24 @@ def run_experiment(exp_thread, capturer, performance):
 
         # if there is data in the output stream, yield it to the event stream
         if content:
-            yield 'data: {}\n\n'.format(json.dumps({'data': content, 'error': error}))
+            data = {'data': content, 'error': error, 'type': 'log'}
+            yield 'data: {}\n\n'.format(json.dumps(data))
             capturer.clear()
 
     # get performance table
-    points = performance.export(metrics=True)
-    table = ansi_escape(performance.formatter.get_table(points, 'html'))
-    yield 'data: {}\n\n'.format(json.dumps({'table': table}))
+    points = experiment.performance.export(metrics=True)
+    table = ansi_escape(experiment.performance.formatter.get_table(points, 'html'))
+    yield 'data: {}\n\n'.format(json.dumps({'table': table, 'type': 'table'}))
 
     # Revert streams back to normal and finish event stream.
     capturer.revert()
-    yield 'data: finished\n\n'
+    data = {
+        'start': experiment.repos['experiment'].start.isoformat(),
+        'finished': experiment.repos['experiment'].finished.isoformat(),
+        'config_file': experiment.repos['experiment'].config_file,
+        'config_content': experiment.repos['experiment'].config_content
+    }
+    yield 'data: {}\n\n'.format(json.dumps({'data': data, 'type': 'finished'}))
 
 
 @blueprint.route('/run/<experiment>', methods=['GET', 'POST'])
@@ -86,12 +95,12 @@ def run(experiment):
         func1_thread.start()
 
         return Response(
-            run_experiment(func1_thread, capturer, exp.performance),
+            run_experiment(func1_thread, capturer, exp),
             content_type='text/event-stream'
         )
 
     # Show experiment form
-    return render_template('experiments/form.jinja', name=experiment, config=exp.config_file)
+    return render_template('experiments/form.jinja', name=experiment, config=exp.config_file or '')
 
 
 @blueprint.route('/plots/<experiment>')
