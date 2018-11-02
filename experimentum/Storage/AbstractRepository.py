@@ -138,6 +138,7 @@ the same name as the file name.
 import os
 import glob
 import imp
+import json
 from six import add_metaclass
 from abc import abstractmethod, ABCMeta
 from experimentum.cli import print_failure
@@ -246,6 +247,15 @@ class AbstractRepository(object):
         """Set all attributes which where passed as kwargs."""
         for attr, val in attributes.items():
             self[attr] = val
+
+    def toJSON(self):
+        """Return JSON representation of repository fields and values.
+
+        Returns:
+            str: JSON representration
+        """
+        attrs = {k: v for k, v in self.__dict__.items() if k[:1] != '_'}
+        return json.dumps(attrs, sort_keys=True, indent=4)
 
     def __repr__(self):
         """Human readable representation of repository fields and values.
