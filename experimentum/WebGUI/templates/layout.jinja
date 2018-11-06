@@ -14,7 +14,7 @@
 <body class="blue-grey lighten-5">
     <nav class="grey darken-4 nav-extended" role="navigation">
         <div class="nav-wrapper container">
-            <a id="logo-container" href="{{ url_for('dashboard.dashboard') }}" class="brand-logo">Logo</a>
+            <a id="logo-container" href="{{ url_for('dashboard.dashboard') }}" class="brand-logo">Experimentum</a>
             <ul class="right hide-on-med-and-down">
                 <li><a class="grey-text text-darken-1" href="#!">Github source</a></li>
                 <li><a class="grey-text text-darken-1" href="#!">Issues</a></li>
@@ -38,6 +38,7 @@
     {% block scripts %}
     <script src="https://code.jquery.com/jquery-latest.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>M.AutoInit();</script>
     <script src="{{ url_for('static', filename='app.js')}}" type="module"></script>
     {% endblock %}
 </body>
