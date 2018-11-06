@@ -13,6 +13,7 @@ from flask import Blueprint, Response, request, render_template, current_app, ab
 from experimentum.WebGUI.helpers import CapturedContent
 from threading import Thread
 import json
+import os
 
 blueprint = Blueprint('experiments', __name__)
 
@@ -77,7 +78,8 @@ def run(experiment):
     if request.method == 'POST':
         context = {
             'iterations': request.form['iterations'],
-            'config': request.form['config']
+            'config': request.form['config'],
+            'experiment': experiment
         }
         return render_template('experiments/result.jinja', **context)
 
@@ -113,7 +115,18 @@ def plots(experiment):
     Returns:
         str: HTML template
     """
-    return render_template('experiments/plots.jinja')
+    from werkzeug.utils import secure_filename
+
+    path = os.path.join(current_app.config['UPLOAD_FOLDER'], experiment)
+    if not os.path.exists(path):
+        os.makedirs(path)
+
+    data = {
+        'experiment': experiment,
+        'plots': map(lambda f: secure_filename(f), os.listdir(path))
+    }
+
+    return render_template('experiments/plots.jinja', **data)
 
 
 # @blueprint.route('/streaming')
