@@ -112,6 +112,7 @@ class Plot(AbstractPlot):
         Returns:
             matplotlib.pyplot: Plot object
         """
+        plt.figure()
         exps = self.repo.get(['name', self.config.get('experiment')])
         plot_data = self.data(exps)
 
