@@ -88,7 +88,7 @@
                         data: data.message,
                         error: !!(data.status == 'error')
                     }, '.plot-log');
-                    
+
                     // add to plot tab
                     $('#plots .row').append(
                         `<div class="col s12 m6">
