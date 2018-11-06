@@ -3,6 +3,7 @@
 Uses the Application Factory Pattern to create a new flask app instance.
 """
 from flask import Flask, render_template
+import os
 
 
 def create_app(container):
@@ -19,6 +20,7 @@ def create_app(container):
     app = Flask(__name__)
     app.jinja_env.auto_reload = True
     app.config['TEMPLATES_AUTO_RELOAD'] = True
+    app.config['UPLOAD_FOLDER'] = os.path.abspath(os.path.join(container.root, '.tmp'))
     # app.config['TESTING'] = True
     app.config['container'] = container
 
@@ -36,9 +38,10 @@ def create_app(container):
         return render_template('404.jinja', msg=e), 404
 
     # Add Blueprints
-    from .views import dashboard, migrations, experiments
+    from .views import dashboard, migrations, experiments, plots
     app.register_blueprint(dashboard.blueprint)
     app.register_blueprint(migrations.blueprint, url_prefix='/migrations')
     app.register_blueprint(experiments.blueprint, url_prefix='/experiments')
+    app.register_blueprint(plots.blueprint, url_prefix='/plots')
 
     return app
