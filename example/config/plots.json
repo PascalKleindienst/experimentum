@@ -17,10 +17,12 @@
     },
     "errorbar": {
         "type": "errorbar",
+        "experiment": "bar",
         "styles": { "fmt": "^-" },
         "params": { "ecolor": "green" }
     },
     "simpleline": {
+        "experiment": "bar",
         "title": {
             "label": "Some Foo Experiment",
             "loc": "right"
