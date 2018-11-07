@@ -1,3 +1,4 @@
 include README.md LICENSE.md
 include experimentum/Storage/Migrations/*.stub
 include experimentum/_stubs/*.stub
+include experimentum/WebGUI/templates/**/*.jinja
