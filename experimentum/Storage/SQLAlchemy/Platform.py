@@ -6,6 +6,7 @@ SQLAlchemy mostly does not support these types of operations.
 from sqlalchemy.dialects.mysql.base import MySQLDialect
 from sqlalchemy.dialects.mssql.base import MSDialect
 from sqlalchemy.dialects.sqlite.base import SQLiteDialect
+from sqlalchemy.dialects.postgresql.base import PGDialect
 
 
 class Platform(object):
@@ -104,6 +105,14 @@ class Platform(object):
         """
         return isinstance(self.engine.dialect, MSDialect)
 
+    def is_postgresql(self):
+        """Check if current database driver is PostgreSQL.
+
+        Returns:
+            boolean
+        """
+        return isinstance(self.engine.dialect, PGDialect)
+
     def get_add_column_sql(self, table, column):
         """Get SQL for adding a column to a table.
 
@@ -120,6 +129,10 @@ class Platform(object):
         """
         column_name = column.compile(dialect=self.engine.dialect)
         column_type = column.type.compile(self.engine.dialect)
+
+        # postgresql does not like the table.column syntax
+        if self.is_postgresql():
+            column_name = column.name
 
         return 'ALTER TABLE {table} ADD COLUMN {column} {type};'.format(
             table=table,
