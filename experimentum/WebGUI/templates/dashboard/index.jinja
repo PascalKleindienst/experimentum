@@ -4,7 +4,23 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
+{# ERROR Section #}
+{% if error %}
+<div class="section">
+    <div class="row row-equal">
+        <div class="col s12">
+            <div class="card red white-text">
+                <div class="card-content valign-wrapper">
+                    <strong>{{ error }}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 {# Experiment Section #}
+{% if experiments %}
 <div class="section">
     <div class="row row-equal">
         <div class="col s12"><h3 class="header teal-text text-darken-2">Experiments</h3></div>
@@ -36,6 +52,7 @@
         </div> #}
     </div>
 </div>
+{% endif %}
 
 {# Migration Section #}
 <div class="divider"></div>
