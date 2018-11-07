@@ -160,8 +160,13 @@ class App(object):
         """Set up the data store."""
         self.log.info('Setup Data Store')
         self.store = Store(self)
+
+        db_args = {}
+        if datastore['drivername'] == 'sqlite':
+            db_args['connect_args'] = {'check_same_thread': False}
+
         self.store.set_engine(
-            create_engine(URL(**datastore), connect_args={'check_same_thread': False})
+            create_engine(URL(**datastore), **db_args)
         )
 
     def make(self, alias, *args, **kwargs):
