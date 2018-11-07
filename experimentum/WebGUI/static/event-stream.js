@@ -97,6 +97,11 @@
                     );
                 });
 
+                if (messages.length == 0) {
+                    log({data: 'No Plots available', error: false}, '.plot-log');
+                    $('#plots .row').append('<div class="col s12"><h3>No Plots available</h3></div>');
+                }
+
                 // Init lightbox and remove progressbar
                 $('.materialboxed').materialbox();
                 $('.progress').remove()

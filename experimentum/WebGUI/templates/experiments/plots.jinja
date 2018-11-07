@@ -27,6 +27,8 @@
         <div class="col s12 m6">
             <img class="materialboxed responsive-img" src="{{ url_for('plots.image', experiment=experiment, filename=plot) }}">
         </div>
+        {% else %}
+            <div class="col s12"><h3>No Plots available</h3></div>
         {% endfor %}
     </div>
 </div>
