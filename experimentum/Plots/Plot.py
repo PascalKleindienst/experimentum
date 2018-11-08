@@ -101,7 +101,7 @@ class Plot(AbstractPlot):
             plt.ylabel(self.config.get('labels.y-axis'))
 
         if self.config.get('title'):
-            plt.title(**self.config.get('title'))
+            plt.title(self.config.get('title.label'), loc=self.config.get('title.loc'))
 
         if self.config.get('legend'):
             plt.legend(**self.config.get('legend'))
