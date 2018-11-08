@@ -5,6 +5,7 @@ with the help of sqlalchemy.
 """
 from sqlalchemy import Column, Index, ForeignKey
 from sqlalchemy.dialects.mysql import INTEGER, BIGINT, DOUBLE, LONGTEXT, MEDIUMINT, MEDIUMTEXT
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.types import ARRAY, BigInteger, Integer, Boolean, Date, DateTime, Enum,\
     LargeBinary, Numeric, SmallInteger, String, Text, Time, CHAR, Float, JSON, TIMESTAMP
 
@@ -62,7 +63,7 @@ def get_string_type(col_type, params):
     if col_type == 'char':
         return CHAR(params.get('length'))
     elif col_type == 'json':
-        return JSON(none_as_null=True).with_variant(Text, 'sqlite')
+        return JSON(none_as_null=True).with_variant(JSONB(none_as_null=True), 'postgresql').with_variant(Text, 'sqlite')
     elif col_type == 'long_text':
         return LONGTEXT().with_variant(Text, 'sqlite')
     elif col_type == 'medium_text':
