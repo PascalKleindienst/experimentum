@@ -121,9 +121,10 @@ def plots(experiment):
     if not os.path.exists(path):
         os.makedirs(path)
 
+    plots = [f for f in os.listdir(path) if not f.startswith('.')]
     data = {
         'experiment': experiment,
-        'plots': map(lambda f: secure_filename(f), os.listdir(path))
+        'plots': map(lambda f: secure_filename(f), plots)
     }
 
     return render_template('experiments/plots.jinja', **data)
