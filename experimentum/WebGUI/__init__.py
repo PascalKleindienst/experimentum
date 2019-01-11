@@ -3,7 +3,23 @@
 Uses the Application Factory Pattern to create a new flask app instance.
 """
 from flask import Flask, render_template
+from werkzeug.serving import run_simple
 import os
+
+
+class Server(object):
+
+    def __init__(self, app):
+        self.app = app
+
+    def create_app(self):
+        return create_app(self.app)
+
+    def run(self, port=5000, debugger=False, reloader=True):
+        run_simple(
+            'localhost', port, self.create_app(), use_reloader=reloader,
+            use_debugger=debugger, use_evalex=True, threaded=True
+        )
 
 
 def create_app(container):
