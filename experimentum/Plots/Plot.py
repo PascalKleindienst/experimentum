@@ -81,6 +81,26 @@ class AbstractPlot(object):
         """
         raise NotImplementedError('Must implement plotting method!')
 
+    @abstractmethod
+    def save(self, filename):
+        """Save the plot.
+
+        Args:
+            filename (str): Filename to save the plot.
+
+        Raises:
+            NotImplementedError: Must implement save method
+        """
+        raise NotImplementedError('Must implement save method!')
+
+    @abstractmethod
+    def show(self):
+        """Show the plot.
+
+        Raises:
+            NotImplementedError: Must implement show method
+        """
+        raise NotImplementedError('Must implement show method!')
 
 class Plot(AbstractPlot):
 
@@ -113,6 +133,7 @@ class Plot(AbstractPlot):
             matplotlib.pyplot: Plot object
         """
         plt.figure()
+        print(self.config.get('experiment'))
         exps = self.repo.get(['name', self.config.get('experiment')])
         plot_data = self.data(exps)
 
@@ -163,6 +184,18 @@ class Plot(AbstractPlot):
                 fmt = fmt[plot_idx]
 
             plt.plot(data.get('x'), data.get('y'), fmt, **params)
+
+    def save(self, filename):
+        """Save the plot.
+
+        Args:
+            filename (str): Filename to save the plot.
+        """
+        plt.savefig(filename)
+
+    def show(self):
+        """Show the plot."""
+        plt.show()
 
     def _get_params(self, plot_idx, remove=[]):
         """Get params for the plot.
