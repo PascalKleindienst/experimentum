@@ -22,6 +22,7 @@ class AbstractPlot(object):
         repo (AbstractRepository): Repository Class to fetch data.
         config (Config): Config data for the plot.
         plot_type (str, optional): Defaults to 'plot'. Type of plot
+        plot (object): Plotting library
     """
 
     def __init__(self, repo, config, plot_type='plot'):
@@ -35,6 +36,7 @@ class AbstractPlot(object):
         self.repo = repo
         self.config = config
         self.type = plot_type
+        self.plot = None
 
     def data(self, experiments):
         """Return Data for the plot.
@@ -112,19 +114,31 @@ class Plot(AbstractPlot):
         repo (AbstractRepository): Repository Class to fetch data.
         config (Config): Config data for the plot.
         plot_type (str, optional): Defaults to 'plot'. Type of plot
+        plot (matplotlib.pyplot): matplotlib.pyplot module
     """
+
+    def __init__(self, repo, config, plot_type='plot'):
+        """Initialize abstract plot.
+
+        Args:
+            repo (AbstractRepository): Repository Class to fetch data.
+            config (Config): Config data for the plot.
+            plot_type (str, optional): Defaults to 'plot'. Type of plot
+        """
+        super(Plot, self).__init__(repo, config, plot_type)
+        self.plot = plt
 
     def labeling(self):
         """Add labels to the plot."""
         if self.config.get('labels'):
-            plt.xlabel(self.config.get('labels.x-axis'))
-            plt.ylabel(self.config.get('labels.y-axis'))
+            self.plot.xlabel(self.config.get('labels.x-axis'))
+            self.plot.ylabel(self.config.get('labels.y-axis'))
 
         if self.config.get('title'):
-            plt.title(self.config.get('title.label'), loc=self.config.get('title.loc'))
+            self.plot.title(self.config.get('title.label'), loc=self.config.get('title.loc'))
 
         if self.config.get('legend'):
-            plt.legend(**self.config.get('legend'))
+            self.plot.legend(**self.config.get('legend'))
 
     def plotting(self):
         """Generate the plot, i.e. add labels, titles, legend etc and draw the plot.
@@ -132,7 +146,7 @@ class Plot(AbstractPlot):
         Returns:
             matplotlib.pyplot: Plot object
         """
-        plt.figure()
+        self.plot.figure()
         print(self.config.get('experiment'))
         exps = self.repo.get(['name', self.config.get('experiment')])
         plot_data = self.data(exps)
@@ -144,18 +158,18 @@ class Plot(AbstractPlot):
             self.draw(plot_data)
 
         if self.config.get('styles.grid', False):
-            plt.grid(True)
+            self.plot.grid(True)
 
         if self.config.get('styles.axis', False):
-            plt.axis(self.config.get('styles.axis'))
+            self.plot.axis(self.config.get('styles.axis'))
 
         if self.config.get('styles.ticks', False):
-            plt.xticks(**self.config.get('styles.ticks.xticks', {}))
-            plt.yticks(**self.config.get('styles.ticks.yticks', {}))
+            self.plot.xticks(**self.config.get('styles.ticks.xticks', {}))
+            self.plot.yticks(**self.config.get('styles.ticks.yticks', {}))
 
         self.labeling()
 
-        return plt
+        return self.plot
 
     def draw(self, data, plot_idx=None):
         """Draw the plot data.
@@ -165,17 +179,17 @@ class Plot(AbstractPlot):
             plot_idx (integer, optional): Defaults to None. Index for when multiple plots are drawn
         """
         if self.type == 'histogram':
-            plt.hist(data.get('y'), **self._get_params(plot_idx))
+            self.plot.hist(data.get('y'), **self._get_params(plot_idx))
         elif self.type == 'errorbar':
-            plt.errorbar(data.get('x'), data.get('y'), **self._get_params(plot_idx))
+            self.plot.errorbar(data.get('x'), data.get('y'), **self._get_params(plot_idx))
         elif self.type == 'bar':
-            plt.bar(data.get('x'), data.get('y'), **self._get_params(plot_idx))
+            self.plot.bar(data.get('x'), data.get('y'), **self._get_params(plot_idx))
         elif self.type == 'pie':
-            plt.pie(data.get('x'), **self._get_params(plot_idx, ['label']))
+            self.plot.pie(data.get('x'), **self._get_params(plot_idx, ['label']))
         elif self.type == 'scatter':
-            plt.scatter(data.get('x'), data.get('y'), **self._get_params(plot_idx))
+            self.plot.scatter(data.get('x'), data.get('y'), **self._get_params(plot_idx))
         elif self.type == 'polar':
-            plt.polar(data.get('theta'), data.get('r'))
+            self.plot.polar(data.get('theta'), data.get('r'))
         else:
             params = self._get_params(plot_idx)
             fmt = self.config.get('styles.fmt', [])
@@ -183,7 +197,7 @@ class Plot(AbstractPlot):
             if plot_idx is not None and isinstance(fmt, list):
                 fmt = fmt[plot_idx]
 
-            plt.plot(data.get('x'), data.get('y'), fmt, **params)
+            self.plot.plot(data.get('x'), data.get('y'), fmt, **params)
 
     def save(self, filename):
         """Save the plot.
@@ -191,11 +205,11 @@ class Plot(AbstractPlot):
         Args:
             filename (str): Filename to save the plot.
         """
-        plt.savefig(filename)
+        self.plot.savefig(filename)
 
     def show(self):
         """Show the plot."""
-        plt.show()
+        self.plot.show()
 
     def _get_params(self, plot_idx, remove=[]):
         """Get params for the plot.
