@@ -248,7 +248,7 @@ class AbstractRepository(object):
         for attr, val in attributes.items():
             self[attr] = val
 
-    def toJSON(self):
+    def to_json(self):
         """Return JSON representation of repository fields and values.
 
         Returns:
