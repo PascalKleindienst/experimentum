@@ -11,6 +11,20 @@ class TestRepositoryLoader(object):
         assert loader.store == 'Store'
         assert AbstractRepository.implementation == 'Implementation'
 
+    def test_load(self, mocker):
+        from testrepos.FooRepository import FooRepository
+        cfg = {'storage.repositories.path': 'testrepos'}
+        app = mocker.patch('experimentum.Experiments.App')
+        app.root = 'tests/Storage'
+        app.config = mocker.MagicMock()
+        app.config.get.side_effect = lambda key, default=None: cfg.get(key, default)
+
+        loader = RepositoryLoader(app, 'Implementation', app.store)
+        loader.load()
+
+        assert loader._repos['FooRepository']._mapped is True
+        assert loader._repos['FooRepository'].__name__ == 'FooRepository'
+
     def test_load_fails(self, mocker):
         app = mocker.patch('experimentum.Experiments.App')
         app.root = os.path.dirname(__file__)
