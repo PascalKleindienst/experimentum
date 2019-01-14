@@ -219,7 +219,8 @@ class App(object):
             'store': lambda: self.store,
             'schema': lambda: Schema(self),
             'blueprint': lambda *args, **kwargs: Blueprint(*args, **kwargs),
-            'server': lambda: Server(self)
+            'server': lambda: Server(self),
+            'config': lambda: Config()
         }
 
     def _add_commands(self):
