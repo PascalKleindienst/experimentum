@@ -12,7 +12,7 @@ class TestRepositoryLoader(object):
         assert AbstractRepository.implementation == 'Implementation'
 
     def test_load(self, mocker):
-        from testrepos.FooRepository import FooRepository
+        # from testrepos.FooRepository import FooRepository
         cfg = {'storage.repositories.path': 'testrepos'}
         app = mocker.patch('experimentum.Experiments.App')
         app.root = 'tests/Storage'
