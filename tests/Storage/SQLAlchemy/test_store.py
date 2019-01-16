@@ -1,6 +1,6 @@
 from experimentum.Storage.SQLAlchemy import Store
 from experimentum.Storage.Migrations import Blueprint
-from sqlalchemy import create_engine, MetaData, Table, Column, Integer, inspect
+from sqlalchemy import create_engine, MetaData, Table, Column, Integer, inspect, Index
 from sqlalchemy.orm.session import Session
 from sqlalchemy.dialects.mysql import INTEGER, BIGINT, DOUBLE, LONGTEXT, MEDIUMINT, MEDIUMTEXT
 from sqlalchemy.types import ARRAY, BigInteger, Boolean, Date, DateTime, Enum,\
@@ -104,3 +104,51 @@ class TestStore(object):
         assert 'fkey_name' == inspector.get_foreign_keys('foo')[0]['name']
         assert {'unique': 0, 'name': u'foo_some_key_index', 'column_names': [u'some_key']} in inspector.get_indexes('foo')
         assert {'unique': 1, 'name': u'foo_unique_key_unique', 'column_names': [u'unique_key']} in inspector.get_indexes('foo')
+
+    def test_alter_table_sqlite(self, mocker):
+        blueprint = Blueprint('foo')
+        column = blueprint.add_column('integer', 'id')
+        blueprint.drop_column('bar')
+
+        store = self._init_store(mocker)
+        store.platform.is_sqlite = mocker.MagicMock(return_value=True)
+        store.sqlite_platform = mocker.MagicMock()
+        store.factory.get_columns_and_indexes = mocker.MagicMock(return_value={'columns': [column], 'indexes': []})
+
+        store.alter(blueprint)
+        store.sqlite_platform.alter_table.assert_called_once_with('foo', [column], {'columns': ['bar'], 'indexes': []})
+
+    def test_alter_table(self, mocker):
+        # Alter Blueprint
+        blueprint = Blueprint('foo')
+        blueprint.add_column('integer', 'bar')
+        blueprint.add_column('integer', 'baz')
+        blueprint.primary('bar')
+        blueprint.unique('baz')
+        blueprint.drop_primary('id')
+        blueprint.drop_column('id')
+
+        # Mocks
+        idx = mocker.patch('sqlalchemy.schema.Index')
+        store = self._init_store(mocker)
+        store.platform.is_sqlite = mocker.MagicMock(return_value=False)
+        store.factory.get_columns_and_indexes = mocker.MagicMock(return_value={
+            'columns': [Column('bar', Integer, primary_key=True), Column('baz', Integer)],
+            'indexes': [idx]
+        })
+
+        # Test Table
+        table = Table('foo', store.meta, Column('id', Integer, primary_key=True))
+        table.create(store.engine)
+
+        # Assertions
+        store.engine = mocker.MagicMock()
+        store.alter(blueprint)
+
+        idx.create.assert_called_once_with()
+        store.engine.execute.assert_any_call('ALTER TABLE foo ADD COLUMN foo.bar INTEGER;')
+        store.engine.execute.assert_any_call('ALTER TABLE foo ADD COLUMN foo.baz INTEGER;')
+        store.engine.execute.assert_any_call('ALTER TABLE foo ADD PRIMARY KEY(foo.bar);')
+        store.engine.execute.assert_any_call('ALTER TABLE foo DROP COLUMN id;')
+        store.engine.execute.assert_any_call('ALTER TABLE foo DROP CONSTRAINT foo_id_primary;')
+        assert store.engine.execute.call_count == 5
