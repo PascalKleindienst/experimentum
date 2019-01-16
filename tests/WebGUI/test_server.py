@@ -34,3 +34,8 @@ class TestServer(object):
         # Assertions
         assert app.config['TEMPLATES_AUTO_RELOAD'] is False
         assert app.config['foo'] == 'bar'
+
+    def test_404_error(self, client):
+        response = client.get('/not_existing_route')
+        assert response.status_code == 404
+        assert 'Page Not Found' in response.data
