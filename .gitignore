@@ -26,3 +26,5 @@ docs/html/
 .eggs/
 .version
 .*_cache
+.tmp/
+coverage.xml
