@@ -86,7 +86,7 @@ class TestSQLitePlatform(object):
         assert 'foo' in inspector.get_table_names()
         assert table.columns.keys() == ['bar']
         assert len(inspector.get_columns('foo')) == 1
-        assert inspector.get_primary_keys('foo') == ['bar']
+        assert inspector.get_pk_constraint('foo')['constrained_columns'] == ['bar']
 
         inspector = inspect(self.platform.engine)
         self.platform.alter_table('foo', [], {'columns': [], 'indexes': [{'type': 'primary', 'col': 'bar', 'name': 'foo_bar_primary'}]})
