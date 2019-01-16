@@ -209,6 +209,11 @@ class Experiment(object):
         rows = repo.all()
         for exp in rows:
             idx = exp.name.lower()
+
+            # Exp file does not exist anymore
+            if idx not in data:
+                data[idx] = {'count': 0, 'name': exp.name, 'missing': True}
+
             data[idx]['count'] += 1
 
             if exp.config_file:
