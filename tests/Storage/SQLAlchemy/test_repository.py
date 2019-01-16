@@ -21,7 +21,7 @@ class TestAbstractStore(object):
         store = mocker.patch('experimentum.Storage.SQLAlchemy.Store')
         table = mocker.MagicMock()
         store.meta.tables.get.return_value = table
-        mapper_mock = mocker.patch('experimentum.Storage.SQLAlchemy.Repository._mapper')
+        mapper_mock = mocker.patch('experimentum.Storage.SQLAlchemy.Repository.map_to_table')
 
         Repository.__table__ = 'foo'
 
@@ -32,7 +32,7 @@ class TestAbstractStore(object):
         Repository.mapping(Repository, store)
 
         assert Repository.store == store
-        mapper_mock.assert_called_once_with(Repository, table, properties={})
+        mapper_mock.assert_called_once_with(Repository, Repository, table, properties={})
 
     def test_mapping_relationships(self, mocker):
         mapper_mock, store, table = self.setup_mapper(mocker)
@@ -46,7 +46,7 @@ class TestAbstractStore(object):
         assert Repository.store == store
         assert mapper_mock.call_count == 3
         mapper_mock.assert_any_call(
-            Repository, table, properties={'foo': mocker.ANY, 'bar': mocker.ANY}
+            Repository, Repository, table, properties={'foo': mocker.ANY, 'bar': mocker.ANY}
         )
 
     def test_mapping_fail(self, mocker, caplog):
