@@ -110,4 +110,4 @@ class TestMigrationsView(object):
     def test_status(self, client, app, mocker):
         response = client.get('/migrations/status')
         assert response.status_code == 200
-        assert '20190101000000_create_experiments' in response.data
+        assert '20190101000000_create_experiments' in response.data.decode('utf-8', errors='ignore')
