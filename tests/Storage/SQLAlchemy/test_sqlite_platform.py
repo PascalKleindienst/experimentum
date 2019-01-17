@@ -90,7 +90,7 @@ class TestSQLitePlatform(object):
 
         inspector = inspect(self.platform.engine)
         self.platform.alter_table('foo', [], {'columns': [], 'indexes': [{'type': 'primary', 'col': 'bar', 'name': 'foo_bar_primary'}]})
-        assert inspector.get_primary_keys('foo') == []
+        assert inspector.get_pk_constraint('foo')['constrained_columns'] == []
 
     def test_alter_table_drop_index(self):
         self._setup_platform()
