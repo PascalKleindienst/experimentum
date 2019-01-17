@@ -54,11 +54,9 @@ def app(mocker):
     container = TestContainer('testing', TestContainer.config_path + '/.')
     container.repositories = {'ExperimentRepository': mocker.MagicMock()}
 
-    # create the app with common test config
-    app = create_app(container, {
-        'TESTING': True,
-        'DATABASE': TestContainer.config_path,
-    })
+    # create the app with common test config and set template folder (otherwise it will not be found in testing)
+    app = create_app(container, {'TESTING': True })
+    app.template_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../experimentum/WebGUI/templates/'))
 
     yield app
 
