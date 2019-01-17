@@ -11,6 +11,7 @@ class TestExperiments(object):
 
         mocker.patch.multiple(Experiment, __abstractmethods__=set())
         app_mock = mocker.patch('experimentum.Experiments.App')
+        app_mock.root = '.'
         exp = Experiment(app_mock, tmpdir.strpath)
         exp.config_file = 'cfg.json'
         exp.repos['testcase'] = mocker.MagicMock()
@@ -43,6 +44,7 @@ class TestExperiments(object):
         repo_mock = mocker.MagicMock()
         repo_mock.all = mocker.MagicMock(return_value=[rows_mock])
         app_mock = mocker.patch('experimentum.Experiments.App')
+        app_mock.root = '.'
         app_mock.config.get = mocker.MagicMock(return_value=tmpdir.strpath)
         app_mock.repositories.get = mocker.MagicMock(return_value=repo_mock)
 
@@ -82,7 +84,9 @@ class TestExperiments(object):
 
     def test_fail_load(self, mocker, tmpdir, capsys):
         with pytest.raises(SystemExit) as pytest_wrapped_e:
-            Experiment.load(mocker.patch('experimentum.Experiments.App'), tmpdir.strpath, 'Foo')
+            app_mock = mocker.patch('experimentum.Experiments.App')
+            app_mock.root = '.'
+            Experiment.load(app_mock, tmpdir.strpath, 'Foo')
 
         assert 'Could not find experiment named "{}" under path "{}"'.format('Foo', tmpdir.strpath) in capsys.readouterr().err
         assert pytest_wrapped_e.type == SystemExit
@@ -93,7 +97,9 @@ class TestExperiments(object):
             fh.write('')
 
         with pytest.raises(SystemExit) as pytest_wrapped_e:
-            Experiment.load(mocker.patch('experimentum.Experiments.App'),tmpdir.strpath, 'Foo')
+            app_mock = mocker.patch('experimentum.Experiments.App')
+            app_mock.root = '.'
+            Experiment.load(app_mock,tmpdir.strpath, 'Foo')
 
         assert 'Could not load file' in capsys.readouterr().err
         assert pytest_wrapped_e.type == SystemExit
@@ -104,7 +110,9 @@ class TestExperiments(object):
             fh.write('class FooExperiment(object): pass')
 
         with pytest.raises(SystemExit) as pytest_wrapped_e:
-            Experiment.load(mocker.patch('experimentum.Experiments.App'),tmpdir.strpath, 'Foo')
+            app_mock = mocker.patch('experimentum.Experiments.App')
+            app_mock.root = '.'
+            Experiment.load(app_mock,tmpdir.strpath, 'Foo')
 
         assert 'FooExperiment must be derived from the experimentum.Experiments.Experiment.Experiment class' in capsys.readouterr().err
         assert pytest_wrapped_e.type == SystemExit
@@ -119,7 +127,9 @@ class TestExperiments(object):
                 "   def reset(self): pass"
             )
 
-        assert isinstance(Experiment.load(mocker.patch('experimentum.Experiments.App'), tmpdir.strpath, 'Foo'), Experiment)
+        app_mock = mocker.patch('experimentum.Experiments.App')
+        app_mock.root = '.'
+        assert isinstance(Experiment.load(app_mock, tmpdir.strpath, 'Foo'), Experiment)
 
     def test_call_command(self, mocker, tmpdir):
         exp = self._setup(mocker, tmpdir)

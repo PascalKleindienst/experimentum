@@ -5,6 +5,7 @@ import pytest
 class TestFactory(object):
     def setup_factory(self, mocker, cfg={}):
         app_mock = mocker.patch('experimentum.Experiments.App')
+        app_mock.root = '.'
         app_mock.config = mocker.MagicMock()
         factory = Factory(app_mock)
         factory.app.config.get.side_effect = lambda key, default=None: cfg.get(key, default)
