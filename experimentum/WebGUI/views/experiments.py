@@ -92,12 +92,12 @@ def run(experiment):
 
         # Run the experiment in a seperate thread, so we can monitor its output
         capturer = CapturedContent(True)
-        func1_thread = Thread(target=lambda: exp.start(iterations))
-        func1_thread.deamon = True
-        func1_thread.start()
+        exp_thread = Thread(target=lambda: exp.start(iterations))
+        exp_thread.deamon = True
+        exp_thread.start()
 
         return Response(
-            run_experiment(func1_thread, capturer, exp),
+            run_experiment(exp_thread, capturer, exp),
             content_type='text/event-stream'
         )
 
