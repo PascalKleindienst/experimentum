@@ -35,14 +35,17 @@ class TestExperimentsView(object):
         app.config['container'].make = mocker.MagicMock(return_value=exp_mock)
         response = client.get('/experiments/run/test?config=bar.json&iterations=2', headers={'accept': 'text/event-stream'})
 
-        exp_mock.start.assert_called_once_with(2)
         assert response.content_type == 'text/event-stream'
         assert exp_mock.config_file == 'bar.json'
         assert exp_mock.show_progress is True
         assert 'data: {"type": "started"}' in response.data
-        assert 'data: {"table": "FOO TABLE", "type": "table"}' in response.data
-        assert 'data: {"type": "finished", "data":' in response.data
-        assert '{"start": "1970-01-01T00:00:00", "finished": "1970-01-01T00:00:00", "config_file": "foo.json", "config_content": "{\\"foo\\": \\"bar\\"}' in response.data
+        assert '"table": "FOO TABLE"' in response.data
+        assert '"type": "table"' in response.data
+        assert '"type": "finished"' in response.data
+        assert '"start": "1970-01-01T00:00:00"' in response.data
+        assert '"finished": "1970-01-01T00:00:00"' in response.data
+        assert '"config_file": "foo.json"' in response.data
+        assert '"config_content": "{\\"foo\\": \\"bar\\"}' in response.data
 
     def test_run_experiment_event_stream_content(self, client, app, mocker):
         import datetime
@@ -65,8 +68,11 @@ class TestExperimentsView(object):
         response = client.get('/experiments/run/test', headers={'accept': 'text/event-stream'})
 
         assert response.content_type == 'text/event-stream'
-        assert 'data: {"type": "log", "data": "error logging", "error": true}' in response.data
-        assert 'data: {"type": "log", "data": "logging", "error": false}' in response.data
+        assert '"type": "log"' in response.data
+        assert '"data": "error logging"' in response.data
+        assert '"error": true' in response.data
+        assert '"data": "logging"' in response.data
+        assert '"error": false' in response.data
 
     def test_plots_empty(self, client, app, mocker):
         exp_mock = mocker.patch('experimentum.Experiments.Experiment')
