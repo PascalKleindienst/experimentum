@@ -40,8 +40,8 @@ def generate_plots(directory, container, experiment):
             # try to plot and save as svg
             try:
                 plot = container.make('plot', name)
-                plt = plot.plotting()
-                plt.savefig(os.path.join(directory, name + '.svg'))
+                plot.plotting()
+                plot.save(os.path.join(directory, name + '.svg'))
 
                 messages.append({
                     'message': 'Generated plot: ' + name,
@@ -66,9 +66,9 @@ def export(experiment):
     """
     directory = os.path.join(current_app.config['UPLOAD_FOLDER'], experiment)
     tmpfile = os.path.join(tempfile.gettempdir(), 'export-' + experiment)
-    shutil.make_archive(tmpfile, 'zip', directory)
 
     try:
+        shutil.make_archive(tmpfile, 'zip', directory)
         return send_file(tmpfile + '.zip', as_attachment=True)
     except Exception as exc:
         current_app.config.get('container').log.error(exc)
