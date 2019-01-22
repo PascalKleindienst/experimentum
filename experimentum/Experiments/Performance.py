@@ -371,7 +371,7 @@ class Performance(object):
             self.iteration += 1
             point = Point(label, self.iteration)
 
-            if len(self.points) and self.points[-1].stop_time is 0:
+            if len(self.points) and self.points[-1].stop_time == 0:
                 self.points[-1].subpoints.append(point)
             else:
                 self.points.append(point)

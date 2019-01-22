@@ -35,7 +35,7 @@ class QueryBuilder(object):
 
         if not isinstance(where, list):
             where = []
-        if len(where) is 0 or not isinstance(where[0], list):
+        if len(where) == 0 or not isinstance(where[0], list):
             where = [where]
 
         self.where = where
@@ -63,19 +63,19 @@ class QueryBuilder(object):
         """
         for cond in self.where:
             # ['id', 2] => WHERE id == 2
-            if len(cond) is 2:
+            if len(cond) == 2:
                 self.__filter_cond.append(getattr(self.repo, cond[0]) == cond[1])
             # ['or', 'id', 2] => WHERE id == 2 OR ...
-            elif len(cond) is 3 and cond[0] == 'or':
+            elif len(cond) == 3 and cond[0] == 'or':
                 self.__filter_cond_or.append(getattr(self.repo, cond[1]) == cond[2])
             # ['id', '!=', 2] => WHERE id != 2
-            elif len(cond) is 3 and cond[0] != 'or':
+            elif len(cond) == 3 and cond[0] != 'or':
                 if cond[1] == '!=':
                     self.__filter_cond.append(getattr(self.repo, cond[0]) != cond[2])
                 elif cond[1] == '==':
                     self.__filter_cond.append(getattr(self.repo, cond[0]) == cond[2])
             # ['or', 'id', '==', 2] => WHERE id == 2 OR
-            elif len(cond) is 4 and cond[0] == 'or':
+            elif len(cond) == 4 and cond[0] == 'or':
                 if cond[2] == '!=':
                     self.__filter_cond_or.append(getattr(self.repo, cond[1]) != cond[3])
                 elif cond[2] == '==':
@@ -192,7 +192,7 @@ class Repository(AbstractRepository):
         try:
             relationships = {}
             for key, relation in cls.__relationships__.items():
-                if len(relation) is 2:
+                if len(relation) == 2:
                     relationships[key] = relationship(relation[0], **relation[1])
                 else:
                     relationships[key] = relationship(relation[0])

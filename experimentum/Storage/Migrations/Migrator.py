@@ -129,7 +129,7 @@ class Migrator(object):
             migrations = self.get_migration_files(self.path)
             migration = [mig for mig in migrations if mig[:14] not in migrated]
 
-            if len(migration) is 0:
+            if len(migration) == 0:
                 print(colored('› Migrations are all up to date.', 'green'))
                 return
 
@@ -159,7 +159,7 @@ class Migrator(object):
             migrations = self.get_migration_files(self.path)[::-1]
             migration = [mig for mig in migrations if mig[:14] in migrated]
 
-            if len(migration) is 0:
+            if len(migration) == 0:
                 print(colored('× There are no migrations to downgrade.', 'red'))
                 return
 

@@ -91,7 +91,7 @@ class CapturedContent(object):
         Returns:
             boolean: Whether the error stream has content or not.
         """
-        return self.streams['err'].getvalue() is not ''
+        return self.streams['err'].getvalue() != ''
 
     def _prepare_lines(self, lines):
         """Strip and escape lines if needed.

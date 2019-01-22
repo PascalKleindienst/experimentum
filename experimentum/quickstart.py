@@ -85,7 +85,7 @@ def main():
     """Generate needed files and folders to get up and running."""
     # Set Root
     global ROOT
-    if len(sys.argv) is 3 and sys.argv[1] == '--root':
+    if len(sys.argv) == 3 and sys.argv[1] == '--root':
         ROOT = os.path.join('.', sys.argv[2])
 
     # Welcome Text

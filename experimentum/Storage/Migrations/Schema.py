@@ -149,7 +149,7 @@ class Schema(object):
         Args:
             blueprint (Blueprint): Blueprint to build.
         """
-        if blueprint.action is 'create':
+        if blueprint.action == 'create':
             self.store.create(blueprint)
-        elif blueprint.action is 'alter':
+        elif blueprint.action == 'alter':
             self.store.alter(blueprint)

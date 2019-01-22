@@ -114,7 +114,7 @@ class ColoredHelpFormatter(argparse.HelpFormatter):
         """Color in the default text of the current action."""
         helptext = action.help
         if '%(default)' not in action.help:
-            if action.default is not '==SUPPRESS==':
+            if action.default != '==SUPPRESS==':
                 defaulting_nargs = ['?', '*']
                 if action.nargs in defaulting_nargs:
                     helptext += colored(' [default: %(default)s]', 'cyan')

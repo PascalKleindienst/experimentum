@@ -23,7 +23,7 @@ def get_input(msg, default=None):
 
     # Required input
     value = six.moves.input(colored("› {}: ".format(msg), 'green'))
-    while value is '':
+    while value == '':
         print(colored("× Please specify a value!", 'red'))
         value = six.moves.input(colored("› {}: ".format(msg), 'green'))
 
