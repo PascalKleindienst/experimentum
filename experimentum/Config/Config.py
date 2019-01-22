@@ -53,7 +53,7 @@ class Config(object):
             object: The config value.
         """
         if isinstance(key, list):
-            return self.getMany(key)
+            return self.get_many(key)
 
         return self._dot(key, default)
 
@@ -65,7 +65,7 @@ class Config(object):
         """
         return self.items
 
-    def getMany(self, keys):
+    def get_many(self, keys):
         """Get many configuration values.
 
         Arguments:
