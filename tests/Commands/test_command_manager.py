@@ -7,8 +7,8 @@ from termcolor import colored
 class TestCommandManager(object):
     def test_init(self, mocker):
         manager = CommandManager(mocker.patch('experimentum.Experiments.App'), 'Test Prog', 'Test Desc')
-        assert isinstance(manager.parser, argparse.ArgumentParser)
-        assert isinstance(manager.subparsers, argparse._SubParsersAction)
+        assert isinstance(manager._parser, argparse.ArgumentParser)
+        assert isinstance(manager._subparsers, argparse._SubParsersAction)
 
     def test_add_invalid_command(self, mocker):
         manager = CommandManager(mocker.patch('experimentum.Experiments.App'), 'Test Prog', 'Test Desc')

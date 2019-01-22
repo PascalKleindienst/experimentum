@@ -13,8 +13,6 @@ class CommandManager(object):
 
     Attributes:
         app (App): Main App class.
-        parser (argparse.ArgumentParser): Main argument parser.
-        subparsers (object): Subparser action object to add commands.
         commands (dict): Registered commands.
     """
     commands = {}
@@ -30,19 +28,19 @@ class CommandManager(object):
         self.app = app
 
         # Init ArgumentParser
-        self.parser = argparse.ArgumentParser(
+        self._parser = argparse.ArgumentParser(
             add_help=False,
             prog=colored(prog, 'yellow'),
             description=colored(description, 'yellow'),
             formatter_class=ColoredHelpFormatter
         )
-        self.parser.add_argument(
+        self._parser.add_argument(
             '-h', '--help',
             action='help',
             default=argparse.SUPPRESS,
             help='Show this help message and exit.'
         )
-        self.parser.add_argument(
+        self._parser.add_argument(
             '-v', '--version',
             action='version',
             version='%(prog)s 1.0',
@@ -50,11 +48,11 @@ class CommandManager(object):
         )
 
         # Colore Titles
-        self.parser._positionals.title = colored('Arguments', 'cyan')
-        self.parser._optionals.title = colored('Options', 'cyan')
+        self._parser._positionals.title = colored('Arguments', 'cyan')
+        self._parser._optionals.title = colored('Options', 'cyan')
 
         # Init subparsers
-        self.subparsers = self.parser.add_subparsers()
+        self._subparsers = self._parser.add_subparsers()
 
     def add_command(self, name, cmd):
         """Add a new command to the parser.
@@ -71,7 +69,7 @@ class CommandManager(object):
 
         # setup command
         cmd = cmd()  # type: AbstractCommand
-        command = self.subparsers.add_parser(
+        command = self._subparsers.add_parser(
             name,
             help=cmd.help,
             description=colored(cmd.description, 'yellow'),
@@ -97,12 +95,12 @@ class CommandManager(object):
         """Use dispatch pattern to invoke class and let it handle the command."""
         try:
             # dispatch
-            options = self.parser.parse_args()
+            options = self._parser.parse_args()
             options.func(self.app, options)
         except AttributeError:
             # no command selected
             print_failure('Please specify a command')
-            self.parser.print_help(sys.stderr)
+            self._parser.print_help(sys.stderr)
             sys.exit(2)
 
 
