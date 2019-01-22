@@ -25,6 +25,7 @@ matrix:
     - python: '3.8-dev'
       dist: xenial
       sudo: true
+      env: TOXENV=py
     - python: 'nightly'
       dist: xenial
       sudo: true
