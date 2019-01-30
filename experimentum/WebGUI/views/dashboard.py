@@ -17,7 +17,7 @@ blueprint = Blueprint('dashboard', __name__)
 
 @blueprint.route('/')
 def dashboard():
-    """Display the dashboard template.
+    """Displays the dashboard template.
 
     Returns:
         str: HTML Template
