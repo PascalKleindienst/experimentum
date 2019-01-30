@@ -64,6 +64,7 @@ from experimentum.Storage.AbstractRepository import RepositoryLoader
 from experimentum.Storage.Migrations import Migrator, Blueprint, Schema
 from experimentum.Storage.SQLAlchemy import Store, Repository
 from experimentum.Plots import Factory
+from experimentum.WebGUI import Server
 
 
 def _path_join(root, path):
@@ -218,6 +219,8 @@ class App(object):
             'store': lambda: self.store,
             'schema': lambda: Schema(self),
             'blueprint': lambda *args, **kwargs: Blueprint(*args, **kwargs),
+            'server': lambda: Server(self),
+            'config': lambda: Config()
         }
 
     def _add_commands(self):

@@ -2,7 +2,6 @@
 from experimentum.cli import print_failure
 from experimentum.utils import find_files, load_class
 from experimentum.Plots import AbstractPlot
-from experimentum.Config import Config
 
 
 class Factory(object):
@@ -82,7 +81,7 @@ class Factory(object):
             Config: Config Data for the plot.
         """
         # TODO: Actually validate config data before saving
-        config = Config()
+        config = self.app.make('config')
         config.set(data)
 
         return config

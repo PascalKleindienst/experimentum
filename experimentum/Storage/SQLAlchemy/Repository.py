@@ -200,7 +200,9 @@ class Repository(AbstractRepository):
                 # recursively map relations first otherwise it won't work!
                 Repository.mapping(relation[0], store)
 
-            mapper(cls, cls.store.meta.tables.get(cls.__table__), properties=relationships)
+            Repository.map_to_table(
+                cls, cls, cls.store.meta.tables.get(cls.__table__), properties=relationships
+            )
         except Exception:
             logging.getLogger('experimentum').warning('Could not map table: ' + cls.__table__)
 
@@ -209,3 +211,14 @@ class Repository(AbstractRepository):
         listen(cls, 'after_insert', lambda m, conn, target: target.after_insert())
         listen(cls, 'before_update', lambda m, conn, target: target.before_update())
         listen(cls, 'after_update', lambda m, conn, target: target.after_update())
+
+    @staticmethod
+    def map_to_table(cls, repo, table, properties):
+        """Get the SQLAlchemy mapper, i.e. map the tables to classes.
+
+        Args:
+            repo (Repository): Repository to map
+            table (sqlalchemy.schema.table): Table to map
+            properties (object): relationships to map
+        """
+        mapper(repo, table, properties=properties)

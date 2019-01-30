@@ -1,5 +1,7 @@
 import argparse
-from experimentum.Commands.ExperimentsCommand import run
+import pytest
+from experimentum.Commands.ExperimentsCommand import run, status
+from experimentum.Experiments import Experiment
 
 
 class TestExperimentsCommand(object):
@@ -38,3 +40,23 @@ class TestExperimentsCommand(object):
 
         run().handle(app_mock, args)
         assert exp_mock.hide_performance is True
+
+    def test_status(self, mocker):
+        exp_mock, app_mock = self.setup_mocks(mocker)
+        args = argparse.Namespace()
+        mocker.patch.object(Experiment, 'get_status')
+        Experiment.get_status.return_value = {'foo': {'count': 0, 'name': 'Foo Exp'}, 'bar': {'count': 1, 'name': 'Bar Exp'}}
+
+        status().handle(app_mock, args)
+        Experiment.get_status.assert_called_once_with(app_mock)
+
+    def test_status_with_no_exps(self, mocker):
+        exp_mock, app_mock = self.setup_mocks(mocker)
+        args = argparse.Namespace()
+
+        with pytest.raises(SystemExit) as pytest_wrapped_e:
+            status().handle(app_mock, args)
+            exp_mock.get_status.assert_called_once_with(app_mock)
+
+        assert pytest_wrapped_e.type == SystemExit
+        assert pytest_wrapped_e.value.code == 2

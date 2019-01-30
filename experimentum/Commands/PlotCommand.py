@@ -35,9 +35,9 @@ def generate(app, args):
         args (argparse.Namespace): Command Arguments and Options.
     """
     plot = app.make('plot', args.name)
-    plt = plot.plotting()
+    plot.plotting()
 
-    if args.o:
-        plt.savefig(args.o)
+    if hasattr(args, 'o') and args.o:
+        plot.save(args.o)
     else:
-        plt.show()
+        plot.show()

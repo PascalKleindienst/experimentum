@@ -85,7 +85,7 @@ from abc import abstractmethod, ABCMeta
 from experimentum.Config import Config
 from experimentum.Experiments import Performance
 from experimentum.cli import print_progress, print_failure
-from experimentum.utils import get_basenames
+from experimentum.utils import get_basenames, load_class, find_files
 
 
 class Script(object):
@@ -182,6 +182,7 @@ class Experiment(object):
             list: Names of experiments
         """
         # TODO: Deprecated remove!
+        print('[DEPRECATED]: Remove Experiments.get_experiments usage!!')
         files = glob.glob(os.path.join(path, '[!_]*.py'))
         return list(map(
             lambda exp: os.path.basename(exp).lower().replace('experiment.py', ''),
@@ -208,6 +209,11 @@ class Experiment(object):
         rows = repo.all()
         for exp in rows:
             idx = exp.name.lower()
+
+            # Exp file does not exist anymore
+            if idx not in data:
+                data[idx] = {'count': 0, 'name': exp.name, 'missing': True}
+
             data[idx]['count'] += 1
 
             if exp.config_file:
@@ -227,36 +233,16 @@ class Experiment(object):
         Returns:
             Experiment: Loaded experiment.
         """
-        # TODO: Refactor to use load_class helper
-        # Load Experiment File
-        files = glob.glob(os.path.join(path, '[!_]*.py'))
-        files = list(filter(
-            lambda exp: name.lower() == os.path.basename(exp).lower().replace('experiment.py', ''),
-            files
-        ))
-
+        # Find Experiment Files
+        files = find_files(app.root, path, name, remove='experiment.py')
         if not files:
             print_failure(
                 'Could not find experiment named "{}" under path "{}"'.format(name, path),
                 exit_code=1
             )
 
-        exp = files[0]
-
-        # Init Experiment class if possible
-        with open(exp, 'rb') as filehandler:
-            try:
-                mod = imp.load_source('experiments', exp, filehandler)
-                experiment = getattr(mod, os.path.basename(exp)[:-3])
-            except Exception as exc:
-                print_failure('Could not load experiment. ' + str(exc), exit_code=2)
-
-            if issubclass(experiment, Experiment) is False:
-                print_failure(
-                    'Experiment must be derived from the experimentum.Experiments.Experiment class',
-                    exit_code=3
-                )
-
+        # Load Experiment class if possible
+        experiment = load_class(files[0], 'experiments', Experiment)
         return experiment(app, path)
 
     @staticmethod
@@ -319,6 +305,7 @@ class Experiment(object):
         # Running tests
         for iteration in self.performance.iterate(1, steps):
             # Reset test state
+            result = None
             self.reset()
 
             # Run experiment
@@ -326,7 +313,12 @@ class Experiment(object):
                 result = self.run()
 
             # Save Results
-            self.save(result, iteration)
+            if result:
+                self.save(result, iteration)
+            else:
+                msg = 'Experiment returned an empty result. Are you sure this is correct?'
+                self.app.log.warning(msg)
+                print('[WARNING]: ' + msg)
 
             if self.show_progress:
                 print_progress(iteration, steps, prefix='Progress:', suffix='Complete')
@@ -344,7 +336,6 @@ class Experiment(object):
             result (object): Result of experiment test run.
             iteration (int): Number of test run iteration.
         """
-        # TODO: Actually saving results and performance values
         # TODO: Wrap saving in try/except statement to catch when saving fails
         # TODO: due to missing tables etc
         data = {

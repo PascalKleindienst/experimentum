@@ -63,11 +63,11 @@ def get_string_type(col_type, params):
     if col_type == 'char':
         return CHAR(params.get('length'))
     elif col_type == 'json':
-        return JSON(none_as_null=True).with_variant(JSONB(none_as_null=True), 'postgresql').with_variant(Text, 'sqlite')
+        return JSON(none_as_null=True).with_variant(JSONB(none_as_null=True), 'postgresql').with_variant(Text(), 'sqlite')
     elif col_type == 'long_text':
-        return LONGTEXT().with_variant(Text, 'sqlite')
+        return LONGTEXT().with_variant(Text(), 'sqlite')
     elif col_type == 'medium_text':
-        return MEDIUMTEXT().with_variant(Text, 'sqlite')
+        return MEDIUMTEXT().with_variant(Text(), 'sqlite')
     elif col_type == 'string':
         return String(length=params.get('length'))
     elif col_type == 'text':

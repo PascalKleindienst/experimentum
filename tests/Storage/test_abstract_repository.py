@@ -1,9 +1,9 @@
 from experimentum.Storage import AbstractRepository
 import pytest
+import json
 
 
-
-class TestAbstractStore(object):
+class TestAbstractRepository(object):
     def setup_repo(self, mocker):
         mocker.patch.multiple(AbstractRepository, __abstractmethods__=set())
         return AbstractRepository()
@@ -22,6 +22,20 @@ class TestAbstractStore(object):
         repo = self.setup_repo(mocker)
         repo['foo'] = 'Bar'
         assert repo.foo == 'Bar'
+
+    def test_contains_item(self, mocker):
+        repo = self.setup_repo(mocker)
+        repo.foo = 'Bar'
+        assert 'foo' in repo
+
+    def test_to_json(self, mocker):
+        repo = self.setup_repo(mocker)
+        repo.foo = 'bar'
+        repo.bar = ['foo', 'bar', 'baz']
+        repo._private = 'private'
+
+        output = {'foo': 'bar', 'bar': ['foo', 'bar', 'baz']}
+        assert json.dumps(output, sort_keys=True, indent=4) == repo.to_json()
 
     def test_from_dict(self, mocker):
         mocker.patch.multiple(AbstractRepository, __abstractmethods__=set())
@@ -57,9 +71,10 @@ class TestAbstractStore(object):
             'foo': 'bar',
             'foobar': {'id': 'foobar'},
         })
+
         assert repo.foo == 'bar'
-        assert isinstance(repo.foobar, AbstractRepository)
-        assert repo.foobar.id == 'foobar'
+        assert isinstance(repo.foobar[0], AbstractRepository)
+        assert repo.foobar[0].id == 'foobar'
         AbstractRepository.__relationships__ = {}
 
     def test_abstract_mapping(self):

@@ -142,6 +142,7 @@ import json
 from six import add_metaclass
 from abc import abstractmethod, ABCMeta
 from experimentum.cli import print_failure
+from experimentum.utils import find_files
 
 
 class RepositoryLoader(object):
@@ -172,11 +173,10 @@ class RepositoryLoader(object):
     def load(self):
         """Load all repositories from the repo folder and try to map them to the store."""
         # Get Repository files
-        files = glob.glob(os.path.join(
+        files = find_files(
             self.app.root,
-            self.app.config.get('storage.repositories.path', 'repositories'),
-            '*Repository.py'
-        ))
+            self.app.config.get('storage.repositories.path', 'repositories')
+        )
 
         for filename in files:
             name = os.path.basename(filename)[:-3]
@@ -248,7 +248,7 @@ class AbstractRepository(object):
         for attr, val in attributes.items():
             self[attr] = val
 
-    def toJSON(self):
+    def to_json(self):
         """Return JSON representation of repository fields and values.
 
         Returns:

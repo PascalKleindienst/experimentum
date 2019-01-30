@@ -3,22 +3,58 @@ from alchemy_mock.mocking import UnifiedAlchemyMagicMock
 from sqlalchemy import or_
 
 
+class mock_foo_relation(Repository):
+    __relationships__ = {}
+
+
 class TestAbstractStore(object):
     def setup_repo(self, mocker):
         store = mocker.patch('experimentum.Storage.SQLAlchemy.Store')
         store.session = UnifiedAlchemyMagicMock()
+        Repository.__relationships__ = {}
         repo = Repository()
         Repository.store = store
         repo.store = store
         return repo
 
-    def test_mapping(self, mocker):
-        mapper = mocker.patch('sqlalchemy.orm.mapper')
-        Repository.__table__ = 'foo'
-        Repository.mapping(Repository, 'store')
+    def setup_mapper(self, mocker):
+        store = mocker.patch('experimentum.Storage.SQLAlchemy.Store')
+        table = mocker.MagicMock()
+        store.meta.tables.get.return_value = table
+        mapper_mock = mocker.patch('experimentum.Storage.SQLAlchemy.Repository.map_to_table')
 
-        # TODO: Assertions
-        assert Repository.store == 'store'
+        Repository.__table__ = 'foo'
+
+        return mapper_mock, store, table
+
+    def test_mapping(self, mocker):
+        mapper_mock, store, table = self.setup_mapper(mocker)
+        Repository.mapping(Repository, store)
+
+        assert Repository.store == store
+        mapper_mock.assert_called_once_with(Repository, Repository, table, properties={})
+
+    def test_mapping_relationships(self, mocker):
+        mapper_mock, store, table = self.setup_mapper(mocker)
+
+        Repository.__relationships__ = {
+            'foo': [mock_foo_relation, {'order_by': 'my_id'}],
+            'bar': [mock_foo_relation]
+        }
+        Repository.mapping(Repository, store)
+
+        assert Repository.store == store
+        assert mapper_mock.call_count == 3
+        mapper_mock.assert_any_call(
+            Repository, Repository, table, properties={'foo': mocker.ANY, 'bar': mocker.ANY}
+        )
+
+    def test_mapping_fail(self, mocker, caplog):
+        store = mocker.patch('experimentum.Storage.SQLAlchemy.Store')
+        Repository.__relationships__ = {}
+        Repository.mapping(Repository, store)
+
+        assert 'Could not map table: foo' in caplog.text
 
     def test_create(self, mocker):
         repo = self.setup_repo(mocker)

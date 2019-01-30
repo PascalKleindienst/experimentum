@@ -36,6 +36,13 @@ class TestConfig(object):
         self.config.set('foo', {'foobar': 42})
         assert self.config.items['foo']['foobar'] is 42
 
+    def test_set_dot(self):
+        self.config.set('foo.bar.baz', 42)
+        assert 'foo' in self.config.items
+        assert 'bar' in self.config.items['foo']
+        assert 'baz' in self.config.items['foo']['bar']
+        assert self.config.items['foo']['bar']['baz'] is 42
+
     def test_set_multiple_key(self):
         self.config.set({'foo': {'bar': 42}, 'x': 'y'})
         assert self.config.items['foo']['bar'] is 42

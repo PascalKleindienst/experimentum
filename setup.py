@@ -24,7 +24,7 @@ VERSION = None
 REQUIRED = [
     # 'requests', 'maya', 'records',
     'SQLAlchemy>=1.2.0', 'termcolor', 'colorama', 'tabulate', 'inflection', 'six', 'psutil', 'matplotlib',
-    'flask'
+    'Flask>=1.0.0'
 ]
 
 # What packages are optional?

@@ -24,10 +24,11 @@
         update_scroll(selector);
 
         // Error indicators
+        console.log(item.error, selector);
         if (item.error) {
-            $(`${selector} .status i`).text('error').addClass('red-text').removeClass('green-text');
-            $(`${selector} .log > pre:last`).removeClass('green-text').addClass('red-text');
-            $(`.status-log ${selector} > li.success`).removeClass('success').addClass('error');
+            $(`${selector} .status i`).text('error').addClass('red-text').removeClass('green-text').removeClass('amber-text');
+            $(`${selector} .log > pre:last`).removeClass('green-text').removeClass('amber-text').addClass('red-text');
+            $(`.status-log ${selector}.waiting`).removeClass('waiting').addClass('error');
         }
     }
 
@@ -59,6 +60,8 @@
                 const start = new Date(data.data.start);
                 const finished = new Date(data.data.finished);
 
+                $('.experiment-log.waiting').removeClass('waiting').addClass('success');
+                $('.experiment-log.success .material-icons').text('check_circle').removeClass('amber-text').addClass('green-text');
                 $('.started_at').html(start.toLocaleString());
                 $('.finished_at').html(finished.toLocaleString());
                 $('.config_file').html(data.data.config_file);
@@ -103,6 +106,8 @@
                 }
 
                 // Init lightbox and remove progressbar
+                $('.plot-log.waiting').removeClass('waiting').addClass('success');
+                $('.plot-log.success .material-icons').text('check_circle').removeClass('amber-text').addClass('green-text');
                 $('.materialboxed').materialbox();
                 $('.progress').remove()
             })
