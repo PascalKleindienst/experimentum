@@ -173,7 +173,7 @@ class Experiment(object):
 
     @staticmethod
     def get_experiments(path):
-        """Get experiment names from exp files/classes.
+        """[DEPRECATED] Get experiment names from exp files/classes.
 
         Args:
             path (str): Path to experiments folder.
@@ -333,7 +333,7 @@ class Experiment(object):
         """Save the test results in the data store.
 
         Args:
-            result (object): Result of experiment test run.
+            result (dict): Result of experiment test run.
             iteration (int): Number of test run iteration.
         """
         # TODO: Wrap saving in try/except statement to catch when saving fails

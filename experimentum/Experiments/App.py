@@ -158,7 +158,11 @@ class App(object):
         # app(self)
 
     def setup_datastore(self, datastore):
-        """Set up the data store."""
+        """Set up the data store.
+
+        Args:
+            datastore (dict): Datastore config.
+        """
         self.log.info('Setup Data Store')
         self.store = Store(self)
 

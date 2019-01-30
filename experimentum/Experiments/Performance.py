@@ -180,6 +180,9 @@ class Formatter(object):
         Args:
             points (list): Measuring Points.
             tablefmt (str, optional): Defaults to 'psql'. Table format for :mod:`tabulate`
+
+        Returns:
+            str: Performance table
         """
         data = []
         headers = [
