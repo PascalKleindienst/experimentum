@@ -70,8 +70,8 @@ def export(experiment):
     try:
         shutil.make_archive(tmpfile, 'zip', directory)
         return send_file(tmpfile + '.zip', as_attachment=True)
-    except Exception as exc:
-        current_app.config.get('container').log.error(exc)
+    except Exception:
+        current_app.config.get('container').log.error('No such file or directory: %s' % directory)
         abort(400)
 
 
