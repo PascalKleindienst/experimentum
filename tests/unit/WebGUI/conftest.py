@@ -1,6 +1,6 @@
 import pytest
 import os
-import shutil
+# import shutil
 import tempfile
 import json
 from experimentum.Experiments import App
@@ -56,12 +56,12 @@ def app(mocker):
 
     # create the app with common test config and set template folder (otherwise it will not be found in testing)
     app = create_app(container, {'TESTING': True })
-    app.template_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../experimentum/WebGUI/templates/'))
+    app.template_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../experimentum/WebGUI/templates/'))
 
     yield app
 
     # remove the temporary app
-    shutil.rmtree(TestContainer.config_path)
+    # shutil.rmtree(TestContainer.config_path)
 
 
 @pytest.fixture
