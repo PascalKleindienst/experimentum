@@ -24,7 +24,7 @@ class TestMigrationsView(object):
     def test_export_plots(self, client, app):
         os.makedirs(os.path.join(app.config['UPLOAD_FOLDER'], 'foo'))
         response = client.get('/plots/export/foo')
-        assert response.content_type == 'application/zip'
+        assert response.content_type == 'application/zip' or response.content_type == 'application/x-zip-compressed'
         assert response.status_code == 200
 
     def test_export_not_existing_plots(self, client, caplog):
