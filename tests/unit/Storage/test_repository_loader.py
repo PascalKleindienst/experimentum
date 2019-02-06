@@ -15,7 +15,7 @@ class TestRepositoryLoader(object):
         # from testrepos.FooRepository import FooRepository
         cfg = {'storage.repositories.path': 'testrepos'}
         app = mocker.patch('experimentum.Experiments.App')
-        app.root = 'tests/Storage'
+        app.root = 'tests/unit/Storage'
         app.config = mocker.MagicMock()
         app.config.get.side_effect = lambda key, default=None: cfg.get(key, default)
 
