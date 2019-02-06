@@ -22,7 +22,7 @@ class {migration}(Migration):
 
 class TestMigrator(object):
     def _create_migration_file(self, ts, tmpdir):
-        time = datetime.fromtimestamp(ts).strftime('%Y%m%d%H%M%S')
+        time = datetime.utcfromtimestamp(ts).strftime('%Y%m%d%H%M%S')
         fname = "{}_test_migration_{}.py".format(time, ts)
         fh = tmpdir.join(fname)
         fh.write(_STUB_.format(
@@ -78,17 +78,17 @@ class TestMigrator(object):
         self._create_migration_file(0, tmpdir)
         migrator = self._create_migrator(tmpdir.strpath, mocker)
         migrator.up()
-        assert tmpdir.join('.version').read() ==  '|' + datetime.fromtimestamp(0).strftime('%Y%m%d%H%M%S')
+        assert tmpdir.join('.version').read() ==  '|' + datetime.utcfromtimestamp(0).strftime('%Y%m%d%H%M%S')
 
     def test_upgraded_all_migrations(self, tmpdir, mocker, capsys):
         self._create_migration_file(0, tmpdir)
-        tmpdir.join('.version').write('|' + datetime.fromtimestamp(0).strftime('%Y%m%d%H%M%S'))
+        tmpdir.join('.version').write('|' + datetime.utcfromtimestamp(0).strftime('%Y%m%d%H%M%S'))
         migrator = self._create_migrator(tmpdir.strpath, mocker)
         migrator.up()
         assert 'Migrations are all up to date' in capsys.readouterr().out
 
     def test_uprage_with_valid_migration(self, tmpdir, mocker):
-        mock_migration = mocker.patch('experimentum.Storage.Migrations.Migration', revision=datetime.fromtimestamp(0).strftime('%Y%m%d%H%M%S'))
+        mock_migration = mocker.patch('experimentum.Storage.Migrations.Migration', revision=datetime.utcfromtimestamp(0).strftime('%Y%m%d%H%M%S'))
         mock_migration.up = mocker.MagicMock()
 
         migrator = self._create_migrator(tmpdir.strpath, mocker)
@@ -108,13 +108,13 @@ class TestMigrator(object):
         self._create_migration_file(0, tmpdir)
         self._create_migration_file(100, tmpdir)
         tmpdir.join('.version').write('|{}|{}'.format(
-            datetime.fromtimestamp(0).strftime('%Y%m%d%H%M%S'),
-            datetime.fromtimestamp(100).strftime('%Y%m%d%H%M%S')
+            datetime.utcfromtimestamp(0).strftime('%Y%m%d%H%M%S'),
+            datetime.utcfromtimestamp(100).strftime('%Y%m%d%H%M%S')
         ))
 
         migrator = self._create_migrator(tmpdir.strpath, mocker)
         migrator.down()
-        assert tmpdir.join('.version').read() == '|' + datetime.fromtimestamp(0).strftime('%Y%m%d%H%M%S')
+        assert tmpdir.join('.version').read() == '|' + datetime.utcfromtimestamp(0).strftime('%Y%m%d%H%M%S')
 
     def test_downgraded_all_migrations(self, tmpdir, mocker, capsys):
         self._create_migration_file(0, tmpdir)
@@ -123,9 +123,9 @@ class TestMigrator(object):
         assert 'There are no migrations to downgrade' in capsys.readouterr().out
 
     def test_downgrade_with_valid_migration(self, tmpdir, mocker):
-        mock_migration = mocker.patch('experimentum.Storage.Migrations.Migration', revision=datetime.fromtimestamp(0).strftime('%Y%m%d%H%M%S'))
+        mock_migration = mocker.patch('experimentum.Storage.Migrations.Migration', revision=datetime.utcfromtimestamp(0).strftime('%Y%m%d%H%M%S'))
         mock_migration.down = mocker.MagicMock()
-        tmpdir.join('.version').write('|' + datetime.fromtimestamp(0).strftime('%Y%m%d%H%M%S'))
+        tmpdir.join('.version').write('|' + datetime.utcfromtimestamp(0).strftime('%Y%m%d%H%M%S'))
 
         migrator = self._create_migrator(tmpdir.strpath, mocker)
         migrator.down(mock_migration)
@@ -142,8 +142,8 @@ class TestMigrator(object):
 
     def test_refresh(self, tmpdir, mocker):
         self._create_migration_file(0, tmpdir)
-        migration = '{}_test_migration_0'.format(datetime.fromtimestamp(0).strftime('%Y%m%d%H%M%S'))
-        tmpdir.join('.version').write('|' + datetime.fromtimestamp(0).strftime('%Y%m%d%H%M%S'))
+        migration = '{}_test_migration_0'.format(datetime.utcfromtimestamp(0).strftime('%Y%m%d%H%M%S'))
+        tmpdir.join('.version').write('|' + datetime.utcfromtimestamp(0).strftime('%Y%m%d%H%M%S'))
         migrator = self._create_migrator(tmpdir.strpath, mocker)
         migrator.up = mocker.MagicMock()
         migrator.down = mocker.MagicMock()
