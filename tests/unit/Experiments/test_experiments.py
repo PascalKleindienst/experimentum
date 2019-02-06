@@ -135,7 +135,7 @@ class TestExperiments(object):
         exp = self._setup(mocker, tmpdir)
         mocker.patch('experimentum.Experiments.Script', '__init__', lambda *args, **kwargs: None)
 
-        assert isinstance(exp.call('ls'), Script)
+        assert isinstance(exp.call('python -v'), Script)
 
     def test_start(self, mocker, tmpdir, capsys):
         exp = self._create_exp(mocker, tmpdir, {'foo': 'bar'})
