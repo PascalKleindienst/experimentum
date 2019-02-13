@@ -60,6 +60,7 @@ from experimentum.Config import Config, Loader
 from experimentum.Commands import CommandManager, MigrationCommand, ExperimentsCommand,\
     PlotCommand, WebGUICommand
 from experimentum.Experiments import Experiment
+from experimentum.Storage.AbstractStore import AbstractStore
 from experimentum.Storage.AbstractRepository import RepositoryLoader
 from experimentum.Storage.Migrations import Migrator, Blueprint, Schema
 from experimentum.Storage.SQLAlchemy import Store, Repository
@@ -130,6 +131,7 @@ class App(object):
         self.log.info('Bootstrap App')
 
         # Setup Datastore
+        self.log.info('Setup Data Store')
         default_db = {'drivername': 'sqlite', 'database': 'experimentum.db'}
         database = self.config.get('storage.datastore', default_db)
 
@@ -137,6 +139,10 @@ class App(object):
             database['database'] = _path_join(self.root, database['database'])
 
         self.setup_datastore(database)
+
+        if not isinstance(self.store, AbstractStore):
+            msg = 'The "{}" Store implementation must implement the AbstractStore interface'
+            print_failure(msg.format(self.store.__class__), 1)
 
         # Load and map Repositories
         self.repositories = RepositoryLoader(self, self.base_repository, self.store)
@@ -163,7 +169,6 @@ class App(object):
         Args:
             datastore (dict): Datastore config.
         """
-        self.log.info('Setup Data Store')
         self.store = Store(self)
 
         db_args = {}
