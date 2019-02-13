@@ -194,7 +194,7 @@ class Plot(AbstractPlot):
             params = self._get_params(plot_idx)
             fmt = self.config.get('styles.fmt', [])
 
-            if plot_idx is not None and isinstance(fmt, list):
+            if plot_idx is not None and isinstance(fmt, list) and plot_idx < len(fmt):
                 fmt = fmt[plot_idx]
 
             self.plot.plot(data.get('x'), data.get('y'), fmt, **params)
