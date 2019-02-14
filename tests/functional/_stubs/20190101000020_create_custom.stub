@@ -4,7 +4,7 @@ from experimentum.Storage.Migrations import Migration
 class CreateCustom(Migration):
 
     """Create the create_testcase migration."""
-    revision = '20190101000002'
+    revision = '20190101000020'
 
     def up(self):
         """Run the migrations."""

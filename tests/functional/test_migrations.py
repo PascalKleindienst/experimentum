@@ -15,10 +15,10 @@ def _create_migration(app):
     """
     root = os.path.dirname(os.path.realpath(__file__))
     copy(
-        os.path.join(root, '_stubs/20190101000002_create_custom.stub'),
+        os.path.join(root, '_stubs/20190101000020_create_custom.stub'),
         os.path.join(
             app.root, app.config.get('storage.migrations.path'),
-            '20190101000002_create_custom.py'
+            '20190101000020_create_custom.py'
         )
     )
 
@@ -38,7 +38,7 @@ class TestMigration(object):
         cli_app.run()
 
         # New migration should be executed
-        assert 'Migrated 20190101000002_create_custom' in ansi_escape(capsys.readouterr().out)
+        assert 'Migrated 20190101000020_create_custom' in ansi_escape(capsys.readouterr().out)
 
         # Database schema should be changed
         insp = reflection.Inspector.from_engine(cli_app.store.engine)
@@ -61,10 +61,10 @@ class TestMigration(object):
         cli_app.run()
 
         # migration should be reverted
-        assert 'Migrated 20190101000001_create_testcase' in ansi_escape(capsys.readouterr().out)
+        assert 'Migrated 20190101000002_create_performance' in ansi_escape(capsys.readouterr().out)
 
         # Database schema should be changed
-        assert ['experiments'] == cli_app.store.engine.table_names()
+        assert ['experiments', 'testcases'] == cli_app.store.engine.table_names()
 
     def test_migration_status(self, cli_app, capsys):
         """
@@ -83,7 +83,8 @@ class TestMigration(object):
         output = ansi_escape(capsys.readouterr().out)
         assert '20190101000000_create_experiments | Yes' in output
         assert '20190101000001_create_testcase    | Yes' in output
-        assert '20190101000002_create_custom      | No' in output
+        assert '20190101000002_create_performance | Yes' in output
+        assert '20190101000020_create_custom      | No' in output
 
     def test_migration_refresh(self, cli_app):
         """
@@ -116,7 +117,7 @@ class TestMigration(object):
         """
         # Check that migration does not already exist
         pattern = os.path.join(cli_app.root, cli_app.config.get('storage.migrations.path'), '*.py')
-        assert len(glob.glob(pattern)) == 2
+        assert len(glob.glob(pattern)) == 3
 
         # User refreshes database
         sys.argv = ['main.py', 'migration:make', '"My Migration"']
@@ -124,5 +125,5 @@ class TestMigration(object):
 
         # database should be empty
         assert 'Migration created successfully!' in ansi_escape(capsys.readouterr().out)
-        assert len(glob.glob(pattern)) == 3
+        assert len(glob.glob(pattern)) == 4
         assert '_my_migration.py' in glob.glob(pattern)[-1]
