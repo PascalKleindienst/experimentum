@@ -1,0 +1,25 @@
+from experimentum.Storage.Migrations import Migration
+
+
+class CreateCustom(Migration):
+
+    """Create the create_testcase migration."""
+    revision = '20190101000002'
+
+    def up(self):
+        """Run the migrations."""
+        # add integer bar column to testcases
+        with self.schema.table('testcases') as table:
+            table.integer('bar')
+
+        # add foo table with id:int and name:str
+        with self.schema.create('foo') as table:
+            table.integer('id')
+            table.string('name')
+
+    def down(self):
+        """Revert the migrations."""
+        self.schema.drop_if_exists('foo')
+
+        with self.schema.table('testcases') as table:
+            table.drop_column('bar')
