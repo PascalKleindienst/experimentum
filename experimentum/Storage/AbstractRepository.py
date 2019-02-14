@@ -136,8 +136,7 @@ end with ``Repository.py``. The repository files should contain a repository cla
 the same name as the file name.
 """
 import os
-import glob
-import imp
+import sys
 import json
 from six import add_metaclass
 from abc import abstractmethod, ABCMeta
@@ -170,6 +169,53 @@ class RepositoryLoader(object):
 
         AbstractRepository.implementation = implementation
 
+    def _import_file(self, name, loc):
+        """Load the repository file modules.
+
+        Args:
+            name (str): Name of the Repository
+            loc (str): Location of the Repository
+
+        Returns:
+            Module: Repository Module
+
+        Raises:
+            Error: if the module could not be found
+        """
+        path = self.app.config.get('storage.repositories.path', 'repositories')
+
+        if sys.version_info >= (3, 5):
+            import importlib.util
+            import importlib.machinery
+
+            # finder is needed when folder is not a subfolder of root dir (e.g. for test layouts)
+            loader_details = (
+                importlib.machinery.SourceFileLoader,
+                importlib.machinery.SOURCE_SUFFIXES
+            )
+
+            finder = importlib.machinery.FileFinder(loc, loader_details)
+            spec = finder.find_spec(name)
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+
+            return module
+
+        else:
+            import imp
+            # first find and load the package assuming it is in
+            # the current working directory, '.'
+            fp, p, desc = imp.find_module(os.path.join(self.app.root, path), ['.'])
+            pkg = imp.load_module(path, fp, p, desc)
+
+            # then find the named repository module using pkg.__path__
+            # and load the module using the dotted name
+            fp, p, desc = imp.find_module(name, pkg.__path__)
+            module = imp.load_module(path + '.' + name, fp, p, desc)
+            fp.close()
+
+            return module
+
     def load(self):
         """Load all repositories from the repo folder and try to map them to the store."""
         # Get Repository files
@@ -180,25 +226,13 @@ class RepositoryLoader(object):
 
         for filename in files:
             name = os.path.basename(filename)[:-3]
-            path = self.app.config.get('storage.repositories.path', 'repositories')
 
+            # Try to load and map the repos
             try:
-                # first find and load the package assuming it is in
-                # the current working directory, '.'
-                fp, p, desc = imp.find_module(os.path.join(self.app.root, path), ['.'])
-                pkg = imp.load_module(path, fp, p, desc)
-
-                # then find the named repository module using pkg.__path__
-                # and load the module using the dotted name
-                fp, p, desc = imp.find_module(name, pkg.__path__)
-                mod = imp.load_module(path + '.' + name, fp, p, desc)
-
-                # Mapping
-                repo = getattr(mod, name)
+                module = self._import_file(name, os.path.abspath(os.path.dirname(filename)))
+                repo = getattr(module, name)
                 repo.mapping(repo, self.store)
                 self._repos[name] = repo
-
-                fp.close()
 
             except Exception as exc:
                 print_failure('Could not load repository. ' + str(exc), exit_code=1)
