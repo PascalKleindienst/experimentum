@@ -1,6 +1,5 @@
 from experimentum.Storage import AbstractStore
 from experimentum.Experiments import App
-from conftest import create_directories_and_files
 import tempfile
 import pytest
 
@@ -61,7 +60,7 @@ class TestStore():
         entry.delete()
         assert cli_app.store.session.execute('SELECT COUNT(*) FROM testcases;').first()[0] == 0
 
-    def test_custom_store(self):
+    def test_custom_store(self, app_files):
         """
         GIVEN the framework is installed and the standard tables exist
         WHEN the user creates a custom AbstractStore implementation
@@ -77,7 +76,7 @@ class TestStore():
                 self.store = my_store
 
         # User initialises the application
-        create_directories_and_files(TestContainer.config_path)
+        app_files.create_directories_and_files(TestContainer.config_path)
         container = TestContainer('testing', TestContainer.config_path + '/.')
 
         # The application store should be the custom store implementation
@@ -85,7 +84,7 @@ class TestStore():
         assert isinstance(container.store, CustomStore)
         assert isinstance(container.make('store'), CustomStore)
 
-    def test_invalid_store(self, capsys):
+    def test_invalid_store(self, capsys, app_files):
         """
         GIVEN the framework is installed and the standard tables exist
         WHEN the user uses a custom invalid store implementation
@@ -102,7 +101,7 @@ class TestStore():
                 self.store = InvalidStore()
 
         # User initialises the application
-        create_directories_and_files(TestContainer.config_path)
+        app_files.create_directories_and_files(TestContainer.config_path)
         with pytest.raises(SystemExit) as pytest_wrapped_e:
             TestContainer('testing', TestContainer.config_path + '/.')
 
