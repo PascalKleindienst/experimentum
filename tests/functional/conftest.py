@@ -25,8 +25,11 @@ def create_directories_and_files(path):
 
     # Create Config Files
     cfg = {
-        'app.json': {"prog": "main.py", "description": "Testing."},
-        'storage.json': {"datastore": {'drivername': 'sqlite', 'database': 'test.db'}, 'migrations': {'path': 'migrations'}}
+        'app.json': {'prog': 'main.py', 'description': 'Testing.'},
+        'storage.json': {
+            'datastore': {'drivername': 'sqlite', 'database': 'test.db'},
+            'migrations': {'path': 'migrations'}
+        }
     }
     for key, item in cfg.items():
         with open(os.path.join(path, key), 'w') as outfile:
