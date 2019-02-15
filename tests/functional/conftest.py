@@ -16,7 +16,7 @@ class AppFileHandler(object):
             path (str): Root Path
         """
         # Create Folders
-        folders = ['logs', 'experiments', 'migrations', 'repositories']
+        folders = ['logs', 'experiments', 'migrations', 'repositories', 'plots']
         for folder in folders:
             os.mkdir(os.path.join(path, folder))
 
@@ -30,7 +30,8 @@ class AppFileHandler(object):
             'storage.json': {
                 'datastore': {'drivername': 'sqlite', 'database': 'test.db'},
                 'migrations': {'path': 'migrations'}
-            }
+            },
+            'plots.json': {'foo': {'type': 'plot'}}
         }
         for key, item in cfg.items():
             with open(os.path.join(path, key), 'w') as outfile:
@@ -44,6 +45,7 @@ class AppFileHandler(object):
             {'name': 'ExperimentRepository', 'target': 'repositories/{name}.py'},
             {'name': 'TestCaseRepository', 'target': 'repositories/{name}.py'},
             {'name': 'PerformanceRepository', 'target': 'repositories/{name}.py'},
+            {'name': 'FooPlot', 'target': 'plots/{name}.py'},
         ]
         for stub in stubs:
             self.create_from_stub(path, stub['name'], stub['target'])

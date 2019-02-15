@@ -1,0 +1,15 @@
+from experimentum.Experiments import Experiment
+
+
+class FooExperiment(Experiment):
+    def reset(self):
+        """Reset data structured and values used in each test run."""
+        pass
+
+    def run(self):
+        """Perform a test run of the experiment."""
+        with self.performance.point('Test-Abschnitt'):
+            # Profiling
+            pass
+
+        return {'bar': 1}

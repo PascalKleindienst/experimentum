@@ -1,0 +1,11 @@
+from experimentum.Experiments import Experiment
+
+
+class FooExperiment(Experiment):
+    def reset(self):
+        """Reset data structured and values used in each test run."""
+        pass
+
+    def run(self):
+        """Perform a test run of the experiment."""
+        return {'bar': 1}
