@@ -43,7 +43,7 @@ class TestMigration(object):
         # Database schema should be changed
         insp = reflection.Inspector.from_engine(cli_app.store.engine)
         assert 'foo' in cli_app.store.engine.table_names()
-        assert insp.get_columns('testcases')[3]['name'] == 'bar'
+        assert insp.get_columns('testcases')[4]['name'] == 'foo'
         assert isinstance(insp.get_columns('testcases')[3]['type'], INTEGER)
         assert insp.get_columns('foo')[0]['name'] == 'id'
         assert isinstance(insp.get_columns('foo')[0]['type'], INTEGER)

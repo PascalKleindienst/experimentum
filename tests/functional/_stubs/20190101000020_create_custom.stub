@@ -8,9 +8,9 @@ class CreateCustom(Migration):
 
     def up(self):
         """Run the migrations."""
-        # add integer bar column to testcases
+        # add integer foo column to testcases
         with self.schema.table('testcases') as table:
-            table.integer('bar')
+            table.integer('foo')
 
         # add foo table with id:int and name:str
         with self.schema.create('foo') as table:
