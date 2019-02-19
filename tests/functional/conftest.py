@@ -3,9 +3,10 @@ import pytest
 import tempfile
 import os
 import json
-from experimentum.Experiments import App
 from shutil import copyfile, rmtree
 from sqlalchemy.orm import clear_mappers
+from experimentum.Experiments import App
+from experimentum.WebGUI import create_app
 
 
 class AppFileHandler(object):
@@ -20,7 +21,10 @@ class AppFileHandler(object):
         for folder in folders:
             os.mkdir(os.path.join(path, folder))
 
-        # Create Init files
+        # Create Init/Main files
+        with open(os.path.join(path, 'main.py'), 'w+') as outfile:
+            outfile.write('')
+
         with open(os.path.join(path, 'repositories', '__init__.py'), 'w+') as outfile:
             outfile.write('')
 
@@ -99,3 +103,16 @@ def cli_app(app_files):
         handler.close()
         container.log.removeHandler(handler)
     rmtree(TestContainer.config_path)
+
+
+@pytest.fixture
+def webclient(cli_app):
+    """A test client for the web app."""
+    # create the app with common test config and set template folder
+    webapp = create_app(cli_app, {'TESTING': True})
+    webapp.template_folder = os.path.abspath(os.path.join(
+        os.path.dirname(__file__),
+        '../../experimentum/WebGUI/templates/'
+    ))
+
+    return webapp.test_client()
