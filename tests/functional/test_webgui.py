@@ -10,15 +10,34 @@ def start_server():
     import tempfile
     from conftest import AppFileHandler
     from experimentum.Experiments import App
+    from experimentum.WebGUI import Server
 
+    # App Container
     class WebAppContainer(App):
         config_path = tempfile.mkdtemp()
 
+    # Test Server
+    class TestServer(Server):
+        def create_app(self):
+            app = super(TestServer, self).create_app()
+            app.template_folder = os.path.abspath(os.path.join(
+                os.path.dirname(__file__),
+                '../../experimentum/WebGUI/templates/'
+            ))
+
+            return app
+
+    # Setup args
     main = os.path.join(WebAppContainer.config_path, 'main.py')
     sys.argv = [main, 'webgui', '--port', '3000', '--no-reload']
+
+    # add files and dirs
     app_files = AppFileHandler()
     app_files.create_directories_and_files(WebAppContainer.config_path)
+
+    # init container and testserver and run command
     container = WebAppContainer('testing', WebAppContainer.config_path + '/.')
+    container.aliases['server'] = lambda: TestServer(container, True)
     container.run()
 
 
