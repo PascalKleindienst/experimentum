@@ -43,19 +43,35 @@ the command execution::
 """
 
 
-def command(description='', arguments={}, help=''):
+def command(description='', arguments=None, help=''):
     """Command decorator, creates a Command to use with the CommandManager.
 
     Args:
         description (str, optional): Defaults to ''. Description of the command.
-        arguments (dict, optional): Defaults to {}. Arguments for the command.
+        arguments (dict, optional): Defaults to None. Arguments for the command.
         help (str, optional): Defaults to ''. Help text of the command.
 
     Returns:
         function:
     """
     def command_decorator(command):
+        """Decorator to specific a CLI command-
+
+        Args:
+            command (function): Command Handler
+
+        Returns:
+            function: Command Wrapper
+        """
         def command_wrapper(args=None):
+            """Wrapper to wrap handler in AbstractCommand Class
+
+            Args:
+                args (dict, optional): Defaults to None. Command Arguments
+
+            Returns:
+                AbstractCommand: Command Wrapper
+            """
             cmd = AbstractCommand()
             cmd.setup(description, arguments, help)
             cmd.handle = command
@@ -79,16 +95,16 @@ class AbstractCommand(object):
     arguments = {}
     args = {}
 
-    def setup(self, description='', arguments={}, help=''):
+    def setup(self, description='', arguments=None, help=''):
         """Set up the command.
 
         Args:
             description (str, optional): Defaults to ''. Description of the command.
-            arguments (dict, optional): Defaults to {}. Optional aguments for the command.
+            arguments (dict, optional): Defaults to None. Optional aguments for the command.
             help (str, optional): Defaults to ''. Help Text for the command.
         """
         self.description = description
-        self.arguments = arguments
+        self.arguments = arguments if arguments is not None else {}
         self.help = help
 
     def handle(self, app, args):
