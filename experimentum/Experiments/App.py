@@ -135,7 +135,8 @@ class App(object):
         default_db = {'drivername': 'sqlite', 'database': 'experimentum.db'}
         database = self.config.get('storage.datastore', default_db)
 
-        if database['drivername'] == 'sqlite' and database['database'] != '':  # Absolute db path based on root
+        # Absolute file path based on root for sqlite databases (except in-memory)
+        if database['drivername'] == 'sqlite' and database['database'] != '':
             database['database'] = _path_join(self.root, database['database'])
 
         self.setup_datastore(database)
@@ -224,12 +225,12 @@ class App(object):
                 lambda name: Experiment.load(self, _path_join(self.root, experiments_path), name),
             'migrator':
                 lambda: Migrator(_path_join(self.root, migration_path), self),
-            'plot': lambda name: plot_factory.create(name),
+            'plot': plot_factory.create,
             'store': lambda: self.store,
             'schema': lambda: Schema(self),
             'blueprint': lambda *args, **kwargs: Blueprint(*args, **kwargs),
             'server': lambda: Server(self),
-            'config': lambda: Config()
+            'config': Config
         }
 
     def _add_commands(self):
