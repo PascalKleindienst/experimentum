@@ -15,7 +15,6 @@ Options:
 -h, --help   Show the help message.
 """
 from experimentum.Commands import command
-from experimentum.WebGUI import create_app
 
 
 @command(
@@ -25,7 +24,9 @@ from experimentum.WebGUI import create_app
             'help': 'Port number to start the server on', 'default': 5000, 'type': int
         },
         '--no-reload': {
-            'help': 'Disable reload when file changes are detected', 'dest': 'reload', 'action': 'store_false'
+            'help': 'Disable reload when file changes are detected',
+            'dest': 'reload',
+            'action': 'store_false'
         },
         '--debug': {
             'help': 'Enable the debugger', 'dest': 'debug', 'action': 'store_true'
