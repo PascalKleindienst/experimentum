@@ -9,8 +9,9 @@ to easly manage your database's schema.
 
 Generating Migrations
 ---------------------
-Use the ``migration:make`` command  to create a new :py:class:`.Migration`. This will create the following new :py:class:`.Migration`
-class in your ``migrations`` folder. In order to determine the order of the migrations, each migration file name contains a timestamp.
+Use the ``migration:make`` command  to create a new :py:class:`.Migration`. This will create the
+following new :py:class:`.Migration` class in your ``migrations`` folder. In order to determine
+the order of the migrations, each migration file name contains a timestamp.
 
 Arguments:
 
@@ -55,12 +56,11 @@ from experimentum.Commands import command
     'Displays which migrations where migrated and which ones not.',
     help='Show the migration status.'
 )
-def status(app, args):
+def status(app):
     """Show the status of the migrations.
 
     Arguments:
-        app {experimentum.Experiments.App}
-        args {dict} -- Additional args
+        app (App): Main Service Container
     """
     app.make('migrator').status()
 
@@ -69,12 +69,11 @@ def status(app, args):
     'Reset all migrations and then run them again to rebuild the data schema.',
     help='Rebuild the data schema (clears database).'
 )
-def refresh(app, args):
+def refresh(app):
     """Refresh all migrations.
 
     Arguments:
-        app {experimentum.Experiments.App}
-        args {dict} -- Additional args
+        app (App): Main Service Container
     """
     app.make('migrator').refresh()
 
@@ -83,12 +82,11 @@ def refresh(app, args):
     'Upgrade the oldes migration which needs to be upgraded.',
     help='Upgrade oldest migration.'
 )
-def up(app, args):
+def up(app):
     """Upgrade the oldes migration which needs to be upgraded.
 
     Arguments:
-        app {experimentum.Experiments.App}
-        args {dict} -- Additional args
+        app (App): Main Service Container
     """
     app.make('migrator').up()
 
@@ -97,12 +95,11 @@ def up(app, args):
     'Downgrade latest migration',
     help='Downgrade the latest migration which can be downgraded.'
 )
-def down(app, args):
+def down(app):
     """Downgrade the latest migration which can be downgraded.
 
     Arguments:
-        app {experimentum.Experiments.App}
-        args {dict} -- Additional args
+        app (App): Main Service Container
     """
     app.make('migrator').down()
 
@@ -116,7 +113,7 @@ def make(app, args):
     """Make a new migration file.
 
     Arguments:
-        app {experimentum.Experiments.App}
-        args {dict} -- Additional args
+        app (App): Main Service Container
+        args (dict): Additional args
     """
     app.make('migrator').make(args.name.lower())
