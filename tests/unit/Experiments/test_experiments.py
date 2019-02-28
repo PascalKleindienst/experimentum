@@ -30,7 +30,6 @@ class TestExperiments(object):
 
         return exp
 
-
     def test_get_status(self, tmpdir, mocker):
         with tmpdir.join('FooExperiment.py').open('w+') as fh:
             fh.write('#Foo')
@@ -48,7 +47,7 @@ class TestExperiments(object):
         app_mock.config.get = mocker.MagicMock(return_value=tmpdir.strpath)
         app_mock.repositories.get = mocker.MagicMock(return_value=repo_mock)
 
-
+        # assert correct status data
         data = Experiment.get_status(app_mock)
         assert data['foo']['count'] is 1
         assert data['foo']['name'] == 'Foo'
@@ -99,7 +98,7 @@ class TestExperiments(object):
         with pytest.raises(SystemExit) as pytest_wrapped_e:
             app_mock = mocker.patch('experimentum.Experiments.App')
             app_mock.root = '.'
-            Experiment.load(app_mock,tmpdir.strpath, 'Foo')
+            Experiment.load(app_mock, tmpdir.strpath, 'Foo')
 
         assert 'Could not load file' in capsys.readouterr().err
         assert pytest_wrapped_e.type == SystemExit
