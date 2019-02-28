@@ -135,7 +135,7 @@ class App(object):
         default_db = {'drivername': 'sqlite', 'database': 'experimentum.db'}
         database = self.config.get('storage.datastore', default_db)
 
-        if database['drivername'] == 'sqlite':  # Absolute db path based on root
+        if database['drivername'] == 'sqlite' and database['database'] != '':  # Absolute db path based on root
             database['database'] = _path_join(self.root, database['database'])
 
         self.setup_datastore(database)
