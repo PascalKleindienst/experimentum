@@ -136,7 +136,15 @@ class Script(object):
         Returns:
             object: Process output
         """
-        return json.loads(self.output)
+        return json.loads(self.get_text())
+
+    def get_text(self):
+        """Get the text of the process output.
+
+        Returns:
+            str: Process output
+        """
+        return self.output
 
 
 @add_metaclass(ABCMeta)
