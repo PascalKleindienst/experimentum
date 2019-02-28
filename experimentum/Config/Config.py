@@ -9,11 +9,11 @@ Example:
 
     cfg = Config()
     cfg.set({ 'foo': 'bar', 'foobar': {'baz': 42 } })
-    cfg.set('a.b.c', 'd')
+    cfg.set('a.b', 'c')
 
     cfg.get('foobar.baz')  # returns: 42
     cfg.has('foobar.foo')  # returns: False
-    cfg.all()              # returns: { 'foo': 'bar', 'foobar': {'baz': 42 }, 'a': {'b': {'c': 'd'}} }
+    cfg.all()              # returns: { 'foo': 'bar', 'foobar': {'baz': 42 }, 'a': {'b': 'c'} }
 
 """
 

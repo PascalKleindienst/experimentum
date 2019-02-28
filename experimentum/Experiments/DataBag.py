@@ -44,7 +44,8 @@ Deleting entries works just like adding/getting entries::
 
 Flushing Entries
 ----------------
-Flushing the DataBag means that you get all the entires (or just a specific key) and then clear the content::
+Flushing the DataBag means that you get all the entires (or just a specific key)
+and then clear the content::
 
     DataBag.add('foo.bar.baz', 42)
     print(DataBag.flush('foo.bar.baz))  # prints: 42, contains: {'foo': {'bar': {}}}
@@ -95,8 +96,8 @@ def get_from(items, data):
     if not isinstance(data, dict):
         raise KeyError
 
-    it = items.pop(0)
-    data = data[it]
+    item = items.pop(0)
+    data = data[item]
 
     return get_from(items, data) if items else data
 
@@ -170,7 +171,6 @@ class DataBag(object):
             return -1
 
         return 1
-
 
     @classmethod
     def merge(cls, key, data):
