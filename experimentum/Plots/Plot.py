@@ -104,6 +104,7 @@ class AbstractPlot(object):
         """
         raise NotImplementedError('Must implement show method!')
 
+
 class Plot(AbstractPlot):
 
     """Concrete Implementation of the AbstractPlot Interface for a plot class.

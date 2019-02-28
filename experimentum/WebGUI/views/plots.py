@@ -49,7 +49,11 @@ def generate_plots(directory, container, experiment):
                     'file': url_for('plots.image', experiment=experiment, filename=name + '.svg')
                 })
             except Exception as exc:
-                messages.append({'message': 'Error generating plot {}: {}'.format(name, exc), 'status': 'error', 'file': None})
+                messages.append({
+                    'message': 'Error generating plot {}: {}'.format(name, exc),
+                    'status': 'error',
+                    'file': None
+                })
 
     return messages
 
