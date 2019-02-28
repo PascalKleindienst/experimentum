@@ -76,7 +76,6 @@ your TestCaseRepository with a migration::
 from __future__ import print_function
 import os
 import glob
-import imp
 import subprocess
 import json
 from datetime import datetime
