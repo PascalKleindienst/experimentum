@@ -212,17 +212,18 @@ class Plot(AbstractPlot):
         """Show the plot."""
         self.plot.show()
 
-    def _get_params(self, plot_idx, remove=[]):
+    def _get_params(self, plot_idx, remove=None):
         """Get params for the plot.
 
         Args:
             plot_idx (integer): Index for when multiple plots are drawn.
-            remove (list, optional): Defaults to []. List of keys to remove from params.
+            remove (list, optional): Defaults to None. List of keys to remove from params.
 
         Returns:
             dict: Dictionary of params
         """
         _params = {}
+        remove = remove if remove is not None else []
         params = self.config.get('params', {})
         params['label'] = self.config.get('styles.label', '')
 

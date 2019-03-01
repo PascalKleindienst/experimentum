@@ -48,8 +48,8 @@ class Store(AbstractStore):
         self.sqlite_platform.set_engine(self.engine, self.meta)
 
         # Create session
-        Session = sessionmaker(bind=engine)
-        self.session = Session()
+        session = sessionmaker(bind=engine)
+        self.session = session()
 
     def has_table(self, table):
         """Check if the data store has a specific table.
