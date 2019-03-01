@@ -11,6 +11,7 @@ Subpackages
     experimentum.Experiments
     experimentum.Plots
     experimentum.Storage
+    experimentum.WebGUI
 
 Submodules
 ----------

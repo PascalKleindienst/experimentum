@@ -44,6 +44,14 @@ experimentum.Commands.PlotCommand module
     :undoc-members:
     :show-inheritance:
 
+experimentum.Commands.WebGUICommand module
+------------------------------------------
+
+.. automodule:: experimentum.Commands.WebGUICommand
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 
 Module contents
 ---------------
