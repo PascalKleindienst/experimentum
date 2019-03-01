@@ -7,6 +7,22 @@ from experimentum.cli import print_failure
 from experimentum.Commands import AbstractCommand
 
 
+class _Parser(argparse.ArgumentParser):
+
+    """Helper to color in titles."""
+
+    def titles(self, positionals, optionals, color='cyan'):
+        """Color in titles.
+
+        Args:
+            positionals (str): Positionals Title
+            optionals (str): Optionals Title
+            color (str, optional): Defaults to 'cyan'. Text Color
+        """
+        self._positionals.title = colored(positionals, color)
+        self._optionals.title = colored(optionals, color)
+
+
 class CommandManager(object):
 
     """CommandManager class registers and manages commands.
@@ -28,7 +44,7 @@ class CommandManager(object):
         self.app = app
 
         # Init ArgumentParser
-        self._parser = argparse.ArgumentParser(
+        self._parser = _Parser(
             add_help=False,
             prog=colored(prog, 'yellow'),
             description=colored(description, 'yellow'),
@@ -48,8 +64,7 @@ class CommandManager(object):
         )
 
         # Colore Titles
-        self._parser._positionals.title = colored('Arguments', 'cyan')
-        self._parser._optionals.title = colored('Options', 'cyan')
+        self._parser.titles('Arguments', 'Options', color='cyan')
 
         # Init subparsers
         self._subparsers = self._parser.add_subparsers()
@@ -82,8 +97,7 @@ class CommandManager(object):
             default=argparse.SUPPRESS,
             help='Show this help message and exit.'
         )
-        command._positionals.title = colored('Arguments', 'cyan')
-        command._optionals.title = colored('Options', 'cyan')
+        command.titles('Arguments', 'Options', color='cyan')
 
         # Add arguments and bind command
         for arg, opt in cmd.arguments.items():
@@ -112,10 +126,10 @@ class ColoredHelpFormatter(argparse.HelpFormatter):
         """Color in the default text of the current action."""
         helptext = action.help
         if '%(default)' not in action.help:
-            if action.default != '==SUPPRESS==':
-                defaulting_nargs = ['?', '*']
-                if action.nargs in defaulting_nargs:
-                    helptext += colored(' [default: %(default)s]', 'cyan')
+            if action.default != '==SUPPRESS==' and action.default:
+                # defaulting_nargs = ['?', '*']
+                # if action.nargs in defaulting_nargs:
+                helptext += colored(' [default: %(default)s]', 'cyan')
         return helptext
 
     def _format_action_invocation(self, action):
@@ -130,6 +144,7 @@ class ColoredHelpFormatter(argparse.HelpFormatter):
 
     def _format_action(self, action):
         """Color in actions."""
+        # Color in Options
         if action.option_strings:
             help_position = min(
                 self._action_max_length + 2,
