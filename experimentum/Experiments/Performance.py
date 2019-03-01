@@ -97,6 +97,45 @@ def _to_df(point, level=0):
     return data
 
 
+def _calc_metrics(row):
+    """Calculate metrics for time and memory.
+
+    Args:
+        row (list): List of points
+
+    Returns:
+        set: Mean Time, STD Time, Mean Memory, STD Memory
+    """
+    times = list(zip(*[points['Time'] for points in row]))
+    mean_time = list(map(Performance.mean, times))
+    std_time = list(map(Performance.standard_deviation, times))
+
+    memory = list(zip(*[points['Memory'] for points in row]))
+    mean_memory = list(map(Performance.mean, memory))
+    std_memory = list(map(Performance.standard_deviation, memory))
+
+    return list(zip(mean_time, std_time, mean_memory, std_memory))
+
+
+def _transform_points(points, attrs):
+    """Transform points to another format for better usability.
+
+    Args:
+        points (dict): Points
+        attrs (list): list of point attributes
+
+    Returns:
+        list: List of Points in the format of [{'label': 'foo', ...}, {'label': 'bar'}]
+    """
+    items = zip(*[points[k] for k in attrs])
+    return [
+        {
+            key.lower().replace(' ', '_'): item[idx] for idx, key in enumerate(attrs)
+        }
+        for item in items
+    ]
+
+
 class Formatter(object):
 
     """Format performance values to a human-readable format."""
@@ -410,13 +449,13 @@ class Performance(object):
         data = []
         for row in result.values():
             # Only last iteration
-            points = self._get_points(
+            points = _transform_points(
                 row[-1], ['Label', 'Level', 'Type', 'Time', 'Memory', 'Peak Memory']
             )
 
             # Calculate metrics for time and memory
             if metrics:
-                metrics = self._calc_metrics(row)
+                metrics = _calc_metrics(row)
 
                 # add metrics to each point
                 for idx, point in enumerate(points):
@@ -429,43 +468,6 @@ class Performance(object):
             data.extend(points)
 
         return data
-
-    def _get_points(self, points, attrs):
-        """Transform points to another format for better usability.
-
-        Args:
-            points (dict): Points
-            attrs (list): list of point attributes
-
-        Returns:
-            list: List of Points in the format of [{'label': 'foo', ...}, {'label': 'bar'}]
-        """
-        items = zip(*[points[k] for k in attrs])
-        return [
-            {
-                key.lower().replace(' ', '_'): item[idx] for idx, key in enumerate(attrs)
-            }
-            for item in items
-        ]
-
-    def _calc_metrics(self, row):
-        """Calculate metrics for time and memory.
-
-        Args:
-            row (list): List of points
-
-        Returns:
-            set: Mean Time, STD Time, Mean Memory, STD Memory
-        """
-        times = list(zip(*[points['Time'] for points in row]))
-        mean_time = list(map(Performance.mean, times))
-        std_time = list(map(Performance.standard_deviation, times))
-
-        memory = list(zip(*[points['Memory'] for points in row]))
-        mean_memory = list(map(Performance.mean, memory))
-        std_memory = list(map(Performance.standard_deviation, memory))
-
-        return list(zip(mean_time, std_time, mean_memory, std_memory))
 
     def results(self):
         """Print the performance results in a human-readable format."""
