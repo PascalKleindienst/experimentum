@@ -205,14 +205,14 @@ class RepositoryLoader(object):
             import imp
             # first find and load the package assuming it is in
             # the current working directory, '.'
-            fp, p, desc = imp.find_module(os.path.join(self.app.root, path), ['.'])
-            pkg = imp.load_module(path, fp, p, desc)
+            handler, pathname, desc = imp.find_module(os.path.join(self.app.root, path), ['.'])
+            pkg = imp.load_module(path, handler, pathname, desc)
 
             # then find the named repository module using pkg.__path__
             # and load the module using the dotted name
-            fp, p, desc = imp.find_module(name, pkg.__path__)
-            module = imp.load_module(path + '.' + name, fp, p, desc)
-            fp.close()
+            handler, pathname, desc = imp.find_module(name, pkg.__path__)
+            module = imp.load_module(path + '.' + name, handler, pathname, desc)
+            handler.close()
 
             return module
 
@@ -347,7 +347,7 @@ class AbstractRepository(object):
 
         for key, val in data.items():
             if key in relationships:
-                if type(val) is list:
+                if isinstance(val, list):
                     relations[key] = [relationships[key][0].from_dict(v) for v in val]
                 else:
                     relations[key] = [relationships[key][0].from_dict(val)]
@@ -466,30 +466,30 @@ class AbstractRepository(object):
         """Event that gets called before insert statement is executed.
 
         Returns:
-            None
+            AbstractRepository
         """
-        return None
+        return self
 
     def after_insert(self):
         """Event that gets called after insert statement is executed.
 
         Returns:
-            None
+            AbstractRepository
         """
-        return None
+        return self
 
     def before_update(self):
         """Event that gets called before update statement is executed.
 
         Returns:
-            None
+            AbstractRepository
         """
-        return None
+        return self
 
     def after_update(self):
         """Event that gets called after update statement is executed.
 
         Returns:
-            None
+            AbstractRepository
         """
-        return None
+        return self

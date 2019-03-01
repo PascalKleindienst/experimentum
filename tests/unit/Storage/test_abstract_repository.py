@@ -117,16 +117,16 @@ class TestAbstractRepository(object):
 
     def test_before_insert(self, mocker):
         repo = self.setup_repo(mocker)
-        assert repo.before_insert() is None
+        assert repo.before_insert() is repo
 
     def test_after_insert(self, mocker):
         repo = self.setup_repo(mocker)
-        assert repo.after_insert() is None
+        assert repo.after_insert() is repo
 
     def test_before_update(self, mocker):
         repo = self.setup_repo(mocker)
-        assert repo.before_update() is None
+        assert repo.before_update() is repo
 
     def test_after_update(self, mocker):
         repo = self.setup_repo(mocker)
-        assert repo.after_update() is None
+        assert repo.after_update() is repo
