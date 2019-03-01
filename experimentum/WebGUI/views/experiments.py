@@ -124,7 +124,7 @@ def plots(experiment):
     plots = [f for f in os.listdir(path) if not f.startswith('.')]
     data = {
         'experiment': experiment,
-        'plots': map(lambda f: secure_filename(f), plots)
+        'plots': map(secure_filename, plots)
     }
 
     return render_template('experiments/plots.jinja', **data)

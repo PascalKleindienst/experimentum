@@ -49,7 +49,7 @@ def print_progress(iteration, total, prefix='', suffix='', decimals=1, bar_lengt
     # bar = '█' * filled_length + '-' * (bar_length - filled_length)
     bar = '#' * filled_length + '-' * (bar_length - filled_length)
 
-    sys.stdout.write('\r%s |%s| %s%s %s\n' % (prefix, bar, percents, '%', suffix)),
+    sys.stdout.write('\r%s |%s| %s%s %s\n' % (prefix, bar, percents, '%', suffix))
 
     if iteration == total:
         sys.stdout.write('\n')

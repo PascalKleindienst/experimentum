@@ -228,7 +228,7 @@ class App(object):
             'plot': plot_factory.create,
             'store': lambda: self.store,
             'schema': lambda: Schema(self),
-            'blueprint': lambda *args, **kwargs: Blueprint(*args, **kwargs),
+            'blueprint': Blueprint,
             'server': lambda: Server(self),
             'config': Config
         }

@@ -27,13 +27,13 @@ VERSION = __version__.__version__
 ROOT = '.'
 
 
-def _create_migration(path, name, up, down):
+def _create_migration(path, name, upgrade, down):
     """Create a migration file.
 
     Args:
         path (str): Path to migrations folder.
         name (str): Name of Migration
-        up (str): Up method content
+        upgrade (str): Up method content
         down (str): down method content
     """
     revision = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
@@ -42,15 +42,16 @@ def _create_migration(path, name, up, down):
         'migration': inflection.camelize(name),
         'name': name,
         'revision': revision,
-        'up': up,
+        'up': upgrade,
         'down': down
     }
     create_from_stub('Migration.stub', filename, attrs)
 
 
-def _create_repository(path, name, table, attributes, nullable=[], relationships=None):
+def _create_repository(path, name, table, attributes, nullable=None, relationships=None):
     # Relationships and Imports
     relationships = relationships if relationships is not None else {}
+    nullable = nullable if nullable is not None else []
     imports = []
     relations_data = []
     for attr, repo in relationships.items():
@@ -74,7 +75,7 @@ def _create_repository(path, name, table, attributes, nullable=[], relationships
         'kwargs': ', '.join(
             map(lambda attr: '{}{}'.format(attr, '=None' if attr in nullable else ''), attributes)
         ),
-        'set_attr': '\n        '.join(map(lambda attr: 'self.{0} = {0}'.format(attr), attributes))
+        'set_attr': '\n        '.join(map('self.{0} = {0}'.format, attributes))
     }
 
     # print(attrs)
@@ -155,7 +156,7 @@ def main():
     _create_migration(
         folders['migrations'],
         'create_experiments',
-        up="""with self.schema.create('experiments') as table:
+        upgrade="""with self.schema.create('experiments') as table:
             table.increments('id')
             table.primary('id')
             table.string('name', 75)
@@ -169,7 +170,7 @@ def main():
     _create_migration(
         folders['migrations'],
         'create_testcase',
-        up=r"""with self.schema.create('testcases') as table:
+        upgrade=r"""with self.schema.create('testcases') as table:
             table.increments('id')
             table.primary('id')
             table.increments('experiment_id')
@@ -183,7 +184,7 @@ def main():
     _create_migration(
         folders['migrations'],
         'create_performance',
-        up=r"""with self.schema.create('performance') as table:
+        upgrade=r"""with self.schema.create('performance') as table:
             table.big_increments('id')
             table.primary('id')
             table.string('label', 25)

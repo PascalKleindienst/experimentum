@@ -78,16 +78,16 @@ def create_app(container, test_config=None):
 
     # 404 Page
     @app.errorhandler(404)
-    def page_not_found(e):
+    def page_not_found(err):
         """Return 404 error page.
 
         Args:
-            e (werkzeug.exceptions.NotFound): Error message
+            err (werkzeug.exceptions.NotFound): Error message
 
         Returns:
             Response: 404 Page
         """
-        return render_template('404.jinja', msg=e), 404
+        return render_template('404.jinja', msg=err), 404
 
     # Add Blueprints
     from .views import dashboard, migrations, experiments, plots

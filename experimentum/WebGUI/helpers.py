@@ -4,7 +4,7 @@ import sys
 from six import StringIO
 from contextlib import contextmanager
 
-ansi_pattern = re.compile(r'\x1B\[[0-?]*[ -/]*[@-~]')
+ANSI_PATTERN = re.compile(r'\x1B\[[0-?]*[ -/]*[@-~]')
 
 
 def ansi_escape(text):
@@ -16,7 +16,7 @@ def ansi_escape(text):
     Returns:
         str: escaped text
     """
-    return ansi_pattern.sub('', text)
+    return ANSI_PATTERN.sub('', text)
 
 
 @contextmanager
@@ -56,7 +56,8 @@ class CapturedContent(object):
         sys.stdout = self.streams['out']
         sys.stderr = self.streams['err']
 
-    def revert(self):
+    @classmethod
+    def revert(cls):
         """Revert back to default stdout and stderr streams."""
         sys.stdout = sys.__stdout__
         sys.stderr = sys.__stderr__
