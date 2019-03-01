@@ -1,3 +1,4 @@
+"""Utility functions to work with files and loading classes."""
 from experimentum.cli import print_failure
 import glob
 import os
