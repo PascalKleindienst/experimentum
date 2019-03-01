@@ -3,9 +3,9 @@
 The dashboard lists:
 * all available experiments
 * all migrations and their status
-  - Upgrade migrations
-  - Downgrade migrations
-  - Refresh Migrations
+  * Upgrade migrations
+  * Downgrade migrations
+  * Refresh Migrations
 """
 from experimentum.WebGUI.views.migrations import get_migration_status
 from experimentum.Experiments import Experiment
