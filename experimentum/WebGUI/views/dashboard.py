@@ -3,6 +3,7 @@
 The dashboard lists:
 * all available experiments
 * all migrations and their status
+
   * Upgrade migrations
   * Downgrade migrations
   * Refresh Migrations
