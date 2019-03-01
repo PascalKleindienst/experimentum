@@ -118,29 +118,21 @@ class ColumnFactory(object):
         primary_key = False
 
         for idx in indexes:
-            if idx.get('col') == col.get('name') or col.get('name') in idx.get('col'):
+            idx_type = idx.get('type')
+            idx_cols = idx.get('col')
+
+            if idx_cols == col.get('name') or col.get('name') in idx_cols:
                 # Primary Key
-                if idx.get('type') == 'primary':
+                if idx_type == 'primary':
                     primary_key = True
-                # Unique Index
-                elif idx.get('type') == 'unique' and idx.get('col') not in used_indexes:
-                    _cols = idx.get('col')
-                    if not isinstance(_cols, list):
-                        _cols = [_cols]
+                # Indexes
+                elif idx_type == 'unique' or idx_type == 'index' and idx_cols not in used_indexes:
+                    if not isinstance(idx_cols, list):
+                        idx_cols = [idx_cols]
 
-                    used_indexes.extend(_cols)
+                    used_indexes.extend(idx_cols)
                     _indexes.append(
-                        Index(idx.get('name'), *_cols, unique=True)
-                    )
-                # Basic Index
-                elif idx.get('type') == 'index' and idx.get('col') not in used_indexes:
-                    _cols = idx.get('col')
-                    if not isinstance(_cols, list):
-                        _cols = [_cols]
-
-                    used_indexes.extend(_cols)
-                    _indexes.append(
-                        Index(idx.get('name'), *_cols)
+                        Index(idx.get('name'), *idx_cols, unique=idx_type == 'unique')
                     )
 
         return primary_key, _indexes, used_indexes
