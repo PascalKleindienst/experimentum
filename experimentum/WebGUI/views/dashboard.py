@@ -1,11 +1,11 @@
 """Contains all views/routes for the dashboard.
 
-The dashboard should:
-* List all available experiments
-* List all migrations and their status
-    - Upgrade migrations
-    - Downgrade migrations
-    - Refresh Migrations
+The dashboard lists:
+* all available experiments
+* all migrations and their status
+  - Upgrade migrations
+  - Downgrade migrations
+  - Refresh Migrations
 """
 from experimentum.WebGUI.views.migrations import get_migration_status
 from experimentum.Experiments import Experiment
