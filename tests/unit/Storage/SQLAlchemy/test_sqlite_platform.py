@@ -1,4 +1,4 @@
-from experimentum.Storage.SQLAlchemy import SQLitePlatform
+from experimentum.Storage.SQLAlchemy.SQLitePlatform import SQLitePlatform, prepare_columns
 from sqlalchemy import Column, Text, Table, create_engine, MetaData
 from sqlalchemy import inspect, ForeignKey, Index
 
@@ -109,3 +109,12 @@ class TestSQLitePlatform(object):
         inspector = inspect(self.platform.engine)
         self.platform.alter_table('foo', [], {'columns': [], 'indexes': [{'type': 'index', 'col': 'bar', 'name': 'foo_bar_index'}]})
         assert inspector.get_indexes('foo') == []
+
+    def test_prepare_columns_drop(self):
+        key = ForeignKey('bar', name='fkey_bar')
+        col = Column('bar', Text, key)
+        idx = [{'type': 'index', 'name': 'invalid'}, {'col': 'bar', 'type': 'foreign', 'name': 'fkey_bar'}]
+
+        assert prepare_columns(
+            [col], [key], {'indexes': idx, 'columns': ['bar']}
+        ) == {'columns': [], 'names': []}

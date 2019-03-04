@@ -18,8 +18,13 @@ class TestDataBag(object):
         DataBag.add('foo.bar.baz', True)  # append
         assert DataBag._data['foo']['bar']['baz'] == [42, True]
 
+    def test_append_item_to_list(self):
+        DataBag.add('foo.bar.baz', [1, 2])
+        DataBag.add('foo.bar.baz', 3)  # append
+        assert DataBag._data['foo']['bar']['baz'] == [1, 2, 3]
+
     def test_get_item(self):
-        DataBag._data = {'foo': {'bar': {'baz': 42 }}}
+        DataBag._data = {'foo': {'bar': {'baz': 42}}}
         assert DataBag.get('foo.bar.baz') is 42
 
     def test_get_invalid_item(self):
@@ -39,6 +44,16 @@ class TestDataBag(object):
         DataBag._data = {'foo': {'bar':  ['a', 'b', 'c']}}
         DataBag.merge('foo.bar', ['a', 'd', 'e'])
         assert DataBag._data['foo']['bar'] == ['a', 'b', 'c', 'a', 'd', 'e']
+
+    def test_merge_invalid(self):
+        DataBag._data = {'foo': 1}
+        DataBag.merge('foo', [2, 3])
+        assert DataBag._data['foo'] == 1
+
+    def test_merge_empty(self):
+        DataBag._data = {'foo': 1}
+        DataBag.merge('bar', [2, 3])
+        assert DataBag._data == {'foo': 1}
 
     def test_get_all(self):
         DataBag._data = {'foo': {'a': 1, 'b': 2}}
