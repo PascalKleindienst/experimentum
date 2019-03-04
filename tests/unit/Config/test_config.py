@@ -20,7 +20,7 @@ class TestConfig(object):
         assert self.config.has('invalid.key') is False
 
     def test_get_with_valid_key(self):
-        assert self.config.get('foo.bar') is 'baz'
+        assert self.config.get('foo.bar') == 'baz'
 
     def test_get_with_valid_key_list(self):
         keys = [('foo.bar', 'a'), ('foo.baz', 'b')]
@@ -34,16 +34,20 @@ class TestConfig(object):
 
     def test_set_key(self):
         self.config.set('foo', {'foobar': 42})
-        assert self.config.items['foo']['foobar'] is 42
+        assert self.config.items['foo']['foobar'] == 42
+
+    def test_set_invalid_key(self):
+        self.config.set(42, 'a')
+        assert 42 not in self.config.items
 
     def test_set_dot(self):
         self.config.set('foo.bar.baz', 42)
         assert 'foo' in self.config.items
         assert 'bar' in self.config.items['foo']
         assert 'baz' in self.config.items['foo']['bar']
-        assert self.config.items['foo']['bar']['baz'] is 42
+        assert self.config.items['foo']['bar']['baz'] == 42
 
     def test_set_multiple_key(self):
         self.config.set({'foo': {'bar': 42}, 'x': 'y'})
-        assert self.config.items['foo']['bar'] is 42
+        assert self.config.items['foo']['bar'] == 42
         assert self.config.items['x'] == 'y'
