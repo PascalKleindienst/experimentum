@@ -2,31 +2,88 @@ from experimentum.Storage.SQLAlchemy import ColumnFactory
 from sqlalchemy.dialects.mysql import INTEGER, BIGINT, DOUBLE, LONGTEXT, MEDIUMINT, MEDIUMTEXT
 from sqlalchemy.types import ARRAY, BigInteger, Boolean, Date, DateTime, Enum, Integer,\
     LargeBinary, Numeric, SmallInteger, String, Text, Time, CHAR, Float, JSON, TIMESTAMP
+import pytest
+
+invalid_types = [
+    'invalid_integer', 'invalid_text', 'invalid_time'
+]
+
+integer_types = [
+    {'id': 'big_increments', 'unsigned': True, 'mapping': BIGINT, 'impl': BigInteger},
+    {'id': 'big_integer', 'unsigned': False, 'mapping': BIGINT, 'impl': BigInteger},
+    {'id': 'increments', 'unsigned': True, 'mapping': INTEGER, 'impl': Integer},
+    {'id': 'integer', 'unsigned': False, 'mapping': INTEGER, 'impl': Integer},
+]
+
+sqlite_variants = [
+    {'id': 'json', 'sqlite': Text, 'impl': JSON},
+    {'id': 'long_text', 'sqlite': Text, 'impl': LONGTEXT},
+    {'id': 'medium_integer', 'sqlite': INTEGER, 'impl': MEDIUMINT},
+    {'id': 'medium_text', 'sqlite': Text, 'impl': MEDIUMTEXT},
+]
+
+column_types = [
+    {'id': 'binary', 'impl': LargeBinary},
+    {'id': 'boolean', 'impl': Boolean},
+    {'id': 'date', 'impl': Date},
+    {'id': 'datetime', 'impl': DateTime},
+    {'id': 'small_integer', 'impl': SmallInteger},
+    {'id': 'text', 'impl': Text},
+    {'id': 'time', 'impl': Time},
+    {'id': 'timestamp', 'impl': TIMESTAMP},
+    {'id': 'foobar does not exist', 'impl': Text}
+]
+
+attr_types = [
+    {'id': 'char', 'impl': CHAR, 'attrs': {'length': 42}},
+    {'id': 'string', 'impl': String, 'attrs': {'length': 42}},
+    {'id': 'enum', 'impl': Enum, 'attrs': {'enums': ['foo', 'bar']}},
+    {'id': 'decimal', 'impl': Numeric, 'attrs': {'precision': 10, 'scale': 2}},
+    {'id': 'float', 'impl': Float, 'params': {'precision': 10, 'decimal_return_scale': 2}, 'attrs': {'precision': 10, 'scale': 2}}
+]
 
 
 class TestColumnFactory(object):
-    def test_type_mapping(self, mocker):
+
+    @pytest.mark.parametrize('invalid_type', invalid_types)
+    def test_invalid_type_mapping(self, invalid_type):
+        factory = ColumnFactory()
+        assert factory.get_type(invalid_type) is None
+
+    @pytest.mark.parametrize('integer_type', integer_types)
+    def test_integer_type_mapping(self, integer_type):
         factory = ColumnFactory()
 
-        _type = factory.get_type('big_increments').__dict__
-        assert _type['mapping']['mysql'].unsigned is True
-        assert isinstance(_type['mapping']['mysql'], BIGINT)
-        assert isinstance(_type['impl'], BigInteger)
+        _type = factory.get_type(integer_type['id']).__dict__
+        assert _type['mapping']['mysql'].unsigned is integer_type['unsigned']
+        assert isinstance(_type['mapping']['mysql'], integer_type['mapping'])
+        assert isinstance(_type['impl'], integer_type['impl'])
 
-        _type = factory.get_type('big_integer', unsigned=False).__dict__
-        assert _type['mapping']['mysql'].unsigned is False
-        assert isinstance(_type['mapping']['mysql'], BIGINT)
-        assert isinstance(_type['impl'], BigInteger)
+    @pytest.mark.parametrize('variants', sqlite_variants)
+    def test_sqlite_variants_mappings(self, variants):
+        factory = ColumnFactory()
 
-        _type = factory.get_type('increments').__dict__
-        assert _type['mapping']['mysql'].unsigned is True
-        assert isinstance(_type['mapping']['mysql'], INTEGER)
-        assert isinstance(_type['impl'], Integer)
+        _type = factory.get_type(variants['id']).__dict__
+        assert isinstance(_type['mapping']['sqlite'], variants['sqlite'])
+        assert isinstance(_type['impl'], variants['impl'])
 
-        _type = factory.get_type('integer', unsigned=False).__dict__
-        assert _type['mapping']['mysql'].unsigned is False
-        assert isinstance(_type['mapping']['mysql'], INTEGER)
-        assert isinstance(_type['impl'], Integer)
+    @pytest.mark.parametrize('column_type', column_types)
+    def test_type_mapping(self, column_type):
+        factory = ColumnFactory()
+        isinstance(factory.get_type(column_type['id']), column_type['impl'])
+
+    @pytest.mark.parametrize('attr_type', attr_types)
+    def test_attr_type_mapping(self, attr_type):
+        factory = ColumnFactory()
+
+        _type = factory.get_type(attr_type['id'], attr_type.get('attrs', {}))
+        assert isinstance(_type, attr_type['impl'])
+
+        for key, val in attr_type.get('params', {}).items():
+            assert _type.__dict__[key] == val
+
+    def test_double_type_mapping(self):
+        factory = ColumnFactory()
 
         _type = factory.get_type('double', {'precision': 10, 'scale': 2}).__dict__
         assert _type['mapping']['sqlite'].precision == 10
@@ -36,42 +93,10 @@ class TestColumnFactory(object):
         assert isinstance(_type['mapping']['sqlite'], Float)
         assert isinstance(_type['impl'], DOUBLE)
 
-        self._test_get_type_attribute(factory, 'char', CHAR, {'length': 42}, {'length': 42})
-        self._test_get_type_attribute(factory, 'string', String, {'length': 42}, {'length': 42})
-        self._test_get_type_attribute(factory, 'enum', Enum, {'enums': ['foo', 'bar']}, {'fields': ['foo', 'bar']})
-        self._test_get_type_attribute(factory, 'decimal', Numeric, {'precision': 10, 'scale': 2}, {'precision': 10, 'scale': 2})
-        self._test_get_type_attribute(factory, 'float', Float, {'precision': 10, 'decimal_return_scale': 2}, {'precision': 10, 'scale': 2})
-
-        self._test_get_type_sqlite_variant(factory, 'json', Text, JSON)
-        self._test_get_type_sqlite_variant(factory, 'long_text', Text, LONGTEXT)
-        self._test_get_type_sqlite_variant(factory, 'medium_integer', INTEGER, MEDIUMINT)
-        self._test_get_type_sqlite_variant(factory, 'medium_text', Text, MEDIUMTEXT)
-
+    def test_array_type_mapping(self):
+        factory = ColumnFactory()
         _type = factory.get_type('array', {'arr_type': 'integer', 'dimensions': 2}).__dict__
         assert isinstance(_type['mapping']['postgresql'], ARRAY)
         # assert isinstance(_type['mapping']['postgresql'].__dict__['item_type']['impl'], INTEGER)
         assert _type['mapping']['postgresql'].__dict__['dimensions'] is 2
         assert isinstance(_type['impl'], Integer)
-
-        assert isinstance(factory.get_type('binary'), LargeBinary)
-        assert isinstance(factory.get_type('boolean'), Boolean)
-        assert isinstance(factory.get_type('date'), Date)
-        assert isinstance(factory.get_type('datetime'), DateTime)
-        assert isinstance(factory.get_type('small_integer'), SmallInteger)
-        assert isinstance(factory.get_type('text'), Text)
-        assert isinstance(factory.get_type('time'), Time)
-        assert isinstance(factory.get_type('timestamp'), TIMESTAMP)
-
-        assert isinstance(factory.get_type('foobar does not exist'), Text)
-
-    def _test_get_type_attribute(self, factory, type_key, impl, attrs, parameters={}):
-        _type = factory.get_type(type_key, parameters)
-        assert isinstance(_type, impl)
-
-        for attr_key, attr_val in attrs.items():
-            assert _type.__dict__[attr_key] == attr_val
-
-    def _test_get_type_sqlite_variant(self, factory, type_key, sqlite_type, impl_type):
-        _type = factory.get_type(type_key).__dict__
-        assert isinstance(_type['mapping']['sqlite'], sqlite_type)
-        assert isinstance(_type['impl'], impl_type)
