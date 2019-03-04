@@ -1,6 +1,8 @@
 from experimentum.Storage.SQLAlchemy import Repository
 from alchemy_mock.mocking import UnifiedAlchemyMagicMock
 from sqlalchemy import or_
+from sqlalchemy.event import contains
+import pytest
 
 
 class mock_foo_relation(Repository):
@@ -33,6 +35,15 @@ class TestAbstractStore(object):
 
         assert Repository.store == store
         mapper_mock.assert_called_once_with(Repository, Repository, table, properties={})
+
+    @pytest.mark.parametrize('event', ['before_insert', 'after_insert', 'before_update', 'after_update'])
+    def test_mapping_listeners(self, mocker, event):
+        mapper_mock, store, table = self.setup_mapper(mocker)
+        Repository.mapping(Repository, store)
+
+        assert contains(Repository, event, Repository._events[event])
+        Repository._events[event](mapper_mock, None, table)
+        getattr(table, event).assert_called_once_with()
 
     def test_mapping_relationships(self, mocker):
         mapper_mock, store, table = self.setup_mapper(mocker)
@@ -107,6 +118,15 @@ class TestAbstractStore(object):
         repo.store.session.query.assert_called_once_with(repo.__class__)
         repo.store.session.filter.assert_has_calls([
             mocker.call(or_(Repository.id != 2, Repository.id == 2))
+        ])
+
+    @pytest.mark.parametrize('where', [['id', '<>', 2], ['or', 'id', '<>', 2]])
+    def test_get_where_invalid(self, mocker, where):
+        repo = self.setup_repo(mocker)
+        repo.get(where=where)
+        repo.store.session.query.assert_called_once_with(repo.__class__)
+        repo.store.session.filter.assert_has_calls([
+            mocker.call(or_())
         ])
 
     def test_first(self, mocker):

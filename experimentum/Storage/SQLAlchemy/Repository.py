@@ -93,6 +93,12 @@ class Repository(AbstractRepository):
     to map the Table Schema and the a Repository class. It also uses the
     ``listen`` method to hook up the before_* and after_* events.
     """
+    _events = {
+        'before_insert': lambda m, conn, target: target.before_insert(),
+        'after_insert': lambda m, conn, target: target.after_insert(),
+        'before_update': lambda m, conn, target: target.before_update(),
+        'after_update': lambda m, conn, target: target.after_update()
+    }
 
     def create(self):
         """Save the repository content in your data store.
@@ -207,10 +213,8 @@ class Repository(AbstractRepository):
             logging.getLogger('experimentum').warning('Could not map table: ' + cls.__table__)
 
         # Listen to events
-        listen(cls, 'before_insert', lambda m, conn, target: target.before_insert())
-        listen(cls, 'after_insert', lambda m, conn, target: target.after_insert())
-        listen(cls, 'before_update', lambda m, conn, target: target.before_update())
-        listen(cls, 'after_update', lambda m, conn, target: target.after_update())
+        for event, callback in cls._events.items():
+            listen(cls, event, callback)
 
     @staticmethod
     def map_to_table(cls, repo, table, properties):
