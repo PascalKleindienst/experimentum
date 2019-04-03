@@ -72,6 +72,17 @@ class TestExperiments(object):
         exp.boot()
         assert exp.config.all() == {'foo': 'bar'}
 
+    def test_fail_boot(self, tmpdir, mocker, capsys):
+        exp = self._setup(mocker, tmpdir)
+        exp.app.repositories.get.side_effect = Exception('something went horribly wrong')
+
+        with pytest.raises(SystemExit) as pytest_wrapped_e:
+            exp.boot()
+
+        assert 'something went horribly wrong' in capsys.readouterr().err
+        assert pytest_wrapped_e.type == SystemExit
+        assert pytest_wrapped_e.value.code == 2
+
     def test_boot_load_cfg_failure(self, tmpdir, mocker, capsys):
         exp = self._setup(mocker, tmpdir)
         exp.config_file = 'bar.json'
@@ -186,3 +197,14 @@ class TestExperiments(object):
             'foo': 'bar',
             'bar': {'foobar': 'baz'}
         })
+
+    def test_fail_save(self, mocker, tmpdir, capsys):
+        exp = self._setup(mocker, tmpdir)
+        exp.repos['testcase'].from_dict.side_effect = Exception('something went horribly wrong')
+
+        with pytest.raises(SystemExit) as pytest_wrapped_e:
+            exp.save({}, 2)
+
+        assert 'something went horribly wrong' in capsys.readouterr().err
+        assert pytest_wrapped_e.type == SystemExit
+        assert pytest_wrapped_e.value.code == -1

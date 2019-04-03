@@ -343,8 +343,6 @@ class Experiment(object):
             result (dict): Result of experiment test run.
             iteration (int): Number of test run iteration.
         """
-        # TODO: Wrap saving in try/except statement to catch when saving fails
-        # TODO: due to missing tables etc
         data = {
             'experiment_id':  self.repos['experiment'].id,
             'iteration': iteration,
@@ -353,7 +351,12 @@ class Experiment(object):
         data.update(result)
         data['performances'].extend(self.performance.export())
 
-        self.repos['testcase'].from_dict(data).create()
+        try:
+            self.repos['testcase'].from_dict(data).create()
+        except Exception as exc:
+            for msg in str(exc).split('\n'):
+                print_failure(msg)
+            raise SystemExit(-1)
 
     @abstractmethod
     def reset(self):
