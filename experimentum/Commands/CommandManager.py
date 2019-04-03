@@ -110,7 +110,12 @@ class CommandManager(object):
         try:
             # dispatch
             options = self._parser.parse_args()
-            options.func(self.app, options)
+
+            # only dispatch args if available
+            if len(vars(options)) > 1:
+                options.func(self.app, options)
+            else:
+                options.func(self.app)
         except AttributeError:
             # no command selected
             print_failure('Please specify a command')

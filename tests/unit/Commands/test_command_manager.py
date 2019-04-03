@@ -54,3 +54,15 @@ class TestCommandManager(object):
 
         manager.add_command('foobar', foobar)
         manager.dispatch()
+
+    def test_dispatch_without_args(self, mocker):
+        mock_app = mocker.patch('experimentum.Experiments.App')
+        manager = CommandManager(mock_app, 'Test Prog', 'Test Desc')
+        sys.argv = ["prog", "foobar"]
+        @command(help='Help me')
+        def foobar(app, args=None):
+            assert app is mock_app
+            assert args is None
+
+        manager.add_command('foobar', foobar)
+        manager.dispatch()
