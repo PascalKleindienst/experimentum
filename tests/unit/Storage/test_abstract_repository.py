@@ -3,6 +3,10 @@ import pytest
 import json
 
 
+def err(self, foo):
+    raise TypeError('something went wrong')
+
+
 class TestAbstractRepository(object):
     def setup_repo(self, mocker):
         mocker.patch.multiple(AbstractRepository, __abstractmethods__=set())
@@ -45,6 +49,23 @@ class TestAbstractRepository(object):
         })
         assert repo.foo == 'bar'
         assert repo.foobars == ['foobar', 'foobaz']
+
+    @pytest.mark.parametrize('init,output,code', [
+        (err, "something went wrong", -1),
+        (lambda self: None, 'got an unexpected keyword argument \'foo\'', 1),
+        (lambda self, foo, bar: None, "The AbstractRepository class is missing the following parameters: {'bar'}", 2)
+    ])
+    def test_from_dict_error_init(self, mocker, capsys, init, output, code):
+        mocker.patch.multiple(AbstractRepository, __init__=init, __abstractmethods__=set())
+
+        with pytest.raises(SystemExit) as pytest_wrapped_e:
+            AbstractRepository.from_dict({
+                'foo': 'bar',
+            })
+
+        assert output in capsys.readouterr().err
+        assert pytest_wrapped_e.type == SystemExit
+        assert pytest_wrapped_e.value.code == code
 
     def test_from_dict_with_relationships(self, mocker):
         mocker.patch.multiple(AbstractRepository, __abstractmethods__=set())

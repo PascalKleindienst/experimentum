@@ -354,7 +354,30 @@ class AbstractRepository(object):
             else:
                 init[key] = val
 
-        repo = cls(**init)
+        try:
+            repo = cls(**init)
+        except TypeError as err:
+            # Unexpected Argument
+            if 'unexpected keyword argument' in str(err):
+                print_failure(
+                    "{}. Either fix the typo or add it the repository constructor.".format(
+                        str(err).replace('__init__()', cls.__name__),
+                    ),
+                    1
+                )
+            # Determine missing parameters
+            elif 'required positional argument' in str(err):
+                import inspect
+                available = set(inspect.getfullargspec(cls.__init__).args[1:])
+                passed = set(init.keys())
+                print_failure(
+                    "The {} class is missing the following parameters: {}".format(
+                        cls.__name__, available - passed
+                    ),
+                    2
+                )
+            else:
+                print_failure(err, -1)
 
         for key, val in relations.items():
             repo[key] = val
