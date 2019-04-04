@@ -13,7 +13,7 @@ class TestMigrationsView(object):
 
         # assertion
         response = client.get('/plots/image/test/testing.svg')
-        assert response.content_type == 'image/svg+xml'
+        assert 'image/svg+xml' in response.content_type
         assert response.content_length == 0
         assert response.status_code == 200
 
