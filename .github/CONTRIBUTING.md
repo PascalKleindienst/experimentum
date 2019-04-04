@@ -29,8 +29,8 @@ Make sure to install the following dependencies *(if not already installed)* in 
 - sphinx-rtd-theme
 - sphinxcontrib.napoleon
 
-### Report bugs using Github's [issues](../issues)
-We use GitHub issues to track public bugs. Report a bug by [opening a new issue](../issues/new); it's that easy!
+### Report bugs using Github's [issues](../../../issues)
+We use GitHub issues to track public bugs. Report a bug by [opening a new issue](../../../issues/new); it's that easy!
 
 **Great Bug Reports** tend to have:
 
