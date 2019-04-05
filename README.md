@@ -1,13 +1,26 @@
 # Experimentum [![Build Status][build-status-badge]][build-status-link] [![Codacy grade][codacy-quality-badge]][codacy-quality-link] [![Codacy coverage][codacy-coverage-badge]][codacy-coverage-link]
 
-## Installation
-Since experimentum is in its development stage you have to install it from its GitHub repository.
+👨‍🔬🔬Experimentum is a domain-independent data-management framework for running and analyzing computational experiments.
 
-`pip install https://github.com/PascalKleindienst/experimentum/archive/master.tar.gz`
+## About Experimentum
 
-or 
+![Experimentum Dashboard](docs/_static/dashboard.png)
+*Fig. 1: Web-GUI Dashboard*
 
-`pip install git+ssh://git@github.com/PascalKleindienst/experimentum.git#egg=experimentum`
+The main purposes of Experimentum are to support experimenters in conducting routine tasks in complex experiments more efficiently. Experimentum itself takes care of the database-specific parts of the data management: creating and modifying the database schema, storing the  collected experiment results, and retrieving data from the database for further analysis.
+
+### Features
+- Domain-independent
+- Independent of used database *(standard is a SQL database, but implementation can be swapped out to support NoSQL databases like MongoDB)*
+- Migrations and Schema-builder to easily create the database-schema *(no need to know SQL!)*
+- Visualize results with matplotlib
+- Manage Experiments via CLI or via Web-Interface
+
+
+## Installation 👨‍💻
+The framework can be easily installed via `pip` with the following command:
+
+`$ pip install experimentum`
 
 >The different ``dbapi`` packages are not part of the package dependencies, so you must install them in order to connect to corresponding databases:
 >* PostgreSQL: ``psycopg2``
@@ -21,11 +34,11 @@ In order to use the experimentum framework, you’ll have to take care of some i
 
 From the command line, `cd` into a directory where you would like to store your code, and then run the following command:
 
-`experimentum-quickstart`
-
-After you answered the questions it will create the files and folders in this directory. If you want to create the project in a subdirectory you can add the `--root` option to the command, like so:
-
-`experimentum-quickstart --root myproject`
+~~~
+$ experimentum-quickstart
+# if you you want to create the project in a subdirectory you can add the --root option
+# experimentum-quickstart --root myproject
+~~~
 
 This willl create a **myproject** directory in your current directoy. The quickstart command will have created the following:
 ```
@@ -62,11 +75,21 @@ These files are:
 - **repositories/TestcaseRepository.py**: Repository for testcase data.
 - **repositories/PerformanceRepository.py**: Repository for performance data.
 
-## Documentation
-The documentation can be found under: https://pascalkleindienst.github.io/experimentum/index.html
+
+## Documentation 📃
+An extensive documentation about the usage of the Experimentum framework and each individual component can be found under: https://pascalkleindienst.github.io/experimentum/index.html
+
+## Changelog 📝
+The full changelog can be found in the [CHANGELOG.md](CHANGELOG.md) file.
+
+## Contributing
+Thank you for considering contributing to the Experimentum framework! The contribution guide can be found in the [CONTRIBUTING.md](CONTRIBUTING.md) file.
+
+## Acknowledgments 👍
+- [@softgit](https://github.com/softgit) - Beta Tester
 
 ## License
-Copyright 2018 Pascal Kleindienst
+Copyright 2019 Pascal Kleindienst
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
