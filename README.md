@@ -83,7 +83,7 @@ An extensive documentation about the usage of the Experimentum framework and eac
 The full changelog can be found in the [CHANGELOG.md](CHANGELOG.md) file.
 
 ## Contributing
-Thank you for considering contributing to the Experimentum framework! The contribution guide can be found in the [CONTRIBUTING.md](CONTRIBUTING.md) file.
+Thank you for considering contributing to the Experimentum framework! The contribution guide can be found in the [CONTRIBUTING.md](.github/CONTRIBUTING.md) file.
 
 ## Acknowledgments 👍
 - [@softgit](https://github.com/softgit) - Beta Tester
