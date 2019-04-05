@@ -368,7 +368,12 @@ class AbstractRepository(object):
             # Determine missing parameters
             elif 'required positional argument' in str(err) or 'takes exactly' in str(err):
                 import inspect
-                available = set(inspect.getfullargspec(cls.__init__).args[1:])
+                if hasattr(inspect, 'getfullargspec'):
+                    getargspec = inspect.getfullargspec
+                else:
+                    getargspec = inspect.getargspec
+
+                available = set(getargspec(cls.__init__).args[1:])
                 passed = set(init.keys())
                 print_failure(
                     "The {} class is missing the following parameters: {}".format(
