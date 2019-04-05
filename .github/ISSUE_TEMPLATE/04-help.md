@@ -1,6 +1,6 @@
 ---
 name: ⁉️ Need help with the framework?
-about:  File an issue in our help repo.
+about:  File a new issue and ask your question.
 
 ---
 <!-- Please remove this line and fill the template -->
