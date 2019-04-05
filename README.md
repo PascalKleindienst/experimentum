@@ -5,7 +5,7 @@
 ## About Experimentum
 
 ![Experimentum Dashboard](docs/_static/dashboard.png)
-*Fig. 1: Web-GUI Dashboard*
+*Fig. 1: Web-Interface Dashboard*
 
 The main purposes of Experimentum are to support experimenters in conducting routine tasks in complex experiments more efficiently. Experimentum itself takes care of the database-specific parts of the data management: creating and modifying the database schema, storing the  collected experiment results, and retrieving data from the database for further analysis.
 
