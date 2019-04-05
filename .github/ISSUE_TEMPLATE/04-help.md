@@ -1,7 +1,7 @@
 ---
 name: ⁉️ Need help with the framework?
 about:  File a new issue and ask your question.
-
+labels: question
 ---
 <!-- Please remove this line and fill the template -->
 

@@ -1,7 +1,7 @@
 ---
 name: 🐛 Bug Report
 about: If something isn't working as expected 🤔.
-
+labels: bug
 ---
 <!--
 Thanks for wanting to report an issue you've found in the framework.
