@@ -53,7 +53,7 @@ class TestAbstractRepository(object):
     @pytest.mark.parametrize('init,output,code', [
         (err, "something went wrong", -1),
         (lambda self: None, 'got an unexpected keyword argument \'foo\'', 1),
-        (lambda self, foo, bar: None, "The AbstractRepository class is missing the following parameters: {'bar'}", 2)
+        (lambda self, foo, bar: None, "The AbstractRepository class is missing the following parameters", 2)
     ])
     def test_from_dict_error_init(self, mocker, capsys, init, output, code):
         mocker.patch.multiple(AbstractRepository, __init__=init, __abstractmethods__=set())
