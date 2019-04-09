@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Some CLI Helpers."""
+from __future__ import print_function
 import sys
 import six
 import shutil
@@ -19,13 +20,16 @@ def get_input(msg, default=None):
     """
     # Default value if skipped
     if default is not None:
-        return six.moves.input(colored("› {} [{}]: ".format(msg, default), 'green')) or default
+        print(colored("› {} [{}]: ".format(msg, default), 'green'), end='')
+        return six.moves.input() or default
 
     # Required input
-    value = six.moves.input(colored("› {}: ".format(msg), 'green'))
+    print(colored("› {}: ".format(msg), 'green'), end='')
+    value = six.moves.input()
     while value == '':
         print(colored("× Please specify a value!", 'red'))
-        value = six.moves.input(colored("› {}: ".format(msg), 'green'))
+        print(colored("› {}: ".format(msg), 'green'), end='')
+        value = six.moves.input()
 
     return value
 
