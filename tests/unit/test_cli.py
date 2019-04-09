@@ -18,9 +18,9 @@ def test_print_failure_with_exit(capsys):
 
 
 @pytest.mark.parametrize('user_input,default,expected,msg', [
-    ('foo', 'default', 'foo', colored("› INPUT [default]: ", 'green')),  # optional input
-    ('', 'default', 'default', colored("› INPUT [default]: ", 'green')),  # optional input default
-    ('foo', None, 'foo', colored("› INPUT: ", 'green'))  # required input (no default)
+    ('foo', 'default', 'foo', colored(u"› INPUT [default]: ", 'green')),  # optional input
+    ('', 'default', 'default', colored(u"› INPUT [default]: ", 'green')),  # optional input default
+    ('foo', None, 'foo', colored(u"› INPUT: ", 'green'))  # required input (no default)
 ])
 def test_get_input(mocker, capsys, user_input, default, expected, msg):
     mock = mocker.patch('six.moves')
@@ -39,7 +39,7 @@ def test_get_required_input_waiting(mocker, capsys):
     output = capsys.readouterr().out
 
     mock.input.assert_any_call()
-    assert colored("› INPUT: ", 'green') in output
+    assert colored(u"› INPUT: ", 'green') in output
     assert mock.input.call_count is 2
     assert 'Please specify a value' in output
     assert data == 'foo'
