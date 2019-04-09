@@ -32,8 +32,6 @@ def lorem(app, args):
     ]
 
     # Clamp sentences between 1 and 10
-    sentences = args.sentences
-    sentences = 1 if sentences < 1 else sentences
-    sentences = 10 if sentences > 10 else sentences
+    sentences = max(0, min(args.sentences, 10))
 
     print(colored(' '.join(content[:sentences]), 'yellow'))
