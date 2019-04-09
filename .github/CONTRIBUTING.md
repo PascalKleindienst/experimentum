@@ -55,6 +55,16 @@ Pull requests are the best way to propose changes to the codebase (we use [Githu
 ## Any contributions you make will be under the Apache License, Version 2.0
 In short, when you submit code changes, your submissions are understood to be under the same [Apache License Version 2.0](http://www.apache.org/licenses/LICENSE-2.0) that covers the project. Feel free to contact the maintainers if that's a concern.
 
+### Running Tests
+The different testsuites *(unit, functional, and docs)* can be run via the `tox` command:
+~~~
+# Run Unit Tests
+$ tox
+# Run functional tests
+$ tox -e functional
+# Run documentation tests
+$ tox -e docs
+~~~
 
 ## Coding Conventions
 In order to sanitize coding standards, please follow [PEP8 Style Guide](https://www.python.org/dev/peps/pep-0008/). Additionally we follow the [Google Style Guide for Comments and Docstrings](https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings) so please follow it as well.
