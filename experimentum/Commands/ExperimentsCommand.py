@@ -72,12 +72,11 @@ def run(app, args):
 
 
 @command('Gather status informations about all available experiments', help='List experiments')
-def status(app, args):
+def status(app):
     """List experiment status.
 
     Args:
         app (App): App Service Container.
-        args (argparse.Namespace): Command Arguments and Options.
     """
     data = []
     headers = [
