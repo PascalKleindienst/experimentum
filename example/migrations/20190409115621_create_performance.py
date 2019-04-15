@@ -4,7 +4,7 @@ from experimentum.Storage.Migrations import Migration
 class CreatePerformance(Migration):
 
     """Create the create_performance migration."""
-    revision = '20180831134225'
+    revision = '20190409115621'
 
     def up(self):
         """Run the migrations."""
