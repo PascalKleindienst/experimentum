@@ -13,7 +13,7 @@ This folder contains an example application to illustrate how the framework can 
   - [Repositories](#repositories)
 - [Creating an experiment](#creating-an-experiment)
   - [Running an experiment](#running-an-experiment)
-- [Creating Plots](#creating-plots)
+- [Plots](#plots)
   - [Generating Plots](#generating-plots)
 - [Starting the Web-Interface](#starting-the-web-interface)
 - [Adding Custom Commands](#adding-custom-commands)
@@ -133,10 +133,83 @@ class TestCaseRepository(AbstractRepository.implementation):
 
 
 ## Creating an experiment
+[Experiments](https://pascalkleindienst.github.io/experimentum/experiments.html) are created in the `experiments` directory and they must adhere to the following naming convention: `{NAME}Experiment.py`. In this example we create an experiment called `FibExperiment.py` in which we will test an algorithm to calculate fibonacci numbers.
+
+All Experiments extend from the `Experiment` class and must implement a reset() and a run() method. The `config_file` attribute can define a JSON file with some arguments/config values for the experiment. In our case we use it to specify which fibonacci number we want to calculate *(i.e. `{"n": 25}`)*.
+
+~~~python
+from experimentum.Experiments import Experiment
+from termcolor import colored
+
+
+class FibExperiment(Experiment):
+
+    """Experiment which tests the the fibonacci algorithm."""
+
+    config_file = 'foo.json'  # default config file
+
+    def reset(self):
+        """Reset data structure and values used in each test run."""
+        print(colored('* Resetting fibonacci sequence', 'green'))
+        self.fib_sequence = [0, 1]
+        self.n = self.config.get('n', 0)
+
+    def run(self):
+        """Run the Experiment, i.e. calculated the nth fibonacci number."""
+        print(colored('* Calculating fibonacci sequence', 'green'))
+
+        # Run the fib algorithm
+        val = -1
+        with self.performance.point('Calculating Fibonacci Sequence'):
+            val = fib(self.n, self.fib_sequence)
+
+        # Some debug/info log output
+        print(' > Sequence = {}'.format(colored(self.fib_sequence, 'cyan')))
+        print(' > fib({}) = {}\n'.format(self.n, colored(val, 'cyan')))
+
+        return {
+            'value': val
+        }
+~~~
+
+The algorithm to generate the fibonacci numbers is the following:
+~~~python
+from experimentum.cli import print_failure
+
+
+def fib(n, seq):
+    """Calculate the nth fibonacci number.
+
+    Args:
+        n (int)
+        seq (list): List of fibonacci numbers
+
+    Returns:
+        int
+    """
+    if n < 0:
+        print_failure('Incorrect Input', exit_code=1)
+    elif n <= len(seq):
+        return seq[n - 1]
+
+    tmp = fib(n - 1, seq) + fib(n - 2, seq)
+    seq.append(tmp)
+    return tmp
+~~~
+
 
 ### Running an experiment
+To run an experiment the `experiments:run` command is being used followed by the name of the experiment we want to test. With the `--n` option it can be specified how often the test should run and with `--config` another config file can be used.
 
-## Creating Plots
+~~~console
+$ python main.py experiments:run fib --n=1 --config=bar.json
+* Resetting fibonacci sequence
+* Calculating fibonacci sequence
+ > Sequence = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946, 17711, 28657, 46368]
+ > fib(25) = 46368
+ ~~~
+
+## Plots
 ### Generating Plots
 
 ## Starting the Web-Interface
