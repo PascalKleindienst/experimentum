@@ -187,7 +187,7 @@ def main():
         upgrade=r"""with self.schema.create('performance') as table:
             table.big_increments('id')
             table.primary('id')
-            table.string('label', 25)
+            table.string('label', 75)
             table.small_integer('level')
             table.string('type', 25)
             table.float('time')
