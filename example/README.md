@@ -5,9 +5,12 @@ This folder contains an example application to illustrate how the framework can 
 - [Prerequisite](#prerequisite)
 - [Initialization](#initialization)
 - [Database Schema](#database-schema)
-  - [Creating Migrations](#creating-migrations)
-  - [Running Migrations](#running-migrations)
-  - [Creating Repositories](#creating-repositories)
+  - [Migrations](#migrations)
+    - [Creating Migrations](#creating-migrations)
+    - [Running Migrations](#running-migrations)
+    - [Reverting Migrations](#reverting-migrations)
+    - [Status of Migrations](#status-of-migrations)
+  - [Repositories](#repositories)
 - [Creating an experiment](#creating-an-experiment)
   - [Running an experiment](#running-an-experiment)
 - [Creating Plots](#creating-plots)
@@ -48,7 +51,7 @@ Done.
 ~~~
 
 ## Database Schema
-After the framework is initialized with the `experimentum-quickstart` command, it is time to setup the needed database tables. By default the framework will use a *SQLite* database, but this can be changed in the `config/storage.json` configuration file *(more information can be found in the [documentation](https://pascalkleindienst.github.io/experimentum/configuration.html#storage-configuration))*. To create the tables run the following command:
+After the framework is initialized with the `experimentum-quickstart` command, it is time to setup the needed database tables. By default the framework will use a *SQLite* database, but this can be changed in the `config/storage.json` configuration file *(more information can be found in the [documentation](https://pascalkleindienst.github.io/experimentum/configuration.html#storage-configuration))*. To (re-)create the tables run the following command, which will effectivly delete and then create all tables again:
 
 ~~~console
 $ python main.py migration:refresh
@@ -60,20 +63,21 @@ $ python main.py migration:refresh
 › Migrated 20190409115621_create_performance
 ~~~
 
-### Creating Migrations
+### Migrations
+#### Creating Migrations
 For our example experiment we want to extend the default testcase table with some columns to save our experiment results. Changing the database schema is done through [migrations](https://pascalkleindienst.github.io/experimentum/migrations.html). First, we need to make a new migration file. This can easily be done with the following command:
 
 ~~~console
 $ python main.py migration:make "Add Testcase Data"
 ~~~
 
-The migration file contains two methods which need to be filled. The first one is the `up`-method, which handles the new changes to the database schema. In this example, a new `integer` column called `random_value` is called.
+The migration file contains two methods which need to be filled. The first one is the `up`-method, which handles the new changes to the database schema. In this example, a new `integer` column called `value` is called.
 
 ~~~python
 def up(self):
     """Run the migrations."""
     with self.schema.table('testcases') as table:
-        table.integer('random_value')
+        table.integer('value')
 ~~~
 
 The second method is called `down` and it will revert the changes made in the `up`-method:
@@ -81,15 +85,51 @@ The second method is called `down` and it will revert the changes made in the `u
 def down(self):
     """Revert the migrations."""
     with self.schema.table('testcases') as table:
-        table.drop_column('random_value')
+        table.drop_column('value')
 ~~~
 
-### Running Migrations
+#### Running Migrations
+To run the migrations, simply execute the following command:
 ~~~console
 $ python main.py migration:up
 ~~~
 
-### Creating Repositories
+#### Reverting Migrations
+If you want to revert to an older version of your database schema simply run the down command:
+
+~~~console
+$ python main.py migration:down
+~~~
+
+#### Status of Migrations
+The status information if migrations, i.e. whether they were already executed or not, is saved locally in the `migrations/.version` file. If you work in a team, make sure to share this file with them. To display the status in a human-readable format, run the following command:
+
+~~~console
+$ python main.py migration:status
++-----------------------------------+--------+
+| Migration                         | Ran?   |
+|-----------------------------------+--------|
+| 20190409115619_create_experiments | Yes    |
+| 20190409115620_create_testcase    | Yes    |
+| 20190409115621_create_performance | Yes    |
+| 20190411131223_add_testcase_data  | No     |
++-----------------------------------+--------+
+~~~
+
+### Repositories
+While [migrations](https://pascalkleindienst.github.io/experimentum/migrations.html) define the data schema on the database side, [repositories](https://pascalkleindienst.github.io/experimentum/repositories.html) act like an in-memory domain object collections, that connect the domain and data mapping layers. Objects can be easily added to and removed from the [repositories](https://pascalkleindienst.github.io/experimentum/repositories.html), due to the mapping code of the [repositories](https://pascalkleindienst.github.io/experimentum/repositories.html) which will ensure that the right operations are executed behind the scenes.
+
+Each table you created with migrations is represented by a [repority](https://pascalkleindienst.github.io/experimentum/repositories.html). Therefore, we have to modify the `TestCaseRepository` according to the changes we made in the previous migration *(i.e. add the `value` column)*. To do that we simply have to set the value via the constructor like this:
+
+~~~python
+class TestCaseRepository(AbstractRepository.implementation):
+    # ...
+    def __init__(self, iteration, value, experiment_id=None):
+        """Set attributes."""
+        self.iteration = iteration
+        self.value = value  # Our custom column we created earlier
+        self.experiment_id = experiment_id
+~~~
 
 
 ## Creating an experiment
@@ -146,4 +186,8 @@ class ExampleApp(App):
         }
 ~~~
 
-Now, if `python main.py lorem 2` is called for example, it will display two "lorem ipsum"-sentences.
+Now the new command can be used to display the lorem-ipsum sentences:
+~~~console
+$ python main.py lorem 2
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod temporinvidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+~~~
