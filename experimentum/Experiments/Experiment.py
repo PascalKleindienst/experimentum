@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 """Run experiments and save the results for future analysations.
 
-...
-
 Writing Experiments
 -------------------
+Experiments are created in the `experiments` directory and they must adhere to
+the following naming convention: `{NAME}Experiment.py`.
+
 All Experiments extend the :py:class:`.Experiment` class. Experiments
 contain a :py:meth:`~.Experiment.reset` and :py:meth:`~.Experiment.run`
 method. Within :py:meth:`~.Experiment.reset` the method, you should
