@@ -33,16 +33,18 @@ class FibExperiment(Experiment):
         """Reset data structure and values used in each test run."""
         print(colored('* Resetting fibonacci sequence', 'green'))
         self.fib_sequence = [0, 1]
+        self.n = self.config.get('n', 0)
 
     def run(self):
-        val = -1
-        n = self.config.get('n', 0)
+        """Run the Experiment, i.e. calculated the nth fibonacci number."""
         print(colored('* Calculating fibonacci sequence', 'green'))
+
+        val = -1
         with self.performance.point('Calculating Fibonacci Sequence'):
-            val = fib(n, self.fib_sequence)
+            val = fib(self.n, self.fib_sequence)
 
         print(' > Sequence = {}'.format(colored(self.fib_sequence, 'cyan')))
-        print(' > fib({}) = {}\n'.format(n, colored(val, 'cyan')))
+        print(' > fib({}) = {}\n'.format(self.n, colored(val, 'cyan')))
 
         return {
             'value': val
