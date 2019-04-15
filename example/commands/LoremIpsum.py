@@ -31,7 +31,7 @@ def lorem(app, args):
         "invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua."
     ]
 
-    # Clamp sentences between 1 and 10
-    sentences = max(0, min(args.sentences, 10))
+    # Clamp sentences to content range
+    sentences = max(0, min(args.sentences, len(content)-1))
 
     print(colored(' '.join(content[:sentences]), 'yellow'))
