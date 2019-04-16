@@ -247,8 +247,8 @@ Plots can either directly configured via the `plots.json` config file or from th
 | `styles.ticks`        | `object`       | Set the current tick locations and labels of the axis.                                                                                                                                  |
 | `styles.ticks.xticks` | `object`       | Set the current tick locations and labels of the x-axis. *(See [matplotlib.pyplot.xticks](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.xticks.html) for available parameters.)* |
 | `styles.ticks.yticks` | `object`       | Set the current tick locations and labels of the y-axis. *(See [matplotlib.pyplot.yticks](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.yticks.html) for available parameters.)* |
-| `styles.fmt`          | `string|array` | Set the line format. *(See [matplotlib.pyplot.plot](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot) for more notes about the `fmt` parameter.)*  |
-| `styles.label`        | `string|array` | Label plot data. *(See [matplotlib.pyplot.plot](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot) for more notes about the `label` parameter.)*    |
+| `styles.fmt`          | `string,array` | Set the line format. *(See [matplotlib.pyplot.plot](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot) for more notes about the `fmt` parameter.)*  |
+| `styles.label`        | `string,array` | Label plot data. *(See [matplotlib.pyplot.plot](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot) for more notes about the `label` parameter.)*    |
 | `params`              | `object`       | Additional parameters which are specific to the plot type.                                                                                                                              |
 
 
