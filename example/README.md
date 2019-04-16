@@ -14,7 +14,7 @@ This folder contains an example application to illustrate how the framework can 
 - [Creating an experiment](#creating-an-experiment)
   - [Running an experiment](#running-an-experiment)
 - [Plots](#plots)
-  - [Generating Plots](#generating-plots)
+  - [Configuration](#configuration)
 - [Starting the Web-Interface](#starting-the-web-interface)
 - [Adding Custom Commands](#adding-custom-commands)
 
@@ -210,9 +210,56 @@ $ python main.py experiments:run fib --n=1 --config=bar.json
  ~~~
 
 ## Plots
-### Generating Plots
+[Plots](https://pascalkleindienst.github.io/experimentum/plots.html) are created in the `plots` directory and they must adhere to the following naming convention: `{NAME}(Plot|Chart|Diagram).py`. As this is just an example app, our diagramms will not be very useful and serve only for illustrative purposes. All Plots extend from the `Plot` class and must implement a `data()` method. Furthermore, they need to have an entry of the form `{"NAME": {"type": "{bar|pie|polar|scatter|histogram|errorbar|plot}"` in the `plots.json` config file. If that is not the case then the framework will not be able to execute them correctly.
+
+In the `data` method you have access to the experiment repository to fetch for data and to the `plot` attribute to access the underlying plotting class *(default: [matplotlib](https://matplotlib.org/index.html))*.
+
+### Configuration
+An example of a plot configuration could look like this:
+~~~json
+{
+    "examplebar": {
+        "type": "bar",
+        "experiment": "Fib",
+        "labels": {
+            "x-axis": "N",
+            "y-axis": "Fibonacci Number"
+        },
+        "legend": { "loc": "upper right" },
+        "styles": { "grid": true }
+    }
+}
+~~~
+
+Plots can either directly configured via the `plots.json` config file or from the python class via the `self.config` attribute. The different attributes are as following:
+
+| Attribute             | Type           | Description                                                                                                                                                                             |
+| :-------------------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `experiment`          | `string`       | Name of the experiment that should be fetched by the repository.                                                                                                                        |
+| `title`               | `object`       | Set a title for the axes. *(See [matplotlib.pyplot.title](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.title.html) for available parameters.)*                                  |
+| `labels`              | `object`       | Set the labels of the axes.                                                                                                                                                             |
+| `labels.x-axis`       | `string`       | Set a label for the x-axis.                                                                                                                                                             |
+| `labels.y-axis`       | `string`       | Set a label for the y-axis.                                                                                                                                                             |
+| `legend`              | `object`       | Place a legend on the axes. *(See [matplotlib.pyplot.legend](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.legend.html) for available parameters.)*                              |
+| `styles`              | `object`       | Set different styling options for the plot.                                                                                                                                             |
+| `styles.grid`         | `bool`         | Whether or not a grid should be displayed.                                                                                                                                              |
+| `styles.axis`         | `mixed`        | Set some axis properties. *(See [matplotlib.pyplot.axis](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.axis.html) for available parameters.)*                                    |
+| `styles.ticks`        | `object`       | Set the current tick locations and labels of the axis.                                                                                                                                  |
+| `styles.ticks.xticks` | `object`       | Set the current tick locations and labels of the x-axis. *(See [matplotlib.pyplot.xticks](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.xticks.html) for available parameters.)* |
+| `styles.ticks.yticks` | `object`       | Set the current tick locations and labels of the y-axis. *(See [matplotlib.pyplot.yticks](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.yticks.html) for available parameters.)* |
+| `styles.fmt`          | `string|array` | Set the line format. *(See [matplotlib.pyplot.plot](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot) for more notes about the `fmt` parameter.)*  |
+| `styles.label`        | `string|array` | Label plot data. *(See [matplotlib.pyplot.plot](https://matplotlib.org/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib.pyplot.plot) for more notes about the `label` parameter.)*    |
+| `params`              | `object`       | Additional parameters which are specific to the plot type.                                                                                                                              |
+
 
 ## Starting the Web-Interface
+Instead of using the command-line to use the framework and manage the experiments a web-interface can be used. To start the web-interface just run to following command:
+
+~~~console
+$ python main.py webgui
+~~~
+
+> **Note**: Custom commands are not available in the web-interface as of now!
 
 ## Adding Custom Commands
 To create a new custom command for the framework we create a new `commands` package and place a `LoremIpsum.py` file inside it which contains our command. This is not required as the command handlers only must either be derived from `AbstractCommand` or a function with the decorator `AbstractCommand.command()`. But placing all commands inside a dedicated package or module keeps things well-organized. A shortened example for a command which displays some 'lorem ipsum' text could look like this:
