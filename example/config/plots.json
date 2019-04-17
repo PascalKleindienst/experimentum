@@ -1,5 +1,14 @@
-
 {
+    "examplebar": {
+        "type": "bar",
+        "experiment": "Fib",
+        "labels": {
+            "x-axis": "N",
+            "y-axis": "Fibonacci Number"
+        },
+        "legend": { "loc": "upper right" },
+        "styles": { "grid": true }
+    },
     "pie": {
         "type": "pie"
     },
