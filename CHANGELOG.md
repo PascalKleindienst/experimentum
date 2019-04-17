@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [Unreleased]
 
-## [1.0.0] - 2019-04-xx
+## [1.0.0] - 2019-04-17
 ### Added
 - Initial public release
 
