@@ -1,5 +1,5 @@
 [[source]]
-url = "https://pypi.org/simple"
+url = "https://pypi.org/experimentum"
 verify_ssl = true
 name = "pypi"
 
@@ -10,10 +10,9 @@ inflection = "*"
 six = "*"
 psutil = "*"
 SQLAlchemy = ">=1.2.0"
-experimentum = {editable = true, path = "."}
 colorama = "*"
 matplotlib = "*"
-flask = "*"
+flask = ">=1.0.0"
 
 [dev-packages]
 sphinx = "*"
@@ -21,5 +20,3 @@ sphinx = "*"
 sphinx-rtd-theme = "*"
 tox = "*"
 
-[requires]
-python_version = "3.6"
