@@ -13,7 +13,7 @@ from setuptools import find_packages, setup, Command
 
 # Package meta-data.
 NAME = 'experimentum'
-DESCRIPTION = 'My short description for my project.'
+DESCRIPTION = 'Data-Management Framework for Running and Analyzing Computational Experiments'
 URL = 'https://github.com/PascalKleindienst/experimentum'
 EMAIL = 'mail@pascalkleindienst.de'
 AUTHOR = 'Pascal Kleindienst'
@@ -23,8 +23,8 @@ VERSION = None
 # What packages are required for this module to be executed?
 REQUIRED = [
     # 'requests', 'maya', 'records',
-    'SQLAlchemy>=1.2.0', 'termcolor', 'colorama', 'tabulate', 'inflection', 'six', 'psutil', 'matplotlib',
-    'Flask>=1.0.0'
+    'SQLAlchemy>=1.2.0', 'termcolor', 'colorama', 'tabulate', 'inflection', 'six', 'psutil',
+    'matplotlib', 'Flask>=1.0.0'
 ]
 
 # What packages are optional?
@@ -64,6 +64,7 @@ if not VERSION:
         exec(f.read(), about)
 else:
     about['__version__'] = VERSION
+
 
 class UploadCommand(Command):
     """Support setup.py upload."""
@@ -127,8 +128,11 @@ setup(
     classifiers=[
         # Trove classifiers
         # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
-        'Development Status :: 1 - Planning',
+        'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
+        'Environment :: Web Environment',
+        'Intended Audience :: Developers',
+        'Intended Audience :: Information Technology',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: Apache Software License',
         'Programming Language :: Python',
@@ -140,7 +144,6 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: Implementation :: CPython',
-        'Programming Language :: Python :: Implementation :: PyPy',
         'Topic :: Database',
         'Topic :: Scientific/Engineering',
         'Topic :: Utilities'
