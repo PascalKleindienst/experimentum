@@ -13,5 +13,6 @@ class AddTestcaseData(Migration):
 
     def down(self):
         """Revert the migrations."""
-        with self.schema.table('testcases') as table:
-            table.drop_column('value')
+        if self.schema.has_column('testcases', 'value'):
+            with self.schema.table('testcases') as table:
+                table.drop_column('value')
