@@ -1,4 +1,11 @@
-# Experimentum [![Build Status][build-status-badge]][build-status-link] [![Codacy grade][codacy-quality-badge]][codacy-quality-link] [![Codacy coverage][codacy-coverage-badge]][codacy-coverage-link]
+# Experimentum
+[![Build Status][build-status-badge]][build-status-link]
+[![Codacy grade][codacy-quality-badge]][codacy-quality-link]
+[![Codacy coverage][codacy-coverage-badge]][codacy-coverage-link]
+![PyPI - Python Version][python_version_badge]
+![PyPI - License][license_badge]
+![PyPI][version_badge]
+
 
 👨‍🔬🔬Experimentum is a domain-independent data-management framework for running and analyzing computational experiments.
 
@@ -114,3 +121,7 @@ limitations under the License.
 [_codacy-coverage-badge]: https://img.shields.io/codacy/coverage/e85a2c346ef14265b3986ff7f58b3c7a.svg?style=flat-square
 [codacy-coverage-badge]: https://api.codacy.com/project/badge/Coverage/e85a2c346ef14265b3986ff7f58b3c7a
 [codacy-coverage-link]: https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=PascalKleindienst/experimentum&amp;utm_campaign=Badge_Coverage
+
+[python_version_badge]: https://img.shields.io/pypi/pyversions/experimentum.svg?style=flat-square
+[license_badge]: https://img.shields.io/pypi/l/experimentum.svg?style=flat-square
+[version_badge]: https://img.shields.io/pypi/v/experimentum.svg?style=flat-square
