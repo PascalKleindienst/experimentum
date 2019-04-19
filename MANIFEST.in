@@ -1,6 +1,7 @@
 include README.md LICENSE.md CHANGELOG.md
 include experimentum/Storage/Migrations/*.stub
 include experimentum/_stubs/*.stub
+include experimentum/WebGUI/templates/*.jinja
 include experimentum/WebGUI/templates/**/*.jinja
 include experimentum/WebGUI/static/*.js experimentum/WebGUI/static/*.css
 recursive-exclude tests *
