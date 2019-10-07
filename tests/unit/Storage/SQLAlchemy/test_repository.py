@@ -120,13 +120,20 @@ class TestAbstractStore(object):
             mocker.call(or_(Repository.id != 2, Repository.id == 2))
         ])
 
-    @pytest.mark.parametrize('where', [['id', '<>', 2], ['or', 'id', '<>', 2]])
-    def test_get_where_invalid(self, mocker, where):
+    def test_get_where_neq(self, mocker):
         repo = self.setup_repo(mocker)
-        repo.get(where=where)
+        repo.get(where=['id', '<>', 2])
         repo.store.session.query.assert_called_once_with(repo.__class__)
         repo.store.session.filter.assert_has_calls([
-            mocker.call(or_())
+            mocker.call(Repository.id != 2)
+        ])
+
+    def test_get_where_or_neq(self, mocker):
+        repo = self.setup_repo(mocker)
+        repo.get(where=['or', 'id', '<>', 2])
+        repo.store.session.query.assert_called_once_with(repo.__class__)
+        repo.store.session.filter.assert_has_calls([
+            mocker.call(or_(Repository.id != 2))
         ])
 
     def test_first(self, mocker):

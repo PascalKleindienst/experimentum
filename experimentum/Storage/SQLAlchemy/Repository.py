@@ -10,6 +10,34 @@ from experimentum.Storage import AbstractRepository
 import logging
 
 
+def _append_query_filter(filterList, operator, left, right):
+    """Append a query condition to a filter list.
+
+    Args:
+        filterList (list): List with query filters
+        operator (string): operator to use
+        left (object): Left-Hand value
+        right (object): Right-Hand value
+
+    Returns:
+        list
+    """
+    if operator == '!=' or operator == '<>':
+        filterList.append(left != right)
+    elif operator == '==':
+        filterList.append(left == right)
+    elif operator == '>':
+        filterList.append(left > right)
+    elif operator == '<':
+        filterList.append(left < right)
+    elif operator == '>=':
+        filterList.append(left >= right)
+    elif operator == '=<':
+        filterList.append(left <= right)
+
+    return filterList
+
+
 class QueryBuilder(object):
 
     """Helper Class to build a SQLAlchemy Query.
@@ -69,24 +97,29 @@ class QueryBuilder(object):
             elif len(cond) == 3 and cond[0] == 'or':
                 self.__filter_cond_or.append(getattr(self.repo, cond[1]) == cond[2])
             # ['id', '!=', 2] => WHERE id != 2
-            # ['or', 'id', '==', 2] => WHERE id == 2 OR
-            elif (len(cond) == 3 and cond[0] != 'or') or (len(cond) == 4 and cond[0] == 'or'):
+            elif (len(cond) == 3 and cond[0] != 'or'):
                 operator = len(cond) - 2
                 left = operator - 1
                 right = operator + 1
 
-                if cond[operator] == '!=':
-                    self.__filter_cond.append(getattr(self.repo, cond[left]) != cond[right])
-                elif cond[operator] == '==':
-                    self.__filter_cond.append(getattr(self.repo, cond[left]) == cond[right])
-                elif cond[operator] == '>':
-                    self.__filter_cond.append(getattr(self.repo, cond[left]) > cond[right])
-                elif cond[operator] == '<':
-                    self.__filter_cond.append(getattr(self.repo, cond[left]) < cond[right])
-                elif cond[operator] == '>=':
-                    self.__filter_cond.append(getattr(self.repo, cond[left]) >= cond[right])
-                elif cond[operator] == '=<':
-                    self.__filter_cond.append(getattr(self.repo, cond[left]) <= cond[right])
+                self.__filter_cond = _append_query_filter(
+                    self.__filter_cond,
+                    cond[operator],
+                    getattr(self.repo, cond[left]),
+                    cond[right]
+                )
+            # ['or', 'id', '==', 2] => WHERE id == 2 OR
+            elif len(cond) == 4 and cond[0] == 'or':
+                operator = len(cond) - 2
+                left = operator - 1
+                right = operator + 1
+
+                self.__filter_cond_or = _append_query_filter(
+                    self.__filter_cond_or,
+                    cond[operator],
+                    getattr(self.repo, cond[left]),
+                    cond[right]
+                )
 
         return query.filter(*self.__filter_cond).filter(or_(*self.__filter_cond_or))
 
