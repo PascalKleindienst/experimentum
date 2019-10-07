@@ -125,7 +125,7 @@ class TestAbstractStore(object):
         repo.get(where=['id', '<>', 2])
         repo.store.session.query.assert_called_once_with(repo.__class__)
         repo.store.session.filter.assert_has_calls([
-            mocker.call(Repository.id != 2)
+            mocker.call(Repository.id != 2, or_())
         ])
 
     def test_get_where_or_neq(self, mocker):

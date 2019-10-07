@@ -32,7 +32,7 @@ def _append_query_filter(filterList, operator, left, right):
         filterList.append(left < right)
     elif operator == '>=':
         filterList.append(left >= right)
-    elif operator == '=<':
+    elif operator == '<=':
         filterList.append(left <= right)
 
     return filterList
