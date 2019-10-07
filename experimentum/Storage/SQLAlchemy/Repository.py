@@ -69,17 +69,24 @@ class QueryBuilder(object):
             elif len(cond) == 3 and cond[0] == 'or':
                 self.__filter_cond_or.append(getattr(self.repo, cond[1]) == cond[2])
             # ['id', '!=', 2] => WHERE id != 2
-            elif len(cond) == 3 and cond[0] != 'or':
-                if cond[1] == '!=':
-                    self.__filter_cond.append(getattr(self.repo, cond[0]) != cond[2])
-                elif cond[1] == '==':
-                    self.__filter_cond.append(getattr(self.repo, cond[0]) == cond[2])
             # ['or', 'id', '==', 2] => WHERE id == 2 OR
-            elif len(cond) == 4 and cond[0] == 'or':
-                if cond[2] == '!=':
-                    self.__filter_cond_or.append(getattr(self.repo, cond[1]) != cond[3])
-                elif cond[2] == '==':
-                    self.__filter_cond_or.append(getattr(self.repo, cond[1]) == cond[3])
+            elif (len(cond) == 3 and cond[0] != 'or') or (len(cond) == 4 and cond[0] == 'or'):
+                operator = len(cond) - 2
+                left = operator - 1
+                right = operator + 1
+
+                if cond[operator] == '!=':
+                    self.__filter_cond.append(getattr(self.repo, cond[left]) != cond[right])
+                elif cond[operator] == '==':
+                    self.__filter_cond.append(getattr(self.repo, cond[left]) == cond[right])
+                elif cond[operator] == '>':
+                    self.__filter_cond.append(getattr(self.repo, cond[left]) > cond[right])
+                elif cond[operator] == '<':
+                    self.__filter_cond.append(getattr(self.repo, cond[left]) < cond[right])
+                elif cond[operator] == '>=':
+                    self.__filter_cond.append(getattr(self.repo, cond[left]) >= cond[right])
+                elif cond[operator] == '=<':
+                    self.__filter_cond.append(getattr(self.repo, cond[left]) <= cond[right])
 
         return query.filter(*self.__filter_cond).filter(or_(*self.__filter_cond_or))
 
@@ -142,6 +149,7 @@ class Repository(AbstractRepository):
         """
         query = cls.store.session.query(cls)
         builder = QueryBuilder(cls, where)
+
         return builder.build(query)
 
     @classmethod
