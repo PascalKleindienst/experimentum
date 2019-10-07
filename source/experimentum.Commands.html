@@ -1,0 +1,688 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>experimentum.Commands package &mdash; experimentum  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="experimentum.Config package" href="experimentum.Config.html" />
+    <link rel="prev" title="experimentum package" href="experimentum.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> experimentum
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service.html">Service Container and Provider</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands.html">CLI Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migrations.html">Migrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../repositories.html">Repositories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experiments.html">Experiments</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="experimentum.html">experimentum package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="experimentum.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">experimentum.Commands package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Config.html">experimentum.Config package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Experiments.html">experimentum.Experiments package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Plots.html">experimentum.Plots package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.html">experimentum.Storage package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.WebGUI.html">experimentum.WebGUI package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.cli">experimentum.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.files">experimentum.files module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.quickstart">experimentum.quickstart module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.utils">experimentum.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">experimentum</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">experimentum</a> &raquo;</li>
+        
+          <li><a href="experimentum.html">experimentum package</a> &raquo;</li>
+        
+      <li>experimentum.Commands package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/experimentum.Commands.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="experimentum-commands-package">
+<h1>experimentum.Commands package<a class="headerlink" href="#experimentum-commands-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-experimentum.Commands.AbstractCommand">
+<span id="experimentum-commands-abstractcommand-module"></span><h2>experimentum.Commands.AbstractCommand module<a class="headerlink" href="#module-experimentum.Commands.AbstractCommand" title="Permalink to this headline">¶</a></h2>
+<p>Easily add CLI commands to the app.</p>
+<p>There are to possible ways for defining CLI commands in
+order for them to be added to the <a class="reference internal" href="#module-experimentum.Commands.CommandManager" title="experimentum.Commands.CommandManager"><code class="xref py py-mod docutils literal notranslate"><span class="pre">CommandManager</span></code></a>.</p>
+<div class="section" id="decorator">
+<h3>Decorator<a class="headerlink" href="#decorator" title="Permalink to this headline">¶</a></h3>
+<p>The easiest method to define a command is via the <a class="reference internal" href="#experimentum.Commands.AbstractCommand.command" title="experimentum.Commands.AbstractCommand.command"><code class="xref py py-func docutils literal notranslate"><span class="pre">AbstractCommand.command()</span></code></a>
+decorator. The decorator accepts some arguments like description or help text in order
+to descrine the command while the decorated function handles the command execution.
+The <code class="docutils literal notranslate"><span class="pre">arguments</span></code> argument accepts a dictionary which each key is the name of the argument
+and each value is passed to the <code class="xref py py-func docutils literal notranslate"><span class="pre">argparse.add_argument()</span></code> method:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@command</span><span class="p">(</span>
+    <span class="s1">&#39;Some description about what the command does.&#39;</span><span class="p">,</span>
+    <span class="n">arguments</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;integers&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;help&#39;</span><span class="p">:</span> <span class="s1">&#39;Some Help&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> <span class="s1">&#39;nargs&#39;</span><span class="p">:</span> <span class="s1">&#39;?&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;--bar&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="s1">&#39;help&#39;</span><span class="p">:</span> <span class="s1">&#39;Bar Help&#39;</span><span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Short help text.&#39;</span>
+<span class="p">)</span>
+<span class="k">def</span> <span class="nf">foo</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="class-based">
+<h3>Class-based<a class="headerlink" href="#class-based" title="Permalink to this headline">¶</a></h3>
+<p>The other way of defining a command is a class based approach. Your command class
+has to derived from the <a class="reference internal" href="#experimentum.Commands.AbstractCommand.AbstractCommand" title="experimentum.Commands.AbstractCommand.AbstractCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractCommand</span></code></a> class. Just like the decorator
+you can define description, arguments and a help text. The <code class="docutils literal notranslate"><span class="pre">handle</span></code> method handles
+the command execution:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FooCommand</span><span class="p">(</span><span class="n">AbstractCommand</span><span class="p">):</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Some description about what the command does&#39;</span>
+    <span class="n">arguments</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;integers&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;help&#39;</span><span class="p">:</span> <span class="s1">&#39;Some Help&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> <span class="s1">&#39;nargs&#39;</span><span class="p">:</span> <span class="s1">&#39;?&#39;</span><span class="p">},</span>
+        <span class="s1">&#39;--bar&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="s1">&#39;help&#39;</span><span class="p">:</span> <span class="s1">&#39;Bar Help&#39;</span><span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Short help text.&#39;</span>
+
+    <span class="k">def</span> <span class="nf">handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">args</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="experimentum.Commands.AbstractCommand.AbstractCommand">
+<em class="property">class </em><code class="descclassname">experimentum.Commands.AbstractCommand.</code><code class="descname">AbstractCommand</code><a class="headerlink" href="#experimentum.Commands.AbstractCommand.AbstractCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Abstract Command Class.</p>
+<dl class="attribute">
+<dt id="experimentum.Commands.AbstractCommand.AbstractCommand.description">
+<code class="descname">description</code><a class="headerlink" href="#experimentum.Commands.AbstractCommand.AbstractCommand.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>Description of the command.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Commands.AbstractCommand.AbstractCommand.arguments">
+<code class="descname">arguments</code><a class="headerlink" href="#experimentum.Commands.AbstractCommand.AbstractCommand.arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Optional aguments for the command.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Commands.AbstractCommand.AbstractCommand.help">
+<code class="descname">help</code><a class="headerlink" href="#experimentum.Commands.AbstractCommand.AbstractCommand.help" title="Permalink to this definition">¶</a></dt>
+<dd><p>Help Text for the command.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Commands.AbstractCommand.AbstractCommand.args">
+<code class="descname">args</code><a class="headerlink" href="#experimentum.Commands.AbstractCommand.AbstractCommand.args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary with possible passed arguments.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">args</code><em class="property"> = {}</em></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">arguments</code><em class="property"> = {}</em></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">description</code><em class="property"> = ''</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Commands.AbstractCommand.AbstractCommand.handle">
+<code class="descname">handle</code><span class="sig-paren">(</span><em>app</em>, <em>args</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Commands.AbstractCommand.AbstractCommand.handle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle the command execution.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>app</strong> (<a class="reference internal" href="experimentum.Experiments.html#experimentum.Experiments.App.App" title="experimentum.Experiments.App.App"><em>App</em></a>) – Main App class</li>
+<li><strong>args</strong> (<em>dict</em>) – Dictionary with possible passed arguments.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>NotImplementedError</strong> – must be implemented</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">help</code><em class="property"> = ''</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Commands.AbstractCommand.AbstractCommand.setup">
+<code class="descname">setup</code><span class="sig-paren">(</span><em>description=''</em>, <em>arguments=None</em>, <em>help=''</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Commands.AbstractCommand.AbstractCommand.setup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set up the command.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>description</strong> (<em>str</em><em>, </em><em>optional</em>) – Defaults to ‘’. Description of the command.</li>
+<li><strong>arguments</strong> (<em>dict</em><em>, </em><em>optional</em>) – Defaults to None. Optional aguments for the command.</li>
+<li><strong>help</strong> (<em>str</em><em>, </em><em>optional</em>) – Defaults to ‘’. Help Text for the command.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.Commands.AbstractCommand.command">
+<code class="descclassname">experimentum.Commands.AbstractCommand.</code><code class="descname">command</code><span class="sig-paren">(</span><em>description=''</em>, <em>arguments=None</em>, <em>help=''</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Commands.AbstractCommand.command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Command decorator, creates a Command to use with the CommandManager.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>description</strong> (<em>str</em><em>, </em><em>optional</em>) – Defaults to ‘’. Description of the command.</li>
+<li><strong>arguments</strong> (<em>dict</em><em>, </em><em>optional</em>) – Defaults to None. Arguments for the command.</li>
+<li><strong>help</strong> (<em>str</em><em>, </em><em>optional</em>) – Defaults to ‘’. Help text of the command.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">function</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-experimentum.Commands.CommandManager">
+<span id="experimentum-commands-commandmanager-module"></span><h2>experimentum.Commands.CommandManager module<a class="headerlink" href="#module-experimentum.Commands.CommandManager" title="Permalink to this headline">¶</a></h2>
+<p>Adding CLI commands to the app and handle their execution.</p>
+<dl class="class">
+<dt id="experimentum.Commands.CommandManager.ColoredHelpFormatter">
+<em class="property">class </em><code class="descclassname">experimentum.Commands.CommandManager.</code><code class="descname">ColoredHelpFormatter</code><span class="sig-paren">(</span><em>prog</em>, <em>indent_increment=2</em>, <em>max_help_position=24</em>, <em>width=None</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Commands.CommandManager.ColoredHelpFormatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">argparse.HelpFormatter</span></code></p>
+<p>HelpFormatter for argparse to create colored output.</p>
+<dl class="method">
+<dt id="experimentum.Commands.CommandManager.ColoredHelpFormatter.add_usage">
+<code class="descname">add_usage</code><span class="sig-paren">(</span><em>usage</em>, <em>actions</em>, <em>groups</em>, <em>prefix=None</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Commands.CommandManager.ColoredHelpFormatter.add_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Color in Usage and change format.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentum.Commands.CommandManager.CommandManager">
+<em class="property">class </em><code class="descclassname">experimentum.Commands.CommandManager.</code><code class="descname">CommandManager</code><span class="sig-paren">(</span><em>app</em>, <em>prog</em>, <em>description=''</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Commands.CommandManager.CommandManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>CommandManager class registers and manages commands.</p>
+<dl class="attribute">
+<dt id="experimentum.Commands.CommandManager.CommandManager.app">
+<code class="descname">app</code><a class="headerlink" href="#experimentum.Commands.CommandManager.CommandManager.app" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main App class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="experimentum.Experiments.html#experimentum.Experiments.App.App" title="experimentum.Experiments.App.App">App</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Commands.CommandManager.CommandManager.commands">
+<code class="descname">commands</code><a class="headerlink" href="#experimentum.Commands.CommandManager.CommandManager.commands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registered commands.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Commands.CommandManager.CommandManager.add_command">
+<code class="descname">add_command</code><span class="sig-paren">(</span><em>name</em>, <em>cmd</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Commands.CommandManager.CommandManager.add_command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a new command to the parser.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<em>str</em>) – Name of the command</li>
+<li><strong>cmd</strong> (<em>function</em><em>, </em><a class="reference internal" href="#experimentum.Commands.AbstractCommand.AbstractCommand" title="experimentum.Commands.AbstractCommand.AbstractCommand"><em>AbstractCommand</em></a>) – Command Handler</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">commands</code><em class="property"> = {}</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Commands.CommandManager.CommandManager.dispatch">
+<code class="descname">dispatch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Commands.CommandManager.CommandManager.dispatch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Use dispatch pattern to invoke class and let it handle the command.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentum.Commands.ExperimentsCommand">
+<span id="experimentum-commands-experimentscommand-module"></span><h2>experimentum.Commands.ExperimentsCommand module<a class="headerlink" href="#module-experimentum.Commands.ExperimentsCommand" title="Permalink to this headline">¶</a></h2>
+<p>Experiment CLI commands to allow you to run and manage your experiments.</p>
+<div class="section" id="running-experiments">
+<h3>Running experiments<a class="headerlink" href="#running-experiments" title="Permalink to this headline">¶</a></h3>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">experiments:run</span></code> command to run an experiment.</p>
+<p>Arguments:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="85%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>name</td>
+<td>Name of the experiment</td>
+</tr>
+</tbody>
+</table>
+<p>Options:</p>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">--config=<var>file</var></span></kbd></td>
+<td>Use alternative config file <em>(relative to experiments folder)</em>.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--progress</span></kbd></td>
+<td>Toggle visibility of the progress bar.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--n=<var>number</var></span></kbd></td>
+<td>Run the experiment <em>n</em> times.</td></tr>
+<tr><td class="option-group" colspan="2">
+<kbd><span class="option">--hide_performance</span></kbd></td>
+</tr>
+<tr><td>&#160;</td><td>Hides the performance table.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></td>
+<td>Show the help message.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="listing-experiments">
+<h3>Listing experiments<a class="headerlink" href="#listing-experiments" title="Permalink to this headline">¶</a></h3>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">experiments:list</span></code> command to list status information about all experiments.</p>
+<p>Options:</p>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></td>
+<td>Show the help message.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="module-experimentum.Commands.MigrationCommand">
+<span id="experimentum-commands-migrationcommand-module"></span><h2>experimentum.Commands.MigrationCommand module<a class="headerlink" href="#module-experimentum.Commands.MigrationCommand" title="Permalink to this headline">¶</a></h2>
+<p>Migration CLI commands to allow you to version control your database schema.</p>
+<p>With Migrations your team is able to easily modify and share the
+database schema to stay up to date. Migrations are typically paired
+with the <a class="reference internal" href="experimentum.Storage.Migrations.html#module-experimentum.Storage.Migrations.Schema" title="experimentum.Storage.Migrations.Schema"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Schema</span></code></a> Builder which is inspired by the
+<a class="reference external" href="https://laravel.com/docs/5.6/migrations#tables">Laravel Schema Builder</a>
+to easly manage your database’s schema.</p>
+<div class="section" id="generating-migrations">
+<h3>Generating Migrations<a class="headerlink" href="#generating-migrations" title="Permalink to this headline">¶</a></h3>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">migration:make</span></code> command  to create a new <a class="reference internal" href="experimentum.Storage.Migrations.html#experimentum.Storage.Migrations.Migration.Migration" title="experimentum.Storage.Migrations.Migration.Migration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></a>. This will create the
+following new <a class="reference internal" href="experimentum.Storage.Migrations.html#experimentum.Storage.Migrations.Migration.Migration" title="experimentum.Storage.Migrations.Migration.Migration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></a> class in your <code class="docutils literal notranslate"><span class="pre">migrations</span></code> folder. In order to determine
+the order of the migrations, each migration file name contains a timestamp.</p>
+<p>Arguments:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="85%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>name</td>
+<td>Name of the migration</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="migration-structure">
+<h3>Migration Structure<a class="headerlink" href="#migration-structure" title="Permalink to this headline">¶</a></h3>
+<p>Each <a class="reference internal" href="experimentum.Storage.Migrations.html#experimentum.Storage.Migrations.Migration.Migration" title="experimentum.Storage.Migrations.Migration.Migration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></a> class contains two methods: <a class="reference internal" href="experimentum.Storage.Migrations.html#experimentum.Storage.Migrations.Migration.Migration.up" title="experimentum.Storage.Migrations.Migration.Migration.up"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Migration.up()</span></code></a> and
+<a class="reference internal" href="experimentum.Storage.Migrations.html#experimentum.Storage.Migrations.Migration.Migration.down" title="experimentum.Storage.Migrations.Migration.Migration.down"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Migration.down()</span></code></a>. In the <a class="reference internal" href="experimentum.Storage.Migrations.html#experimentum.Storage.Migrations.Migration.Migration.up" title="experimentum.Storage.Migrations.Migration.Migration.up"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Migration.up()</span></code></a> method you add new tables,
+columns, or indexes to your database. In the <a class="reference internal" href="experimentum.Storage.Migrations.html#experimentum.Storage.Migrations.Migration.Migration.down" title="experimentum.Storage.Migrations.Migration.Migration.down"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Migration.down()</span></code></a> method you
+should revert those changed made in the <a class="reference internal" href="experimentum.Storage.Migrations.html#experimentum.Storage.Migrations.Migration.Migration.up" title="experimentum.Storage.Migrations.Migration.Migration.up"><code class="xref py py-meth docutils literal notranslate"><span class="pre">Migration.up()</span></code></a> method.</p>
+<p>Inside the <a class="reference internal" href="experimentum.Storage.Migrations.html#experimentum.Storage.Migrations.Migration.Migration" title="experimentum.Storage.Migrations.Migration.Migration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></a> class you have access to the <a class="reference internal" href="experimentum.Storage.Migrations.html#module-experimentum.Storage.Migrations.Schema" title="experimentum.Storage.Migrations.Schema"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Schema</span></code></a> Builder
+to easily create and modify tables. For more information check out its documentation:
+<a class="reference internal" href="experimentum.Storage.Migrations.html#module-experimentum.Storage.Migrations.Schema" title="experimentum.Storage.Migrations.Schema"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Schema</span></code></a></p>
+</div>
+<div class="section" id="running-migrations">
+<h3>Running Migrations<a class="headerlink" href="#running-migrations" title="Permalink to this headline">¶</a></h3>
+<p>To run the latest outstanding <a class="reference internal" href="experimentum.Storage.Migrations.html#experimentum.Storage.Migrations.Migration.Migration" title="experimentum.Storage.Migrations.Migration.Migration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></a>, just use the <code class="docutils literal notranslate"><span class="pre">migration:up</span></code> command.
+To revert the last <a class="reference internal" href="experimentum.Storage.Migrations.html#experimentum.Storage.Migrations.Migration.Migration" title="experimentum.Storage.Migrations.Migration.Migration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Migration</span></code></a> operation, just use the <code class="docutils literal notranslate"><span class="pre">migration:down</span></code> command.</p>
+<p>To roll back all migrations and then execute all migrations, just use the <code class="docutils literal notranslate"><span class="pre">migration:refresh</span></code>
+command. This command effectively re-creates your entire database.</p>
+<p>To see the status of the migrations, just use the <code class="docutils literal notranslate"><span class="pre">migration:status</span></code> command.
+This would output something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>|-------------------------------------------+--------|
+| Migration                                 | Ran?   |
+|-------------------------------------------+--------|
+| 20180814111005_create_users_table         | Yes    |
+| 20180815101334_add_avater_to_users_table  | No     |
+|-------------------------------------------+--------|
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="module-experimentum.Commands.PlotCommand">
+<span id="experimentum-commands-plotcommand-module"></span><h2>experimentum.Commands.PlotCommand module<a class="headerlink" href="#module-experimentum.Commands.PlotCommand" title="Permalink to this headline">¶</a></h2>
+<p>Plot CLI commands to allow you to generate your plots and charts.</p>
+<div class="section" id="generating-plots-and-charts">
+<h3>Generating plots and charts<a class="headerlink" href="#generating-plots-and-charts" title="Permalink to this headline">¶</a></h3>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">plots:generate</span></code> command to generate a plot/chart.</p>
+<p>Arguments:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="95%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>name</td>
+<td>Name of the plot/chart <em>(plot|chart|graph is omitted from the filename)</em>.</td>
+</tr>
+</tbody>
+</table>
+<p>Options:</p>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">-o</span></kbd></td>
+<td>Output file where the plot is stored at.
+When omitted the plot is shown directly.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></td>
+<td>Show the help message.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="module-experimentum.Commands.WebGUICommand">
+<span id="experimentum-commands-webguicommand-module"></span><h2>experimentum.Commands.WebGUICommand module<a class="headerlink" href="#module-experimentum.Commands.WebGUICommand" title="Permalink to this headline">¶</a></h2>
+<p>Dispatch and configure the flask web app.</p>
+<div class="section" id="starting-the-server">
+<h3>Starting the Server<a class="headerlink" href="#starting-the-server" title="Permalink to this headline">¶</a></h3>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">`webgui</span></code> command to dispatch a new server instance
+(<a class="reference external" href="http://flask.pocoo.org/docs/1.0/patterns/appdispatch/#app-dispatch">http://flask.pocoo.org/docs/1.0/patterns/appdispatch/#app-dispatch</a>).</p>
+<p>Options:</p>
+<table class="docutils option-list" frame="void" rules="none">
+<col class="option" />
+<col class="description" />
+<tbody valign="top">
+<tr><td class="option-group">
+<kbd><span class="option">--debug</span></kbd></td>
+<td>Enable the Debugger.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--port</span></kbd></td>
+<td>Specifiy the port to run server on.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">--no-reload</span></kbd></td>
+<td>Disable the reload when file changes are detected.</td></tr>
+<tr><td class="option-group">
+<kbd><span class="option">-h</span>, <span class="option">--help</span></kbd></td>
+<td>Show the help message.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="module-experimentum.Commands">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-experimentum.Commands" title="Permalink to this headline">¶</a></h2>
+<p>Import classes for easier importing by other packages/modules.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="experimentum.Config.html" class="btn btn-neutral float-right" title="experimentum.Config package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="experimentum.html" class="btn btn-neutral float-left" title="experimentum package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Pascal Kleindienst
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,927 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>experimentum.Storage package &mdash; experimentum  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="experimentum.Storage.Migrations package" href="experimentum.Storage.Migrations.html" />
+    <link rel="prev" title="experimentum.Plots package" href="experimentum.Plots.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> experimentum
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service.html">Service Container and Provider</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands.html">CLI Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migrations.html">Migrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../repositories.html">Repositories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experiments.html">Experiments</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="experimentum.html">experimentum package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="experimentum.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Commands.html">experimentum.Commands package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Config.html">experimentum.Config package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Experiments.html">experimentum.Experiments package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Plots.html">experimentum.Plots package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">experimentum.Storage package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.WebGUI.html">experimentum.WebGUI package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.cli">experimentum.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.files">experimentum.files module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.quickstart">experimentum.quickstart module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.utils">experimentum.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">experimentum</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">experimentum</a> &raquo;</li>
+        
+          <li><a href="experimentum.html">experimentum package</a> &raquo;</li>
+        
+      <li>experimentum.Storage package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/experimentum.Storage.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="experimentum-storage-package">
+<h1>experimentum.Storage package<a class="headerlink" href="#experimentum-storage-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="experimentum.Storage.Migrations.html">experimentum.Storage.Migrations package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Storage.Migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Storage.Migrations.html#module-experimentum.Storage.Migrations.Blueprint">experimentum.Storage.Migrations.Blueprint module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Storage.Migrations.html#columns">Columns</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.Migrations.html#adding-columns">Adding Columns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.Migrations.html#column-modifiers">Column Modifiers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.Migrations.html#dropping-columns">Dropping Columns</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Storage.Migrations.html#indexes">Indexes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.Migrations.html#available-index-types">Available Index Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.Migrations.html#dropping-indexes">Dropping Indexes</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Storage.Migrations.html#foreign-key-contraints">Foreign Key Contraints</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Storage.Migrations.html#module-experimentum.Storage.Migrations.Column">experimentum.Storage.Migrations.Column module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Storage.Migrations.html#module-experimentum.Storage.Migrations.ForeignKey">experimentum.Storage.Migrations.ForeignKey module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Storage.Migrations.html#module-experimentum.Storage.Migrations.Migration">experimentum.Storage.Migrations.Migration module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Storage.Migrations.html#module-experimentum.Storage.Migrations.Migrator">experimentum.Storage.Migrations.Migrator module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Storage.Migrations.html#module-experimentum.Storage.Migrations.Schema">experimentum.Storage.Migrations.Schema module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Storage.Migrations.html#tables">Tables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.Migrations.html#creating-tables">Creating Tables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.Migrations.html#checking-existence">Checking Existence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.Migrations.html#renaming-dropping-tables">Renaming / Dropping Tables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Storage.Migrations.html#module-experimentum.Storage.Migrations">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="experimentum.Storage.SQLAlchemy.html">experimentum.Storage.SQLAlchemy package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#module-experimentum.Storage.SQLAlchemy.ColumnFactory">experimentum.Storage.SQLAlchemy.ColumnFactory module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#module-experimentum.Storage.SQLAlchemy.Platform">experimentum.Storage.SQLAlchemy.Platform module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#module-experimentum.Storage.SQLAlchemy.Repository">experimentum.Storage.SQLAlchemy.Repository module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#module-experimentum.Storage.SQLAlchemy.SQLitePlatform">experimentum.Storage.SQLAlchemy.SQLitePlatform module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#module-experimentum.Storage.SQLAlchemy.Store">experimentum.Storage.SQLAlchemy.Store module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#module-experimentum.Storage.SQLAlchemy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-experimentum.Storage.AbstractRepository">
+<span id="experimentum-storage-abstractrepository-module"></span><h2>experimentum.Storage.AbstractRepository module<a class="headerlink" href="#module-experimentum.Storage.AbstractRepository" title="Permalink to this headline">¶</a></h2>
+<p>Interface for using the <em>Repository Design Pattern</em>.</p>
+<p>Instead of using the <a class="reference internal" href="#experimentum.Storage.AbstractStore.AbstractStore" title="experimentum.Storage.AbstractStore.AbstractStore"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractStore</span></code></a> (or any of its implementations like
+<a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#experimentum.Storage.SQLAlchemy.Store.Store" title="experimentum.Storage.SQLAlchemy.Store.Store"><code class="xref py py-class docutils literal notranslate"><span class="pre">Store</span></code></a>) as a <em>God Class</em> the <em>Repository Design Pattern</em>
+allows you to follow the <em>Single Responsibility Rule</em>.</p>
+<p>A Repository acts like an in-memory domain object collection, that connects the domain
+and data mapping layers. Objects can be easily added to and removed from the Repository,
+due to the mapping code of the Repository which will ensure that the right operations
+are executed behind the scenes.</p>
+<p>Apart from acting as a bridge between the data and the domain layer, the Repository
+also provides some useful methods for storing, updating, deleting and querying data.</p>
+<p class="rubric">Examples</p>
+<p>Lets assume that you are using the default experimentum data store <a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#module-experimentum.Storage.SQLAlchemy.Store" title="experimentum.Storage.SQLAlchemy.Store"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Store</span></code></a>.
+With <a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#module-experimentum.Storage.SQLAlchemy.Repository" title="experimentum.Storage.SQLAlchemy.Repository"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Repository</span></code></a> there is already an implementation which will handle
+the mapping between the Repository objects and the SQLAlchemy ORM which is used by
+the <a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#module-experimentum.Storage.SQLAlchemy.Store" title="experimentum.Storage.SQLAlchemy.Store"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Store</span></code></a>.</p>
+<p>For simplicity we will assume that your database already contains a <em>User</em> and
+<em>Address</em> table (for more information on how to specify your domain layer, see:
+<a class="reference internal" href="experimentum.Storage.Migrations.html#module-experimentum.Storage.Migrations" title="experimentum.Storage.Migrations"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Migrations</span></code></a>).</p>
+<div class="section" id="data-layer">
+<h3>Data Layer<a class="headerlink" href="#data-layer" title="Permalink to this headline">¶</a></h3>
+<p>Each user has a <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">fullname</span></code> and a <code class="docutils literal notranslate"><span class="pre">password</span></code>
+field and can have multiple <code class="docutils literal notranslate"><span class="pre">adresses</span></code>. Each address has an <code class="docutils literal notranslate"><span class="pre">email</span></code> field:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">experimentum.Storage</span> <span class="k">import</span> <span class="n">AbstractRepository</span>
+
+<span class="k">class</span> <span class="nc">AddressRepository</span><span class="p">(</span><span class="n">AbstractRepository</span><span class="o">.</span><span class="n">implementation</span><span class="p">):</span>
+    <span class="n">__table__</span> <span class="o">=</span> <span class="s1">&#39;Address&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="n">email</span>
+
+
+<span class="k">class</span> <span class="nc">UserRepository</span><span class="p">(</span><span class="n">AbstractRepository</span><span class="o">.</span><span class="n">implementation</span><span class="p">):</span>
+    <span class="n">__table__</span> <span class="o">=</span> <span class="s1">&#39;User&#39;</span>
+
+    <span class="n">__relationships__</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;addresses&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">AddressRepository</span><span class="p">]</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">fullname</span><span class="p">,</span> <span class="n">password</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fullname</span> <span class="o">=</span> <span class="n">fullname</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">password</span>
+</pre></div>
+</div>
+<p>In the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method of the repository you specify the fields of the table.
+The <code class="docutils literal notranslate"><span class="pre">__table__</span></code> attribute contains the name of the table, while the optional
+<code class="docutils literal notranslate"><span class="pre">__relationships__</span></code> attribute specifies any relationships of the data.
+The key is the attribute under which the data will be accessible, ie:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">addresses</span><span class="p">)</span>  <span class="c1"># will print all addresses of a specific user</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="actions">
+<h3>Actions<a class="headerlink" href="#actions" title="Permalink to this headline">¶</a></h3>
+<p>There are several methods for querying data, like <a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#experimentum.Storage.SQLAlchemy.Repository.Repository.find" title="experimentum.Storage.SQLAlchemy.Repository.Repository.find"><code class="xref py py-meth docutils literal notranslate"><span class="pre">find()</span></code></a>,
+<a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#experimentum.Storage.SQLAlchemy.Repository.Repository.get" title="experimentum.Storage.SQLAlchemy.Repository.Repository.get"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get()</span></code></a>, <a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#experimentum.Storage.SQLAlchemy.Repository.Repository.first" title="experimentum.Storage.SQLAlchemy.Repository.Repository.first"><code class="xref py py-meth docutils literal notranslate"><span class="pre">first()</span></code></a>, <a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#experimentum.Storage.SQLAlchemy.Repository.Repository.all" title="experimentum.Storage.SQLAlchemy.Repository.Repository.all"><code class="xref py py-meth docutils literal notranslate"><span class="pre">all()</span></code></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find a user by its id</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">UserRepository</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># get user with ID 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">fullname</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">addresses</span><span class="p">)</span>
+
+<span class="c1"># Get many users by a condition (here where name != &#39;John&#39;)</span>
+<span class="n">users</span> <span class="o">=</span> <span class="n">UserRepository</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">where</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;!=&#39;</span><span class="p">,</span> <span class="s1">&#39;John&#39;</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">fullname</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">addresses</span><span class="p">)</span>
+
+<span class="c1"># Get the first user which satisfies a certain condition</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">UserRepository</span><span class="o">.</span><span class="n">first</span><span class="p">(</span><span class="n">where</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;John&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">fullname</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">addresses</span><span class="p">)</span>
+
+<span class="c1"># Get all users</span>
+<span class="n">users</span> <span class="o">=</span> <span class="n">UserRepository</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">fullname</span><span class="p">,</span> <span class="n">user</span><span class="o">.</span><span class="n">addresses</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#experimentum.Storage.SQLAlchemy.Repository.Repository" title="experimentum.Storage.SQLAlchemy.Repository.Repository"><code class="xref py py-class docutils literal notranslate"><span class="pre">Repository</span></code></a> class also provides several methods for storing, updating, and
+deleting data, like <a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#experimentum.Storage.SQLAlchemy.Repository.Repository.create" title="experimentum.Storage.SQLAlchemy.Repository.Repository.create"><code class="xref py py-meth docutils literal notranslate"><span class="pre">create()</span></code></a>, <a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#experimentum.Storage.SQLAlchemy.Repository.Repository.update" title="experimentum.Storage.SQLAlchemy.Repository.Repository.update"><code class="xref py py-meth docutils literal notranslate"><span class="pre">update()</span></code></a>
+<a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#experimentum.Storage.SQLAlchemy.Repository.Repository.delete" title="experimentum.Storage.SQLAlchemy.Repository.Repository.delete"><code class="xref py py-meth docutils literal notranslate"><span class="pre">delete()</span></code></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new user from a data dictionary</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">UserRepository</span><span class="o">.</span><span class="n">from_dict</span><span class="p">({</span>
+    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Hello&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;fullname&#39;</span><span class="p">:</span> <span class="s1">&#39;World&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;1234&#39;</span><span class="p">,</span>
+    <span class="c1"># Turns the entries into AddressRepository instances and adds them to the user repo</span>
+    <span class="c1"># so that they get saved with the correct user id</span>
+    <span class="s1">&#39;addresses&#39;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;hello@world.com&#39;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s1">&#39;email&#39;</span><span class="p">:</span> <span class="s1">&#39;foo@world.com&#39;</span><span class="p">},</span>
+    <span class="p">]</span>
+<span class="p">})</span>
+<span class="n">user</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>  <span class="c1"># create the new user</span>
+
+<span class="c1"># Update a user</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">UserRepository</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">user</span><span class="o">.</span><span class="n">fullname</span> <span class="o">=</span> <span class="s1">&#39;Doe&#39;</span>
+<span class="n">user</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;John&#39;</span>
+<span class="n">user</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+<span class="c1"># Delete a user</span>
+<span class="n">user</span> <span class="o">=</span> <span class="n">UserRepository</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">user</span><span class="o">.</span><span class="n">delete</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="events">
+<h3>Events<a class="headerlink" href="#events" title="Permalink to this headline">¶</a></h3>
+<p>A Repository provides several events, allowing you to hook into the following points in a
+repositorie’s lifecycle: <a class="reference internal" href="#experimentum.Storage.AbstractRepository.AbstractRepository.before_insert" title="experimentum.Storage.AbstractRepository.AbstractRepository.before_insert"><code class="xref py py-meth docutils literal notranslate"><span class="pre">before_insert()</span></code></a>,
+<a class="reference internal" href="#experimentum.Storage.AbstractRepository.AbstractRepository.after_insert" title="experimentum.Storage.AbstractRepository.AbstractRepository.after_insert"><code class="xref py py-meth docutils literal notranslate"><span class="pre">after_insert()</span></code></a>, <a class="reference internal" href="#experimentum.Storage.AbstractRepository.AbstractRepository.before_update" title="experimentum.Storage.AbstractRepository.AbstractRepository.before_update"><code class="xref py py-meth docutils literal notranslate"><span class="pre">before_update()</span></code></a>,
+<a class="reference internal" href="#experimentum.Storage.AbstractRepository.AbstractRepository.after_update" title="experimentum.Storage.AbstractRepository.AbstractRepository.after_update"><code class="xref py py-meth docutils literal notranslate"><span class="pre">after_update()</span></code></a>.</p>
+<p>Events allow you to easily execute code each time after/before a specific repository object
+is saved or updated in the data store.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AddressRepository</span><span class="p">(</span><span class="n">AbstractRepository</span><span class="o">.</span><span class="n">implementation</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+
+    <span class="k">def</span> <span class="nf">after_insert</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Gets called each time after an address is saved to the database.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">email</span><span class="p">)</span>  <span class="c1"># Object has access to the inserted id</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="loading">
+<h3>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h3>
+<p>In order for the framework to map all the repositories it has to load them via the
+<a class="reference internal" href="#experimentum.Storage.AbstractRepository.RepositoryLoader" title="experimentum.Storage.AbstractRepository.RepositoryLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">RepositoryLoader</span></code></a> class. For the <a class="reference internal" href="#experimentum.Storage.AbstractRepository.RepositoryLoader" title="experimentum.Storage.AbstractRepository.RepositoryLoader"><code class="xref py py-class docutils literal notranslate"><span class="pre">RepositoryLoader</span></code></a> class
+to be able to find the repositories, the files have be in your repository folder and
+end with <code class="docutils literal notranslate"><span class="pre">Repository.py</span></code>. The repository files should contain a repository class with
+the same name as the file name.</p>
+<dl class="class">
+<dt id="experimentum.Storage.AbstractRepository.AbstractRepository">
+<em class="property">class </em><code class="descclassname">experimentum.Storage.AbstractRepository.</code><code class="descname">AbstractRepository</code><span class="sig-paren">(</span><em>**attributes</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractRepository.AbstractRepository" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Interface for using the <em>Repository Design Pattern</em>.</p>
+<p>Instead of using the <a class="reference internal" href="#experimentum.Storage.AbstractStore.AbstractStore" title="experimentum.Storage.AbstractStore.AbstractStore"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractStore</span></code></a> as a <em>God Class</em> the
+<em>Repository Design Pattern</em>  allows you to follow the <em>Single Responsibility Rule</em>.</p>
+<dl class="attribute">
+<dt id="experimentum.Storage.AbstractRepository.AbstractRepository.store">
+<code class="descname">store</code><a class="headerlink" href="#experimentum.Storage.AbstractRepository.AbstractRepository.store" title="Permalink to this definition">¶</a></dt>
+<dd><p>Store that is used for mapping domain and data layer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#experimentum.Storage.AbstractStore.AbstractStore" title="experimentum.Storage.AbstractStore.AbstractStore">AbstractStore</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Storage.AbstractRepository.AbstractRepository.implementation">
+<code class="descname">implementation</code><a class="headerlink" href="#experimentum.Storage.AbstractRepository.AbstractRepository.implementation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Concrete repo implementation which should be used.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#experimentum.Storage.AbstractRepository.AbstractRepository" title="experimentum.Storage.AbstractRepository.AbstractRepository">AbstractRepository</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Storage.AbstractRepository.AbstractRepository.__table__">
+<code class="descname">__table__</code><a class="headerlink" href="#experimentum.Storage.AbstractRepository.AbstractRepository.__table__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the table the repository refers to.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Storage.AbstractRepository.AbstractRepository.__relationship__">
+<code class="descname">__relationship__</code><a class="headerlink" href="#experimentum.Storage.AbstractRepository.AbstractRepository.__relationship__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Any Relationships the data has.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.AbstractRepository.AbstractRepository.after_insert">
+<code class="descname">after_insert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractRepository.AbstractRepository.after_insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Event that gets called after insert statement is executed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">AbstractRepository</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.AbstractRepository.AbstractRepository.after_update">
+<code class="descname">after_update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractRepository.AbstractRepository.after_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Event that gets called after update statement is executed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">AbstractRepository</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="experimentum.Storage.AbstractRepository.AbstractRepository.all">
+<em class="property">classmethod </em><code class="descname">all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractRepository.AbstractRepository.all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all entries for this specific repository from your data store.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>NotImplementedError</strong> – if method is not implemented yet.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of all entires</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.AbstractRepository.AbstractRepository.before_insert">
+<code class="descname">before_insert</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractRepository.AbstractRepository.before_insert" title="Permalink to this definition">¶</a></dt>
+<dd><p>Event that gets called before insert statement is executed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">AbstractRepository</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.AbstractRepository.AbstractRepository.before_update">
+<code class="descname">before_update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractRepository.AbstractRepository.before_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Event that gets called before update statement is executed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">AbstractRepository</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.AbstractRepository.AbstractRepository.create">
+<code class="descname">create</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractRepository.AbstractRepository.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the repository content in your data store.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>NotImplementedError</strong> – if method is not implemented yet.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.AbstractRepository.AbstractRepository.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractRepository.AbstractRepository.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete the repository content from your data store.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>NotImplementedError</strong> – if method is not implemented yet.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="experimentum.Storage.AbstractRepository.AbstractRepository.find">
+<em class="property">classmethod </em><code class="descname">find</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractRepository.AbstractRepository.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find an entry of this repository based on its id.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>id</strong> (<em>int</em>) – ID to search for.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>NotImplementedError</strong> – if method is not implemented yet.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Item which the concrete id</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#experimentum.Storage.AbstractRepository.AbstractRepository" title="experimentum.Storage.AbstractRepository.AbstractRepository">AbstractRepository</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="experimentum.Storage.AbstractRepository.AbstractRepository.first">
+<em class="property">classmethod </em><code class="descname">first</code><span class="sig-paren">(</span><em>where=None</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractRepository.AbstractRepository.first" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get first entry which satisfy a specific condition from your data store.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>where</strong> (<em>list</em><em>, </em><em>optional</em>) – Defaults to None. Where Condition</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>NotImplementedError</strong> – if method is not implemented yet.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Item which satisfies the condition.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#experimentum.Storage.AbstractRepository.AbstractRepository" title="experimentum.Storage.AbstractRepository.AbstractRepository">AbstractRepository</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="experimentum.Storage.AbstractRepository.AbstractRepository.from_dict">
+<em class="property">classmethod </em><code class="descname">from_dict</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractRepository.AbstractRepository.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new Repository instance based on a dictionary entry.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>dict</em>) – Repository Data</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Repository instance filled with data.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#experimentum.Storage.AbstractRepository.AbstractRepository" title="experimentum.Storage.AbstractRepository.AbstractRepository">AbstractRepository</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="experimentum.Storage.AbstractRepository.AbstractRepository.get">
+<em class="property">classmethod </em><code class="descname">get</code><span class="sig-paren">(</span><em>where=None</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractRepository.AbstractRepository.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all entries which satisfy a specific condition from your data store.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>where</strong> (<em>list</em><em>, </em><em>optional</em>) – Defaults to None. Where Condition</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>NotImplementedError</strong> – if method is not implemented yet.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of items which satisfy the condition.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Storage.AbstractRepository.AbstractRepository.implemantation">
+<code class="descname">implemantation</code><em class="property"> = None</em><a class="headerlink" href="#experimentum.Storage.AbstractRepository.AbstractRepository.implemantation" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="experimentum.Storage.AbstractRepository.AbstractRepository.mapping">
+<em class="property">static </em><code class="descname">mapping</code><span class="sig-paren">(</span><em>cls</em>, <em>store</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractRepository.AbstractRepository.mapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Map data store content to repository classes.</p>
+<p>Example:
+Map a <em>User</em> Table in the data store to the <em>UserRepository</em>,
+which reflects the attributes of the User Table schema.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>cls</strong> (<a class="reference internal" href="#experimentum.Storage.AbstractRepository.AbstractRepository" title="experimentum.Storage.AbstractRepository.AbstractRepository"><em>AbstractRepository</em></a>) – Repository to map</li>
+<li><strong>store</strong> (<a class="reference internal" href="#experimentum.Storage.AbstractStore.AbstractStore" title="experimentum.Storage.AbstractStore.AbstractStore"><em>AbstractStore</em></a>) – Storage that is used</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>NotImplementedError</strong> – if method is not implemented</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">store</code><em class="property"> = None</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.AbstractRepository.AbstractRepository.to_json">
+<code class="descname">to_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractRepository.AbstractRepository.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return JSON representation of repository fields and values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">JSON representration</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.AbstractRepository.AbstractRepository.update">
+<code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractRepository.AbstractRepository.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the repository content in your data store.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>NotImplementedError</strong> – if method is not implemented yet.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentum.Storage.AbstractRepository.RepositoryLoader">
+<em class="property">class </em><code class="descclassname">experimentum.Storage.AbstractRepository.</code><code class="descname">RepositoryLoader</code><span class="sig-paren">(</span><em>app</em>, <em>implementation</em>, <em>store</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractRepository.RepositoryLoader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Load and map all the repositories it can find and cache them.</p>
+<dl class="attribute">
+<dt id="experimentum.Storage.AbstractRepository.RepositoryLoader.app">
+<code class="descname">app</code><a class="headerlink" href="#experimentum.Storage.AbstractRepository.RepositoryLoader.app" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main App class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="experimentum.Experiments.html#experimentum.Experiments.App.App" title="experimentum.Experiments.App.App">App</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Storage.AbstractRepository.RepositoryLoader.implementation">
+<code class="descname">implementation</code><a class="headerlink" href="#experimentum.Storage.AbstractRepository.RepositoryLoader.implementation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Concrete repo implementation which should be used.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#experimentum.Storage.AbstractRepository.AbstractRepository" title="experimentum.Storage.AbstractRepository.AbstractRepository">AbstractRepository</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Storage.AbstractRepository.RepositoryLoader.store">
+<code class="descname">store</code><a class="headerlink" href="#experimentum.Storage.AbstractRepository.RepositoryLoader.store" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data store which is used</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#experimentum.Storage.AbstractStore.AbstractStore" title="experimentum.Storage.AbstractStore.AbstractStore">AbstractStore</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.AbstractRepository.RepositoryLoader.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>repository</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractRepository.RepositoryLoader.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return class of a loaded repository if it exists.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>repository</strong> (<em>str</em>) – Name of repository class.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Repository class</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#experimentum.Storage.AbstractRepository.AbstractRepository" title="experimentum.Storage.AbstractRepository.AbstractRepository">AbstractRepository</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.AbstractRepository.RepositoryLoader.load">
+<code class="descname">load</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractRepository.RepositoryLoader.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load all repositories from the repo folder and try to map them to the store.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-experimentum.Storage.AbstractStore">
+<span id="experimentum-storage-abstractstore-module"></span><h2>experimentum.Storage.AbstractStore module<a class="headerlink" href="#module-experimentum.Storage.AbstractStore" title="Permalink to this headline">¶</a></h2>
+<p>Interface of the data store to make it possible to switch between different implementations.</p>
+<dl class="class">
+<dt id="experimentum.Storage.AbstractStore.AbstractStore">
+<em class="property">class </em><code class="descclassname">experimentum.Storage.AbstractStore.</code><code class="descname">AbstractStore</code><a class="headerlink" href="#experimentum.Storage.AbstractStore.AbstractStore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Contains the interface between the framework and the concrete Database implementation.</p>
+<dl class="method">
+<dt id="experimentum.Storage.AbstractStore.AbstractStore.alter">
+<code class="descname">alter</code><span class="sig-paren">(</span><em>blueprint</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractStore.AbstractStore.alter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alter the schema for a table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>blueprint</strong> (<a class="reference internal" href="experimentum.Storage.Migrations.html#experimentum.Storage.Migrations.Blueprint.Blueprint" title="experimentum.Storage.Migrations.Blueprint.Blueprint"><em>Blueprint</em></a>) – Table Blueprint</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>NotImplementedError</strong> – if method is not implemented by derived class.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.AbstractStore.AbstractStore.create">
+<code class="descname">create</code><span class="sig-paren">(</span><em>blueprint</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractStore.AbstractStore.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new Table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>blueprint</strong> (<a class="reference internal" href="experimentum.Storage.Migrations.html#experimentum.Storage.Migrations.Blueprint.Blueprint" title="experimentum.Storage.Migrations.Blueprint.Blueprint"><em>Blueprint</em></a>) – The Blueprint to create the table</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>NotImplementedError</strong> – if method is not implemented by derived class.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.AbstractStore.AbstractStore.drop">
+<code class="descname">drop</code><span class="sig-paren">(</span><em>name</em>, <em>checkfirst=False</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractStore.AbstractStore.drop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drop a table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – Name of the table</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>NotImplementedError</strong> – if method is not implemented by derived class.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.AbstractStore.AbstractStore.has_column">
+<code class="descname">has_column</code><span class="sig-paren">(</span><em>table</em>, <em>column</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractStore.AbstractStore.has_column" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if a table has a specific column.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>table</strong> (<em>str</em>) – Name of the table</li>
+<li><strong>column</strong> (<em>str</em>) – Name of the column</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>NotImplementedError</strong> – if method is not implemented by derived class.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">boolean</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.AbstractStore.AbstractStore.has_table">
+<code class="descname">has_table</code><span class="sig-paren">(</span><em>table</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractStore.AbstractStore.has_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the data store has a specific table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>table</strong> (<em>str</em>) – Name of the Table</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>NotImplementedError</strong> – if method is not implemented by derived class.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.AbstractStore.AbstractStore.rename">
+<code class="descname">rename</code><span class="sig-paren">(</span><em>old</em>, <em>new</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.AbstractStore.AbstractStore.rename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rename a table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>old</strong> (<em>str</em>) – Old table name</li>
+<li><strong>new</strong> (<em>str</em>) – New table name</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>NotImplementedError</strong> – if method is not implemented by derived class.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentum.Storage">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-experimentum.Storage" title="Permalink to this headline">¶</a></h2>
+<p>Import classes for easier importing by other packages/modules.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="experimentum.Storage.Migrations.html" class="btn btn-neutral float-right" title="experimentum.Storage.Migrations package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="experimentum.Plots.html" class="btn btn-neutral float-left" title="experimentum.Plots package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Pascal Kleindienst
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

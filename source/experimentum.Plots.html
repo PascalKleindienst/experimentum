@@ -1,0 +1,534 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>experimentum.Plots package &mdash; experimentum  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="experimentum.Storage package" href="experimentum.Storage.html" />
+    <link rel="prev" title="experimentum.Experiments package" href="experimentum.Experiments.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> experimentum
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service.html">Service Container and Provider</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands.html">CLI Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migrations.html">Migrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../repositories.html">Repositories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experiments.html">Experiments</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="experimentum.html">experimentum package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="experimentum.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Commands.html">experimentum.Commands package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Config.html">experimentum.Config package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Experiments.html">experimentum.Experiments package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">experimentum.Plots package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.html">experimentum.Storage package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.WebGUI.html">experimentum.WebGUI package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.cli">experimentum.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.files">experimentum.files module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.quickstart">experimentum.quickstart module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.utils">experimentum.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">experimentum</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">experimentum</a> &raquo;</li>
+        
+          <li><a href="experimentum.html">experimentum package</a> &raquo;</li>
+        
+      <li>experimentum.Plots package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/experimentum.Plots.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="experimentum-plots-package">
+<h1>experimentum.Plots package<a class="headerlink" href="#experimentum-plots-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-experimentum.Plots.Factory">
+<span id="experimentum-plots-factory-module"></span><h2>experimentum.Plots.Factory module<a class="headerlink" href="#module-experimentum.Plots.Factory" title="Permalink to this headline">¶</a></h2>
+<p>Factory to load and init plot classes.</p>
+<dl class="class">
+<dt id="experimentum.Plots.Factory.Factory">
+<em class="property">class </em><code class="descclassname">experimentum.Plots.Factory.</code><code class="descname">Factory</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Plots.Factory.Factory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Create instances of plot classes based on their name.</p>
+<dl class="attribute">
+<dt id="experimentum.Plots.Factory.Factory.app">
+<code class="descname">app</code><a class="headerlink" href="#experimentum.Plots.Factory.Factory.app" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main Service Container.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="experimentum.Experiments.html#experimentum.Experiments.App.App" title="experimentum.Experiments.App.App">App</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Plots.Factory.Factory.create">
+<code class="descname">create</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Plots.Factory.Factory.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new plot class instance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – Name of the plot.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Plot Class</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#experimentum.Plots.Plot.AbstractPlot" title="experimentum.Plots.Plot.AbstractPlot">AbstractPlot</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Plots.Factory.Factory.parse">
+<code class="descname">parse</code><span class="sig-paren">(</span><em>plot</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Plots.Factory.Factory.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse the config file for the current plot.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>plot</strong> (<em>str</em>) – Name of the plot.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Config data for the plot</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Plots.Factory.Factory.validate">
+<code class="descname">validate</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Plots.Factory.Factory.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate the config data and save it in the Config Container if valid.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>object</em>) – Config Data</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Config Data for the plot.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="experimentum.Config.html#experimentum.Config.Config.Config" title="experimentum.Config.Config.Config">Config</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentum.Plots.Plot">
+<span id="experimentum-plots-plot-module"></span><h2>experimentum.Plots.Plot module<a class="headerlink" href="#module-experimentum.Plots.Plot" title="Permalink to this headline">¶</a></h2>
+<p>Interface and Implementation for generating plots and charts.</p>
+<p>The default implementation of <a class="reference internal" href="#experimentum.Plots.Plot.AbstractPlot" title="experimentum.Plots.Plot.AbstractPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractPlot</span></code></a> is the
+<a class="reference internal" href="#experimentum.Plots.Plot.Plot" title="experimentum.Plots.Plot.Plot"><code class="xref py py-class docutils literal notranslate"><span class="pre">Plot</span></code></a> class which internally uses the matplotlib library
+to generate the plots. If you want to use another library to generate
+your plots you can add a new <cite>CustomPlot</cite> class which implements the
+<a class="reference internal" href="#experimentum.Plots.Plot.AbstractPlot" title="experimentum.Plots.Plot.AbstractPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractPlot</span></code></a> interface. Now your plots need to inherit
+from your <cite>CustomPlot</cite> class and you are good to go.</p>
+<dl class="class">
+<dt id="experimentum.Plots.Plot.AbstractPlot">
+<em class="property">class </em><code class="descclassname">experimentum.Plots.Plot.</code><code class="descname">AbstractPlot</code><span class="sig-paren">(</span><em>repo</em>, <em>config</em>, <em>plot_type=u'plot'</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Plots.Plot.AbstractPlot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Abstract Interface for a plot class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>repo</strong> (<a class="reference internal" href="experimentum.Storage.html#experimentum.Storage.AbstractRepository.AbstractRepository" title="experimentum.Storage.AbstractRepository.AbstractRepository"><em>AbstractRepository</em></a>) – Repository Class to fetch data.</li>
+<li><strong>config</strong> (<a class="reference internal" href="experimentum.Config.html#experimentum.Config.Config.Config" title="experimentum.Config.Config.Config"><em>Config</em></a>) – Config data for the plot.</li>
+<li><strong>plot_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Defaults to ‘plot’. Type of plot</li>
+<li><strong>plot</strong> (<em>object</em>) – Plotting library</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="experimentum.Plots.Plot.AbstractPlot.data">
+<code class="descname">data</code><span class="sig-paren">(</span><em>experiments</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Plots.Plot.AbstractPlot.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return Data for the plot.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>experiments</strong> (<a class="reference internal" href="experimentum.Storage.html#experimentum.Storage.AbstractRepository.AbstractRepository" title="experimentum.Storage.AbstractRepository.AbstractRepository"><em>AbstractRepository</em></a>) – Repository with current experiment</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">x,y,z values or list of x,y,z coordinates (e.g. {‘x’: 0, ‘y’: 0, ‘z’: 0})</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list|dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Plots.Plot.AbstractPlot.draw">
+<code class="descname">draw</code><span class="sig-paren">(</span><em>data</em>, <em>plot_idx=None</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Plots.Plot.AbstractPlot.draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw the plot data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>data</strong> (<em>dict</em>) – Dictionary with coordinates (e.g. {‘x’: 0, ‘y’: 0, ‘z’: 0})</li>
+<li><strong>plot_idx</strong> (<em>integer</em><em>, </em><em>optional</em>) – Defaults to None. Index for when multiple plots are drawn</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>NotImplementedError</strong> – Must implement draw method</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Plots.Plot.AbstractPlot.labeling">
+<code class="descname">labeling</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Plots.Plot.AbstractPlot.labeling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add labels to the plot.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>NotImplementedError</strong> – Must implement labeling method</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Plots.Plot.AbstractPlot.plotting">
+<code class="descname">plotting</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Plots.Plot.AbstractPlot.plotting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the plot, i.e. add labels, titles, legend etc and draw the plot.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Plot object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>NotImplementedError</strong> – Must implement plotting method</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Plots.Plot.AbstractPlot.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Plots.Plot.AbstractPlot.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the plot.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str</em>) – Filename to save the plot.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>NotImplementedError</strong> – Must implement save method</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Plots.Plot.AbstractPlot.show">
+<code class="descname">show</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Plots.Plot.AbstractPlot.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show the plot.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>NotImplementedError</strong> – Must implement show method</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentum.Plots.Plot.Plot">
+<em class="property">class </em><code class="descclassname">experimentum.Plots.Plot.</code><code class="descname">Plot</code><span class="sig-paren">(</span><em>repo</em>, <em>config</em>, <em>plot_type=u'plot'</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Plots.Plot.Plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#experimentum.Plots.Plot.AbstractPlot" title="experimentum.Plots.Plot.AbstractPlot"><code class="xref py py-class docutils literal notranslate"><span class="pre">experimentum.Plots.Plot.AbstractPlot</span></code></a></p>
+<p>Concrete Implementation of the AbstractPlot Interface for a plot class.</p>
+<p>This implementation uses matplotlib to genereate the plots.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>repo</strong> (<a class="reference internal" href="experimentum.Storage.html#experimentum.Storage.AbstractRepository.AbstractRepository" title="experimentum.Storage.AbstractRepository.AbstractRepository"><em>AbstractRepository</em></a>) – Repository Class to fetch data.</li>
+<li><strong>config</strong> (<a class="reference internal" href="experimentum.Config.html#experimentum.Config.Config.Config" title="experimentum.Config.Config.Config"><em>Config</em></a>) – Config data for the plot.</li>
+<li><strong>plot_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Defaults to ‘plot’. Type of plot</li>
+<li><strong>plot</strong> (<em>matplotlib.pyplot</em>) – matplotlib.pyplot module</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="experimentum.Plots.Plot.Plot.draw">
+<code class="descname">draw</code><span class="sig-paren">(</span><em>data</em>, <em>plot_idx=None</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Plots.Plot.Plot.draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw the plot data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>data</strong> (<em>dict</em>) – Dictionary with coordinates (e.g. {‘x’: 0, ‘y’: 0, ‘z’: 0})</li>
+<li><strong>plot_idx</strong> (<em>integer</em><em>, </em><em>optional</em>) – Defaults to None. Index for when multiple plots are drawn</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Plots.Plot.Plot.labeling">
+<code class="descname">labeling</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Plots.Plot.Plot.labeling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add labels to the plot.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Plots.Plot.Plot.plotting">
+<code class="descname">plotting</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Plots.Plot.Plot.plotting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate the plot, i.e. add labels, titles, legend etc and draw the plot.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Plot object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">matplotlib.pyplot</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Plots.Plot.Plot.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Plots.Plot.Plot.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the plot.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>str</em>) – Filename to save the plot.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Plots.Plot.Plot.show">
+<code class="descname">show</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Plots.Plot.Plot.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show the plot.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentum.Plots">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-experimentum.Plots" title="Permalink to this headline">¶</a></h2>
+<p>Package for generating plots and charts.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="experimentum.Storage.html" class="btn btn-neutral float-right" title="experimentum.Storage package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="experimentum.Experiments.html" class="btn btn-neutral float-left" title="experimentum.Experiments package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Pascal Kleindienst
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

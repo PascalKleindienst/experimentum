@@ -1,0 +1,1245 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>experimentum.Storage.SQLAlchemy package &mdash; experimentum  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="experimentum.WebGUI package" href="experimentum.WebGUI.html" />
+    <link rel="prev" title="experimentum.Storage.Migrations package" href="experimentum.Storage.Migrations.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> experimentum
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service.html">Service Container and Provider</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands.html">CLI Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migrations.html">Migrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../repositories.html">Repositories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experiments.html">Experiments</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="experimentum.html">experimentum package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="experimentum.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Commands.html">experimentum.Commands package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Config.html">experimentum.Config package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Experiments.html">experimentum.Experiments package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Plots.html">experimentum.Plots package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="experimentum.Storage.html">experimentum.Storage package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.WebGUI.html">experimentum.WebGUI package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.cli">experimentum.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.files">experimentum.files module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.quickstart">experimentum.quickstart module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.utils">experimentum.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">experimentum</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">experimentum</a> &raquo;</li>
+        
+          <li><a href="experimentum.html">experimentum package</a> &raquo;</li>
+        
+          <li><a href="experimentum.Storage.html">experimentum.Storage package</a> &raquo;</li>
+        
+      <li>experimentum.Storage.SQLAlchemy package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/experimentum.Storage.SQLAlchemy.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="experimentum-storage-sqlalchemy-package">
+<h1>experimentum.Storage.SQLAlchemy package<a class="headerlink" href="#experimentum-storage-sqlalchemy-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-experimentum.Storage.SQLAlchemy.ColumnFactory">
+<span id="experimentum-storage-sqlalchemy-columnfactory-module"></span><h2>experimentum.Storage.SQLAlchemy.ColumnFactory module<a class="headerlink" href="#module-experimentum.Storage.SQLAlchemy.ColumnFactory" title="Permalink to this headline">¶</a></h2>
+<p>Column factory class to create new columns.</p>
+<p>Used to create new columns, indexes and foreign keys
+with the help of sqlalchemy.</p>
+<dl class="class">
+<dt id="experimentum.Storage.SQLAlchemy.ColumnFactory.ColumnFactory">
+<em class="property">class </em><code class="descclassname">experimentum.Storage.SQLAlchemy.ColumnFactory.</code><code class="descname">ColumnFactory</code><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.ColumnFactory.ColumnFactory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Factory class to create SQLAlchemy Columns.</p>
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.ColumnFactory.ColumnFactory.create_foreign_key">
+<code class="descname">create_foreign_key</code><span class="sig-paren">(</span><em>key</em>, <em>col</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.ColumnFactory.ColumnFactory.create_foreign_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a foreign key column.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> (<a class="reference internal" href="experimentum.Storage.Migrations.html#experimentum.Storage.Migrations.ForeignKey.ForeignKey" title="experimentum.Storage.Migrations.ForeignKey.ForeignKey"><em>ForeignKey</em></a>) – Foreign Key</li>
+<li><strong>col</strong> (<a class="reference internal" href="experimentum.Storage.Migrations.html#experimentum.Storage.Migrations.Column.Column" title="experimentum.Storage.Migrations.Column.Column"><em>Column</em></a>) – column to create foreign key on</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">foreign key column</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">sqlalchemy.schema.Column</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.ColumnFactory.ColumnFactory.get_columns_and_indexes">
+<code class="descname">get_columns_and_indexes</code><span class="sig-paren">(</span><em>blueprint</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.ColumnFactory.ColumnFactory.get_columns_and_indexes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get Column and Index instances from the blueprint.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>blueprint</strong> (<a class="reference internal" href="experimentum.Storage.Migrations.html#experimentum.Storage.Migrations.Blueprint.Blueprint" title="experimentum.Storage.Migrations.Blueprint.Blueprint"><em>Blueprint</em></a>) – Schema Blueprint to add/modify table.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">dictionary with columns and indexes</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.ColumnFactory.ColumnFactory.get_foreign_key">
+<code class="descname">get_foreign_key</code><span class="sig-paren">(</span><em>col</em>, <em>fkeys</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.ColumnFactory.ColumnFactory.get_foreign_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a foreign key from a column.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>col</strong> (<a class="reference internal" href="experimentum.Storage.Migrations.html#experimentum.Storage.Migrations.Column.Column" title="experimentum.Storage.Migrations.Column.Column"><em>Column</em></a>) – Column to get foreign key of.</li>
+<li><strong>fkeys</strong> (<em>list</em>) – List of foreign keys</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">either a foreign key column if found or False</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">sqlalchemy.schema.Column, False</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="experimentum.Storage.SQLAlchemy.ColumnFactory.ColumnFactory.get_indexes">
+<em class="property">static </em><code class="descname">get_indexes</code><span class="sig-paren">(</span><em>col</em>, <em>indexes</em>, <em>used_indexes=None</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.ColumnFactory.ColumnFactory.get_indexes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all indexes and primary keys of a column.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>col</strong> (<a class="reference internal" href="experimentum.Storage.Migrations.html#experimentum.Storage.Migrations.Column.Column" title="experimentum.Storage.Migrations.Column.Column"><em>Column</em></a>) – The column</li>
+<li><strong>indexes</strong> (<em>list</em>) – List of indexes</li>
+<li><strong>used_indexes</strong> (<em>list</em><em>, </em><em>optional</em>) – Defaults to None. Used indexes cols for composite keys.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">with primary keys, indexes and used indexes</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">tuple</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.ColumnFactory.ColumnFactory.get_type">
+<code class="descname">get_type</code><span class="sig-paren">(</span><em>col_type</em>, <em>params=None</em>, <em>unsigned=False</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.ColumnFactory.ColumnFactory.get_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Map the type to valid Column Types.</p>
+<p class="rubric">Notes</p>
+<p><a class="reference external" href="http://docs.sqlalchemy.org/en/latest/core/type_basics.html">http://docs.sqlalchemy.org/en/latest/core/type_basics.html</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>col_type</strong> (<em>str</em>) – Type of column</li>
+<li><strong>params</strong> (<em>dict</em><em>, </em><em>optional</em>) – Defaults to None. Additional Column Options.</li>
+<li><strong>unsigned</strong> (<em>bool</em><em>, </em><em>optional</em>) – Defaults to False. If it is an unsigned integer or not.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Type for new column</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">sqlalchemy.types.TypeEngine</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.Storage.SQLAlchemy.ColumnFactory.get_number_type">
+<code class="descclassname">experimentum.Storage.SQLAlchemy.ColumnFactory.</code><code class="descname">get_number_type</code><span class="sig-paren">(</span><em>col_type</em>, <em>params</em>, <em>unsigned=False</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.ColumnFactory.get_number_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a number type column.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>col_type</strong> (<em>string</em>) – Type of the column.</li>
+<li><strong>params</strong> (<em>object</em>) – Additional parameters.</li>
+<li><strong>unsigned</strong> (<em>bool</em><em>, </em><em>optional</em>) – Defaults to False. Whether or not it is an unsigned int.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Number type like integer or float</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">sqlalchemy.types.TypeEngine</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.Storage.SQLAlchemy.ColumnFactory.get_string_type">
+<code class="descclassname">experimentum.Storage.SQLAlchemy.ColumnFactory.</code><code class="descname">get_string_type</code><span class="sig-paren">(</span><em>col_type</em>, <em>params</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.ColumnFactory.get_string_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a string type column.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>col_type</strong> (<em>string</em>) – Type of the column.</li>
+<li><strong>params</strong> (<em>object</em>) – Additional parameters.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">String type like char or text</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">sqlalchemy.types.TypeEngine</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.Storage.SQLAlchemy.ColumnFactory.get_time_type">
+<code class="descclassname">experimentum.Storage.SQLAlchemy.ColumnFactory.</code><code class="descname">get_time_type</code><span class="sig-paren">(</span><em>col_type</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.ColumnFactory.get_time_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a time type column.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>col_type</strong> (<em>string</em>) – Type of the column.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Time type like date or timestamp</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">sqlalchemy.types.TypeEngine</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentum.Storage.SQLAlchemy.Platform">
+<span id="experimentum-storage-sqlalchemy-platform-module"></span><h2>experimentum.Storage.SQLAlchemy.Platform module<a class="headerlink" href="#module-experimentum.Storage.SQLAlchemy.Platform" title="Permalink to this headline">¶</a></h2>
+<p>SQL Platform specific code.</p>
+<p>Generate SQL queries for altering tables and columns because
+SQLAlchemy mostly does not support these types of operations.</p>
+<dl class="class">
+<dt id="experimentum.Storage.SQLAlchemy.Platform.Platform">
+<em class="property">class </em><code class="descclassname">experimentum.Storage.SQLAlchemy.Platform.</code><code class="descname">Platform</code><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Platform.Platform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Gettings some sql platform specific queries.</p>
+<dl class="attribute">
+<dt id="experimentum.Storage.SQLAlchemy.Platform.Platform.engine">
+<code class="descname">engine</code><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Platform.Platform.engine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Database Engine</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">sqlalchemy.engine.Engine</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Storage.SQLAlchemy.Platform.Platform.meta">
+<code class="descname">meta</code><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Platform.Platform.meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Schema Metadata</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">sqlalchemy.schema.MetaData</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Platform.Platform.get_add_column_sql">
+<code class="descname">get_add_column_sql</code><span class="sig-paren">(</span><em>table</em>, <em>column</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Platform.Platform.get_add_column_sql" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get SQL for adding a column to a table.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><a class="reference external" href="https://stackoverflow.com/questions/7300948/add-column-to-sqlalchemy-table#17243132">https://stackoverflow.com/questions/7300948/add-column-to-sqlalchemy-table#17243132</a></li>
+<li><a class="reference external" href="http://docs.sqlalchemy.org/en/latest/core/compiler.html">http://docs.sqlalchemy.org/en/latest/core/compiler.html</a></li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>table</strong> (<em>str</em>) – Name of the table</li>
+<li><strong>column</strong> (<em>sqlalchemy.schema.Column</em>) – Column to add</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="experimentum.Storage.SQLAlchemy.Platform.Platform.get_drop_columns_sql">
+<em class="property">static </em><code class="descname">get_drop_columns_sql</code><span class="sig-paren">(</span><em>table</em>, <em>columns</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Platform.Platform.get_drop_columns_sql" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of sql commands for dropping columns.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>table</strong> (<em>str</em>) – name of the table</li>
+<li><strong>columns</strong> (<em>list</em>) – list of column names</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Platform.Platform.get_drop_key_constraint_sql">
+<code class="descname">get_drop_key_constraint_sql</code><span class="sig-paren">(</span><em>table</em>, <em>column</em>, <em>idx_type</em>, <em>idx_name</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Platform.Platform.get_drop_key_constraint_sql" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a drop key constraint sql query.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>table</strong> (<em>str</em>) – Name of table</li>
+<li><strong>column</strong> (<em>sqlalchemy.schema.Column</em>) – Column with the key</li>
+<li><strong>idx_type</strong> (<em>str</em>) – Type of index, i.e. primary, foreign, unique or index</li>
+<li><strong>idx_name</strong> (<em>str</em>) – Name of the index</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="experimentum.Storage.SQLAlchemy.Platform.Platform.get_foreign_key_action_sql">
+<em class="property">static </em><code class="descname">get_foreign_key_action_sql</code><span class="sig-paren">(</span><em>foreign_key</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Platform.Platform.get_foreign_key_action_sql" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get ONUPDATE/ONDELETE actions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>foreign_key</strong> (<em>sqlalchemy.schema.ForeignKey</em>) – ForeignKey to get action of.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Platform.Platform.get_key_sql">
+<code class="descname">get_key_sql</code><span class="sig-paren">(</span><em>table</em>, <em>column</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Platform.Platform.get_key_sql" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get SQL for adding foreign key and primary key constraints.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>table</strong> (<em>str</em>) – Name of the table</li>
+<li><strong>column</strong> (<em>sqlalchemy.schema.Column</em>) – Column to add contraints on</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">List of strings with SQL commands</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="experimentum.Storage.SQLAlchemy.Platform.Platform.get_rename_sql">
+<em class="property">static </em><code class="descname">get_rename_sql</code><span class="sig-paren">(</span><em>old</em>, <em>new</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Platform.Platform.get_rename_sql" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the sql for renaming a table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>old</strong> (<em>str</em>) – old table name</li>
+<li><strong>new</strong> (<em>str</em>) – new table name</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Platform.Platform.is_mssql">
+<code class="descname">is_mssql</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Platform.Platform.is_mssql" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if current database driver is MSSQL.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Platform.Platform.is_mysql">
+<code class="descname">is_mysql</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Platform.Platform.is_mysql" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if current database driver is MySQL.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Platform.Platform.is_postgresql">
+<code class="descname">is_postgresql</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Platform.Platform.is_postgresql" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if current database driver is PostgreSQL.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Platform.Platform.is_sqlite">
+<code class="descname">is_sqlite</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Platform.Platform.is_sqlite" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if current database driver is SQLite.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Platform.Platform.set_engine">
+<code class="descname">set_engine</code><span class="sig-paren">(</span><em>engine</em>, <em>meta</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Platform.Platform.set_engine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set engine and meta.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>engine</strong> (<em>sqlalchemy.engine.Engine</em>) – Database Engine</li>
+<li><strong>meta</strong> (<em>sqlalchemy.schema.MetaData</em>) – Schema Metadata</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentum.Storage.SQLAlchemy.Repository">
+<span id="experimentum-storage-sqlalchemy-repository-module"></span><h2>experimentum.Storage.SQLAlchemy.Repository module<a class="headerlink" href="#module-experimentum.Storage.SQLAlchemy.Repository" title="Permalink to this headline">¶</a></h2>
+<p>Implementation of the AbstractRepository.</p>
+<p>Implements the AbstractRepository interface to use the
+SQLAlchemy ORM as a data store.</p>
+<dl class="class">
+<dt id="experimentum.Storage.SQLAlchemy.Repository.QueryBuilder">
+<em class="property">class </em><code class="descclassname">experimentum.Storage.SQLAlchemy.Repository.</code><code class="descname">QueryBuilder</code><span class="sig-paren">(</span><em>repo</em>, <em>where</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Repository.QueryBuilder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Helper Class to build a SQLAlchemy Query.</p>
+<dl class="attribute">
+<dt id="experimentum.Storage.SQLAlchemy.Repository.QueryBuilder.repo">
+<code class="descname">repo</code><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Repository.QueryBuilder.repo" title="Permalink to this definition">¶</a></dt>
+<dd><p>The Repository to query</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#experimentum.Storage.SQLAlchemy.Repository.Repository" title="experimentum.Storage.SQLAlchemy.Repository.Repository">Repository</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Storage.SQLAlchemy.Repository.QueryBuilder.where">
+<code class="descname">where</code><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Repository.QueryBuilder.where" title="Permalink to this definition">¶</a></dt>
+<dd><p>where condition to build</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Storage.SQLAlchemy.Repository.QueryBuilder.__filter_cond">
+<code class="descname">__filter_cond</code><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Repository.QueryBuilder.__filter_cond" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter Conditions</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Storage.SQLAlchemy.Repository.QueryBuilder.__filter_cond_or">
+<code class="descname">__filter_cond_or</code><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Repository.QueryBuilder.__filter_cond_or" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter Conditions that are connected with logical OR</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Repository.QueryBuilder.build">
+<code class="descname">build</code><span class="sig-paren">(</span><em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Repository.QueryBuilder.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the query.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>query</strong> (<em>sqlalchemy.orm.query.Query</em>) – Current query</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Final query</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">sqlalchemy.orm.query.Query</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Repository.QueryBuilder.build_where">
+<code class="descname">build_where</code><span class="sig-paren">(</span><em>query</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Repository.QueryBuilder.build_where" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the query with the where conditions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>query</strong> (<em>sqlalchemy.orm.query.Query</em>) – Current Query</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Query with where conditions applied.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">sqlalchemy.orm.query.Query</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentum.Storage.SQLAlchemy.Repository.Repository">
+<em class="property">class </em><code class="descclassname">experimentum.Storage.SQLAlchemy.Repository.</code><code class="descname">Repository</code><span class="sig-paren">(</span><em>**attributes</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Repository.Repository" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="experimentum.Storage.html#experimentum.Storage.AbstractRepository.AbstractRepository" title="experimentum.Storage.AbstractRepository.AbstractRepository"><code class="xref py py-class docutils literal notranslate"><span class="pre">experimentum.Storage.AbstractRepository.AbstractRepository</span></code></a></p>
+<p>Implementation of the AbstractRepository Interface.</p>
+<p>This implementation uses the SQLAlchemy ORM to implement the
+<em>Repository Design Pattern</em>. It uses the SQLAlchemy <code class="docutils literal notranslate"><span class="pre">mapper</span></code> function
+to map the Table Schema and the a Repository class. It also uses the
+<code class="docutils literal notranslate"><span class="pre">listen</span></code> method to hook up the before_* and after_* events.</p>
+<dl class="classmethod">
+<dt id="experimentum.Storage.SQLAlchemy.Repository.Repository.all">
+<em class="property">classmethod </em><code class="descname">all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Repository.Repository.all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all entries for this specific repository from your data store.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">List of all entires</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Repository.Repository.create">
+<code class="descname">create</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Repository.Repository.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the repository content in your data store.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Self Instance</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#experimentum.Storage.SQLAlchemy.Repository.Repository" title="experimentum.Storage.SQLAlchemy.Repository.Repository">Repository</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Repository.Repository.delete">
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Repository.Repository.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete the repository content from your data store.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Self Instance.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#experimentum.Storage.SQLAlchemy.Repository.Repository" title="experimentum.Storage.SQLAlchemy.Repository.Repository">Repository</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="experimentum.Storage.SQLAlchemy.Repository.Repository.find">
+<em class="property">classmethod </em><code class="descname">find</code><span class="sig-paren">(</span><em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Repository.Repository.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find an entry of this repository based on its id.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>id</strong> (<em>int</em>) – ID to search for.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Item which the concrete id</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="experimentum.Storage.html#experimentum.Storage.AbstractRepository.AbstractRepository" title="experimentum.Storage.AbstractRepository.AbstractRepository">AbstractRepository</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="experimentum.Storage.SQLAlchemy.Repository.Repository.first">
+<em class="property">classmethod </em><code class="descname">first</code><span class="sig-paren">(</span><em>where=None</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Repository.Repository.first" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get first entry which satisfy a specific condition from your data store.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>where</strong> (<em>list</em><em>, </em><em>optional</em>) – Defaults to None. Where Condition</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Item which satisfies the condition.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="experimentum.Storage.html#experimentum.Storage.AbstractRepository.AbstractRepository" title="experimentum.Storage.AbstractRepository.AbstractRepository">AbstractRepository</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="experimentum.Storage.SQLAlchemy.Repository.Repository.get">
+<em class="property">classmethod </em><code class="descname">get</code><span class="sig-paren">(</span><em>where=None</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Repository.Repository.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all entries which satisfy a specific condition from your data store.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>where</strong> (<em>list</em><em>, </em><em>optional</em>) – Defaults to None. Where Condition</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">List of items which satisfy the condition.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="experimentum.Storage.SQLAlchemy.Repository.Repository.map_to_table">
+<em class="property">static </em><code class="descname">map_to_table</code><span class="sig-paren">(</span><em>cls</em>, <em>repo</em>, <em>table</em>, <em>properties</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Repository.Repository.map_to_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the SQLAlchemy mapper, i.e. map the tables to classes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>repo</strong> (<a class="reference internal" href="#experimentum.Storage.SQLAlchemy.Repository.Repository" title="experimentum.Storage.SQLAlchemy.Repository.Repository"><em>Repository</em></a>) – Repository to map</li>
+<li><strong>table</strong> (<em>sqlalchemy.schema.table</em>) – Table to map</li>
+<li><strong>properties</strong> (<em>object</em>) – relationships to map</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="experimentum.Storage.SQLAlchemy.Repository.Repository.mapping">
+<em class="property">static </em><code class="descname">mapping</code><span class="sig-paren">(</span><em>cls</em>, <em>store</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Repository.Repository.mapping" title="Permalink to this definition">¶</a></dt>
+<dd><p>Map data store content to repository classes.</p>
+<p>Example:
+Map a <em>User</em> Table in the data store to the <em>UserRepository</em>,
+which reflects the attributes of the User Table schema:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Repository</span><span class="o">.</span><span class="n">mapping</span><span class="p">(</span><span class="n">UserRepository</span><span class="p">,</span> <span class="n">store</span><span class="p">)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>cls</strong> (<a class="reference internal" href="experimentum.Storage.html#experimentum.Storage.AbstractRepository.AbstractRepository" title="experimentum.Storage.AbstractRepository.AbstractRepository"><em>AbstractRepository</em></a>) – Repository to map</li>
+<li><strong>store</strong> (<a class="reference internal" href="experimentum.Storage.html#experimentum.Storage.AbstractStore.AbstractStore" title="experimentum.Storage.AbstractStore.AbstractStore"><em>AbstractStore</em></a>) – Storage that is use</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Repository.Repository.update">
+<code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Repository.Repository.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the repository content in your data store.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Self Instance.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="#experimentum.Storage.SQLAlchemy.Repository.Repository" title="experimentum.Storage.SQLAlchemy.Repository.Repository">Repository</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentum.Storage.SQLAlchemy.SQLitePlatform">
+<span id="experimentum-storage-sqlalchemy-sqliteplatform-module"></span><h2>experimentum.Storage.SQLAlchemy.SQLitePlatform module<a class="headerlink" href="#module-experimentum.Storage.SQLAlchemy.SQLitePlatform" title="Permalink to this headline">¶</a></h2>
+<p>SQLite specific sql commands and queries.</p>
+<p>SQLite does not provide complete range of all sql commands, therefore some tricks are needed
+to emulate the behavior. See: <a class="reference external" href="https://www.sqlite.org/omitted.html">https://www.sqlite.org/omitted.html</a></p>
+<dl class="class">
+<dt id="experimentum.Storage.SQLAlchemy.SQLitePlatform.SQLitePlatform">
+<em class="property">class </em><code class="descclassname">experimentum.Storage.SQLAlchemy.SQLitePlatform.</code><code class="descname">SQLitePlatform</code><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.SQLitePlatform.SQLitePlatform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#experimentum.Storage.SQLAlchemy.Platform.Platform" title="experimentum.Storage.SQLAlchemy.Platform.Platform"><code class="xref py py-class docutils literal notranslate"><span class="pre">experimentum.Storage.SQLAlchemy.Platform.Platform</span></code></a></p>
+<p>SQLite specific sql commands and queries.</p>
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.SQLitePlatform.SQLitePlatform.alter_table">
+<code class="descname">alter_table</code><span class="sig-paren">(</span><em>table</em>, <em>cols</em>, <em>dropped</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.SQLitePlatform.SQLitePlatform.alter_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alter SQLite Table.</p>
+<p>SQLite does not provide complete ALTER TABLE support, only RENAME TABLE and ADD COLUMN
+variants are supported. In order to add columns and keys we have to create a tempory
+table which holds the data of the table and then drop and recreate the table with
+the modified schema. Lastly we have to copy the data back into the new table and
+delete the temporary data table.</p>
+<p>See:
+<a class="reference external" href="https://www.sqlite.org/omitted.html">https://www.sqlite.org/omitted.html</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>table</strong> (<em>str</em>) – Name of the table</li>
+<li><strong>cols</strong> (<em>list</em>) – List with changed columns</li>
+<li><strong>dropped</strong> (<em>dict</em>) – Dictionary with list of columns and indexes to drop</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.Storage.SQLAlchemy.SQLitePlatform.prepare_columns">
+<code class="descclassname">experimentum.Storage.SQLAlchemy.SQLitePlatform.</code><code class="descname">prepare_columns</code><span class="sig-paren">(</span><em>columns</em>, <em>indexes</em>, <em>dropped</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.SQLitePlatform.prepare_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepate columns so that they can be created for another table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>columns</strong> (<em>list</em>) – Columns of a table</li>
+<li><strong>indexes</strong> (<em>list</em>) – indexes of a table</li>
+<li><strong>dropped</strong> (<em>object</em>) – Columns and indexes to drop</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">with columns and column names</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentum.Storage.SQLAlchemy.Store">
+<span id="experimentum-storage-sqlalchemy-store-module"></span><h2>experimentum.Storage.SQLAlchemy.Store module<a class="headerlink" href="#module-experimentum.Storage.SQLAlchemy.Store" title="Permalink to this headline">¶</a></h2>
+<p>Concrete Implementation of a data store based on SQLAlchemy.</p>
+<p>Uses the SQLAlchemy ORM to implement the <a class="reference internal" href="experimentum.Storage.html#module-experimentum.Storage.AbstractStore" title="experimentum.Storage.AbstractStore"><code class="xref py py-mod docutils literal notranslate"><span class="pre">AbstractStore</span></code></a> interface.</p>
+<dl class="class">
+<dt id="experimentum.Storage.SQLAlchemy.Store.Store">
+<em class="property">class </em><code class="descclassname">experimentum.Storage.SQLAlchemy.Store.</code><code class="descname">Store</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Store.Store" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="experimentum.Storage.html#experimentum.Storage.AbstractStore.AbstractStore" title="experimentum.Storage.AbstractStore.AbstractStore"><code class="xref py py-class docutils literal notranslate"><span class="pre">experimentum.Storage.AbstractStore.AbstractStore</span></code></a></p>
+<p>Concrete Implementation of a data store based on SQLAlchemy.</p>
+<dl class="attribute">
+<dt id="experimentum.Storage.SQLAlchemy.Store.Store.app">
+<code class="descname">app</code><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Store.Store.app" title="Permalink to this definition">¶</a></dt>
+<dd><p>Framework App class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="experimentum.Experiments.html#experimentum.Experiments.App.App" title="experimentum.Experiments.App.App">App</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Storage.SQLAlchemy.Store.Store.engine">
+<code class="descname">engine</code><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Store.Store.engine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defaults to None. Database engine.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">sqlalchemy.engine.Engine</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Storage.SQLAlchemy.Store.Store.meta">
+<code class="descname">meta</code><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Store.Store.meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defaults to None. Schema Meta Data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">sqlqlchemy.schema.MetaData</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Storage.SQLAlchemy.Store.Store.platform">
+<code class="descname">platform</code><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Store.Store.platform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Basic SQL Statements because SQLAlchemy could not handle everything.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#experimentum.Storage.SQLAlchemy.Platform.Platform" title="experimentum.Storage.SQLAlchemy.Platform.Platform">Platform</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Storage.SQLAlchemy.Store.Store.sqlite_platform">
+<code class="descname">sqlite_platform</code><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Store.Store.sqlite_platform" title="Permalink to this definition">¶</a></dt>
+<dd><p>SQLite specific sql statements.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#experimentum.Storage.SQLAlchemy.SQLitePlatform.SQLitePlatform" title="experimentum.Storage.SQLAlchemy.SQLitePlatform.SQLitePlatform">SQLitePlatform</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Store.Store.alter">
+<code class="descname">alter</code><span class="sig-paren">(</span><em>blueprint</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Store.Store.alter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alter Schema of the table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>blueprint</strong> (<a class="reference internal" href="experimentum.Storage.Migrations.html#experimentum.Storage.Migrations.Blueprint.Blueprint" title="experimentum.Storage.Migrations.Blueprint.Blueprint"><em>Blueprint</em></a>) – The new blueprint with updated schema.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Store.Store.create">
+<code class="descname">create</code><span class="sig-paren">(</span><em>blueprint</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Store.Store.create" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new Table with Columns and indexes.</p>
+<p class="rubric">Notes</p>
+<p><a class="reference external" href="http://docs.sqlalchemy.org/en/latest/core/metadata.html#creating-and-dropping-database-tables">http://docs.sqlalchemy.org/en/latest/core/metadata.html#creating-and-dropping-database-tables</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>blueprint</strong> (<a class="reference internal" href="experimentum.Storage.Migrations.html#experimentum.Storage.Migrations.Blueprint.Blueprint" title="experimentum.Storage.Migrations.Blueprint.Blueprint"><em>Blueprint</em></a>) – The Blueprint to create the table</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Store.Store.drop">
+<code class="descname">drop</code><span class="sig-paren">(</span><em>name</em>, <em>checkfirst=False</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Store.Store.drop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drop a table from the data store.</p>
+<p class="rubric">Notes</p>
+<p><a class="reference external" href="http://docs.sqlalchemy.org/en/latest/core/metadata.html#creating-and-dropping-database-tables">http://docs.sqlalchemy.org/en/latest/core/metadata.html#creating-and-dropping-database-tables</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<em>str</em>) – Name of the table</li>
+<li><strong>checkfirst</strong> (<em>bool</em><em>, </em><em>optional</em>) – Defaults to False. Whether to check if exists first.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Store.Store.drop_if_exists">
+<code class="descname">drop_if_exists</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Store.Store.drop_if_exists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drop a table from the datastore if it exists.</p>
+<p class="rubric">Notes</p>
+<p><a class="reference external" href="http://docs.sqlalchemy.org/en/latest/core/metadata.html#creating-and-dropping-database-tables">http://docs.sqlalchemy.org/en/latest/core/metadata.html#creating-and-dropping-database-tables</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> (<em>str</em>) – Name of the table</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Store.Store.has_column">
+<code class="descname">has_column</code><span class="sig-paren">(</span><em>table</em>, <em>column</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Store.Store.has_column" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if a table has a specific column.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>table</strong> (<em>str</em>) – Name of the table</li>
+<li><strong>column</strong> (<em>str</em>) – Name of the column</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">boolean</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Store.Store.has_table">
+<code class="descname">has_table</code><span class="sig-paren">(</span><em>table</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Store.Store.has_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the data store has a specific table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>table</strong> (<em>str</em>) – Name of the Table</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Store.Store.rename">
+<code class="descname">rename</code><span class="sig-paren">(</span><em>old</em>, <em>new</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Store.Store.rename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rename a table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>old</strong> (<em>str</em>) – Old table name</li>
+<li><strong>new</strong> (<em>str</em>) – New table name</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Storage.SQLAlchemy.Store.Store.set_engine">
+<code class="descname">set_engine</code><span class="sig-paren">(</span><em>engine</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Storage.SQLAlchemy.Store.Store.set_engine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set database engine, metadata store, and platform specific handlers.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>engine</strong> (<em>sqlalchemy.engine.Engine</em>) – Database engine</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentum.Storage.SQLAlchemy">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-experimentum.Storage.SQLAlchemy" title="Permalink to this headline">¶</a></h2>
+<p>Implementation of the Storage based on SQLAlchemy.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="experimentum.WebGUI.html" class="btn btn-neutral float-right" title="experimentum.WebGUI package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="experimentum.Storage.Migrations.html" class="btn btn-neutral float-left" title="experimentum.Storage.Migrations package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Pascal Kleindienst
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

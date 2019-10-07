@@ -1,0 +1,296 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Installation &mdash; experimentum  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Configuration" href="configuration.html" />
+    <link rel="prev" title="Welcome to Experimentum’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> experimentum
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="service.html">Service Container and Provider</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">CLI Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migrations.html">Migrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="repositories.html">Repositories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiments.html">Experiments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/modules.html">API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">experimentum</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Installation</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/install.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>Since experimentum is in its development stage you have to install it from its GitHub repository.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install https://github.com/PascalKleindienst/experimentum/archive/master.tar.gz
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install git+ssh://git@github.com/PascalKleindienst/experimentum.git#egg<span class="o">=</span>experimentum
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The different <code class="docutils literal notranslate"><span class="pre">dbapi</span></code> packages are not part of the package dependencies, so you must install them in order to connect to corresponding databases:</p>
+<ul class="last simple">
+<li>PostgreSQL: <code class="docutils literal notranslate"><span class="pre">psycopg2</span></code></li>
+<li>MySQL: <code class="docutils literal notranslate"><span class="pre">PyMySQL</span></code> or <code class="docutils literal notranslate"><span class="pre">mysqlclient</span></code></li>
+<li>Oracle: <code class="docutils literal notranslate"><span class="pre">cx_oracle</span></code></li>
+<li>Microsoft SQL Server: <code class="docutils literal notranslate"><span class="pre">pyodbc</span></code> or <code class="docutils literal notranslate"><span class="pre">pymssql</span></code></li>
+<li>SQLite: The <code class="docutils literal notranslate"><span class="pre">sqlite3</span></code> module is bundled with Python by default</li>
+</ul>
+</div>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>In order to use the experimentum framework, you’ll have to take care of some initial setup. You’ll need to auto-generate some
+code that creates the config files, migrations, repositories and other application-specific settings.</p>
+<p>From the command line, <code class="docutils literal notranslate"><span class="pre">cd</span></code> into a directory where you would like to store your code, and then run the following command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">experimentum</span><span class="o">-</span><span class="n">quickstart</span>
+</pre></div>
+</div>
+<p>After you answered the questions it will create the files and folders in this directory. If you want to create the project in
+a subdirectory you can add the <code class="docutils literal notranslate"><span class="pre">--root</span></code> option to the command, like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">experimentum</span><span class="o">-</span><span class="n">quickstart</span> <span class="o">--</span><span class="n">root</span> <span class="n">myproject</span>
+</pre></div>
+</div>
+<p>This willl create a <strong>myproject</strong> directory in your current directoy.</p>
+<p>The quickstart command will have created the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span>
+    <span class="n">config</span><span class="o">/</span>
+        <span class="n">app</span><span class="o">.</span><span class="n">json</span>
+        <span class="n">storage</span><span class="o">.</span><span class="n">json</span>
+    <span class="n">experiments</span><span class="o">/</span>
+        <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+    <span class="n">logs</span><span class="o">/</span>
+    <span class="n">migrations</span><span class="o">/</span>
+        <span class="p">{</span><span class="n">TIMESTAMP</span><span class="p">}</span><span class="n">_create_experiments</span><span class="o">.</span><span class="n">py</span>
+        <span class="p">{</span><span class="n">TIMESTAMP</span><span class="p">}</span><span class="n">_create_testcase</span><span class="o">.</span><span class="n">py</span>
+        <span class="p">{</span><span class="n">TIMESTAMP</span><span class="p">}</span><span class="n">_create_performance</span><span class="o">.</span><span class="n">py</span>
+    <span class="n">repositories</span><span class="o">/</span>
+        <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+        <span class="n">ExperimentRepository</span><span class="o">.</span><span class="n">py</span>
+        <span class="n">PerformanceRepository</span><span class="o">.</span><span class="n">py</span>
+        <span class="n">TestcaseRepository</span><span class="o">.</span><span class="n">py</span>
+    <span class="n">main</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>These files are:</p>
+<dl class="docutils">
+<dt>main.py</dt>
+<dd>The main entry point of the framework. It lets you interact with the experimentum framework via the command line.</dd>
+<dt>config/</dt>
+<dd>Contains all configuration files. You can place you own configuration files here. All *.json files will be loaded
+by the framework and available via the <a class="reference internal" href="source/experimentum.Config.html#module-experimentum.Config.Config" title="experimentum.Config.Config"><code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></a> class under the
+<a class="reference internal" href="source/experimentum.Experiments.html#experimentum.Experiments.App.App.config" title="experimentum.Experiments.App.App.config"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config</span></code></a> attribute of the <code class="xref py py-class docutils literal notranslate"><span class="pre">App</span></code> class.</dd>
+<dt>config/app.json and storage.json</dt>
+<dd>Framework related settings. For more information see <a class="reference internal" href="configuration.html#configuration"><span class="std std-ref">Configuration</span></a></dd>
+<dt>experiments/</dt>
+<dd>Here you can place your experiments and their configrations.</dd>
+<dt>logs/</dt>
+<dd>Contains the log files.</dd>
+<dt>migrations/</dt>
+<dd>Your migration files are placed here.</dd>
+<dt>migrations/{TIMESTAMP}_create_experiments.py</dt>
+<dd>Migration for creating the experiments table.</dd>
+<dt>migrations/{TIMESTAMP}_create_testcase.py</dt>
+<dd>Migration for creating the testcase table.</dd>
+<dt>migrations/{TIMESTAMP}_create_performance.py</dt>
+<dd>Migration for creating the performance table.</dd>
+<dt>repositories/ExperimentRepository.py</dt>
+<dd>Repository for experiment data.</dd>
+<dt>repositories/TestcaseRepository.py</dt>
+<dd>Repository for testcase data.</dd>
+<dt>repositories/PerformanceRepository.py</dt>
+<dd>Repository for performance data.</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="configuration.html" class="btn btn-neutral float-right" title="Configuration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Experimentum’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Pascal Kleindienst
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

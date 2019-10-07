@@ -1,0 +1,462 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>experimentum.Config package &mdash; experimentum  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="experimentum.Experiments package" href="experimentum.Experiments.html" />
+    <link rel="prev" title="experimentum.Commands package" href="experimentum.Commands.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> experimentum
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service.html">Service Container and Provider</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands.html">CLI Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migrations.html">Migrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../repositories.html">Repositories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experiments.html">Experiments</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="experimentum.html">experimentum package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="experimentum.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Commands.html">experimentum.Commands package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">experimentum.Config package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Experiments.html">experimentum.Experiments package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Plots.html">experimentum.Plots package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.html">experimentum.Storage package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.WebGUI.html">experimentum.WebGUI package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.cli">experimentum.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.files">experimentum.files module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.quickstart">experimentum.quickstart module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.utils">experimentum.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">experimentum</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">experimentum</a> &raquo;</li>
+        
+          <li><a href="experimentum.html">experimentum package</a> &raquo;</li>
+        
+      <li>experimentum.Config package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/experimentum.Config.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="experimentum-config-package">
+<h1>experimentum.Config package<a class="headerlink" href="#experimentum-config-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-experimentum.Config.Config">
+<span id="experimentum-config-config-module"></span><h2>experimentum.Config.Config module<a class="headerlink" href="#module-experimentum.Config.Config" title="Permalink to this headline">¶</a></h2>
+<p>The config module stores all config items.</p>
+<p>The Config class supports the <em>dot-notation</em> which means that you
+can access nested elements seperated by a <code class="docutils literal notranslate"><span class="pre">.</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">foo.bar.baz</span></code>.</p>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cfg</span> <span class="o">=</span> <span class="n">Config</span><span class="p">()</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">set</span><span class="p">({</span> <span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="s1">&#39;foobar&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;baz&#39;</span><span class="p">:</span> <span class="mi">42</span> <span class="p">}</span> <span class="p">})</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s1">&#39;a.b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
+
+<span class="n">cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;foobar.baz&#39;</span><span class="p">)</span>  <span class="c1"># returns: 42</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">has</span><span class="p">(</span><span class="s1">&#39;foobar.foo&#39;</span><span class="p">)</span>  <span class="c1"># returns: False</span>
+<span class="n">cfg</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>              <span class="c1"># returns: { &#39;foo&#39;: &#39;bar&#39;, &#39;foobar&#39;: {&#39;baz&#39;: 42 }, &#39;a&#39;: {&#39;b&#39;: &#39;c&#39;} }</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="experimentum.Config.Config.Config">
+<em class="property">class </em><code class="descclassname">experimentum.Config.Config.</code><code class="descname">Config</code><a class="headerlink" href="#experimentum.Config.Config.Config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Manages all the config items.</p>
+<dl class="attribute">
+<dt id="experimentum.Config.Config.Config.items">
+<code class="descname">items</code><a class="headerlink" href="#experimentum.Config.Config.Config.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loaded config items.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Config.Config.Config.all">
+<code class="descname">all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Config.Config.Config.all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all of the configuration items for the application.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">config items</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Config.Config.Config.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>key</em>, <em>default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Config.Config.Config.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the specified configuration value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> (<em>string|list</em>) – Set of keys.</li>
+<li><strong>default</strong> (<em>object</em><em>, </em><em>optional</em>) – Defaults to None. A default value if the key is
+not found</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The config value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Config.Config.Config.get_many">
+<code class="descname">get_many</code><span class="sig-paren">(</span><em>keys</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Config.Config.Config.get_many" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get many configuration values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>keys</strong> (<em>list</em>) – Names of the keys.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Donfig items for the set of keys.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Config.Config.Config.has">
+<code class="descname">has</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Config.Config.Config.has" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine if the given configuration value exists.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>key</strong> (<em>string</em>) – config item key</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Config.Config.Config.set">
+<code class="descname">set</code><span class="sig-paren">(</span><em>key</em>, <em>value=None</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Config.Config.Config.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a given configuration value.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>key</strong> (<em>dict|string</em>) – Config item keys to change the value</li>
+<li><strong>value</strong> (<em>object</em><em>,</em><em>optional</em>) – Defaults to None. New value</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentum.Config.Loader">
+<span id="experimentum-config-loader-module"></span><h2>experimentum.Config.Loader module<a class="headerlink" href="#module-experimentum.Config.Loader" title="Permalink to this headline">¶</a></h2>
+<p>The Config Loader module loads json config files.</p>
+<p>The <a class="reference internal" href="#module-experimentum.Config.Loader" title="experimentum.Config.Loader"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Loader</span></code></a> loads all json files from a folder
+and stores the content in the <a class="reference internal" href="#experimentum.Config.Config.Config" title="experimentum.Config.Config.Config"><code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></a> class.</p>
+<dl class="class">
+<dt id="experimentum.Config.Loader.Loader">
+<em class="property">class </em><code class="descclassname">experimentum.Config.Loader.</code><code class="descname">Loader</code><span class="sig-paren">(</span><em>config_path</em>, <em>config</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Config.Loader.Loader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Load the configuration files.</p>
+<dl class="attribute">
+<dt id="experimentum.Config.Loader.Loader.config_path">
+<code class="descname">config_path</code><a class="headerlink" href="#experimentum.Config.Loader.Loader.config_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path to config files.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Config.Loader.Loader.config">
+<code class="descname">config</code><a class="headerlink" href="#experimentum.Config.Loader.Loader.config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Config holder class</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#experimentum.Config.Config.Config" title="experimentum.Config.Config.Config">Config</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="experimentum.Config.Loader.Loader.config_key">
+<em class="property">classmethod </em><code class="descname">config_key</code><span class="sig-paren">(</span><em>fname</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Config.Loader.Loader.config_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the config key based on the filename.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fname</strong> (<em>str</em>) – Name of the config file.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">key</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Config.Loader.Loader.get_config_files">
+<code class="descname">get_config_files</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Config.Loader.Loader.get_config_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get all of the configuration files for the application.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">The config items.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Config.Loader.Loader.load_config_files">
+<code class="descname">load_config_files</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Config.Loader.Loader.load_config_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load the configuration items from all of the files.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>Exception</strong> – if there is no app.json config.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentum.Config">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-experimentum.Config" title="Permalink to this headline">¶</a></h2>
+<p>Provides Config Holder and Config Loader modules to easily load/store config items.</p>
+<p>Import <a class="reference internal" href="#module-experimentum.Config.Loader" title="experimentum.Config.Loader"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Loader</span></code></a> and <a class="reference internal" href="#experimentum.Config.Config.Config" title="experimentum.Config.Config.Config"><code class="xref py py-class docutils literal notranslate"><span class="pre">Config</span></code></a>
+so that they can be easly imported by other packages/modules.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="experimentum.Experiments.html" class="btn btn-neutral float-right" title="experimentum.Experiments package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="experimentum.Commands.html" class="btn btn-neutral float-left" title="experimentum.Commands package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Pascal Kleindienst
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

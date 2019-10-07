@@ -1,0 +1,1669 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>experimentum.Experiments package &mdash; experimentum  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="experimentum.Plots package" href="experimentum.Plots.html" />
+    <link rel="prev" title="experimentum.Config package" href="experimentum.Config.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> experimentum
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service.html">Service Container and Provider</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands.html">CLI Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migrations.html">Migrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../repositories.html">Repositories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experiments.html">Experiments</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="experimentum.html">experimentum package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="experimentum.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Commands.html">experimentum.Commands package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Config.html">experimentum.Config package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">experimentum.Experiments package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Plots.html">experimentum.Plots package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.html">experimentum.Storage package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.WebGUI.html">experimentum.WebGUI package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.cli">experimentum.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.files">experimentum.files module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.quickstart">experimentum.quickstart module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.utils">experimentum.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">experimentum</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">experimentum</a> &raquo;</li>
+        
+          <li><a href="experimentum.html">experimentum package</a> &raquo;</li>
+        
+      <li>experimentum.Experiments package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/experimentum.Experiments.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="experimentum-experiments-package">
+<h1>experimentum.Experiments package<a class="headerlink" href="#experimentum-experiments-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-experimentum.Experiments.App">
+<span id="experimentum-experiments-app-module"></span><h2>experimentum.Experiments.App module<a class="headerlink" href="#module-experimentum.Experiments.App" title="Permalink to this headline">¶</a></h2>
+<p>Main Service Container and Provider.</p>
+<p>Sets up the framework and runs the experiments and lets you customize/extend
+the behavior of the framework.</p>
+<div class="section" id="binding">
+<h3>Binding<a class="headerlink" href="#binding" title="Permalink to this headline">¶</a></h3>
+<p>We can register/bind a new  alias by extending either the <code class="xref py py-meth docutils literal notranslate"><span class="pre">register_aliases</span> <span class="pre">class()</span></code>
+or by directly adding the alias to the <a class="reference internal" href="#experimentum.Experiments.App.App.aliases" title="experimentum.Experiments.App.App.aliases"><code class="xref py py-attr docutils literal notranslate"><span class="pre">aliases</span></code></a> dictionary. The key is the alias
+name you want to register and the value is a function that returns an instance of the class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">register_aliases</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">(</span><span class="n">MyAppClass</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">register_aliases</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">aliases</span><span class="p">[</span><span class="s1">&#39;my_custom_api&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">API</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Additional arguments for creating a class instance may be passed when resolving. Your function
+just has to add them in order to use them:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">aliases</span><span class="p">[</span><span class="s1">&#39;my_custom_api&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">name</span><span class="p">,</span> <span class="n">user_id</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="n">API</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">user_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="resolving">
+<h3>Resolving<a class="headerlink" href="#resolving" title="Permalink to this headline">¶</a></h3>
+<p>You may use the <a class="reference internal" href="#experimentum.Experiments.App.App.make" title="experimentum.Experiments.App.App.make"><code class="xref py py-meth docutils literal notranslate"><span class="pre">make()</span></code></a> method to resolve a class instance out of the container.
+The <a class="reference internal" href="#experimentum.Experiments.App.App.make" title="experimentum.Experiments.App.App.make"><code class="xref py py-meth docutils literal notranslate"><span class="pre">make()</span></code></a> method accepts the alias of the class you want to resolve:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s1">&#39;my_custom_api&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If some of your class’ dependencies are not resolvable via the app container, you may pass them
+as additional args and keyword args:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s1">&#39;my_custom_api&#39;</span><span class="p">,</span> <span class="n">foo</span><span class="p">,</span> <span class="n">user_id</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="customizing">
+<h3>Customizing<a class="headerlink" href="#customizing" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="commands">
+<h4>Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h4>
+<p>Register new commands with the <a class="reference internal" href="#experimentum.Experiments.App.App.register_commands" title="experimentum.Experiments.App.App.register_commands"><code class="xref py py-meth docutils literal notranslate"><span class="pre">App.register_commands()</span></code></a> method.
+It should return a dictionary where the keys are names of the commands and
+the values are the command handlers. The command handlers must either be
+derived from <a class="reference internal" href="experimentum.Commands.html#experimentum.Commands.AbstractCommand.AbstractCommand" title="experimentum.Commands.AbstractCommand.AbstractCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractCommand</span></code></a> or a function with the decorator
+<a class="reference internal" href="experimentum.Commands.html#experimentum.Commands.AbstractCommand.command" title="experimentum.Commands.AbstractCommand.command"><code class="xref py py-func docutils literal notranslate"><span class="pre">AbstractCommand.command()</span></code></a>. Example return:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="n">FooCommand</span><span class="p">,</span>
+    <span class="s1">&#39;bar&#39;</span><span class="p">:</span> <span class="n">BarCommand</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="experimentum.Experiments.App.App">
+<em class="property">class </em><code class="descclassname">experimentum.Experiments.App.</code><code class="descname">App</code><span class="sig-paren">(</span><em>name</em>, <em>root</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.App.App" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Main entry point of the framework.</p>
+<dl class="attribute">
+<dt id="experimentum.Experiments.App.App.config_path">
+<code class="descname">config_path</code><a class="headerlink" href="#experimentum.Experiments.App.App.config_path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defaults to <code class="docutils literal notranslate"><span class="pre">.</span></code>. Path to config files.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.App.App.base_repository">
+<code class="descname">base_repository</code><a class="headerlink" href="#experimentum.Experiments.App.App.base_repository" title="Permalink to this definition">¶</a></dt>
+<dd><p>Defaults to <code class="docutils literal notranslate"><span class="pre">Repository</span></code>. Repository Base Class</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="experimentum.Storage.html#experimentum.Storage.AbstractRepository.AbstractRepository" title="experimentum.Storage.AbstractRepository.AbstractRepository">AbstractRepository</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.App.App.name">
+<code class="descname">name</code><a class="headerlink" href="#experimentum.Experiments.App.App.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of the app.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.App.App.root">
+<code class="descname">root</code><a class="headerlink" href="#experimentum.Experiments.App.App.root" title="Permalink to this definition">¶</a></dt>
+<dd><p>Root Path of the app.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.App.App.config">
+<code class="descname">config</code><a class="headerlink" href="#experimentum.Experiments.App.App.config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Config Manager.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="experimentum.Config.html#experimentum.Config.Config.Config" title="experimentum.Config.Config.Config">Config</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.App.App.log">
+<code class="descname">log</code><a class="headerlink" href="#experimentum.Experiments.App.App.log" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logger.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logging.Logger</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.App.App.store">
+<code class="descname">store</code><a class="headerlink" href="#experimentum.Experiments.App.App.store" title="Permalink to this definition">¶</a></dt>
+<dd><p>Data Store.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="experimentum.Storage.html#experimentum.Storage.AbstractStore.AbstractStore" title="experimentum.Storage.AbstractStore.AbstractStore">AbstractStore</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.App.App.aliases">
+<code class="descname">aliases</code><a class="headerlink" href="#experimentum.Experiments.App.App.aliases" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of aliases and factory functions.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">base_repository</code></dt>
+<dd><p>alias of <a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#experimentum.Storage.SQLAlchemy.Repository.Repository" title="experimentum.Storage.SQLAlchemy.Repository.Repository"><code class="xref py py-class docutils literal notranslate"><span class="pre">experimentum.Storage.SQLAlchemy.Repository.Repository</span></code></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.App.App.bootstrap">
+<code class="descname">bootstrap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.App.App.bootstrap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bootstrap the app, i.e. setup config and logger.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">config_path</code><em class="property"> = '.'</em></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.App.App.make">
+<code class="descname">make</code><span class="sig-paren">(</span><em>alias</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.App.App.make" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an instance of an aliased class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>alias</strong> (<em>str</em>) – Name of class alias.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><strong>Exception</strong> – if the alias does not exists.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Instance of the aliased class</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.App.App.register_aliases">
+<code class="descname">register_aliases</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.App.App.register_aliases" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register aliases for classes.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.App.App.register_commands">
+<code class="descname">register_commands</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.App.App.register_commands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register custom cli commands.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">commands to register</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.App.App.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.App.App.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the app.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.App.App.setup_datastore">
+<code class="descname">setup_datastore</code><span class="sig-paren">(</span><em>datastore</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.App.App.setup_datastore" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set up the data store.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>datastore</strong> (<em>dict</em>) – Datastore config.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+<div class="section" id="module-experimentum.Experiments.DataBag">
+<span id="experimentum-experiments-databag-module"></span><h2>experimentum.Experiments.DataBag module<a class="headerlink" href="#module-experimentum.Experiments.DataBag" title="Permalink to this headline">¶</a></h2>
+<p>In-Memory Container to easily store experiment results on the fly.</p>
+<div class="section" id="adding-entries">
+<h3>Adding Entries<a class="headerlink" href="#adding-entries" title="Permalink to this headline">¶</a></h3>
+<p>Add the entry <cite>{‘foo’: {‘bar’: {‘baz’: 42} }}</cite> to the DatBag via a dot-notation supported key:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DataBag</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;foo.bar.baz&#39;</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="mergins-entries">
+<h3>Mergins Entries<a class="headerlink" href="#mergins-entries" title="Permalink to this headline">¶</a></h3>
+<p>Merging dictionary and list entires:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DataBag</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;foo.bar&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">DataBag</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;foo.baz&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+<span class="n">DataBag</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="s1">&#39;foo.bar&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">])</span>
+<span class="n">DataBag</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="s1">&#39;foo.baz&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">})</span>
+
+<span class="c1"># Results in</span>
+<span class="c1"># {</span>
+<span class="c1">#   &#39;foo&#39;: {</span>
+<span class="c1">#       &#39;bar&#39;: [1, 2, 3, 2, 4, 8],</span>
+<span class="c1">#       &#39;baz&#39;: {&#39;a&#39;: 42, &#39;b&#39;: 2, &#39;c&#39;: 3}</span>
+<span class="c1">#   }</span>
+<span class="c1"># }</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="getting-entries">
+<h3>Getting Entries<a class="headerlink" href="#getting-entries" title="Permalink to this headline">¶</a></h3>
+<p>Add the entry <cite>baz</cite> of the dictionary <cite>{‘foo’: {‘bar’: {‘baz’: 42} }}</cite> in the DatBag via a
+dot-notation supported key:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">DataBag</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;foo.bar.baz&#39;</span><span class="p">)</span>  <span class="c1"># 42</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>The DataBag also provides a default value if the key does not exist</dt>
+<dd>data = DataBag.get(‘a.b.c’, ‘default value’)  # ‘default value’</dd>
+</dl>
+</div>
+<div class="section" id="deleting-entries">
+<h3>Deleting Entries<a class="headerlink" href="#deleting-entries" title="Permalink to this headline">¶</a></h3>
+<p>Deleting entries works just like adding/getting entries:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DataBag</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s1">&#39;foo.bar.baz&#39;</span><span class="p">)</span>  <span class="c1"># {&#39;foo&#39;: {&#39;bar&#39;: {}}}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="flushing-entries">
+<h3>Flushing Entries<a class="headerlink" href="#flushing-entries" title="Permalink to this headline">¶</a></h3>
+<p>Flushing the DataBag means that you get all the entires (or just a specific key)
+and then clear the content:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">DataBag</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s1">&#39;foo.bar.baz&#39;</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">DataBag</span><span class="o">.</span><span class="n">flush</span><span class="p">(</span><span class="s1">&#39;foo.bar.baz))  # prints: 42, contains: {&#39;</span><span class="n">foo</span><span class="s1">&#39;: {&#39;</span><span class="n">bar</span><span class="s1">&#39;: </span><span class="si">{}</span><span class="s1">}}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">DataBag</span><span class="o">.</span><span class="n">flush</span><span class="p">())</span>              <span class="c1"># prints: {&#39;foo&#39;: {&#39;bar&#39;: {}}}, contains: {}}</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="experimentum.Experiments.DataBag.DataBag">
+<em class="property">class </em><code class="descclassname">experimentum.Experiments.DataBag.</code><code class="descname">DataBag</code><a class="headerlink" href="#experimentum.Experiments.DataBag.DataBag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>In-Memory Container to easily store experiment results on the fly.</p>
+<dl class="classmethod">
+<dt id="experimentum.Experiments.DataBag.DataBag.add">
+<em class="property">classmethod </em><code class="descname">add</code><span class="sig-paren">(</span><em>key</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.DataBag.DataBag.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add an item to the DatBag via a dot-notation supported key.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>key</strong> (<em>str</em>) – Key to set (i.e. ‘foo’ or ‘foo.bar.baz’ for a deep key)</li>
+<li><strong>value</strong> (<em>object</em>) – Value to set for key.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="experimentum.Experiments.DataBag.DataBag.all">
+<em class="property">classmethod </em><code class="descname">all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.DataBag.DataBag.all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return content of the DataBag.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DataBag content.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="experimentum.Experiments.DataBag.DataBag.clear">
+<em class="property">classmethod </em><code class="descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.DataBag.DataBag.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear DataBag content.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="experimentum.Experiments.DataBag.DataBag.delete">
+<em class="property">classmethod </em><code class="descname">delete</code><span class="sig-paren">(</span><em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.DataBag.DataBag.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Delete an item from the DataBag via a dot-notation supported key.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>key</strong> (<em>str</em>) – Key to delete (i.e. ‘foo’ or ‘foo.bar.baz’ for a deep key)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Statuscode, 1: okay, -1: Key not found</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="experimentum.Experiments.DataBag.DataBag.flush">
+<em class="property">classmethod </em><code class="descname">flush</code><span class="sig-paren">(</span><em>key=None</em>, <em>default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.DataBag.DataBag.flush" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flush a specific key or all of the databag (i.e. return and delete).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> (<em>str</em>) – Key to set(i.e. ‘foo’ or ‘foo.bar.baz’ for a deep key)</li>
+<li><strong>default</strong> (<em>object</em><em>, </em><em>optional</em>) – Defaults to None. Default if key does not exist</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Value of the key</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="experimentum.Experiments.DataBag.DataBag.get">
+<em class="property">classmethod </em><code class="descname">get</code><span class="sig-paren">(</span><em>key</em>, <em>default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.DataBag.DataBag.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an item from the DataBag via a dot-notation supported key.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>key</strong> (<em>str</em>) – Key to get (i.e. ‘foo’ or ‘foo.bar.baz’ for a deep key)</li>
+<li><strong>default</strong> (<em>object</em><em>, </em><em>optional</em>) – Defaults to None. Default if key does not exist</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Value of the key</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="experimentum.Experiments.DataBag.DataBag.merge">
+<em class="property">classmethod </em><code class="descname">merge</code><span class="sig-paren">(</span><em>key</em>, <em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.DataBag.DataBag.merge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge two dicts or lists.</p>
+<dl class="docutils">
+<dt>For example:</dt>
+<dd><ul class="first last simple">
+<li>{‘a’: 1, ‘b’: 2} + {‘a’: 42, ‘c’: 3}  =&gt; {‘a’: 42, ‘b’: 2, ‘c’: 3}</li>
+<li>[‘a’, ‘b’, ‘c’]  + [‘a’, ‘d’, ‘e’]    =&gt; [‘a’, ‘b’, ‘c’, ‘a’, ‘d’, ‘e’]</li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>key</strong> (<em>str</em>) – Key to set (i.e. ‘foo’ or ‘foo.bar.baz’ for a deep key)</li>
+<li><strong>data</strong> (<em>dict|list</em>) – Value to update/extend for key.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.Experiments.DataBag.del_key">
+<code class="descclassname">experimentum.Experiments.DataBag.</code><code class="descname">del_key</code><span class="sig-paren">(</span><em>items</em>, <em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.DataBag.del_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively remove deep key from dict.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>items</strong> (<em>list</em>) – List of dictionary keys</li>
+<li><strong>data</strong> (<em>dict</em>) – Portion of dictionary to operate on</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>KeyError</strong> – If key does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.Experiments.DataBag.get_from">
+<code class="descclassname">experimentum.Experiments.DataBag.</code><code class="descname">get_from</code><span class="sig-paren">(</span><em>items</em>, <em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.DataBag.get_from" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively get value from dictionary deep key.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>items</strong> (<em>list</em>) – List of dictionary keys</li>
+<li><strong>data</strong> (<em>dict</em>) – Portion of dictionary to operate on</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Returns</dt>
+<dd>object: Value from dictionary</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><strong>KeyError</strong> – If key does not exist</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.Experiments.DataBag.set_to">
+<code class="descclassname">experimentum.Experiments.DataBag.</code><code class="descname">set_to</code><span class="sig-paren">(</span><em>items</em>, <em>data</em>, <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.DataBag.set_to" title="Permalink to this definition">¶</a></dt>
+<dd><p>Recursively set value to dictionary deep key.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>items</strong> (<em>list</em>) – List of dictionary keys</li>
+<li><strong>data</strong> (<em>dict</em>) – Portion of dictionary to operate on</li>
+<li><strong>value</strong> (<em>object</em>) – Value to set for key.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-experimentum.Experiments.Experiment">
+<span id="experimentum-experiments-experiment-module"></span><h2>experimentum.Experiments.Experiment module<a class="headerlink" href="#module-experimentum.Experiments.Experiment" title="Permalink to this headline">¶</a></h2>
+<p>Run experiments and save the results for future analysations.</p>
+<div class="section" id="writing-experiments">
+<h3>Writing Experiments<a class="headerlink" href="#writing-experiments" title="Permalink to this headline">¶</a></h3>
+<p>Experiments are created in the <cite>experiments</cite> directory and they must adhere to
+the following naming convention: <cite>{NAME}Experiment.py</cite>.</p>
+<p>All Experiments extend the <a class="reference internal" href="#experimentum.Experiments.Experiment.Experiment" title="experimentum.Experiments.Experiment.Experiment"><code class="xref py py-class docutils literal notranslate"><span class="pre">Experiment</span></code></a> class. Experiments
+contain a <a class="reference internal" href="#experimentum.Experiments.Experiment.Experiment.reset" title="experimentum.Experiments.Experiment.Experiment.reset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code></a> and <a class="reference internal" href="#experimentum.Experiments.Experiment.Experiment.run" title="experimentum.Experiments.Experiment.Experiment.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a>
+method. Within <a class="reference internal" href="#experimentum.Experiments.Experiment.Experiment.reset" title="experimentum.Experiments.Experiment.Experiment.reset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code></a> the method, you should
+reset/initialize the data structuresand values you want to use in each test run.</p>
+<p>The <a class="reference internal" href="#experimentum.Experiments.Experiment.Experiment.run" title="experimentum.Experiments.Experiment.Experiment.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> method should contain the code you want to test.
+It should return a dictionary with the values you want to save.</p>
+</div>
+<div class="section" id="the-reset-method">
+<h3>The Reset Method<a class="headerlink" href="#the-reset-method" title="Permalink to this headline">¶</a></h3>
+<p>As mentioned before the <a class="reference internal" href="#experimentum.Experiments.Experiment.Experiment.reset" title="experimentum.Experiments.Experiment.Experiment.reset"><code class="xref py py-meth docutils literal notranslate"><span class="pre">reset()</span></code></a> should reset/initialize the
+data structuresand values you want to use in each test run.</p>
+<p>Let’s take a look at a basic experiment. Within any of your experiment methods,
+you always have access to the <a class="reference internal" href="#experimentum.Experiments.Experiment.Experiment.app" title="experimentum.Experiments.Experiment.Experiment.app"><code class="xref py py-attr docutils literal notranslate"><span class="pre">app</span></code></a> attribute which
+provides access to the main app class and to the <a class="reference internal" href="#experimentum.Experiments.Experiment.Experiment.config" title="experimentum.Experiments.Experiment.Experiment.config"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config</span></code></a> which
+contains the content of the <a class="reference internal" href="#experimentum.Experiments.Experiment.Experiment.config_file" title="experimentum.Experiments.Experiment.Experiment.config_file"><code class="xref py py-attr docutils literal notranslate"><span class="pre">config_file</span></code></a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">experimentum.Experiments</span> <span class="k">import</span> <span class="n">Experiment</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+
+<span class="k">class</span> <span class="nc">FooExperiment</span><span class="p">(</span><span class="n">Experiment</span><span class="p">):</span>
+
+    <span class="n">config_file</span> <span class="o">=</span> <span class="s1">&#39;foo.json&#39;</span>
+
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># use app to create an instance of a custom aliased class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">user</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">some_class</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s1">&#39;some_class&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rand</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-run-method">
+<h3>The Run Method<a class="headerlink" href="#the-run-method" title="Permalink to this headline">¶</a></h3>
+<p>As mentioned before the <a class="reference internal" href="#experimentum.Experiments.Experiment.Experiment.run" title="experimentum.Experiments.Experiment.Experiment.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> method should contain the code
+you want to test and return a dictionary with the values you want to save.</p>
+<p>Let’s take a look at a basic experiment, assuming that you added a <code class="docutils literal notranslate"><span class="pre">rand</span></code> attribute to
+your TestCaseRepository with a migration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">experimentum.Experiments</span> <span class="k">import</span> <span class="n">Experiment</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+
+<span class="k">class</span> <span class="nc">FooExperiment</span><span class="p">(</span><span class="n">Experiment</span><span class="p">):</span>
+
+    <span class="n">config_file</span> <span class="o">=</span> <span class="s1">&#39;foo.json&#39;</span>
+
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">performance</span><span class="o">.</span><span class="n">point</span><span class="p">(</span><span class="s1">&#39;Task to measure some Rscript algo&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">point</span><span class="p">:</span>
+            <span class="n">script</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="s1">&#39;some_script.r&#39;</span><span class="p">)</span>  <span class="c1"># prints json to stdout as return value.</span>
+            <span class="n">algo_result</span> <span class="o">=</span> <span class="n">script</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+            <span class="n">script</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>  <span class="c1"># Wait for child process to terminate.</span>
+
+        <span class="c1"># Add a custom performance entry</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s1">&#39;rand&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">rand</span><span class="p">,</span>
+            <span class="s1">&#39;performances&#39;</span><span class="p">:</span> <span class="p">[{</span>
+                <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Custom Rscript measuring&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;time&#39;</span><span class="p">:</span> <span class="n">algo_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;memory&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s1">&#39;peak_memory&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s1">&#39;level&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;custom&#39;</span>
+            <span class="p">}]</span>
+        <span class="p">}</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="experimentum.Experiments.Experiment.Experiment">
+<em class="property">class </em><code class="descclassname">experimentum.Experiments.Experiment.</code><code class="descname">Experiment</code><span class="sig-paren">(</span><em>app</em>, <em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Experiment.Experiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Run experiments and save the results in the data store.</p>
+<dl class="attribute">
+<dt id="experimentum.Experiments.Experiment.Experiment.app">
+<code class="descname">app</code><a class="headerlink" href="#experimentum.Experiments.Experiment.Experiment.app" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main Application Class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#experimentum.Experiments.App.App" title="experimentum.Experiments.App.App">App</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.Experiment.Experiment.performance">
+<code class="descname">performance</code><a class="headerlink" href="#experimentum.Experiments.Experiment.Experiment.performance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performance Profiler.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#experimentum.Experiments.Performance.Performance" title="experimentum.Experiments.Performance.Performance">Performance</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.Experiment.Experiment.config">
+<code class="descname">config</code><a class="headerlink" href="#experimentum.Experiments.Experiment.Experiment.config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hold the experiment configuration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="experimentum.Config.html#experimentum.Config.Config.Config" title="experimentum.Config.Config.Config">Config</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.Experiment.Experiment.show_progress">
+<code class="descname">show_progress</code><a class="headerlink" href="#experimentum.Experiments.Experiment.Experiment.show_progress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flag to show/hide the progress bar.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.Experiment.Experiment.hide_performance">
+<code class="descname">hide_performance</code><a class="headerlink" href="#experimentum.Experiments.Experiment.Experiment.hide_performance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Flag to show/hide the performance table.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.Experiment.Experiment.config_file">
+<code class="descname">config_file</code><a class="headerlink" href="#experimentum.Experiments.Experiment.Experiment.config_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Config file to load.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.Experiment.Experiment.repos">
+<code class="descname">repos</code><a class="headerlink" href="#experimentum.Experiments.Experiment.Experiment.repos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Experiment and Testcast Repo to save results.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.Experiment.Experiment.boot">
+<code class="descname">boot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Experiment.Experiment.boot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boot up the experiment, e.g. load config etc.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="experimentum.Experiments.Experiment.Experiment.call">
+<em class="property">static </em><code class="descname">call</code><span class="sig-paren">(</span><em>cmd</em>, <em>verbose=False</em>, <em>shell=False</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Experiment.Experiment.call" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call another script to run algorithms for your experiment.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Passing <code class="docutils literal notranslate"><span class="pre">shell=True</span></code> can be a security hazard if combined with untrusted input.
+See the warning under <a class="reference external" href="https://docs.python.org/2/library/subprocess.html#frequently-used-arguments">Frequently Used Arguments</a>
+for details.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>cmd</strong> (<em>str</em><em>, </em><em>list</em>) – Command which you want to call.</li>
+<li><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – Defaults to False. Print the cmd output or not.</li>
+<li><strong>shell</strong> (<em>bool</em><em>, </em><em>optional</em>) – Defaults to False. Specifices whether to use the
+shell as the program to execute.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Executed script to get output from</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#experimentum.Experiments.Experiment.Script" title="experimentum.Experiments.Experiment.Script">Script</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt>
+<code class="descname">config_file</code><em class="property"> = None</em></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="experimentum.Experiments.Experiment.Experiment.get_experiments">
+<em class="property">static </em><code class="descname">get_experiments</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Experiment.Experiment.get_experiments" title="Permalink to this definition">¶</a></dt>
+<dd><p>[DEPRECATED] Get experiment names from exp files/classes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>path</strong> (<em>str</em>) – Path to experiments folder.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Names of experiments</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="experimentum.Experiments.Experiment.Experiment.get_status">
+<em class="property">static </em><code class="descname">get_status</code><span class="sig-paren">(</span><em>app</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Experiment.Experiment.get_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get status information about experiments.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>app</strong> (<a class="reference internal" href="#experimentum.Experiments.App.App" title="experimentum.Experiments.App.App"><em>App</em></a>) – Main Service Provider/Container.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Dictionary with experiment status</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="experimentum.Experiments.Experiment.Experiment.load">
+<em class="property">static </em><code class="descname">load</code><span class="sig-paren">(</span><em>app</em>, <em>path</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Experiment.Experiment.load" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load and initialize an experiment class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>app</strong> (<a class="reference internal" href="#experimentum.Experiments.App.App" title="experimentum.Experiments.App.App"><em>App</em></a>) – Main app calss</li>
+<li><strong>path</strong> (<em>str</em>) – Path to experiments folder.</li>
+<li><strong>name</strong> (<em>str</em>) – Name of experiment.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Loaded experiment.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#experimentum.Experiments.Experiment.Experiment" title="experimentum.Experiments.Experiment.Experiment">Experiment</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.Experiment.Experiment.reset">
+<code class="descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Experiment.Experiment.reset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset data structured and values used in the run method.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.Experiment.Experiment.run">
+<code class="descname">run</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Experiment.Experiment.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run a test of the experiment.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.Experiment.Experiment.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>result</em>, <em>iteration</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Experiment.Experiment.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the test results in the data store.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>result</strong> (<em>dict</em>) – Result of experiment test run.</li>
+<li><strong>iteration</strong> (<em>int</em>) – Number of test run iteration.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.Experiment.Experiment.start">
+<code class="descname">start</code><span class="sig-paren">(</span><em>steps=10</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Experiment.Experiment.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start the test runs of the experiment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>steps</strong> (<em>int</em><em>, </em><em>optional</em>) – Defaults to 10. How many tests runs should be executed.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentum.Experiments.Experiment.Script">
+<em class="property">class </em><code class="descclassname">experimentum.Experiments.Experiment.</code><code class="descname">Script</code><span class="sig-paren">(</span><em>cmd</em>, <em>verbose=False</em>, <em>shell=False</em>, <em>stdout=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Experiment.Script" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Call another script to run algorithms for your experiment.</p>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">script</span> <span class="o">=</span> <span class="n">Script</span><span class="p">([</span><span class="s1">&#39;Rscript&#39;</span><span class="p">,</span> <span class="s1">&#39;myalgo.r&#39;</span><span class="p">,</span> <span class="s1">&#39;arg1&#39;</span><span class="p">,</span> <span class="s1">&#39;arg2&#39;</span><span class="p">],</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">algo_result</span> <span class="o">=</span> <span class="n">script</span><span class="o">.</span><span class="n">get_json</span><span class="p">()</span>
+<span class="n">script</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>  <span class="c1"># Wait for child process to terminate.</span>
+</pre></div>
+</div>
+<dl class="attribute">
+<dt id="experimentum.Experiments.Experiment.Script.process">
+<code class="descname">process</code><a class="headerlink" href="#experimentum.Experiments.Experiment.Script.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called script.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">subprocess.Popen</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.Experiment.Script.output">
+<code class="descname">output</code><a class="headerlink" href="#experimentum.Experiments.Experiment.Script.output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Output of called script.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.Experiment.Script.get_json">
+<code class="descname">get_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Experiment.Script.get_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decode JSON of process output.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Process output</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.Experiment.Script.get_text">
+<code class="descname">get_text</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Experiment.Script.get_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the text of the process output.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Process output</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-experimentum.Experiments.Performance">
+<span id="experimentum-experiments-performance-module"></span><h2>experimentum.Experiments.Performance module<a class="headerlink" href="#module-experimentum.Experiments.Performance" title="Permalink to this headline">¶</a></h2>
+<p>The Performance module lets you easily measure the performance.</p>
+<p>It measures <em>execution time and memory consumption</em> of your python script
+and lets you add messages to each measuring point for a more detailed overview.</p>
+<p>Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">performance</span> <span class="o">=</span> <span class="n">Performance</span><span class="p">()</span>
+<span class="k">with</span> <span class="n">performance</span><span class="o">.</span><span class="n">point</span><span class="p">(</span><span class="s1">&#39;Task A&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">point</span><span class="p">:</span>
+    <span class="c1"># Do some heavy work</span>
+    <span class="n">point</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="s1">&#39;Database query insert xy&#39;</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">performance</span><span class="o">.</span><span class="n">point</span><span class="p">(</span><span class="s1">&#39;Subtask A1&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">subpoint</span><span class="p">:</span>
+        <span class="c1"># Do some heavy work</span>
+
+    <span class="k">with</span> <span class="n">performance</span><span class="o">.</span><span class="n">point</span><span class="p">(</span><span class="s1">&#39;Subtask A2&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">subpoint</span><span class="p">:</span>
+        <span class="n">subpoint</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="s1">&#39;Database query insert xy&#39;</span><span class="p">)</span>
+
+<span class="n">performance</span><span class="o">.</span><span class="n">results</span><span class="p">()</span>  <span class="c1"># print results table</span>
+</pre></div>
+</div>
+<dl class="class">
+<dt id="experimentum.Experiments.Performance.Formatter">
+<em class="property">class </em><code class="descclassname">experimentum.Experiments.Performance.</code><code class="descname">Formatter</code><a class="headerlink" href="#experimentum.Experiments.Performance.Formatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Format performance values to a human-readable format.</p>
+<dl class="staticmethod">
+<dt id="experimentum.Experiments.Performance.Formatter.format_number">
+<em class="property">static </em><code class="descname">format_number</code><span class="sig-paren">(</span><em>value</em>, <em>decimals</em>, <em>unit</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Performance.Formatter.format_number" title="Permalink to this definition">¶</a></dt>
+<dd><p>Round a number and add a unit.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>value</strong> (<em>float</em>) – Number to round.</li>
+<li><strong>decimals</strong> (<em>int</em>) – Numer of decimals places.</li>
+<li><strong>unit</strong> (<em>str</em>) – Unit to append</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.Performance.Formatter.get_table">
+<code class="descname">get_table</code><span class="sig-paren">(</span><em>points</em>, <em>tablefmt='psql'</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Performance.Formatter.get_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print performance table in human-readable format.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>points</strong> (<em>list</em>) – Measuring Points.</li>
+<li><strong>tablefmt</strong> (<em>str</em><em>, </em><em>optional</em>) – Defaults to ‘psql’. Table format for <code class="xref py py-mod docutils literal notranslate"><span class="pre">tabulate</span></code></li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Performance table</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.Performance.Formatter.memory_to_human">
+<code class="descname">memory_to_human</code><span class="sig-paren">(</span><em>_bytes</em>, <em>unit='auto'</em>, <em>decimals=2</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Performance.Formatter.memory_to_human" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform used memory into a better suited unit.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>_bytes</strong> (<em>float</em>) – Used Bytes.</li>
+<li><strong>unit</strong> (<em>str</em><em>, </em><em>optional</em>) – Defaults to ‘auto’. Unit to transform seconds into.</li>
+<li><strong>decimals</strong> (<em>int</em><em>, </em><em>optional</em>) – Defaults to 2. To which decimal point is rounded to.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">used memory suffixed with unit identifer</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.Performance.Formatter.print_table">
+<code class="descname">print_table</code><span class="sig-paren">(</span><em>points</em>, <em>tablefmt='psql'</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Performance.Formatter.print_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print performance table in human-readable format.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>points</strong> (<em>list</em>) – Measuring Points.</li>
+<li><strong>tablefmt</strong> (<em>str</em><em>, </em><em>optional</em>) – Defaults to ‘psql’. Table format for <code class="xref py py-mod docutils literal notranslate"><span class="pre">tabulate</span></code></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.Performance.Formatter.time_to_human">
+<code class="descname">time_to_human</code><span class="sig-paren">(</span><em>seconds</em>, <em>unit='auto'</em>, <em>decimals=2</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Performance.Formatter.time_to_human" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform time into a better suited unit.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>seconds</strong> (<em>float</em>) – Time seconds.</li>
+<li><strong>unit</strong> (<em>str</em><em>, </em><em>optional</em>) – Defaults to ‘auto’. Unit to transform seconds into.</li>
+<li><strong>decimals</strong> (<em>int</em><em>, </em><em>optional</em>) – Defaults to 2. To which decimal point is rounded to.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>TypeError</strong> – if an unknown unit is passed</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">time suffixed with unit identifer</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentum.Experiments.Performance.Performance">
+<em class="property">class </em><code class="descclassname">experimentum.Experiments.Performance.</code><code class="descname">Performance</code><a class="headerlink" href="#experimentum.Experiments.Performance.Performance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Easily measure the performance of your python scripts.</p>
+<dl class="attribute">
+<dt id="experimentum.Experiments.Performance.Performance.points">
+<code class="descname">points</code><a class="headerlink" href="#experimentum.Experiments.Performance.Performance.points" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of measuring points</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.Performance.Performance.iteration">
+<code class="descname">iteration</code><a class="headerlink" href="#experimentum.Experiments.Performance.Performance.iteration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of current iteration</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.Performance.Performance.formatter">
+<code class="descname">formatter</code><a class="headerlink" href="#experimentum.Experiments.Performance.Performance.formatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Formatter to output human readable results</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><a class="reference internal" href="#experimentum.Experiments.Performance.Formatter" title="experimentum.Experiments.Performance.Formatter">Formatter</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.Performance.Performance.export">
+<code class="descname">export</code><span class="sig-paren">(</span><em>metrics=False</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Performance.Performance.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export the measuring points as a dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>metrics</strong> (<em>bool</em><em>, </em><em>optional</em>) – </td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Measuring points</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.Performance.Performance.iterate">
+<code class="descname">iterate</code><span class="sig-paren">(</span><em>start</em>, <em>stop</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Performance.Performance.iterate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Iterate over multiple performance points to later calculate avg and standard deviation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>start</strong> (<em>int</em>) – Start at</li>
+<li><strong>stop</strong> (<em>int</em>) – Stop at</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first last"><em>int</em> – current iteration</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="experimentum.Experiments.Performance.Performance.mean">
+<em class="property">static </em><code class="descname">mean</code><span class="sig-paren">(</span><em>values</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Performance.Performance.mean" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate Mean of values.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>values</strong> (<em>list</em>) – List of values</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Mean value</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.Performance.Performance.point">
+<code class="descname">point</code><span class="sig-paren">(</span><em>**kwds</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Performance.Performance.point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set measuring point with or without a label.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Keyword Arguments:</th></tr>
+<tr class="field-odd field"><td>&#160;</td><td class="field-body"><strong>label</strong> (<em>str</em><em>, </em><em>optional</em>) – Defaults to ‘Point’. Enter point label</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">performance</span><span class="o">.</span><span class="n">point</span><span class="p">(</span><span class="s1">&#39;Task A&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">point</span><span class="p">:</span>
+    <span class="c1"># do something</span>
+    <span class="n">point</span><span class="o">.</span><span class="n">message</span><span class="p">(</span><span class="s1">&#39;Some Message)</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Yields:</th><td class="field-body"><em>Point</em> – new measuring point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.Performance.Performance.results">
+<code class="descname">results</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Performance.Performance.results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print the performance results in a human-readable format.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.Performance.Performance.set_formatter">
+<code class="descname">set_formatter</code><span class="sig-paren">(</span><em>formatter</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Performance.Performance.set_formatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a formatter for human readable output.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>formatter</strong> (<a class="reference internal" href="#experimentum.Experiments.Performance.Formatter" title="experimentum.Experiments.Performance.Formatter"><em>Formatter</em></a>) – Human-readable output formatter</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="experimentum.Experiments.Performance.Performance.standard_deviation">
+<em class="property">static </em><code class="descname">standard_deviation</code><span class="sig-paren">(</span><em>numbers</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Performance.Performance.standard_deviation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the standard deviation.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>numbers</strong> (<em>list</em>) – List of numbers</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Standard Deviation</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="experimentum.Experiments.Performance.Point">
+<em class="property">class </em><code class="descclassname">experimentum.Experiments.Performance.</code><code class="descname">Point</code><span class="sig-paren">(</span><em>label</em>, <em>iter_id=None</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Performance.Point" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Measuring Point Data Structure.</p>
+<p>Keeps track of execution time and memory consumption. You can also append
+messages to a point to keep track of different events. Each message contains
+the time since the last message was logged and the message content itself.</p>
+<dl class="attribute">
+<dt id="experimentum.Experiments.Performance.Point.label">
+<code class="descname">label</code><a class="headerlink" href="#experimentum.Experiments.Performance.Point.label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Label of the point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.Performance.Point.id">
+<code class="descname">id</code><a class="headerlink" href="#experimentum.Experiments.Performance.Point.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Id to keep track of same points when iterating.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.Performance.Point.start_time">
+<code class="descname">start_time</code><a class="headerlink" href="#experimentum.Experiments.Performance.Point.start_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Startpoint Timestamp.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.Performance.Point.stop_time">
+<code class="descname">stop_time</code><a class="headerlink" href="#experimentum.Experiments.Performance.Point.stop_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Endpoint Timestamp.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.Performance.Point.start_memory">
+<code class="descname">start_memory</code><a class="headerlink" href="#experimentum.Experiments.Performance.Point.start_memory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Memory consumption on start.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.Performance.Point.stop_memory">
+<code class="descname">stop_memory</code><a class="headerlink" href="#experimentum.Experiments.Performance.Point.stop_memory" title="Permalink to this definition">¶</a></dt>
+<dd><p>Memory consumption on end.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.Performance.Point.messages">
+<code class="descname">messages</code><a class="headerlink" href="#experimentum.Experiments.Performance.Point.messages" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of optional messages.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="experimentum.Experiments.Performance.Point.subpoints">
+<code class="descname">subpoints</code><a class="headerlink" href="#experimentum.Experiments.Performance.Point.subpoints" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of optional subpoints.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.Performance.Point.message">
+<code class="descname">message</code><span class="sig-paren">(</span><em>msg</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Performance.Point.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set a message associated with the point.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>msg</strong> (<em>str</em>) – Enter message</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.Performance.Point.to_df">
+<code class="descname">to_df</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Performance.Point.to_df" title="Permalink to this definition">¶</a></dt>
+<dd><p>Transform point to dataframe.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Dataframe</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="experimentum.Experiments.Performance.Point.to_dict">
+<code class="descname">to_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Performance.Point.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return all measured attributes and messages as a dictionary.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">measured attributes and messages.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.Experiments.Performance.memory_usage">
+<code class="descclassname">experimentum.Experiments.Performance.</code><code class="descname">memory_usage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.Experiments.Performance.memory_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the memory usage of the current process.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Thanks to Fabian Pedregosa for his overview of different ways to
+determine the memory usage in python.
+<a class="reference external" href="http://fa.bianp.net/blog/2013/different-ways-to-get-memory-consumption-or-lessons-learned-from-memory_profiler">http://fa.bianp.net/blog/2013/different-ways-to-get-memory-consumption-or-lessons-learned-from-memory_profiler</a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">used bytes.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentum.Experiments">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-experimentum.Experiments" title="Permalink to this headline">¶</a></h2>
+<p>Provides the main entry point and some utilities for running experiments.</p>
+<p>Import <a class="reference internal" href="#module-experimentum.Experiments.App" title="experimentum.Experiments.App"><code class="xref py py-mod docutils literal notranslate"><span class="pre">App</span></code></a>, <code class="xref py py-mod docutils literal notranslate"><span class="pre">Experiment</span></code> and <a class="reference internal" href="#module-experimentum.Experiments.Performance" title="experimentum.Experiments.Performance"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Performance</span></code></a> so that
+they can be easly imported by other packages/modules.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="experimentum.Plots.html" class="btn btn-neutral float-right" title="experimentum.Plots package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="experimentum.Config.html" class="btn btn-neutral float-left" title="experimentum.Config package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Pascal Kleindienst
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

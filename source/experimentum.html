@@ -1,0 +1,621 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>experimentum package &mdash; experimentum  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="experimentum.Commands package" href="experimentum.Commands.html" />
+    <link rel="prev" title="experimentum" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> experimentum
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service.html">Service Container and Provider</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands.html">CLI Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migrations.html">Migrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../repositories.html">Repositories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experiments.html">Experiments</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">experimentum package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Commands.html">experimentum.Commands package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Config.html">experimentum.Config package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Experiments.html">experimentum.Experiments package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Plots.html">experimentum.Plots package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.html">experimentum.Storage package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.WebGUI.html">experimentum.WebGUI package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-experimentum.cli">experimentum.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-experimentum.files">experimentum.files module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-experimentum.quickstart">experimentum.quickstart module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-experimentum.utils">experimentum.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-experimentum">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">experimentum</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">experimentum</a> &raquo;</li>
+        
+      <li>experimentum package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/experimentum.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="experimentum-package">
+<h1>experimentum package<a class="headerlink" href="#experimentum-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="experimentum.Commands.html">experimentum.Commands package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Commands.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Commands.html#module-experimentum.Commands.AbstractCommand">experimentum.Commands.AbstractCommand module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Commands.html#decorator">Decorator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Commands.html#class-based">Class-based</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Commands.html#module-experimentum.Commands.CommandManager">experimentum.Commands.CommandManager module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Commands.html#module-experimentum.Commands.ExperimentsCommand">experimentum.Commands.ExperimentsCommand module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Commands.html#running-experiments">Running experiments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Commands.html#listing-experiments">Listing experiments</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Commands.html#module-experimentum.Commands.MigrationCommand">experimentum.Commands.MigrationCommand module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Commands.html#generating-migrations">Generating Migrations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Commands.html#migration-structure">Migration Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Commands.html#running-migrations">Running Migrations</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Commands.html#module-experimentum.Commands.PlotCommand">experimentum.Commands.PlotCommand module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Commands.html#generating-plots-and-charts">Generating plots and charts</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Commands.html#module-experimentum.Commands.WebGUICommand">experimentum.Commands.WebGUICommand module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Commands.html#starting-the-server">Starting the Server</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Commands.html#module-experimentum.Commands">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="experimentum.Config.html">experimentum.Config package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Config.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Config.html#module-experimentum.Config.Config">experimentum.Config.Config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Config.html#module-experimentum.Config.Loader">experimentum.Config.Loader module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Config.html#module-experimentum.Config">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="experimentum.Experiments.html">experimentum.Experiments package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Experiments.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Experiments.html#module-experimentum.Experiments.App">experimentum.Experiments.App module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Experiments.html#binding">Binding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Experiments.html#resolving">Resolving</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Experiments.html#customizing">Customizing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Experiments.html#commands">Commands</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Experiments.html#module-experimentum.Experiments.DataBag">experimentum.Experiments.DataBag module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Experiments.html#adding-entries">Adding Entries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Experiments.html#mergins-entries">Mergins Entries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Experiments.html#getting-entries">Getting Entries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Experiments.html#deleting-entries">Deleting Entries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Experiments.html#flushing-entries">Flushing Entries</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Experiments.html#module-experimentum.Experiments.Experiment">experimentum.Experiments.Experiment module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Experiments.html#writing-experiments">Writing Experiments</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Experiments.html#the-reset-method">The Reset Method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Experiments.html#the-run-method">The Run Method</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Experiments.html#module-experimentum.Experiments.Performance">experimentum.Experiments.Performance module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Experiments.html#module-experimentum.Experiments">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="experimentum.Plots.html">experimentum.Plots package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Plots.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Plots.html#module-experimentum.Plots.Factory">experimentum.Plots.Factory module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Plots.html#module-experimentum.Plots.Plot">experimentum.Plots.Plot module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Plots.html#module-experimentum.Plots">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="experimentum.Storage.html">experimentum.Storage package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Storage.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Storage.Migrations.html">experimentum.Storage.Migrations package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.Migrations.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.Migrations.html#module-experimentum.Storage.Migrations.Blueprint">experimentum.Storage.Migrations.Blueprint module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="experimentum.Storage.Migrations.html#columns">Columns</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="experimentum.Storage.Migrations.html#adding-columns">Adding Columns</a></li>
+<li class="toctree-l6"><a class="reference internal" href="experimentum.Storage.Migrations.html#column-modifiers">Column Modifiers</a></li>
+<li class="toctree-l6"><a class="reference internal" href="experimentum.Storage.Migrations.html#dropping-columns">Dropping Columns</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="experimentum.Storage.Migrations.html#indexes">Indexes</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="experimentum.Storage.Migrations.html#available-index-types">Available Index Types</a></li>
+<li class="toctree-l6"><a class="reference internal" href="experimentum.Storage.Migrations.html#dropping-indexes">Dropping Indexes</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="experimentum.Storage.Migrations.html#foreign-key-contraints">Foreign Key Contraints</a></li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.Migrations.html#module-experimentum.Storage.Migrations.Column">experimentum.Storage.Migrations.Column module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.Migrations.html#module-experimentum.Storage.Migrations.ForeignKey">experimentum.Storage.Migrations.ForeignKey module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.Migrations.html#module-experimentum.Storage.Migrations.Migration">experimentum.Storage.Migrations.Migration module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.Migrations.html#module-experimentum.Storage.Migrations.Migrator">experimentum.Storage.Migrations.Migrator module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.Migrations.html#module-experimentum.Storage.Migrations.Schema">experimentum.Storage.Migrations.Schema module</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="experimentum.Storage.Migrations.html#tables">Tables</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="experimentum.Storage.Migrations.html#creating-tables">Creating Tables</a></li>
+<li class="toctree-l6"><a class="reference internal" href="experimentum.Storage.Migrations.html#checking-existence">Checking Existence</a></li>
+<li class="toctree-l6"><a class="reference internal" href="experimentum.Storage.Migrations.html#renaming-dropping-tables">Renaming / Dropping Tables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.Migrations.html#module-experimentum.Storage.Migrations">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Storage.SQLAlchemy.html">experimentum.Storage.SQLAlchemy package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#module-experimentum.Storage.SQLAlchemy.ColumnFactory">experimentum.Storage.SQLAlchemy.ColumnFactory module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#module-experimentum.Storage.SQLAlchemy.Platform">experimentum.Storage.SQLAlchemy.Platform module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#module-experimentum.Storage.SQLAlchemy.Repository">experimentum.Storage.SQLAlchemy.Repository module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#module-experimentum.Storage.SQLAlchemy.SQLitePlatform">experimentum.Storage.SQLAlchemy.SQLitePlatform module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#module-experimentum.Storage.SQLAlchemy.Store">experimentum.Storage.SQLAlchemy.Store module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.SQLAlchemy.html#module-experimentum.Storage.SQLAlchemy">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Storage.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Storage.html#module-experimentum.Storage.AbstractRepository">experimentum.Storage.AbstractRepository module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Storage.html#data-layer">Data Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Storage.html#actions">Actions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Storage.html#events">Events</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.Storage.html#loading">Loading</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Storage.html#module-experimentum.Storage.AbstractStore">experimentum.Storage.AbstractStore module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.Storage.html#module-experimentum.Storage">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="experimentum.WebGUI.html">experimentum.WebGUI package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.WebGUI.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.WebGUI.views.html">experimentum.WebGUI.views package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.WebGUI.views.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.WebGUI.views.html#module-experimentum.WebGUI.views.dashboard">experimentum.WebGUI.views.dashboard module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.WebGUI.views.html#module-experimentum.WebGUI.views.experiments">experimentum.WebGUI.views.experiments module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.WebGUI.views.html#module-experimentum.WebGUI.views.migrations">experimentum.WebGUI.views.migrations module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.WebGUI.views.html#module-experimentum.WebGUI.views.plots">experimentum.WebGUI.views.plots module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.WebGUI.views.html#module-experimentum.WebGUI.views">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.WebGUI.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.WebGUI.html#module-experimentum.WebGUI.helpers">experimentum.WebGUI.helpers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="experimentum.WebGUI.html#module-experimentum.WebGUI">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-experimentum.cli">
+<span id="experimentum-cli-module"></span><h2>experimentum.cli module<a class="headerlink" href="#module-experimentum.cli" title="Permalink to this headline">¶</a></h2>
+<p>Some CLI Helpers.</p>
+<dl class="function">
+<dt id="experimentum.cli.get_input">
+<code class="descclassname">experimentum.cli.</code><code class="descname">get_input</code><span class="sig-paren">(</span><em>msg</em>, <em>default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.cli.get_input" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the user input.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>msg</strong> (<em>str</em>) – Message</li>
+<li><strong>default</strong> (<em>object</em><em>, </em><em>optional</em>) – Default to None. Default value if nothing is entered</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">User Input</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.cli.print_failure">
+<code class="descclassname">experimentum.cli.</code><code class="descname">print_failure</code><span class="sig-paren">(</span><em>msg</em>, <em>exit_code=None</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.cli.print_failure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print a failure message to stder.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>msg</strong> (<em>str</em>) – Failure message.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.cli.print_progress">
+<code class="descclassname">experimentum.cli.</code><code class="descname">print_progress</code><span class="sig-paren">(</span><em>iteration</em>, <em>total</em>, <em>prefix=''</em>, <em>suffix=''</em>, <em>decimals=1</em>, <em>bar_length=100</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.cli.print_progress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Call in a loop to create terminal progress bar.</p>
+<p><a class="reference external" href="https://gist.github.com/aubricus/f91fb55dc6ba5557fbab06119420dd6a">https://gist.github.com/aubricus/f91fb55dc6ba5557fbab06119420dd6a</a></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>iteration</strong> (<em>int</em>) – current iteration</li>
+<li><strong>total</strong> (<em>int</em>) – total iterations</li>
+<li><strong>prefix</strong> (<em>str</em><em>, </em><em>optional</em>) – Defaults to ‘’. Prefix string</li>
+<li><strong>suffix</strong> (<em>str</em><em>, </em><em>optional</em>) – Defaults to ‘’. Suffix string</li>
+<li><strong>decimals</strong> (<em>int</em><em>, </em><em>optional</em>) – Defaults to 1. Positive number of decimals in percent complete.</li>
+<li><strong>bar_length</strong> (<em>int</em><em>, </em><em>optional</em>) – Defaults to 100. Character length of bar.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentum.files">
+<span id="experimentum-files-module"></span><h2>experimentum.files module<a class="headerlink" href="#module-experimentum.files" title="Permalink to this headline">¶</a></h2>
+<p>Some Helper functions for creating files and folders.</p>
+<dl class="function">
+<dt id="experimentum.files.create_config_file">
+<code class="descclassname">experimentum.files.</code><code class="descname">create_config_file</code><span class="sig-paren">(</span><em>root</em>, <em>path</em>, <em>name</em>, <em>data</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.files.create_config_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a config file and fill it with data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>root</strong> (<em>str</em>) – Root folder</li>
+<li><strong>path</strong> (<em>str</em>) – Path to config folder</li>
+<li><strong>name</strong> (<em>str</em>) – Name of the config file</li>
+<li><strong>data</strong> (<em>object</em>) – Config Data</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.files.create_folder">
+<code class="descclassname">experimentum.files.</code><code class="descname">create_folder</code><span class="sig-paren">(</span><em>root</em>, <em>path</em>, <em>with_init=False</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.files.create_folder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a folder if it does not exist.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>root</strong> (<em>str</em>) – Root folder</li>
+<li><strong>path</strong> (<em>str</em>) – folder path</li>
+<li><strong>with_init</strong> (<em>bool</em>) – Add an __init__.py to folder or not</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.files.create_from_stub">
+<code class="descclassname">experimentum.files.</code><code class="descname">create_from_stub</code><span class="sig-paren">(</span><em>stubfile</em>, <em>filename</em>, <em>attrs</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.files.create_from_stub" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new file from a stub.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>stubfile</strong> (<em>str</em>) – Name of stub file in _stubs folder</li>
+<li><strong>filename</strong> (<em>str</em>) – Filename to create (with path)</li>
+<li><strong>attrs</strong> (<em>dict</em>) – Attributes to pass to stub</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentum.quickstart">
+<span id="experimentum-quickstart-module"></span><h2>experimentum.quickstart module<a class="headerlink" href="#module-experimentum.quickstart" title="Permalink to this headline">¶</a></h2>
+<p>Generate needed files and folders to get up and running.</p>
+<p>In order to create all needed files and folders <em>(including config and migrations)</em>
+the experimentum framework contains a quickstart command. Just run <code class="docutils literal notranslate"><span class="pre">experimentum-quickstart</span></code>
+and answer the questions.</p>
+<p>You can also add a different root path with the <code class="docutils literal notranslate"><span class="pre">--root</span></code> option, e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">experimentum</span><span class="o">-</span><span class="n">quickstart</span> <span class="o">--</span><span class="n">root</span> <span class="n">example</span>
+</pre></div>
+</div>
+<dl class="function">
+<dt id="experimentum.quickstart.main">
+<code class="descclassname">experimentum.quickstart.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.quickstart.main" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate needed files and folders to get up and running.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentum.utils">
+<span id="experimentum-utils-module"></span><h2>experimentum.utils module<a class="headerlink" href="#module-experimentum.utils" title="Permalink to this headline">¶</a></h2>
+<p>Utility functions to work with files and loading classes.</p>
+<dl class="function">
+<dt id="experimentum.utils.find_files">
+<code class="descclassname">experimentum.utils.</code><code class="descname">find_files</code><span class="sig-paren">(</span><em>root</em>, <em>path</em>, <em>search=None</em>, <em>remove='.py'</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.utils.find_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find files in a folder (except _*.py files).</p>
+<p>Can also search for specific filenames (case ignored).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>root</strong> (<em>str</em>) – Root Path</li>
+<li><strong>path</strong> (<em>str</em>) – Path to folder</li>
+<li><strong>search</strong> (<em>str</em><em>, </em><em>optional</em>) – Defaults to None. Filename to search for</li>
+<li><strong>remove</strong> (<em>str</em><em>, </em><em>optional</em>) – Defaults to ‘.py’. Exclude from filename comparison</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">List of filenames</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.utils.get_basenames">
+<code class="descclassname">experimentum.utils.</code><code class="descname">get_basenames</code><span class="sig-paren">(</span><em>root</em>, <em>path</em>, <em>remove='.py'</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.utils.get_basenames" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get file basenames of a folder.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>root</strong> (<em>str</em>) – Root path</li>
+<li><strong>path</strong> (<em>str</em>) – Path to folder</li>
+<li><strong>remove</strong> (<em>str</em><em>, </em><em>optional</em>) – Defaults to ‘.py’. Part to remove from filename.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of names</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.utils.load_class">
+<code class="descclassname">experimentum.utils.</code><code class="descname">load_class</code><span class="sig-paren">(</span><em>src</em>, <em>module</em>, <em>subclass=None</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.utils.load_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Try to load a class from a module.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>src</strong> (<em>str</em>) – Source file</li>
+<li><strong>module</strong> (<em>str</em>) – Module name</li>
+<li><strong>subclass</strong> (<em>object</em><em>, </em><em>optional</em>) – Defaults to None. Object the class needs to be derived from</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">loaded class</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentum">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-experimentum" title="Permalink to this headline">¶</a></h2>
+<p>Import classes for easier importing by other packages/modules.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="experimentum.Commands.html" class="btn btn-neutral float-right" title="experimentum.Commands package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="modules.html" class="btn btn-neutral float-left" title="experimentum" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Pascal Kleindienst
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

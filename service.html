@@ -1,0 +1,268 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Service Container and Provider &mdash; experimentum  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="CLI Commands" href="commands.html" />
+    <link rel="prev" title="Configuration" href="configuration.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> experimentum
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configuration.html">Configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Service Container and Provider</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#binding">Binding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resolving">Resolving</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#customizing">Customizing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#commands">Commands</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">CLI Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migrations.html">Migrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="repositories.html">Repositories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="experiments.html">Experiments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/modules.html">API</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">experimentum</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Service Container and Provider</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/service.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-experimentum.Experiments.App">
+<span id="service-container-and-provider"></span><h1>Service Container and Provider<a class="headerlink" href="#module-experimentum.Experiments.App" title="Permalink to this headline">¶</a></h1>
+<p>Main Service Container and Provider.</p>
+<p>Sets up the framework and runs the experiments and lets you customize/extend
+the behavior of the framework.</p>
+<div class="section" id="binding">
+<h2>Binding<a class="headerlink" href="#binding" title="Permalink to this headline">¶</a></h2>
+<p>We can register/bind a new  alias by extending either the <code class="xref py py-meth docutils literal notranslate"><span class="pre">register_aliases</span> <span class="pre">class()</span></code>
+or by directly adding the alias to the <a class="reference internal" href="source/experimentum.Experiments.html#experimentum.Experiments.App.App.aliases" title="experimentum.Experiments.App.App.aliases"><code class="xref py py-attr docutils literal notranslate"><span class="pre">aliases</span></code></a> dictionary. The key is the alias
+name you want to register and the value is a function that returns an instance of the class:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">register_aliases</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">(</span><span class="n">MyAppClass</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">register_aliases</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">aliases</span><span class="p">[</span><span class="s1">&#39;my_custom_api&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">API</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Additional arguments for creating a class instance may be passed when resolving. Your function
+just has to add them in order to use them:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">aliases</span><span class="p">[</span><span class="s1">&#39;my_custom_api&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">name</span><span class="p">,</span> <span class="n">user_id</span><span class="o">=</span><span class="kc">None</span><span class="p">:</span> <span class="n">API</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">store</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">user_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="resolving">
+<h2>Resolving<a class="headerlink" href="#resolving" title="Permalink to this headline">¶</a></h2>
+<p>You may use the <a class="reference internal" href="source/experimentum.Experiments.html#experimentum.Experiments.App.App.make" title="experimentum.Experiments.App.App.make"><code class="xref py py-meth docutils literal notranslate"><span class="pre">make()</span></code></a> method to resolve a class instance out of the container.
+The <a class="reference internal" href="source/experimentum.Experiments.html#experimentum.Experiments.App.App.make" title="experimentum.Experiments.App.App.make"><code class="xref py py-meth docutils literal notranslate"><span class="pre">make()</span></code></a> method accepts the alias of the class you want to resolve:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s1">&#39;my_custom_api&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If some of your class’ dependencies are not resolvable via the app container, you may pass them
+as additional args and keyword args:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">api</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">make</span><span class="p">(</span><span class="s1">&#39;my_custom_api&#39;</span><span class="p">,</span> <span class="n">foo</span><span class="p">,</span> <span class="n">user_id</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="customizing">
+<h2>Customizing<a class="headerlink" href="#customizing" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="commands">
+<h3>Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h3>
+<p>Register new commands with the <a class="reference internal" href="source/experimentum.Experiments.html#experimentum.Experiments.App.App.register_commands" title="experimentum.Experiments.App.App.register_commands"><code class="xref py py-meth docutils literal notranslate"><span class="pre">App.register_commands()</span></code></a> method.
+It should return a dictionary where the keys are names of the commands and
+the values are the command handlers. The command handlers must either be
+derived from <a class="reference internal" href="source/experimentum.Commands.html#experimentum.Commands.AbstractCommand.AbstractCommand" title="experimentum.Commands.AbstractCommand.AbstractCommand"><code class="xref py py-class docutils literal notranslate"><span class="pre">AbstractCommand</span></code></a> or a function with the decorator
+<a class="reference internal" href="source/experimentum.Commands.html#experimentum.Commands.AbstractCommand.command" title="experimentum.Commands.AbstractCommand.command"><code class="xref py py-func docutils literal notranslate"><span class="pre">AbstractCommand.command()</span></code></a>. Example return:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;foo&#39;</span><span class="p">:</span> <span class="n">FooCommand</span><span class="p">,</span>
+    <span class="s1">&#39;bar&#39;</span><span class="p">:</span> <span class="n">BarCommand</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="commands.html" class="btn btn-neutral float-right" title="CLI Commands" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="configuration.html" class="btn btn-neutral float-left" title="Configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Pascal Kleindienst
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

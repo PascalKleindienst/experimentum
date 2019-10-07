@@ -1,0 +1,566 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>experimentum.WebGUI.views package &mdash; experimentum  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="experimentum.WebGUI package" href="experimentum.WebGUI.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> experimentum
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configuration.html">Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../service.html">Service Container and Provider</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands.html">CLI Commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migrations.html">Migrations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../repositories.html">Repositories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../experiments.html">Experiments</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="experimentum.html">experimentum package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="experimentum.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Commands.html">experimentum.Commands package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Config.html">experimentum.Config package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Experiments.html">experimentum.Experiments package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Plots.html">experimentum.Plots package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="experimentum.Storage.html">experimentum.Storage package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="experimentum.WebGUI.html">experimentum.WebGUI package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.cli">experimentum.cli module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.files">experimentum.files module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.quickstart">experimentum.quickstart module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum.utils">experimentum.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="experimentum.html#module-experimentum">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">experimentum</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="modules.html">experimentum</a> &raquo;</li>
+        
+          <li><a href="experimentum.html">experimentum package</a> &raquo;</li>
+        
+          <li><a href="experimentum.WebGUI.html">experimentum.WebGUI package</a> &raquo;</li>
+        
+      <li>experimentum.WebGUI.views package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/source/experimentum.WebGUI.views.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="experimentum-webgui-views-package">
+<h1>experimentum.WebGUI.views package<a class="headerlink" href="#experimentum-webgui-views-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-experimentum.WebGUI.views.dashboard">
+<span id="experimentum-webgui-views-dashboard-module"></span><h2>experimentum.WebGUI.views.dashboard module<a class="headerlink" href="#module-experimentum.WebGUI.views.dashboard" title="Permalink to this headline">¶</a></h2>
+<p>Contains all views/routes for the dashboard.</p>
+<p>The dashboard lists:
+* all available experiments
+* all migrations and their status</p>
+<blockquote>
+<div><ul class="simple">
+<li>Upgrade migrations</li>
+<li>Downgrade migrations</li>
+<li>Refresh Migrations</li>
+</ul>
+</div></blockquote>
+<dl class="function">
+<dt id="experimentum.WebGUI.views.dashboard.dashboard">
+<code class="descclassname">experimentum.WebGUI.views.dashboard.</code><code class="descname">dashboard</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.WebGUI.views.dashboard.dashboard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays the dashboard template.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">HTML Template</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentum.WebGUI.views.experiments">
+<span id="experimentum-webgui-views-experiments-module"></span><h2>experimentum.WebGUI.views.experiments module<a class="headerlink" href="#module-experimentum.WebGUI.views.experiments" title="Permalink to this headline">¶</a></h2>
+<p>Contains all views/routes for the experiments.</p>
+<p>It should call <code class="docutils literal notranslate"><span class="pre">experiments:run</span></code> to run an experiment,
+show the ouput log and performance table, and show the
+generated plots and charts if available.</p>
+<dl class="docutils">
+<dt>Available Routes for:</dt>
+<dd><ul class="first last simple">
+<li>Running Experiments</li>
+<li>Showing Plots and Charts of experiments</li>
+</ul>
+</dd>
+</dl>
+<dl class="function">
+<dt id="experimentum.WebGUI.views.experiments.plots">
+<code class="descclassname">experimentum.WebGUI.views.experiments.</code><code class="descname">plots</code><span class="sig-paren">(</span><em>experiment</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.WebGUI.views.experiments.plots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show plots and charts for experiment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>experiment</strong> (<em>str</em>) – Name of experiment</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">HTML template</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.WebGUI.views.experiments.run">
+<code class="descclassname">experimentum.WebGUI.views.experiments.</code><code class="descname">run</code><span class="sig-paren">(</span><em>experiment</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.WebGUI.views.experiments.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run an experiment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>experiment</strong> (<em>str</em>) – Name of the experiment</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">HTML template, or event stream for experiment log</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str|Response</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.WebGUI.views.experiments.run_experiment">
+<code class="descclassname">experimentum.WebGUI.views.experiments.</code><code class="descname">run_experiment</code><span class="sig-paren">(</span><em>exp_thread</em>, <em>capturer</em>, <em>experiment</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.WebGUI.views.experiments.run_experiment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Experiment runner, which monitors and yields the thread output.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>exp_thread</strong> (<em>Thread</em>) – Thread which runs the experiment.</li>
+<li><strong>capturer</strong> (<a class="reference internal" href="experimentum.WebGUI.html#experimentum.WebGUI.helpers.CapturedContent" title="experimentum.WebGUI.helpers.CapturedContent"><em>CapturedContent</em></a>) – Capturer the capture the thread output.</li>
+<li><strong>experiment</strong> (<a class="reference internal" href="experimentum.Experiments.html#experimentum.Experiments.Experiment.Experiment" title="experimentum.Experiments.Experiment.Experiment"><em>Experiment</em></a>) – experiment measurement.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentum.WebGUI.views.migrations">
+<span id="experimentum-webgui-views-migrations-module"></span><h2>experimentum.WebGUI.views.migrations module<a class="headerlink" href="#module-experimentum.WebGUI.views.migrations" title="Permalink to this headline">¶</a></h2>
+<p>Contains all views/routes for the migrations.</p>
+<dl class="docutils">
+<dt>Available Routes for:</dt>
+<dd><ul class="first last simple">
+<li>Upgrading Migrations</li>
+<li>Downgrading Migrations</li>
+<li>Refreshing Migrations</li>
+<li>Getting Migration Status</li>
+</ul>
+</dd>
+</dl>
+<dl class="function">
+<dt id="experimentum.WebGUI.views.migrations.downgrade">
+<code class="descclassname">experimentum.WebGUI.views.migrations.</code><code class="descname">downgrade</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.WebGUI.views.migrations.downgrade" title="Permalink to this definition">¶</a></dt>
+<dd><p>Downgrade the migration and send a json status message.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">json status message</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Response</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.WebGUI.views.migrations.get_migration_status">
+<code class="descclassname">experimentum.WebGUI.views.migrations.</code><code class="descname">get_migration_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.WebGUI.views.migrations.get_migration_status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the current migration status.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of migrations with their status (i.e. migrated or not)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.WebGUI.views.migrations.make">
+<code class="descclassname">experimentum.WebGUI.views.migrations.</code><code class="descname">make</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.WebGUI.views.migrations.make" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a new migration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">json status message</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Response</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.WebGUI.views.migrations.refresh">
+<code class="descclassname">experimentum.WebGUI.views.migrations.</code><code class="descname">refresh</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.WebGUI.views.migrations.refresh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refresh all migrations and send a json status message.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">json status message</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Response</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.WebGUI.views.migrations.status">
+<code class="descclassname">experimentum.WebGUI.views.migrations.</code><code class="descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.WebGUI.views.migrations.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the migration status as an html template.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">HTML migration status template</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Response</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.WebGUI.views.migrations.upgrade">
+<code class="descclassname">experimentum.WebGUI.views.migrations.</code><code class="descname">upgrade</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.WebGUI.views.migrations.upgrade" title="Permalink to this definition">¶</a></dt>
+<dd><p>Upgrade the migration and send a json status message.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">json status message</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Response</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentum.WebGUI.views.plots">
+<span id="experimentum-webgui-views-plots-module"></span><h2>experimentum.WebGUI.views.plots module<a class="headerlink" href="#module-experimentum.WebGUI.views.plots" title="Permalink to this headline">¶</a></h2>
+<p>Contains all views/routes for the plots.</p>
+<dl class="docutils">
+<dt>Available Routes for:</dt>
+<dd><ul class="first last simple">
+<li>Generating plots of an experiment</li>
+<li>Exporting plots of an experiment</li>
+<li>Serving plot image files</li>
+</ul>
+</dd>
+</dl>
+<dl class="function">
+<dt id="experimentum.WebGUI.views.plots.export">
+<code class="descclassname">experimentum.WebGUI.views.plots.</code><code class="descname">export</code><span class="sig-paren">(</span><em>experiment</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.WebGUI.views.plots.export" title="Permalink to this definition">¶</a></dt>
+<dd><p>Download all plots for an experiment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>experiment</strong> (<em>str</em>) – Name of the experiment.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">File Download</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Response</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.WebGUI.views.plots.generate">
+<code class="descclassname">experimentum.WebGUI.views.plots.</code><code class="descname">generate</code><span class="sig-paren">(</span><em>experiment</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.WebGUI.views.plots.generate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate all plots for an experiment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>experiment</strong> (<em>str</em>) – Name of the experiment.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Redirects to plot overview.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Response</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.WebGUI.views.plots.generate_ajax">
+<code class="descclassname">experimentum.WebGUI.views.plots.</code><code class="descname">generate_ajax</code><span class="sig-paren">(</span><em>experiment</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.WebGUI.views.plots.generate_ajax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Genereate all plots for an experiment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>experiment</strong> (<em>str</em>) – Name of the experiment.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">JSON with status messages</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.WebGUI.views.plots.generate_plots">
+<code class="descclassname">experimentum.WebGUI.views.plots.</code><code class="descname">generate_plots</code><span class="sig-paren">(</span><em>directory</em>, <em>container</em>, <em>experiment</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.WebGUI.views.plots.generate_plots" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate all plots for an experiment.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>directory</strong> (<em>str</em>) – Plot Upload directory.</li>
+<li><strong>container</strong> (<a class="reference internal" href="experimentum.Experiments.html#experimentum.Experiments.App.App" title="experimentum.Experiments.App.App"><em>App</em></a>) – Service Container.</li>
+<li><strong>experiment</strong> (<em>str</em>) – Name of the experiment.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of status messages.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="experimentum.WebGUI.views.plots.image">
+<code class="descclassname">experimentum.WebGUI.views.plots.</code><code class="descname">image</code><span class="sig-paren">(</span><em>experiment</em>, <em>filename</em><span class="sig-paren">)</span><a class="headerlink" href="#experimentum.WebGUI.views.plots.image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serve plot images from the plot graphics directory.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>experiment</strong> (<em>str</em>) – Name of the experiment.</li>
+<li><strong>filename</strong> (<em>str</em>) – Name of the plot.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Plot graphics</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">obj</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="module-experimentum.WebGUI.views">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-experimentum.WebGUI.views" title="Permalink to this headline">¶</a></h2>
+<p>Contains routes and views for the web server.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="experimentum.WebGUI.html" class="btn btn-neutral float-left" title="experimentum.WebGUI package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Pascal Kleindienst
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
